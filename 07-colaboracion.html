@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="JA Palazón Ferrando">
+<meta name="dcterms.date" content="2026-05-30">
+
+<title>07. Colaboración en equipo</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="07-colaboracion_files/libs/clipboard/clipboard.min.js"></script>
+<script src="07-colaboracion_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="07-colaboracion_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="07-colaboracion_files/libs/quarto-html/popper.min.js"></script>
+<script src="07-colaboracion_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="07-colaboracion_files/libs/quarto-html/anchor.min.js"></script>
+<link href="07-colaboracion_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="07-colaboracion_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="07-colaboracion_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="07-colaboracion_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="07-colaboracion_files/libs/bootstrap/bootstrap-ba13d4a16a61746bd6fb80a772d4709f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo">Objetivo</a></li>
+  <li><a href="#compartir-configuración" id="toc-compartir-configuración" class="nav-link" data-scroll-target="#compartir-configuración">Compartir configuración</a></li>
+  <li><a href="#qué-se-comparte-y-qué-no" id="toc-qué-se-comparte-y-qué-no" class="nav-link" data-scroll-target="#qué-se-comparte-y-qué-no">Qué se comparte y qué no</a></li>
+  <li><a href="#manos-a-la-obra" id="toc-manos-a-la-obra" class="nav-link" data-scroll-target="#manos-a-la-obra">Manos a la obra</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1-preparar-el-proyecto-para-compartir" id="toc-ejercicio-1-preparar-el-proyecto-para-compartir" class="nav-link" data-scroll-target="#ejercicio-1-preparar-el-proyecto-para-compartir">Ejercicio 1 — Preparar el proyecto para compartir</a></li>
+  <li><a href="#ejercicio-2-crear-un-.gitignore-para-claves" id="toc-ejercicio-2-crear-un-.gitignore-para-claves" class="nav-link" data-scroll-target="#ejercicio-2-crear-un-.gitignore-para-claves">Ejercicio 2 — Crear un <code>.gitignore</code> para claves</a></li>
+  <li><a href="#ejercicio-3-documentar-la-configuración" id="toc-ejercicio-3-documentar-la-configuración" class="nav-link" data-scroll-target="#ejercicio-3-documentar-la-configuración">Ejercicio 3 — Documentar la configuración</a></li>
+  <li><a href="#ejercicio-4-simular-la-incorporación-de-un-nuevo-miembro" id="toc-ejercicio-4-simular-la-incorporación-de-un-nuevo-miembro" class="nav-link" data-scroll-target="#ejercicio-4-simular-la-incorporación-de-un-nuevo-miembro">Ejercicio 4 — Simular la incorporación de un nuevo miembro</a></li>
+  <li><a href="#ejercicio-5-compartir-skills-manualmente" id="toc-ejercicio-5-compartir-skills-manualmente" class="nav-link" data-scroll-target="#ejercicio-5-compartir-skills-manualmente">Ejercicio 5 — Compartir skills manualmente</a></li>
+  <li><a href="#ejercicio-6-estandarizar-comandos-del-equipo" id="toc-ejercicio-6-estandarizar-comandos-del-equipo" class="nav-link" data-scroll-target="#ejercicio-6-estandarizar-comandos-del-equipo">Ejercicio 6 — Estandarizar comandos del equipo</a></li>
+  </ul></li>
+  <li><a href="#flujo-de-trabajo-en-equipo" id="toc-flujo-de-trabajo-en-equipo" class="nav-link" data-scroll-target="#flujo-de-trabajo-en-equipo">Flujo de trabajo en equipo</a></li>
+  <li><a href="#buenas-prácticas" id="toc-buenas-prácticas" class="nav-link" data-scroll-target="#buenas-prácticas">Buenas prácticas</a></li>
+  <li><a href="#resumen-del-paso" id="toc-resumen-del-paso" class="nav-link" data-scroll-target="#resumen-del-paso">Resumen del paso</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">07. Colaboración en equipo</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>JA Palazón Ferrando </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivo" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
+<p>Aprender a compartir configuración, comandos personalizados y agentes con otros miembros del equipo.</p>
+<p>Duración estimada: <strong>25 minutos</strong></p>
+<hr>
+</section>
+<section id="compartir-configuración" class="level2">
+<h2 class="anchored" data-anchor-id="compartir-configuración">Compartir configuración</h2>
+<p>OpenCode permite exportar e importar la configuración del proyecto, de modo que todo el equipo pueda usar los mismos agentes, comandos y skills.</p>
+<p>La clave está en <strong>versionar la configuración</strong> junto con el proyecto. Todo lo que está dentro de la carpeta del proyecto se puede compartir con Git: agentes, <code>opencode.jsonc</code>, <code>mcp.json</code> y scripts.</p>
+<p>Lo que <strong>no se comparte</strong> es la configuración global (<code>~/.config/opencode/</code>), como skills personales o claves de API.</p>
+<hr>
+</section>
+<section id="qué-se-comparte-y-qué-no" class="level2">
+<h2 class="anchored" data-anchor-id="qué-se-comparte-y-qué-no">Qué se comparte y qué no</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Elemento</th>
+<th>Se comparte</th>
+<th>Dónde está</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Agentes personalizados</td>
+<td>✅</td>
+<td><code>.opencode/agents/</code></td>
+</tr>
+<tr class="even">
+<td><code>opencode.jsonc</code> del proyecto</td>
+<td>✅</td>
+<td>Raíz del proyecto</td>
+</tr>
+<tr class="odd">
+<td><code>mcp.json</code></td>
+<td>✅</td>
+<td><code>.opencode/mcp.json</code></td>
+</tr>
+<tr class="even">
+<td>Scripts de automatización</td>
+<td>✅</td>
+<td><code>*.sh</code> en la raíz</td>
+</tr>
+<tr class="odd">
+<td>Skills reutilizables</td>
+<td>❌</td>
+<td><code>~/.config/opencode/skills/</code></td>
+</tr>
+<tr class="even">
+<td>Claves de API</td>
+<td>❌</td>
+<td>No deben versionarse</td>
+</tr>
+<tr class="odd">
+<td>Preferencias personales</td>
+<td>❌</td>
+<td><code>~/.config/opencode/</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="manos-a-la-obra" class="level2">
+<h2 class="anchored" data-anchor-id="manos-a-la-obra">Manos a la obra</h2>
+<section id="ejercicio-1-preparar-el-proyecto-para-compartir" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1-preparar-el-proyecto-para-compartir">Ejercicio 1 — Preparar el proyecto para compartir</h3>
+<p>Asegúrate de que todo lo compartible está dentro del repositorio:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Deberías ver los agentes, <code>opencode.jsonc</code>, <code>mcp.json</code> y demás archivos de configuración. Si falta alguno, añádelo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .opencode/ opencode.jsonc mcp.json</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Añade configuración compartible del equipo"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejercicio-2-crear-un-.gitignore-para-claves" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-2-crear-un-.gitignore-para-claves">Ejercicio 2 — Crear un <code>.gitignore</code> para claves</h3>
+<p>Añade estas líneas a <code>.gitignore</code> para evitar filtrar información sensible:</p>
+<pre><code>.env
+*.key
+**/secrets*</code></pre>
+<p>Si tienes un <code>mcp.json</code> que contiene rutas locales o claves, considera crear una plantilla <code>mcp.template.json</code> sin datos sensibles:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mcpServers"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"filesystem"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"npx"</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">"args"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"-y"</span><span class="ot">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"@modelcontextprotocol/server-filesystem"</span><span class="ot">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"RUTA_DEL_EQUIPO"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      <span class="ot">]</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cada miembro copia la plantilla, la renombra a <code>mcp.json</code> y ajusta la ruta a su máquina.</p>
+</section>
+<section id="ejercicio-3-documentar-la-configuración" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-3-documentar-la-configuración">Ejercicio 3 — Documentar la configuración</h3>
+<p>Crea un archivo <code>COMPARTIR.md</code> (o añádelo al <code>README.md</code>) con las instrucciones para el equipo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Configuración del proyecto</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Clona el repositorio</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Copia <span class="in">`mcp.template.json`</span> como <span class="in">`mcp.json`</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Ajusta las rutas en <span class="in">`mcp.json`</span> a tu máquina</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Si usas skills, impórtalos desde la carpeta compartida</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>Comandos disponibles:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bash render-all.sh`</span> — genera los HTML del curso</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bash revisar-todo.sh`</span> — revisa todos los archivos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejercicio-4-simular-la-incorporación-de-un-nuevo-miembro" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-4-simular-la-incorporación-de-un-nuevo-miembro">Ejercicio 4 — Simular la incorporación de un nuevo miembro</h3>
+<p>Clona el repositorio en otra carpeta para ver qué recibe un compañero:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone /ruta/del/proyecto curso-clonado</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> curso-clonado</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Abre OpenCode en esa carpeta y comprueba que los agentes están disponibles:</p>
+<blockquote class="blockquote">
+<p><span class="citation" data-cites="revisor-estilo">@revisor-estilo</span> ¿Qué puedes hacer?</p>
+</blockquote>
+<p>Si los agentes están en <code>.opencode/agents/</code>, OpenCode los reconocerá automáticamente.</p>
+</section>
+<section id="ejercicio-5-compartir-skills-manualmente" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-5-compartir-skills-manualmente">Ejercicio 5 — Compartir skills manualmente</h3>
+<p>Aunque los skills no se versionan con Git, puedes compartir la carpeta del skill para que cada miembro la copie:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> ~/.config/opencode/skills/formatear-fechas /tmp/compartir/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>O mejor: crea un script <code>instalar-skills.sh</code> en el proyecto:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Copia los skills compartidos a la configuración local</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="va">SKILLS_DIR</span><span class="op">=</span><span class="st">"</span><span class="va">$HOME</span><span class="st">/.config/opencode/skills"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$SKILLS_DIR</span><span class="st">"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> skills-compartidos/<span class="pp">*</span> <span class="st">"</span><span class="va">$SKILLS_DIR</span><span class="st">"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Skills instalados. Revisa skills.jsonc si es necesario."</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y guarda los skills en <code>skills-compartidos/</code> dentro del repositorio:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> skills-compartidos</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> <span class="at">-r</span> ~/.config/opencode/skills/formatear-fechas skills-compartidos/</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add skills-compartidos instalar-skills.sh</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Añade skills compartidos y script de instalación"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejercicio-6-estandarizar-comandos-del-equipo" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-6-estandarizar-comandos-del-equipo">Ejercicio 6 — Estandarizar comandos del equipo</h3>
+<p>Define comandos personalizados en <code>opencode.jsonc</code> para que todo el equipo tenga las mismas tareas rápidas:</p>
+<pre class="jsonc"><code>{
+  "commands": {
+    "revisar-estilo": {
+      "command": ["bash", "revisar-todo.sh"],
+      "description": "Revisa el estilo de todos los documentos"
+    },
+    "generar-html": {
+      "command": ["bash", "render-all.sh"],
+      "description": "Genera todos los HTML del curso"
+    },
+    "status": {
+      "command": ["git", "status"],
+      "description": "Muestra el estado del repositorio"
+    }
+  }
+}</code></pre>
+<p>Ahora cualquier miembro del equipo puede ejecutar:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">opencode</span> run <span class="st">"ejecuta el comando generar-html"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+<section id="flujo-de-trabajo-en-equipo" class="level2">
+<h2 class="anchored" data-anchor-id="flujo-de-trabajo-en-equipo">Flujo de trabajo en equipo</h2>
+<pre><code>1. git pull          → Trae los cambios del equipo
+2. Editas documentos  → Trabajas con OpenCode
+3. git add + commit  → Guardas tus cambios
+4. git push          → Compartes con el equipo</code></pre>
+<p>Cada miembro tiene su configuración local (skills, claves) y la configuración compartida (agentes, comandos, scripts) viene con el repositorio.</p>
+<hr>
+</section>
+<section id="buenas-prácticas" class="level2">
+<h2 class="anchored" data-anchor-id="buenas-prácticas">Buenas prácticas</h2>
+<ul>
+<li><strong>No versiones claves</strong> — usa plantillas y <code>.gitignore</code></li>
+<li><strong>Documenta el onboarding</strong> — explica en el README qué hacer al unirse al proyecto</li>
+<li><strong>Usa comandos personalizados</strong> — evita que cada miembro tenga que recordar rutas y scripts</li>
+<li><strong>Revisa los permisos</strong> — si el equipo crece, revisa quién puede modificar la configuración compartida</li>
+</ul>
+<hr>
+</section>
+<section id="resumen-del-paso" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-del-paso">Resumen del paso</h2>
+<ul>
+<li>✅ Has identificado qué se comparte y qué no en un proyecto</li>
+<li>✅ Has preparado el repositorio para compartir en equipo</li>
+<li>✅ Has creado una plantilla segura para MCP</li>
+<li>✅ Has simulado la incorporación de un nuevo miembro</li>
+<li>✅ Has creado un script para compartir skills</li>
+<li>✅ Has estandarizado comandos del equipo</li>
+<li>✅ Tienes un flujo de trabajo colaborativo con Git</li>
+</ul>
+<hr>
+<p><em>Curso OpenCode 102 — Completo</em></p>
+<p>Has terminado los 7 pasos del curso avanzado. Ahora sabes:</p>
+<ol type="1">
+<li>Crear agentes a medida con permisos</li>
+<li>Crear skills reutilizables y globales</li>
+<li>Versionar documentos con Git</li>
+<li>Conectar sistemas externos con MCP</li>
+<li>Automatizar procesos con la CLI</li>
+<li>Controlar permisos y acciones</li>
+<li>Colaborar en equipo compartiendo configuración</li>
+</ol>
+<p><em>Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

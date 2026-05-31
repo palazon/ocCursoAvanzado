@@ -1,0 +1,26 @@
+{
+  "index.qmd": {
+    "index.html": "85348ba2"
+  },
+  "01-agentes.qmd": {
+    "01-agentes.html": "c4b9adf2"
+  },
+  "02-skills.qmd": {
+    "02-skills.html": "72478542"
+  },
+  "03-git.qmd": {
+    "03-git.html": "f87b06b8"
+  },
+  "04-mcp.qmd": {
+    "04-mcp.html": "7c876177"
+  },
+  "05-cli.qmd": {
+    "05-cli.html": "81ab2870"
+  },
+  "06-permisos.qmd": {
+    "06-permisos.html": "61ab4553"
+  },
+  "07-colaboracion.qmd": {
+    "07-colaboracion.html": "12045e71"
+  }
+}

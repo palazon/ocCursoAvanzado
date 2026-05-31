@@ -1,0 +1,216 @@
+---
+title: "03. Git para documentalistas"
+author: "JA Palazón Ferrando"
+date: "2026-05-30"
+---
+
+## Objetivo
+
+Aprender los fundamentos de Git para versionar documentos,
+mantener un historial de cambios y colaborar sin riesgo.
+
+Duración estimada: **30 minutos**
+
+---
+
+## ¿Por qué Git si no soy programador?
+
+Git permite guardar versiones de tus documentos, ver qué cambió
+entre una versión y otra, y deshacer cambios sin perder trabajo.
+Es la herramienta estándar para colaborar en proyectos de
+documentación.
+
+Si alguna vez has tenido archivos como `informe-v3-final-definitivo.docx`,
+Git es la solución. Con Git:
+
+- Cada cambio queda registrado con fecha, autor y motivo
+- Puedes volver a cualquier versión anterior
+- Varias personas pueden trabajar sin pisarse
+- Sabes exactamente qué cambió entre versiones
+
+---
+
+## Conceptos clave
+
+| Concepto | Qué significa |
+|----------|--------------|
+| **Repositorio** | La carpeta donde Git guarda el historial |
+| **Commit** | Una foto de tus archivos en un momento dado |
+| **Staging** | Área donde preparas qué cambios incluir en el commit |
+| **Historial** | La lista de commits ordenados en el tiempo |
+| **Rama (branch)** | Una línea de trabajo independiente |
+
+No necesitas memorizar todo. Con cuatro comandos haces el 90 %
+del trabajo.
+
+---
+
+## Manos a la obra
+
+### Ejercicio 1 — Configurar Git por primera vez
+
+Abre una terminal y escribe tu nombre y correo. Git los usará
+para firmar tus commits:
+
+```bash
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu@correo.com"
+```
+
+### Ejercicio 2 — Iniciar un repositorio
+
+Dentro de la carpeta del curso, inicializa Git:
+
+```bash
+git init
+```
+
+Esto crea una carpeta oculta `.git/` donde se guardará todo
+el historial. No la toques manualmente.
+
+### Ejercicio 3 — Primer commit
+
+Añade los archivos del curso al staging y haz un commit:
+
+```bash
+git add *.qmd *.css *.yml *.md
+git commit -m "Primera versión del curso OpenCode 102"
+```
+
+El comando `git add` prepara los archivos. El comando `git commit`
+los guarda en el historial con un mensaje descriptivo.
+
+### Ejercicio 4 — Ver el historial
+
+Comprueba que el commit se ha registrado:
+
+```bash
+git log --oneline
+```
+
+Deberías ver algo como:
+
+```
+a1b2c3d Primera versión del curso OpenCode 102
+```
+
+### Ejercicio 5 — Hacer un cambio y ver la diferencia
+
+Abre `index.qmd` y añade una línea nueva al final, donde quieras.
+Luego ejecuta:
+
+```bash
+git diff
+```
+
+Git te muestra exactamente qué líneas has añadido (verde) y
+cuáles has quitado (rojo).
+
+### Ejercicio 6 — Commit del cambio
+
+Cuando estés satisfecho con el cambio:
+
+```bash
+git add index.qmd
+git commit -m "Añade línea sobre requisitos del curso"
+```
+
+### Ejercicio 7 — Ignorar archivos temporales
+
+Crea un archivo `.gitignore` para que Git ignore los HTML
+generados y otros archivos temporales:
+
+```
+*.html
+.DS_Store
+*.bak
+```
+
+Añádelo al repositorio:
+
+```bash
+git add .gitignore
+git commit -m "Ignora archivos HTML y temporales"
+```
+
+> A partir de ahora, `git add .` no incluirá los `.html`.
+> Si quieres incluirlos, usa `git add -f archivo.html`.
+
+### Ejercicio 8 — Deshacer un cambio (sin perderlo)
+
+Modifica un archivo a propósito. Si no te gusta el resultado,
+puedes volver al estado del último commit:
+
+```bash
+git restore index.qmd
+```
+
+> Este comando descarta los cambios no commiteados. Si quieres
+> mantener una copia de seguridad, antes haz `git stash`.
+
+### Ejercicio 9 — Crear una rama para experimentar
+
+Las ramas permiten hacer pruebas sin tocar la versión principal:
+
+```bash
+git branch experimento
+git checkout experimento
+```
+
+Haz algunos cambios, haz commit, y luego vuelve a la rama
+principal:
+
+```bash
+git checkout main
+```
+
+Verás que los cambios de la rama `experimento` han desaparecido.
+No se han perdido, solo están en su rama.
+
+Para fusionarlos más tarde:
+
+```bash
+git merge experimento
+```
+
+---
+
+## Flujo de trabajo diario para documentalistas
+
+```
+1. git status         → ¿Qué ha cambiado?
+2. git diff           → ¿Qué exactamente?
+3. git add archivo    → Preparo el cambio
+4. git commit -m "..." → Lo guardo en el historial
+```
+
+Con estos cuatro pasos tienes cubierto el día a día.
+
+---
+
+## Comandos útiles
+
+| Comando | Para qué sirve |
+|---------|---------------|
+| `git status` | Ver el estado actual del repositorio |
+| `git diff` | Ver cambios sin commitead |
+| `git log --oneline` | Historial resumido |
+| `git show HASH` | Ver qué cambió en un commit concreto |
+| `git restore archivo` | Deshacer cambios en un archivo |
+| `git stash` | Guardar cambios temporalmente y limpiar |
+| `git branch NOMBRE` | Crear una rama nueva |
+
+---
+
+## Resumen del paso
+
+- ✅ Has configurado Git por primera vez
+- ✅ Has creado un repositorio y hecho tu primer commit
+- ✅ Has visto cómo cambian los archivos con `git diff`
+- ✅ Has aprendido a deshacer cambios sin perder trabajo
+- ✅ Has creado ramas para experimentar sin riesgo
+- ✅ Tienes un flujo de trabajo diario para documentación
+
+En el próximo paso veremos cómo conectar sistemas externos con MCP.
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*

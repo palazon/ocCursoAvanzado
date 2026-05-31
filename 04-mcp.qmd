@@ -1,0 +1,190 @@
+---
+title: "04. MCP — Conectar sistemas externos"
+author: "JA Palazón Ferrando"
+date: "2026-05-30"
+---
+
+## Objetivo
+
+Aprender a conectar OpenCode con sistemas externos: glosarios
+corporativos, bases de conocimiento, APIs y otras fuentes de
+datos.
+
+Duración estimada: **30 minutos**
+
+---
+
+## ¿Qué es MCP?
+
+MCP (Model Context Protocol) permite a OpenCode acceder a
+información externa durante una conversación, sin necesidad de
+copiar y pegar manualmente.
+
+Imagina que estás redactando un documento técnico y necesitas
+consultar el glosario de la empresa, buscar un término en la
+wiki interna o comprobar un dato en una API. Con MCP, OpenCode
+puede hacer esas consultas por ti en tiempo real.
+
+MCP funciona con **servidores** que exponen recursos y
+herramientas. OpenCode se conecta a estos servidores y los usa
+cuando los necesita.
+
+---
+
+## Conceptos clave
+
+| Concepto | Qué significa |
+|----------|--------------|
+| **Servidor MCP** | Un programa que ofrece datos o acciones a OpenCode |
+| **Recurso** | Algo que se puede leer (un archivo, una consulta) |
+| **Herramienta** | Algo que se puede ejecutar (buscar, calcular) |
+| **Contexto** | La información que OpenCode recibe del servidor |
+
+---
+
+## Manos a la obra
+
+### Ejercicio 1 — Verificar que OpenCode soporta MCP
+
+Abre OpenCode en la carpeta del curso y escribe en **Plan**:
+
+> ¿Qué servidores MCP tienes disponibles?
+
+Si OpenCode responde que no tiene ninguno configurado, es
+normal. Vamos a añadir uno.
+
+### Ejercicio 2 — Crear un servidor MCP de sistema de archivos
+
+El servidor de sistema de archivos permite a OpenCode leer
+archivos de carpetas concretas de forma segura.
+
+Crea un archivo `.opencode/mcp.json` en la raíz del proyecto:
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/ruta/a/tu/carpeta/compartida"
+      ]
+    }
+  }
+}
+```
+
+> Cambia `/ruta/a/tu/carpeta/compartida` por una carpeta real
+> de tu sistema, como `~/Documentos/glosario`.
+
+Este servidor permite a OpenCode listar y leer archivos dentro
+de esa carpeta, pero no fuera de ella.
+
+### Ejercicio 3 — Crear un glosario corporativo
+
+Crea un archivo de glosario en la carpeta que configuraste:
+
+```markdown
+# Glosario corporativo
+
+API: Interfaz de Programación de Aplicaciones
+CRUD: Crear, Leer, Actualizar, Eliminar
+DAG: Grafo Acíclico Dirigido
+MVP: Producto Mínimo Viable
+SLA: Acuerdo de Nivel de Servicio
+WIP: Trabajo en Progreso
+```
+
+Guárdalo como `glosario.md` dentro de la carpeta compartida.
+
+### Ejercicio 4 — Probar la conexión MCP
+
+Reinicia OpenCode para que cargue la configuración nueva.
+Luego en **Plan**:
+
+> Busca en el glosario el término SLA y explícame qué significa
+
+OpenCode usará el servidor MCP de archivos para leer el
+glosario y responderte con la definición.
+
+### Ejercicio 5 — Añadir un servidor MCP de web search
+
+Puedes darle a OpenCode la capacidad de buscar en internet de
+forma estructurada. Añade este servidor al `mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "~/Documentos/glosario"
+      ]
+    },
+    "web-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-web-search"
+      ]
+    }
+  }
+}
+```
+
+> Algunos servidores MCP requieren una clave de API. Consulta
+> la documentación de cada servidor para más detalles.
+
+### Ejercicio 6 — Usar MCP en un flujo real
+
+Combina varios servidores MCP en una sola sesión de trabajo:
+
+> Busca en internet las últimas tendencias en documentación
+> técnica y compáralas con el glosario corporativo. Genera un
+> informe breve.
+
+OpenCode usará el servidor de búsqueda web para obtener
+información actualizada y el servidor de archivos para
+consultar el glosario.
+
+---
+
+## Buenas prácticas
+
+- **Limita el alcance** — cada servidor MCP solo debe acceder a
+  lo mínimo necesario
+- **No compartas claves** — si un servidor usa API keys,
+  mantenlas fuera del repositorio
+- **Documenta los servidores** — incluye un comentario en
+  `mcp.json` explicando qué hace cada uno
+
+---
+
+## Ideas para tus propios servidores MCP
+
+| Servidor | Para qué sirve |
+|----------|---------------|
+| `server-filesystem` | Leer archivos de una carpeta segura |
+| `server-web-search` | Buscar información actualizada en internet |
+| `server-sqlite` | Consultar una base de datos local |
+| `server-github` | Leer issues, PRs y repositorios |
+| `server-notion` | Consultar una base de conocimiento en Notion |
+| `server-glpi` | Integrar con sistemas de ticketing |
+
+---
+
+## Resumen del paso
+
+- ✅ Has aprendido qué es MCP y para qué sirve
+- ✅ Has configurado un servidor MCP de sistema de archivos
+- ✅ Has creado un glosario corporativo accesible desde OpenCode
+- ✅ Has probado la conexión con consultas en tiempo real
+- ✅ Has añadido un servidor de búsqueda web
+- ✅ Conoces las buenas prácticas para usar MCP en equipo
+
+En el próximo paso veremos cómo automatizar procesos con la CLI.
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*

@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="JA Palazón Ferrando">
+<meta name="dcterms.date" content="2026-05-30">
+
+<title>02. Skills reutilizables</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="02-skills_files/libs/clipboard/clipboard.min.js"></script>
+<script src="02-skills_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="02-skills_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="02-skills_files/libs/quarto-html/popper.min.js"></script>
+<script src="02-skills_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="02-skills_files/libs/quarto-html/anchor.min.js"></script>
+<link href="02-skills_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="02-skills_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="02-skills_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="02-skills_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="02-skills_files/libs/bootstrap/bootstrap-ba13d4a16a61746bd6fb80a772d4709f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link active" data-scroll-target="#objetivo">Objetivo</a></li>
+  <li><a href="#qué-es-un-skill" id="toc-qué-es-un-skill" class="nav-link" data-scroll-target="#qué-es-un-skill">¿Qué es un skill?</a></li>
+  <li><a href="#cómo-se-crea-un-skill" id="toc-cómo-se-crea-un-skill" class="nav-link" data-scroll-target="#cómo-se-crea-un-skill">Cómo se crea un skill</a>
+  <ul class="collapse">
+  <li><a href="#estructura-de-skill.md" id="toc-estructura-de-skill.md" class="nav-link" data-scroll-target="#estructura-de-skill.md">Estructura de SKILL.md</a></li>
+  <li><a href="#registro-en-opencode.jsonc" id="toc-registro-en-opencode.jsonc" class="nav-link" data-scroll-target="#registro-en-opencode.jsonc">Registro en opencode.jsonc</a></li>
+  </ul></li>
+  <li><a href="#manos-a-la-obra" id="toc-manos-a-la-obra" class="nav-link" data-scroll-target="#manos-a-la-obra">Manos a la obra</a>
+  <ul class="collapse">
+  <li><a href="#ejercicio-1-crear-la-carpeta-de-skills" id="toc-ejercicio-1-crear-la-carpeta-de-skills" class="nav-link" data-scroll-target="#ejercicio-1-crear-la-carpeta-de-skills">Ejercicio 1 — Crear la carpeta de skills</a></li>
+  <li><a href="#ejercicio-2-crear-un-skill-de-normalización-de-fechas" id="toc-ejercicio-2-crear-un-skill-de-normalización-de-fechas" class="nav-link" data-scroll-target="#ejercicio-2-crear-un-skill-de-normalización-de-fechas">Ejercicio 2 — Crear un skill de normalización de fechas</a></li>
+  <li><a href="#ejercicio-3-probar-el-skill-desde-el-chat" id="toc-ejercicio-3-probar-el-skill-desde-el-chat" class="nav-link" data-scroll-target="#ejercicio-3-probar-el-skill-desde-el-chat">Ejercicio 3 — Probar el skill desde el chat</a></li>
+  <li><a href="#ejercicio-4-crear-un-skill-de-revisión-de-tablas" id="toc-ejercicio-4-crear-un-skill-de-revisión-de-tablas" class="nav-link" data-scroll-target="#ejercicio-4-crear-un-skill-de-revisión-de-tablas">Ejercicio 4 — Crear un skill de revisión de tablas</a></li>
+  <li><a href="#ejercicio-5-skills-desde-cualquier-proyecto" id="toc-ejercicio-5-skills-desde-cualquier-proyecto" class="nav-link" data-scroll-target="#ejercicio-5-skills-desde-cualquier-proyecto">Ejercicio 5 — Skills desde cualquier proyecto</a></li>
+  </ul></li>
+  <li><a href="#ideas-para-tus-propios-skills" id="toc-ideas-para-tus-propios-skills" class="nav-link" data-scroll-target="#ideas-para-tus-propios-skills">Ideas para tus propios skills</a></li>
+  <li><a href="#resumen-del-paso" id="toc-resumen-del-paso" class="nav-link" data-scroll-target="#resumen-del-paso">Resumen del paso</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">02. Skills reutilizables</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>JA Palazón Ferrando </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 30, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objetivo" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
+<p>Aprender a crear y usar skills —habilidades reutilizables— para tareas repetitivas de documentación.</p>
+<p>Duración estimada: <strong>25 minutos</strong></p>
+<hr>
+</section>
+<section id="qué-es-un-skill" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-un-skill">¿Qué es un skill?</h2>
+<p>Un skill es un conjunto de instrucciones que le das a OpenCode para que se comporte de una manera determinada. A diferencia de los agentes, los skills:</p>
+<ul>
+<li><strong>No están siempre disponibles</strong> — se cargan bajo demanda</li>
+<li><strong>Son multiplataforma</strong> — valen para cualquier proyecto</li>
+<li><strong>Se guardan en tu carpeta de configuración</strong> global</li>
+<li><strong>Se invocan por nombre</strong> desde el chat</li>
+</ul>
+<p>Mientras que un agente se define dentro de un proyecto (<code>.opencode/agents/</code>), un skill se define una sola vez y se usa desde cualquier carpeta.</p>
+<p>Los skills son ideales para tareas que haces a menudo pero que no justifican un agente dedicado: formatear fechas, revisar tablas, aplicar una nomenclatura concreta, etc.</p>
+<hr>
+</section>
+<section id="cómo-se-crea-un-skill" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-se-crea-un-skill">Cómo se crea un skill</h2>
+<p>Un skill se compone de dos partes:</p>
+<ol type="1">
+<li><strong>El archivo SKILL.md</strong> — con las instrucciones</li>
+<li><strong>El registro en opencode.jsonc</strong> — para que OpenCode lo reconozca</li>
+</ol>
+<section id="estructura-de-skill.md" class="level3">
+<h3 class="anchored" data-anchor-id="estructura-de-skill.md">Estructura de SKILL.md</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nombre del skill</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Describe aquí lo que hace el skill. Usa un tono directo, como</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>si le dieras instrucciones a un ayudante.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="registro-en-opencode.jsonc" class="level3">
+<h3 class="anchored" data-anchor-id="registro-en-opencode.jsonc">Registro en opencode.jsonc</h3>
+<pre class="jsonc"><code>{
+  "skills": {
+    "mi-skill": {
+      "paths": ["/ruta/a/mi-skill"]
+    }
+  }
+}</code></pre>
+<hr>
+</section>
+</section>
+<section id="manos-a-la-obra" class="level2">
+<h2 class="anchored" data-anchor-id="manos-a-la-obra">Manos a la obra</h2>
+<section id="ejercicio-1-crear-la-carpeta-de-skills" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-1-crear-la-carpeta-de-skills">Ejercicio 1 — Crear la carpeta de skills</h3>
+<p>Los skills se guardan en <code>~/.config/opencode/skills/</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.config/opencode/skills</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ejercicio-2-crear-un-skill-de-normalización-de-fechas" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-2-crear-un-skill-de-normalización-de-fechas">Ejercicio 2 — Crear un skill de normalización de fechas</h3>
+<p>Crea la carpeta y el archivo del skill:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/.config/opencode/skills/formatear-fechas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ahora crea <code>~/.config/opencode/skills/formatear-fechas/SKILL.md</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># formatear-fechas</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Normaliza las fechas de un documento al formato corporativo</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>DD/MM/AAAA. Busca cualquier fecha en formato ISO (AAAA-MM-DD),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>americano (MM/DD/AAAA) o abreviado (DD/MM/AA) y conviértela</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>al formato DD/MM/AAAA.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Regístralo en <code>~/.config/opencode/skills/skills.jsonc</code>:</p>
+<pre class="jsonc"><code>{
+  "skills": {
+    "formatear-fechas": {
+      "paths": ["~/.config/opencode/skills/formatear-fechas"]
+    }
+  }
+}</code></pre>
+<blockquote class="blockquote">
+<p>Si ya tienes un <code>skills.jsonc</code>, añade este bloque al array.</p>
+</blockquote>
+</section>
+<section id="ejercicio-3-probar-el-skill-desde-el-chat" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-3-probar-el-skill-desde-el-chat">Ejercicio 3 — Probar el skill desde el chat</h3>
+<p>En <strong>Plan</strong>, prueba a cargar el skill:</p>
+<blockquote class="blockquote">
+<p>Usa el skill formatear-fechas en el documento <span class="citation" data-cites="informe.md">@informe.md</span></p>
+</blockquote>
+<p>Si todo está bien configurado, OpenCode cargará las instrucciones del skill y las aplicará al documento que le pases.</p>
+</section>
+<section id="ejercicio-4-crear-un-skill-de-revisión-de-tablas" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-4-crear-un-skill-de-revisión-de-tablas">Ejercicio 4 — Crear un skill de revisión de tablas</h3>
+<p>Crea <code>~/.config/opencode/skills/revisar-tablas/SKILL.md</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># revisar-tablas</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Revisa todas las tablas del documento y verifica que:</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Todas las tablas tienen un encabezado descriptivo</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Las columnas están alineadas correctamente</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>No hay celdas vacías sin justificar</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Los totales o resúmenes están en la fila correcta</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>El formato es coherente entre tablas similares</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>Señala cada problema encontrado, pero no modifiques el documento.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Añádelo al <code>skills.jsonc</code>:</p>
+<pre class="jsonc"><code>{
+  "skills": {
+    "formatear-fechas": {
+      "paths": ["~/.config/opencode/skills/formatear-fechas"]
+    },
+    "revisar-tablas": {
+      "paths": ["~/.config/opencode/skills/revisar-tablas"]
+    }
+  }
+}</code></pre>
+</section>
+<section id="ejercicio-5-skills-desde-cualquier-proyecto" class="level3">
+<h3 class="anchored" data-anchor-id="ejercicio-5-skills-desde-cualquier-proyecto">Ejercicio 5 — Skills desde cualquier proyecto</h3>
+<p>Abre una terminal en otra carpeta cualquiera y prueba:</p>
+<blockquote class="blockquote">
+<p>Usa el skill revisar-tablas</p>
+</blockquote>
+<p>El skill se cargará aunque no estés en el proyecto del curso. Los skills son globales y están disponibles desde cualquier lugar.</p>
+<hr>
+</section>
+</section>
+<section id="ideas-para-tus-propios-skills" class="level2">
+<h2 class="anchored" data-anchor-id="ideas-para-tus-propios-skills">Ideas para tus propios skills</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Skill</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>normalizar-glosario</code></td>
+<td>Unifica términos en un documento técnico</td>
+</tr>
+<tr class="even">
+<td><code>revisar-enlaces</code></td>
+<td>Comprueba que todos los enlaces están vivos</td>
+</tr>
+<tr class="odd">
+<td><code>aplicar-tono-corporativo</code></td>
+<td>Ajusta el tono del documento al manual de estilo</td>
+</tr>
+<tr class="even">
+<td><code>extraer-citas</code></td>
+<td>Extrae todas las citas a un listado aparte</td>
+</tr>
+<tr class="odd">
+<td><code>generar-indice</code></td>
+<td>Crea un índice de contenidos a partir de los encabezados</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="resumen-del-paso" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-del-paso">Resumen del paso</h2>
+<ul>
+<li>✅ Has creado tu primer skill de normalización de fechas</li>
+<li>✅ Has creado un skill de revisión de tablas</li>
+<li>✅ Has probado los skills desde el chat</li>
+<li>✅ Has visto que los skills funcionan desde cualquier proyecto</li>
+<li>✅ Tienes ideas para crear tus propios skills</li>
+</ul>
+<p>En el próximo paso veremos cómo usar Git para versionar documentos y colaborar sin riesgo.</p>
+<p><em>Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,8 +1,7 @@
 # Curso: OpenCode 102 — Automatización y personalización
 
-Este proyecto contiene el curso avanzado para **docentes y
-redactores técnicos** que ya conocen lo básico de OpenCode y
-quieren automatizar tareas y personalizar la herramienta.
+Curso avanzado para **docentes y redactores técnicos** que quieren
+automatizar tareas y personalizar OpenCode más allá del uso básico.
 
 ## Curso
 
@@ -12,14 +11,15 @@ MCP, CLI, permisos, colaboración en equipo.
 
 ## Estructura del proyecto
 
-- `index.qmd` — visión general del curso
-- `01-agentes.qmd` a `07-colaboracion.qmd` — sesiones del curso
-- `custom.css` — hoja de estilos personalizada para la salida HTML
-- `_quarto.yml` — configuración compartida de Quarto
+- `contenidos/` — archivos fuente del curso
+  - `index.qmd` — visión general
+  - `01-agentes.qmd` a `07-colaboracion.qmd` — sesiones del curso
+  - `_quarto.yml` — configuración compartida de Quarto
+  - `custom.css` — hoja de estilos personalizada
+  - `captura-tui.png`, `tab-key.svg` — recursos gráficos
+- `cursoAvanzadoOpencode/` — paquete redistribuible (generado con `bash build-distro.sh`)
 
 ## Generar HTML
-
-Para renderizar todos los archivos:
 
 ```
 bash render-all.sh

@@ -1,9 +1,0 @@
-project:
-  title: "OpenCode 102 — Automatización y personalización"
-
-format:
-  html:
-    css: custom.css
-    toc: true
-    toc-location: right
-    toc-title: "Contenido"

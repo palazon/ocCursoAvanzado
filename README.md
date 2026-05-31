@@ -13,6 +13,9 @@ usan OpenCode y quieren automatizar su flujo de trabajo. Se
 recomienda haber completado OpenCode 101 o tener soltura con
 los modos Plan/Build y referencias `@`.
 
+> **Curso anterior:** [OpenCode 101 — Curso básico para creadores de contenido](https://github.com/palazon/ocCursoIntro)  
+> 12 pasos para aprender los fundamentos: sistema de archivos, prompts, contenido externo, investigación, traducción, tablas, comandos y revisión.
+
 ## Estructura del curso
 
 | Paso | Tema |

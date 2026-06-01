@@ -39,6 +39,7 @@ Un agente se define con muy pocas líneas:
 ---
 description: Revisa el estilo y tono sin modificar el documento
 mode: subagent
+model: gpt-4o-mini  # opcional
 permission:
   edit: deny
 ---
@@ -52,6 +53,7 @@ Campos clave:
 - **description** — qué hace el agente (aparece en el menú de
   autocompletado con @)
 - **mode** — `subagent` para que pueda invocarse desde el chat
+- **model** — modelo de IA que usará el agente (opcional; si se omite, usa el del proyecto). Ver [Proveedores de IA](proveedores-ia.qmd)
 - **permission** — controlas qué puede y qué no puede hacer
 
 Para invocarlo, escribes `@nombre-del-agente` seguido de tu
@@ -87,14 +89,25 @@ usuario y señala:
 3. Errores ortográficos o gramaticales
 4. Sugerencias de mejora
 
-NO hagas cambios directos sobre el archivo.
+**NO** hagas cambios directos sobre el archivo.
 ```
+
+> **Tip:** Puedes usar el propio OpenCode para que te ayude a crear
+> el agente. En **Build**, pídele directamente:
+>
+> > Crea un agente revisor de estilo en
+> > .opencode/agents/revisor-estilo.md que señale problemas de
+> > redacción pero no modifique nada
+>
+> OpenCode te generará el archivo con la estructura adecuada.
+> Puedes modificar el fichero después para ajustar el tono, añadir
+> más comprobaciones o cambiar los permisos.
 
 ### Ejercicio 3 — Crear un documento de prueba
 
 Antes de probar el agente, crea un documento sobre el que trabajar:
 
-**Build** ![Tab](tab-key.svg) `Build`.
+En **Build** (![Tab](tab-key.svg) `Build`), escribe:
 
 > Crea un archivo llamado muestra-ejemplo.md con un texto breve
 > sobre los beneficios del aprendizaje continuo. Tono divulgativo,
@@ -104,7 +117,7 @@ Antes de probar el agente, crea un documento sobre el que trabajar:
 
 Cambia a **Plan** ![Tab](tab-key.svg) `Plan` y escribe:
 
-> @revisor-estilo @muestra-ejemplo.md Revísame este documento
+> @muestra-ejemplo.md @revisor-estilo Revísame este documento
 
 OpenCode invocará al agente revisor, que analizará el documento
 y te dará su opinión. Como tiene `edit: deny`, no podrá modificar
@@ -134,7 +147,7 @@ Aplica el siguiente formato estándar al documento:
 
 Pruébalo en **Build**:
 
-> @normalizador @muestra-ejemplo.md Aplica el formato estándar a
+> @muestra-ejemplo.md @normalizador Aplica el formato estándar a
 > este documento
 
 ### Ejercicio 6 — Agentes en Plan y Build
@@ -157,7 +170,7 @@ no hace cambios. Luego cambia a Build y vuelve a invocarlo.
 | `@generar-actas` | Toma notas sueltas y las estructura como acta |
 | `@traducir-corporativo` | Traduce usando el glosario de la empresa |
 | `@resumir-ejecutivo` | Reduce cualquier texto a un párrafo ejecutivo |
-| `@faq` | Convierte un texto continuo en preguntas frecuentes |
+| `@generar-faq` | Convierte un texto continuo en preguntas frecuentes |
 
 ---
 

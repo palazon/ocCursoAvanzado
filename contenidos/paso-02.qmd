@@ -35,31 +35,35 @@ aplicar una nomenclatura concreta, etc.
 
 ## Cómo se crea un skill
 
-Un skill se compone de dos partes:
+Crear un skill es muy sencillo. Solo necesitas:
 
-1. **El archivo SKILL.md** — con las instrucciones
-2. **El registro en opencode.jsonc** — para que OpenCode lo reconozca
+1. **Una carpeta** con el nombre del skill
+2. **Un archivo SKILL.md** dentro, con frontmatter YAML y las instrucciones
+
+OpenCode descubre los skills automáticamente desde `~/.config/opencode/skills/`.
+No hace falta registrarlos en ningún archivo JSON.
+
+> **Nota:** También puedes definir skills por proyecto. Crea la
+> carpeta `.opencode/skills/` dentro de tu proyecto y coloca ahí
+> los `SKILL.md`. OpenCode priorizará los skills del proyecto
+> sobre los globales si hay conflicto de nombres.
 
 ### Estructura de SKILL.md
 
 ```markdown
+---
+name: nombre-del-skill
+description: Qué hace el skill en una línea
+---
+
 # Nombre del skill
 
 Describe aquí lo que hace el skill. Usa un tono directo, como
 si le dieras instrucciones a un ayudante.
 ```
 
-### Registro en opencode.jsonc
-
-```jsonc
-{
-  "skills": {
-    "mi-skill": {
-      "paths": ["/ruta/a/mi-skill"]
-    }
-  }
-}
-```
+El frontmatter YAML (entre `---`) es importante: el campo `name`
+identifica el skill y `description` aparece cuando se invoca.
 
 ---
 
@@ -84,6 +88,11 @@ mkdir -p ~/.config/opencode/skills/formatear-fechas
 Ahora crea `~/.config/opencode/skills/formatear-fechas/SKILL.md`:
 
 ```markdown
+---
+name: formatear-fechas
+description: Normaliza fechas al formato corporativo DD/MM/AAAA
+---
+
 # formatear-fechas
 
 Normaliza las fechas de un documento al formato corporativo
@@ -92,34 +101,37 @@ americano (MM/DD/AAAA) o abreviado (DD/MM/AA) y conviértela
 al formato DD/MM/AAAA.
 ```
 
-Regístralo en `~/.config/opencode/skills/skills.jsonc`:
+OpenCode descubrirá el skill automáticamente al arrancar. No
+necesitas registrarlo en ningún lado.
 
-```jsonc
-{
-  "skills": {
-    "formatear-fechas": {
-      "paths": ["~/.config/opencode/skills/formatear-fechas"]
-    }
-  }
-}
-```
+### Ejercicio 3 — Crear un documento de prueba
 
-> Si ya tienes un `skills.jsonc`, añade este bloque al array.
+Antes de probar el skill, crea un archivo con fechas en varios
+formatos. En **Build** (![Tab](tab-key.svg) `Build`), escribe:
 
-### Ejercicio 3 — Probar el skill desde el chat
+> Crea un archivo llamado informe.md con 3 líneas que incluyan
+> fechas en formato ISO (2025-01-15), americano (01/15/2025) y
+> abreviado (15/01/25)
+
+### Ejercicio 4 — Probar el skill desde el chat
 
 En **Plan**, prueba a cargar el skill:
 
 > Usa el skill formatear-fechas en el documento @informe.md
 
-Si todo está bien configurado, OpenCode cargará las instrucciones
-del skill y las aplicará al documento que le pases.
+OpenCode cargará las instrucciones del skill y normalizará las
+fechas del documento.
 
-### Ejercicio 4 — Crear un skill de revisión de tablas
+### Ejercicio 5 — Crear un skill de revisión de tablas
 
 Crea `~/.config/opencode/skills/revisar-tablas/SKILL.md`:
 
 ```markdown
+---
+name: revisar-tablas
+description: Revisa tablas y verifica su estructura y formato
+---
+
 # revisar-tablas
 
 Revisa todas las tablas del documento y verifica que:
@@ -133,22 +145,9 @@ Revisa todas las tablas del documento y verifica que:
 Señala cada problema encontrado, pero no modifiques el documento.
 ```
 
-Añádelo al `skills.jsonc`:
+OpenCode lo descubrirá automáticamente al reiniciar.
 
-```jsonc
-{
-  "skills": {
-    "formatear-fechas": {
-      "paths": ["~/.config/opencode/skills/formatear-fechas"]
-    },
-    "revisar-tablas": {
-      "paths": ["~/.config/opencode/skills/revisar-tablas"]
-    }
-  }
-}
-```
-
-### Ejercicio 5 — Skills desde cualquier proyecto
+### Ejercicio 6 — Skills desde cualquier proyecto
 
 Abre una terminal en otra carpeta cualquiera y prueba:
 

@@ -26,7 +26,8 @@ se puede compartir con Git: agentes, `opencode.jsonc`,
 
 Lo que **no se comparte** es la configuración global
 (`~/.config/opencode/`), como skills personales o claves de
-API.
+API. Para más detalles sobre proveedores y seguridad de claves,
+consulta [Proveedores de IA](proveedores-ia.qmd).
 
 ---
 
@@ -44,6 +45,11 @@ API.
 
 ---
 
+*Compartir la configuración con Git es el método recomendado,
+pero no el único. Puedes copiar la carpeta del proyecto por
+red, USB o cualquier otro medio. Lo importante es que la
+configuración de OpenCode viaje siempre con el código.*
+
 ## Manos a la obra
 
 ### Ejercicio 1 — Preparar el proyecto para compartir
@@ -55,11 +61,12 @@ repositorio:
 git status
 ```
 
-Deberías ver los agentes, `opencode.jsonc`, `mcp.json` y
-demás archivos de configuración. Si falta alguno, añádelo:
+Deberías ver los agentes, `opencode.jsonc` y demás archivos
+de configuración (el `mcp.json` está dentro de `.opencode/`).
+Si falta alguno, añádelo:
 
 ```bash
-git add .opencode/ opencode.jsonc mcp.json
+git add .opencode/ opencode.jsonc
 git commit -m "Añade configuración compartible del equipo"
 ```
 
@@ -93,8 +100,8 @@ sensibles:
 }
 ```
 
-Cada miembro copia la plantilla, la renombra a `mcp.json` y
-ajusta la ruta a su máquina.
+Cada miembro copia la plantilla, la renombra a
+`.opencode/mcp.json` y ajusta la ruta a su máquina.
 
 ### Ejercicio 3 — Documentar la configuración
 
@@ -107,7 +114,7 @@ con las instrucciones para el equipo:
 1. Clona el repositorio
 2. Copia `mcp.template.json` como `mcp.json`
 3. Ajusta las rutas en `mcp.json` a tu máquina
-4. Si usas skills, impórtalos desde la carpeta compartida
+4. Si usas skills, cópialos desde la carpeta compartida
 
 Comandos disponibles:
 - `bash render-all.sh` — genera los HTML del curso
@@ -150,7 +157,7 @@ O mejor: crea un script `instalar-skills.sh` en el proyecto:
 SKILLS_DIR="$HOME/.config/opencode/skills"
 mkdir -p "$SKILLS_DIR"
 cp -r skills-compartidos/* "$SKILLS_DIR"
-echo "Skills instalados. Revisa skills.jsonc si es necesario."
+echo "Skills instalados. OpenCode los detectará automáticamente."
 ```
 
 Y guarda los skills en `skills-compartidos/` dentro del

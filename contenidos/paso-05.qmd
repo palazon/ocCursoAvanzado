@@ -34,6 +34,9 @@ El comando básico es:
 opencode run "tu instrucción"
 ```
 
+> `opencode` sin argumentos abre la interfaz interactiva.
+> `opencode run` ejecuta una instrucción y termina.
+
 ---
 
 ## Conceptos clave
@@ -48,6 +51,20 @@ opencode run "tu instrucción"
 ---
 
 ## Manos a la obra
+
+### Ejercicio 0 — Explorar las opciones del CLI
+
+Antes de ejecutar nada, mira qué opciones ofrece el CLI:
+
+```bash
+opencode --help
+opencode run --help
+```
+
+El primer comando muestra las opciones globales. El segundo
+muestra los flags específicos de `run`, como `--model` o
+`--temperature`. Para ver los modelos disponibles en tu
+proveedor, consulta [Proveedores de IA](proveedores-ia.qmd).
 
 ### Ejercicio 1 — Probar el comando básico
 
@@ -65,29 +82,30 @@ en la terminal, sin abrir la interfaz gráfica.
 Pásale un archivo del curso para que lo revise:
 
 ```bash
-opencode run "Revisa el estilo de este documento y sugiere mejoras" @02-skills.qmd
+opencode run "Revisa el estilo de este documento y sugiere mejoras" @paso-02.qmd
 ```
 
-OpenCode leerá `02-skills.qmd`, lo analizará y te devolverá
+OpenCode leerá `paso-02.qmd`, lo analizará y te devolverá
 sus sugerencias directamente en la terminal.
 
-### Ejercicio 3 — Encadenar con tuberías (pipe)
+### Ejercicio 3 — Usar redirección de archivos
 
-Puedes pasar contenido por el tubo (`|`) desde otros comandos:
+Puedes pasar el contenido de un archivo con `<` en lugar de
+referenciarlo con `@`:
 
 ```bash
-cat 03-git.qmd | opencode run "Resume este documento en 3 líneas"
+opencode run "Resume este documento en 3 líneas" < paso-03.qmd
 ```
 
-Esto es útil cuando quieres procesar la salida de otros
-programas sin crear archivos temporales.
+> También funciona con tuberías: `cat paso-03.qmd | opencode run "..."`.
+> La redirección `<` es más directa y evita un proceso extra.
 
 ### Ejercicio 4 — Guardar la salida en un archivo
 
 Redirige la salida a un archivo para usarla después:
 
 ```bash
-opencode run "Traduce este documento al inglés" @01-agentes.qmd > 01-agentes-en.md
+opencode run "Traduce este documento al inglés" @paso-01.qmd > 01-agentes-en.md
 ```
 
 El resultado se guarda en `01-agentes-en.md` sin mostrarlo en
@@ -106,6 +124,9 @@ done
 
 Este comando procesa todos los archivos `.qmd` del curso y
 acumula las revisiones en `revisiones.txt`.
+
+> Si procesas muchos archivos, añade `sleep 1` dentro del bucle
+> para evitar límites de tasa (rate limiting).
 
 ### Ejercicio 6 — Crear un script de automatización
 
@@ -137,7 +158,7 @@ archivos procesados.
 Puedes invocar agentes personalizados desde CLI:
 
 ```bash
-opencode run "@revisor-estilo Revisa este documento" @04-mcp.qmd
+opencode run "@revisor-estilo Revisa este documento" @paso-04.qmd
 ```
 
 Siempre que el agente exista en `.opencode/agents/`,

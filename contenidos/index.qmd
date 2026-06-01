@@ -38,13 +38,14 @@ con el manejo básico de OpenCode.
 
 | Paso | Título | Qué aprenderás |
 |------|--------|---------------|
-| [01](01-agentes.html) | [Agentes a medida](01-agentes.html) | Crear asistentes especializados |
-| [02](02-skills.html) | Skills | Skills reutilizables para documentación |
-| [03](03-git.html) | Git para documentalistas | Versionar documentos y colaborar |
-| [04](04-mcp.html) | MCP | Conectar sistemas externos |
-| [05](05-cli.html) | CLI | Automatizar procesos con opencode run |
-| [06](06-permisos.html) | Permisos | Control de acciones en entornos sensibles |
-| [07](07-colaboracion.html) | Colaboración | Compartir configuración en equipo |
+| [01](paso-01.html) | [Agentes a medida](paso-01.html) | Crear asistentes especializados |
+| [02](paso-02.html) | Skills | Skills reutilizables para documentación |
+| [03](paso-03.html) | Git para documentalistas | Versionar documentos y colaborar |
+| [04](paso-04.html) | MCP | Conectar sistemas externos |
+| [05](paso-05.html) | CLI | Automatizar procesos con opencode run |
+| [06](paso-06.html) | Permisos | Control de acciones en entornos sensibles |
+| [07](paso-07.html) | Colaboración | Compartir configuración en equipo |
+| — | [Proveedores de IA](proveedores-ia.html) | Anexo: configurar modelos y proveedores |
 
 ---
 
@@ -60,12 +61,11 @@ misma carpeta mientras lees.
 
 ## Requisitos
 
-- OpenCode instalado (ver [OpenCode 101 — Paso 1] si necesitas ayuda)
+- OpenCode instalado (ver [OpenCode 101](https://github.com/palazon/ocCursoIntro) si necesitas ayuda)
 - Soltura básica con OpenCode: modos Plan/Build, referencias `@`, chat
 - Un navegador web para ver los HTML generados
 - Quarto (opcional, solo para regenerar los HTML)
 
 ---
 
-*Curso OpenCode 102 · Idea original de JA Palazón*
-*Modelo deepseek-v4-flash-free · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*

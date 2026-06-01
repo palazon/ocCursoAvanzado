@@ -33,11 +33,13 @@ OpenCode permite definir permisos a distintos niveles:
 | Nivel | Dónde se define | Ámbito |
 |-------|----------------|--------|
 | Global | `~/.config/opencode/opencode.jsonc` | Todos los proyectos |
-| Proyecto | `opencode.jsonc` en la raíz | Solo ese proyecto |
+| Proyecto | `opencode.jsonc` (o `opencode.json`) en la raíz | Solo ese proyecto |
 | Agente | `.opencode/agents/*.md` | Solo ese agente |
 
 Los permisos más restrictivos ganan. Si el proyecto deniega
-la edición, ningún agente puede editarchivos aunque lo pida.
+la edición, ningún agente puede editar archivos aunque lo
+pida. Si hay conflictos entre `allow` y `deny` para una misma
+acción, el `deny` siempre prevalece.
 
 ---
 
@@ -79,8 +81,9 @@ Crea un archivo `opencode.jsonc` en la raíz del curso:
 }
 ```
 
-Guarda el archivo y reinicia OpenCode. Ahora, aunque le pidas
-a OpenCode que modifique un archivo, no podrá hacerlo.
+Guarda el archivo, cierra y vuelve a abrir OpenCode. Ahora,
+aunque le pidas a OpenCode que modifique un archivo, no podrá
+hacerlo.
 
 Pruébalo en **Build**:
 
@@ -104,13 +107,16 @@ pero no de otras:
 }
 ```
 
-Crea una carpeta `privado/` con un archivo de prueba y
-comprueba que OpenCode no puede leerlo.
+Crea una carpeta `privado/` en la raíz del proyecto con un
+archivo de prueba y comprueba que OpenCode no puede leerlo.
 
 ### Ejercicio 4 — Denegar bash pero permitir edición
 
 Si tu equipo usa OpenCode para redactar pero no quieres que
 ejecute comandos en el sistema:
+
+Modifica el `opencode.jsonc` que creaste en el Ejercicio 2 y
+sustitúyelo por:
 
 ```jsonc
 {
@@ -121,7 +127,10 @@ ejecute comandos en el sistema:
 }
 ```
 
-Pruébalo: pide a OpenCode que liste los archivos con bash.
+Pruébalo: pide a OpenCode que liste los archivos con bash:
+
+> Lista los archivos de esta carpeta con bash
+
 Debería responder que no tiene permiso.
 
 ### Ejercicio 5 — Permisos por agente

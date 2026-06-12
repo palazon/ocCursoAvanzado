@@ -1,7 +1,5 @@
 ---
 title: "OpenCode 102 — Automatización y personalización"
-author: "JA Palazón Ferrando"
-date: "2026-05-30"
 ---
 
 ## Del curso básico al avanzado
@@ -25,8 +23,9 @@ con el manejo básico de OpenCode.
 | Capacidad | Para qué sirve |
 |-----------|---------------|
 | Crear agentes a medida | Tener asistentes especializados: revisor de estilo, generador de actas, corrector |
-| Skills reutilizables | Cargar habilidades concretas para tareas repetitivas |
-| Git para documentalistas | Versionar documentos, historial de cambios, colaborar sin riesgo |
+| Habilidades reutilizables | Cargar skills concretos para tareas repetitivas |
+| Modelos y proveedores de IA | Elegir el modelo adecuado según coste, velocidad y calidad |
+| Control de versiones con Git | Versionar documentos, historial de cambios, colaborar sin riesgo |
 | Conectar sistemas externos (MCP) | Vincular glosarios, bases de conocimiento, APIs |
 | Automatizar con CLI | Procesar lotes de documentos sin abrir la interfaz |
 | Controlar permisos | Limitar acciones en entornos con documentos sensibles |
@@ -38,14 +37,15 @@ con el manejo básico de OpenCode.
 
 | Paso | Título | Qué aprenderás |
 |------|--------|---------------|
-| [01](paso-01.html) | [Agentes a medida](paso-01.html) | Crear asistentes especializados |
-| [02](paso-02.html) | Skills | Skills reutilizables para documentación |
-| [03](paso-03.html) | Git para documentalistas | Versionar documentos y colaborar |
-| [04](paso-04.html) | MCP | Conectar sistemas externos |
-| [05](paso-05.html) | CLI | Automatizar procesos con opencode run |
-| [06](paso-06.html) | Permisos | Control de acciones en entornos sensibles |
-| [07](paso-07.html) | Colaboración | Compartir configuración en equipo |
-| — | [Proveedores de IA](proveedores-ia.html) | Anexo: configurar modelos y proveedores |
+| [0](paso-0.html) | [Antes de empezar](paso-0.html) | Preparar el entorno y conocer la estructura de OpenCode |
+| [01](paso-01.html) | [Procedimientos a medida (*agents*)](paso-01.html) | Crear asistentes especializados |
+| [02](paso-02.html) | [Habilidades reutilizables (*skills*)](paso-02.html) | Skills reutilizables para documentación |
+| [03](paso-03.html) | [Modelos y proveedores de IA](paso-03.html) | Elegir el modelo adecuado para cada tarea |
+| [04](paso-04.html) | [Control de versiones (*git*)](paso-04.html) | Versionar documentos y colaborar |
+| [05](paso-05.html) | [Conexión con sistemas externos (*MCP*)](paso-05.html) | Conectar sistemas externos |
+| [06](paso-06.html) | [Automatiza desde la terminal (*CLI*)](paso-06.html) | Automatizar procesos con opencode run |
+| [07](paso-07.html) | [Permisos: controla acciones (*permissions*)](paso-07.html) | Control de acciones en entornos sensibles |
+| [08](paso-08.html) | [Colaboración en equipo](paso-08.html) | Compartir configuración en equipo |
 
 ---
 

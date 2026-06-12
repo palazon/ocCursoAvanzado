@@ -1,9 +1,10 @@
 # OpenCode 102 — Automatización y personalización
 
-Curso avanzado de **7 pasos** para docentes y redactores técnicos
-que quieren ir más allá del uso básico de
+Curso avanzado de **8 pasos** (+ paso 0) para docentes y redactores
+técnicos que quieren ir más allá del uso básico de
 [OpenCode](https://opencode.ai): agentes a medida, skills
-reutilizables, Git, MCP, CLI, permisos y colaboración en equipo.
+reutilizables, modelos de IA, Git, MCP, CLI, permisos y
+colaboración en equipo.
 
 ## ¿Para quién es este curso?
 
@@ -15,8 +16,9 @@ crear herramientas reutilizables y trabajar en equipo con IA.
 
 | Bloque | Pasos | Contenido |
 |--------|-------|-----------|
-| I — Automatización | 01 – 03 | Agentes a medida, skills reutilizables, Git para documentalistas |
-| II — Integración y equipo | 04 – 07 | MCP, CLI, permisos, colaboración |
+| I — Automatización e IA | 01 – 03 | Agentes a medida, skills reutilizables, modelos de IA |
+| II — Herramientas externas | 04 – 06 | Git, MCP, CLI |
+| III — Colaboración | 07 – 08 | Permisos, colaboración en equipo |
 
 ## Cómo empezar
 
@@ -45,8 +47,8 @@ bash render-all.sh
 - OpenCode 101 completado o experiencia equivalente
 - OpenCode instalado
 - Navegador web para ver los HTML
-- Git (para los ejercicios del paso 3)
-- Node.js (opcional, para el paso 4 — MCP con SQLite)
+- Git (para los ejercicios del paso 4)
+- Node.js (opcional, para el paso 5 — MCP con SQLite)
 - Quarto (opcional, solo para modificar fuentes)
 
 ---

@@ -1,7 +1,5 @@
 ---
-title: "01. Agentes a medida"
-author: "JA Palazón Ferrando"
-date: "2026-05-30"
+title: "01. Procedimientos a medida (*agents*)"
 ---
 
 ## Objetivo
@@ -53,7 +51,7 @@ Campos clave:
 - **description** — qué hace el agente (aparece en el menú de
   autocompletado con @)
 - **mode** — `subagent` para que pueda invocarse desde el chat
-- **model** — modelo de IA que usará el agente (opcional; si se omite, usa el del proyecto). Ver [Proveedores de IA](proveedores-ia.qmd)
+- **model** — modelo de IA que usará el agente (opcional; si se omite, usa el del proyecto). Ver [paso 03](paso-03.html)
 - **permission** — controlas qué puede y qué no puede hacer
 
 Para invocarlo, escribes `@nombre-del-agente` seguido de tu
@@ -92,22 +90,26 @@ usuario y señala:
 **NO** hagas cambios directos sobre el archivo.
 ```
 
-> **Tip:** Puedes usar el propio OpenCode para que te ayude a crear
-> el agente. En **Build**, pídele directamente:
->
-> > Crea un agente revisor de estilo en
-> > .opencode/agents/revisor-estilo.md que señale problemas de
-> > redacción pero no modifique nada
->
-> OpenCode te generará el archivo con la estructura adecuada.
-> Puedes modificar el fichero después para ajustar el tono, añadir
-> más comprobaciones o cambiar los permisos.
+::: {.callout-tip}
+## Consejo didáctico
+
+Puedes usar el propio OpenCode para que te ayude a crear
+el agente. En *Build*, pídele directamente:
+
+> Crea un agente revisor de estilo en
+> .opencode/agents/revisor-estilo.md que señale problemas de
+> redacción pero no modifique nada
+
+OpenCode te generará el archivo con la estructura adecuada.
+Puedes modificar el fichero después para ajustar el tono, añadir
+más comprobaciones o cambiar los permisos.
+:::
 
 ### Ejercicio 3 — Crear un documento de prueba
 
 Antes de probar el agente, crea un documento sobre el que trabajar:
 
-En **Build** (![Tab](tab-key.svg) `Build`), escribe:
+En *Build* (![Tab](tab-key.svg) `Build`), escribe:
 
 > Crea un archivo llamado muestra-ejemplo.md con un texto breve
 > sobre los beneficios del aprendizaje continuo. Tono divulgativo,
@@ -115,7 +117,7 @@ En **Build** (![Tab](tab-key.svg) `Build`), escribe:
 
 ### Ejercicio 4 — Probar el agente
 
-Cambia a **Plan** ![Tab](tab-key.svg) `Plan` y escribe:
+Cambia a *Plan* ![Tab](tab-key.svg) `Plan` y escribe:
 
 > @muestra-ejemplo.md @revisor-estilo Revísame este documento
 
@@ -145,7 +147,7 @@ Aplica el siguiente formato estándar al documento:
 6. Sin negritas ni cursivas excesivas
 ```
 
-Pruébalo en **Build**:
+Pruébalo en *Build*:
 
 > @muestra-ejemplo.md @normalizador Aplica el formato estándar a
 > este documento
@@ -154,8 +156,8 @@ Pruébalo en **Build**:
 
 Los agentes heredan el modo en el que los invocas:
 
-- Si invocas `@revisor-estilo` en **Plan**, solo analiza
-- Si invocas `@normalizador` en **Build**, aplica cambios
+- Si invocas `@revisor-estilo` en *Plan*, solo analiza
+- Si invocas `@normalizador` en *Build*, aplica cambios
 
 Pruébalo: cambia a Plan, invoca al normalizador y comprueba que
 no hace cambios. Luego cambia a Build y vuelve a invocarlo.

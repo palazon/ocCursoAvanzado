@@ -1,223 +1,204 @@
 ---
-title: "03. Git para documentalistas"
-author: "JA Palazón Ferrando"
-date: "2026-05-30"
+title: "03. Modelos y proveedores de IA"
 ---
 
 ## Objetivo
 
-Aprender los fundamentos de Git para versionar documentos,
-mantener un historial de cambios y colaborar sin riesgo.
+Conocer los proveedores de IA disponibles, entender cómo elegir
+el modelo adecuado según la tarea y configurarlos en OpenCode.
 
-Duración estimada: **30 minutos**
-
----
-
-## ¿Por qué Git si no soy programador?
-
-Git permite guardar versiones de tus documentos, ver qué cambió
-entre una versión y otra, y deshacer cambios sin perder trabajo.
-Es la herramienta estándar para colaborar en proyectos de
-documentación.
-
-Si alguna vez has tenido archivos como `informe-v3-final-definitivo.docx`,
-Git es la solución. Con Git:
-
-- Cada cambio queda registrado con fecha, autor y motivo
-- Puedes volver a cualquier versión anterior
-- Varias personas pueden trabajar sin pisarse
-- Sabes exactamente qué cambió entre versiones
+Duración estimada: **20 minutos**
 
 ---
 
-## Conceptos clave
+## Por qué importa el modelo
 
-| Concepto | Qué significa |
-|----------|--------------|
-| **Repositorio** | La carpeta donde Git guarda el historial |
-| **Commit** | Una foto de tus archivos en un momento dado |
-| **Staging** | Área donde preparas qué cambios incluir en el commit |
-| **Historial** | La lista de commits ordenados en el tiempo |
-| **Rama (branch)** | Una línea de trabajo independiente |
+Cada modelo de IA tiene distinto equilibrio entre **coste**,
+**velocidad** y **calidad**. Usar el modelo adecuado para cada
+tarea ahorra tiempo y dinero:
 
-No necesitas memorizar todo. Con cuatro comandos haces el 90 %
-del trabajo.
+- Los modelos pequeños (GPT-4o-mini, Haiku) son rápidos y
+  baratos, ideales para revisiones rápidas
+- Los modelos grandes (GPT-4o, Sonnet) dan mejor calidad en
+  tareas complejas como generación de documentos largos
+- Los modelos locales (Llama 3, Gemma) son gratuitos y no
+  comparten datos con terceros
+
+---
+
+## Proveedores cloud compatibles
+
+OpenCode funciona con los principales proveedores:
+
+| Proveedor | Modelos habituales | Variable de entorno |
+|-----------|-------------------|---------------------|
+| OpenAI | GPT-4o, GPT-4o-mini, o1 | `OPENAI_API_KEY` |
+| Anthropic | Claude Sonnet, Claude Haiku | `ANTHROPIC_API_KEY` |
+| Google | Gemini Pro, Gemini Flash | `GOOGLE_API_KEY` |
+| Groq | Llama 3, Mixtral (gratuito) | `GROQ_API_KEY` |
+
+Cada proveedor requiere una clave de API que se configura como
+variable de entorno.
+
+---
+
+## Modelos locales
+
+Puedes usar modelos locales mediante servidores compatibles con
+la API de OpenAI:
+
+| Servidor | Instalación |
+|----------|-------------|
+| Ollama | `ollama pull llama3.2` — corre en `http://localhost:11434` |
+| LM Studio | Descargar desde lmstudio.ai — servidor OpenAI integrado |
+
+Los modelos locales no requieren conexión a internet ni claves,
+pero necesitan un ordenador con suficiente memoria RAM.
+
+---
+
+## Cómo se configura en OpenCode
+
+### Configuración global o del proyecto
+
+En `opencode.jsonc` (global o del proyecto):
+
+```jsonc
+{
+  "model": {
+    "provider": "openai",
+    "name": "gpt-4o-mini",
+    "apiKey": "${OPENAI_API_KEY}"
+  }
+}
+```
+
+Para un modelo local con Ollama:
+
+```jsonc
+{
+  "model": {
+    "provider": "openai",
+    "name": "llama3.2",
+    "baseUrl": "http://localhost:11434/v1",
+    "apiKey": "no-key-needed"
+  }
+}
+```
+
+### Por agente
+
+Puedes asignar un modelo distinto a cada agente en su YAML:
+
+```yaml
+---
+name: revisor-rapido
+model: gpt-4o-mini
+mode: subagent
+---
+```
+
+### Por comando CLI
+
+Con el flag `--model`:
+
+```bash
+opencode run "Revisa este documento" @documento.md --model gpt-4o-mini
+```
 
 ---
 
 ## Manos a la obra
 
-### Ejercicio 1 — Configurar Git por primera vez
+### Ejercicio 1 — Consultar los modelos disponibles
 
-Abre una terminal y escribe tu nombre y correo. Git los usará
-para firmar tus commits:
+En *Plan*, pregunta a OpenCode:
 
-```bash
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu@correo.com"
-```
+> ¿Qué modelos de IA tienes configurados y qué proveedores
+> usas?
 
-### Ejercicio 2 — Iniciar un repositorio
-
-Crea una carpeta aparte para practicar, así no interfieres
-con el historial del curso:
+Si no tienes ningún modelo configurado, OpenCode usará su
+valor por defecto. Puedes ver las opciones desde la terminal:
 
 ```bash
-mkdir -p ~/ejercicio-git
-cd ~/ejercicio-git
-git init
-git branch -m master main
+opencode run --help
 ```
 
-Esto crea un repositorio nuevo y renombra la rama principal a
-`main`. La carpeta `.git/` guardará todo el historial. No la
-toques manualmente.
+Busca el flag `--model` y los proveedores soportados.
 
-### Ejercicio 3 — Primer commit
+### Ejercicio 2 — Comparar dos modelos en la misma tarea
 
-Crea un archivo de prueba y guárdalo en el historial:
+Si tienes acceso a más de un modelo, prueba la misma tarea
+con ambos y compara resultados:
 
 ```bash
-echo "# Mi documento" > documento.md
-git add documento.md
-git commit -m "Primer commit: documento inicial"
+opencode run "Resume este documento en 3 líneas" @paso-01.qmd --model gpt-4o-mini
 ```
-
-El comando `git add` prepara el archivo. El comando `git commit`
-lo guarda en el historial con un mensaje descriptivo.
-
-### Ejercicio 4 — Ver el historial
-
-Comprueba que el commit se ha registrado:
 
 ```bash
-git log --oneline
+opencode run "Resume este documento en 3 líneas" @paso-01.qmd --model gpt-4o
 ```
 
-Deberías ver algo como:
+¿Qué diferencias notas en velocidad, precisión y estilo?
 
-```
-a1b2c3d Primer commit: documento inicial
-```
+### Ejercicio 3 — Configurar un modelo local (opcional)
 
-### Ejercicio 5 — Hacer un cambio y ver la diferencia
+Si tienes Ollama instalado, prueba un modelo local:
 
-Abre `documento.md` y añade una línea nueva al final. Luego
-ejecuta:
+1. Descarga un modelo: `ollama pull llama3.2`
+2. Crea o modifica `opencode.jsonc` con la configuración local
+   (ver sección anterior)
+3. Reinicia OpenCode y prueba:
 
-```bash
-git diff
-```
+> Explica qué es un agente en OpenCode en dos frases
 
-Git te muestra exactamente qué líneas has añadido (verde) y
-cuáles has quitado (rojo).
-
-### Ejercicio 6 — Commit del cambio
-
-Cuando estés satisfecho con el cambio:
-
-```bash
-git add documento.md
-git commit -m "Añade segunda línea al documento"
-```
-
-### Ejercicio 7 — Ignorar archivos temporales
-
-Crea un archivo `.gitignore` para que Git ignore los HTML
-generados y otros archivos temporales:
-
-```
-*.html
-.DS_Store
-*.bak
-```
-
-Añádelo al repositorio:
-
-```bash
-git add .gitignore
-git commit -m "Ignora archivos HTML y temporales"
-```
-
-> A partir de ahora, `git add .` no incluirá los `.html`.
-> Si quieres incluirlos, usa `git add -f archivo.html`.
-
-### Ejercicio 8 — Deshacer un cambio (sin perderlo)
-
-Modifica `documento.md` a propósito. Si no te gusta el resultado,
-puedes volver al estado del último commit:
-
-```bash
-git restore documento.md
-```
-
-> Este comando descarta los cambios no commited. Si quieres
-> mantener una copia de seguridad, antes haz `git stash`.
-
-### Ejercicio 9 — Crear una rama para experimentar
-
-Las ramas permiten hacer pruebas sin tocar la versión principal:
-
-```bash
-git switch -c experimento
-```
-
-Esto crea la rama `experimento` y cambia a ella en un solo paso.
-Haz algunos cambios en `documento.md`, haz commit, y luego vuelve
-a la rama principal:
-
-```bash
-git switch main
-```
-
-Verás que los cambios de la rama `experimento` han desaparecido.
-No se han perdido, solo están en su rama.
-
-Para fusionarlos más tarde:
-
-```bash
-git merge experimento
-```
+Compara la respuesta con la de un modelo cloud.
 
 ---
 
-## Flujo de trabajo diario para documentalistas
+## Estrategias por tarea
 
-```
-1. git status         → ¿Qué ha cambiado?
-2. git diff           → ¿Qué exactamente?
-3. git add archivo    → Preparo el cambio
-4. git commit -m "..." → Lo guardo en el historial
-```
-
-Con estos cuatro pasos tienes cubierto el día a día.
+| Tarea | Modelo recomendado | Motivo |
+|-------|--------------------|--------|
+| Revisión rápida de estilo | GPT-4o-mini / Haiku | Barato, rápido |
+| Generación de documentos largos | GPT-4o / Sonnet | Mayor calidad y coherencia |
+| Traducción | Gemini Flash | Buen equilibrio calidad/velocidad |
+| Investigación web | GPT-4o / Sonnet | Mejor comprensión de contexto |
+| Prototipado y pruebas | Modelo local (Llama 3) | Gratuito, sin límites |
 
 ---
 
-## Comandos útiles
+## Seguridad: gestión de claves
 
-| Comando | Para qué sirve |
-|---------|---------------|
-| `git status` | Ver el estado actual del repositorio |
-| `git diff` | Ver cambios sin commited |
-| `git log --oneline` | Historial resumido |
-| `git show HASH` | Ver qué cambió en un commit concreto |
-| `git restore archivo` | Deshacer cambios en un archivo |
-| `git stash` | Guardar cambios temporalmente y limpiar |
-| `git switch -c NOMBRE` | Crear y cambiarse a una rama nueva |
-| `git switch NOMBRE` | Cambiar a una rama existente |
+- **Nunca versiones claves API** — usa variables de entorno
+- Crea un archivo `.env` en la raíz del proyecto:
+
+```
+OPENAI_API_KEY=sk-proj-...
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+- Añade `.env` a `.gitignore`
+- OpenCode lee `apiKey: "${VARIABLE}"` y la resuelve del entorno
 
 ---
 
 ## Resumen del paso
 
-- ✅ Has configurado Git por primera vez
-- ✅ Has creado un repositorio y hecho tu primer commit
-- ✅ Has visto cómo cambian los archivos con `git diff`
-- ✅ Has aprendido a deshacer cambios sin perder trabajo
-- ✅ Has creado ramas para experimentar sin riesgo
-- ✅ Tienes un flujo de trabajo diario para documentación
+- ✅ Conoces los principales proveedores de IA y sus modelos
+- ✅ Sabes cómo configurar un modelo en OpenCode (global, por agente, por CLI)
+- ✅ Has comparado dos modelos en la misma tarea
+- ✅ Conoces los modelos locales como alternativa gratuita
+- ✅ Sabes gestionar claves API de forma segura
 
-En el próximo paso veremos cómo conectar sistemas externos con MCP.
+En el próximo paso veremos cómo usar Git para versionar documentos.
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+---
+
+## Para profundizar
+
+- [Documentación de OpenCode sobre modelos](https://opencode.ai/docs)
+- [Ollama](https://ollama.ai) — modelos locales
+- [Pro Git en español](https://git-scm.com/book/es/v2)
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

@@ -5,15 +5,16 @@ automatizar tareas y personalizar OpenCode más allá del uso básico.
 
 ## Curso
 
-### OpenCode 102 (pasos 01-07)
-Agentes a medida, skills reutilizables, Git para documentalistas,
-MCP, CLI, permisos, colaboración en equipo.
+### OpenCode 102 (pasos 01-08)
+Agentes a medida, skills reutilizables, modelos de IA,
+Git para documentalistas, MCP, CLI, permisos, colaboración
+en equipo.
 
 ## Estructura del proyecto
 
 - `contenidos/` — archivos fuente del curso
   - `index.qmd` — visión general
-  - `01-agentes.qmd` a `07-colaboracion.qmd` — sesiones del curso
+  - `01-agentes.qmd` a `08-colaboracion.qmd` — sesiones del curso
   - `_quarto.yml` — configuración compartida de Quarto
   - `custom.css` — hoja de estilos personalizada
   - `captura-tui.png`, `tab-key.svg` — recursos gráficos

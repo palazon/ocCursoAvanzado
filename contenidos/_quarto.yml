@@ -1,6 +1,14 @@
 project:
   title: "OpenCode 102 — Automatización y personalización"
 
+lang: es
+
+language:
+  callout-note-title: "Nota"
+  callout-tip-title: "Consejo"
+  callout-warning-title: "Aviso"
+  callout-important-title: "Importante"
+
 format:
   html:
     css: custom.css
@@ -14,6 +22,44 @@ format:
           if (location.pathname.includes('index.html')) return;
           var toc = document.getElementById('TOC');
           if (!toc) return;
+
+          var pages = [
+            { href: 'paso-0.html',  label: 'Paso 0' },
+            { href: 'paso-01.html', label: 'Paso 01' },
+            { href: 'paso-02.html', label: 'Paso 02' },
+            { href: 'paso-03.html', label: 'Paso 03' },
+            { href: 'paso-04.html', label: 'Paso 04' },
+            { href: 'paso-05.html', label: 'Paso 05' },
+            { href: 'paso-06.html', label: 'Paso 06' },
+            { href: 'paso-07.html', label: 'Paso 07' },
+            { href: 'paso-08.html', label: 'Paso 08' },
+          ];
+
+          var current = location.pathname.split('/').pop();
+          var idx = pages.findIndex(function(p) { return p.href === current; });
+          if (idx === -1) return;
+
+          var nav = document.createElement('div');
+          nav.className = 'toc-prevnext';
+
+          if (idx > 0) {
+            var prevLink = document.createElement('a');
+            prevLink.href = pages[idx - 1].href;
+            prevLink.textContent = '\u2190 ' + pages[idx - 1].label;
+            nav.appendChild(prevLink);
+          } else {
+            nav.appendChild(document.createElement('span'));
+          }
+
+          if (idx < pages.length - 1) {
+            var nextLink = document.createElement('a');
+            nextLink.href = pages[idx + 1].href;
+            nextLink.textContent = pages[idx + 1].label + ' \u2192';
+            nav.appendChild(nextLink);
+          }
+
+          toc.appendChild(nav);
+
           var link = document.createElement('a');
           link.href = 'index.html';
           link.textContent = '\u2190 Volver al \u00edndice';

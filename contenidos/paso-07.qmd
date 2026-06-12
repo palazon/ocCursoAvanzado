@@ -1,256 +1,203 @@
 ---
-title: "07. Colaboración en equipo"
-author: "JA Palazón Ferrando"
-date: "2026-05-30"
+title: "07. Permisos: controla acciones (*permissions*)"
 ---
 
 ## Objetivo
 
-Aprender a compartir configuración, comandos personalizados y
-agentes con otros miembros del equipo.
+Aprender a controlar qué puede y qué no puede hacer OpenCode
+en entornos con documentos sensibles.
 
-Duración estimada: **25 minutos**
-
----
-
-## Compartir configuración
-
-OpenCode permite exportar e importar la configuración del
-proyecto, de modo que todo el equipo pueda usar los mismos
-agentes, comandos y skills.
-
-La clave está en **versionar la configuración** junto con el
-proyecto. Todo lo que está dentro de la carpeta del proyecto
-se puede compartir con Git: agentes, `opencode.jsonc`,
-`mcp.json` y scripts.
-
-Lo que **no se comparte** es la configuración global
-(`~/.config/opencode/`), como skills personales o claves de
-API. Para más detalles sobre proveedores y seguridad de claves,
-consulta [Proveedores de IA](proveedores-ia.qmd).
+Duración estimada: **20 minutos**
 
 ---
 
-## Qué se comparte y qué no
+## ¿Por qué controlar permisos?
 
-| Elemento | Se comparte | Dónde está |
-|----------|-------------|------------|
-| Agentes personalizados | ✅ | `.opencode/agents/` |
-| `opencode.jsonc` del proyecto | ✅ | Raíz del proyecto |
-| `mcp.json` | ✅ | `.opencode/mcp.json` |
-| Scripts de automatización | ✅ | `*.sh` en la raíz |
-| Skills reutilizables | ❌ | `~/.config/opencode/skills/` |
-| Claves de API | ❌ | No deben versionarse |
-| Preferencias personales | ❌ | `~/.config/opencode/` |
+En entornos corporativos o con información sensible, es
+importante limitar las acciones del asistente: que pueda
+leer pero no modificar, o que no pueda ejecutar comandos.
+
+OpenCode permite definir permisos a distintos niveles:
+
+- **Global** — para todos los proyectos
+- **Por proyecto** — en `opencode.jsonc`
+- **Por agente** — en cada agente individual
+- **Por acción** — editar archivos, ejecutar bash, acceder a rutas
 
 ---
 
-*Compartir la configuración con Git es el método recomendado,
-pero no el único. Puedes copiar la carpeta del proyecto por
-red, USB o cualquier otro medio. Lo importante es que la
-configuración de OpenCode viaje siempre con el código.*
+## Niveles de permisos
+
+| Nivel | Dónde se define | Ámbito |
+|-------|----------------|--------|
+| Global | `~/.config/opencode/opencode.jsonc` | Todos los proyectos |
+| Proyecto | `opencode.jsonc` (o `opencode.json`) en la raíz | Solo ese proyecto |
+| Agente | `.opencode/agents/*.md` | Solo ese agente |
+
+Los permisos más restrictivos ganan. Si el proyecto deniega
+la edición, ningún agente puede editar archivos aunque lo
+pida. Si hay conflictos entre `allow` y `deny` para una misma
+acción, el `deny` siempre prevalece.
+
+---
+
+## Acciones controlables
+
+| Acción | Descripción |
+|--------|-------------|
+| `edit` | Modificar archivos existentes |
+| `write` | Crear archivos nuevos |
+| `bash` | Ejecutar comandos en la terminal |
+| `read` | Leer archivos (restringible) |
+| `browser` | Navegar por internet |
+
+---
 
 ## Manos a la obra
 
-### Ejercicio 1 — Preparar el proyecto para compartir
+### Ejercicio 1 — Ver la configuración actual
 
-Asegúrate de que todo lo compartible está dentro del
-repositorio:
-
-```bash
-git status
-```
-
-Deberías ver los agentes, `opencode.jsonc` y demás archivos
-de configuración (el `mcp.json` está dentro de `.opencode/`).
-Si falta alguno, añádelo:
+Abre `~/.config/opencode/opencode.jsonc` (o créalo si no
+existe) y mira su contenido:
 
 ```bash
-git add .opencode/ opencode.jsonc
-git commit -m "Añade configuración compartible del equipo"
+cat ~/.config/opencode/opencode.jsonc
 ```
 
-### Ejercicio 2 — Crear un `.gitignore` para claves
+Si no existe, no pasa nada: OpenCode usa los valores por
+defecto (todo permitido).
 
-Añade estas líneas a `.gitignore` para evitar filtrar
-información sensible:
+### Ejercicio 2 — Restringir la edición en el proyecto
 
-```
-.env
-*.key
-**/secrets*
-```
-
-Si tienes un `mcp.json` que contiene rutas locales o claves,
-considera crear una plantilla `mcp.template.json` sin datos
-sensibles:
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "RUTA_DEL_EQUIPO"
-      ]
-    }
-  }
-}
-```
-
-Cada miembro copia la plantilla, la renombra a
-`.opencode/mcp.json` y ajusta la ruta a su máquina.
-
-### Ejercicio 3 — Documentar la configuración
-
-Crea un archivo `COMPARTIR.md` (o añádelo al `README.md`)
-con las instrucciones para el equipo:
-
-```markdown
-## Configuración del proyecto
-
-1. Clona el repositorio
-2. Copia `mcp.template.json` como `mcp.json`
-3. Ajusta las rutas en `mcp.json` a tu máquina
-4. Si usas skills, cópialos desde la carpeta compartida
-
-Comandos disponibles:
-- `bash render-all.sh` — genera los HTML del curso
-- `bash revisar-todo.sh` — revisa todos los archivos
-```
-
-### Ejercicio 4 — Simular la incorporación de un nuevo miembro
-
-Clona el repositorio en otra carpeta para ver qué recibe un
-compañero:
-
-```bash
-cd /tmp
-git clone /ruta/del/proyecto curso-clonado
-cd curso-clonado
-```
-
-Abre OpenCode en esa carpeta y comprueba que los agentes
-están disponibles:
-
-> @revisor-estilo ¿Qué puedes hacer?
-
-Si los agentes están en `.opencode/agents/`, OpenCode los
-reconocerá automáticamente.
-
-### Ejercicio 5 — Compartir skills manualmente
-
-Aunque los skills no se versionan con Git, puedes compartir
-la carpeta del skill para que cada miembro la copie:
-
-```bash
-cp -r ~/.config/opencode/skills/formatear-fechas /tmp/compartir/
-```
-
-O mejor: crea un script `instalar-skills.sh` en el proyecto:
-
-```bash
-#!/bin/bash
-# Copia los skills compartidos a la configuración local
-SKILLS_DIR="$HOME/.config/opencode/skills"
-mkdir -p "$SKILLS_DIR"
-cp -r skills-compartidos/* "$SKILLS_DIR"
-echo "Skills instalados. OpenCode los detectará automáticamente."
-```
-
-Y guarda los skills en `skills-compartidos/` dentro del
-repositorio:
-
-```bash
-mkdir skills-compartidos
-cp -r ~/.config/opencode/skills/formatear-fechas skills-compartidos/
-git add skills-compartidos instalar-skills.sh
-git commit -m "Añade skills compartidos y script de instalación"
-```
-
-### Ejercicio 6 — Estandarizar comandos del equipo
-
-Define comandos personalizados en `opencode.jsonc` para que
-todo el equipo tenga las mismas tareas rápidas:
+Crea un archivo `opencode.jsonc` en la raíz del curso:
 
 ```jsonc
 {
-  "commands": {
-    "revisar-estilo": {
-      "command": ["bash", "revisar-todo.sh"],
-      "description": "Revisa el estilo de todos los documentos"
-    },
-    "generar-html": {
-      "command": ["bash", "render-all.sh"],
-      "description": "Genera todos los HTML del curso"
-    },
-    "status": {
-      "command": ["git", "status"],
-      "description": "Muestra el estado del repositorio"
+  "permission": {
+    "edit": "deny"
+  }
+}
+```
+
+Guarda el archivo, cierra y vuelve a abrir OpenCode. Ahora,
+aunque le pidas a OpenCode que modifique un archivo, no podrá
+hacerlo.
+
+Pruébalo en *Build*:
+
+> Añade una línea al final de index.qmd
+
+OpenCode debería responder que no tiene permiso para editar.
+
+### Ejercicio 3 — Permitir solo lectura de ciertas carpetas
+
+A veces quieres que OpenCode lea archivos de una carpeta
+pero no de otras:
+
+```jsonc
+{
+  "permission": {
+    "read": {
+      "allow": ["docs/", "glosario/"],
+      "deny": ["privado/", "confidencial/"]
     }
   }
 }
 ```
 
-Ahora cualquier miembro del equipo puede ejecutar:
+Crea una carpeta `privado/` en la raíz del proyecto con un
+archivo de prueba y comprueba que OpenCode no puede leerlo.
 
-```bash
-opencode run "ejecuta el comando generar-html"
+### Ejercicio 4 — Denegar bash pero permitir edición
+
+Si tu equipo usa OpenCode para redactar pero no quieres que
+ejecute comandos en el sistema:
+
+Modifica el `opencode.jsonc` que creaste en el Ejercicio 2 y
+sustitúyelo por:
+
+```jsonc
+{
+  "permission": {
+    "bash": "deny",
+    "edit": "allow"
+  }
+}
 ```
 
+Pruébalo: pide a OpenCode que liste los archivos con bash:
+
+> Lista los archivos de esta carpeta con bash
+
+Debería responder que no tiene permiso.
+
+### Ejercicio 5 — Permisos por agente
+
+Vuelve al agente `revisor-estilo` del paso 01. Su archivo
+`.opencode/agents/revisor-estilo.md` ya tiene permisos:
+
+```markdown
 ---
-
-## Flujo de trabajo en equipo
-
-```
-1. git pull          → Trae los cambios del equipo
-2. Editas documentos  → Trabajas con OpenCode
-3. git add + commit  → Guardas tus cambios
-4. git push          → Compartes con el equipo
+description: Revisa estilo, tono y claridad sin modificar nada
+mode: subagent
+permission:
+  edit: deny
+---
 ```
 
-Cada miembro tiene su configuración local (skills, claves) y
-la configuración compartida (agentes, comandos, scripts) viene
-con el repositorio.
+Este agente no puede editar aunque el proyecto lo permita.
+Los permisos del agente siempre se aplican.
+
+Añade también `bash: deny` para que no pueda ejecutar
+comandos:
+
+```markdown
+---
+description: Revisa estilo, tono y claridad sin modificar nada
+mode: subagent
+permission:
+  edit: deny
+  bash: deny
+---
+```
+
+### Ejercicio 6 — Combinar niveles de permisos
+
+Crea una jerarquía completa de ejemplo:
+
+- **Global**: bash permitido, edit permitido
+- **Proyecto** (curso): edit permitido, bash denegado
+- **Agente** revisor: edit denegado
+
+Resultado: el agente revisor no puede editar (por su propio
+permiso) ni ejecutar bash (por el proyecto). El resto de
+agentes sí pueden editar, pero ninguno puede ejecutar bash.
 
 ---
 
 ## Buenas prácticas
 
-- **No versiones claves** — usa plantillas y `.gitignore`
-- **Documenta el onboarding** — explica en el README qué
-  hacer al unirse al proyecto
-- **Usa comandos personalizados** — evita que cada miembro
-  tenga que recordar rutas y scripts
-- **Revisa los permisos** — si el equipo crece, revisa quién
-  puede modificar la configuración compartida
+- **Principio de mínimo privilegio** — otorga solo los
+  permisos necesarios para cada tarea
+- **Documenta los permisos** — incluye comentarios en
+  `opencode.jsonc` explicando por qué existen restricciones
+- **Prueba cada restricción** — verifica que el
+  comportamiento es el esperado antes de desplegar
+- **Revisa periódicamente** — los permisos deben revisarse
+  igual que cualquier otra configuración
 
 ---
 
 ## Resumen del paso
 
-- ✅ Has identificado qué se comparte y qué no en un proyecto
-- ✅ Has preparado el repositorio para compartir en equipo
-- ✅ Has creado una plantilla segura para MCP
-- ✅ Has simulado la incorporación de un nuevo miembro
-- ✅ Has creado un script para compartir skills
-- ✅ Has estandarizado comandos del equipo
-- ✅ Tienes un flujo de trabajo colaborativo con Git
+- ✅ Has visto los niveles de permisos (global, proyecto, agente)
+- ✅ Has restringido la edición en el proyecto
+- ✅ Has limitado el acceso a carpetas concretas
+- ✅ Has denegado la ejecución de bash
+- ✅ Has combinado permisos en un agente revisor
+- ✅ Conoces el principio de mínimo privilegio
 
----
-
-*Curso OpenCode 102 — Completo*
-
-Has terminado los 7 pasos del curso avanzado. Ahora sabes:
-
-01. Crear agentes a medida con permisos
-02. Crear skills reutilizables y globales
-03. Versionar documentos con Git
-04. Conectar sistemas externos con MCP
-05. Automatizar procesos con la CLI
-06. Controlar permisos y acciones
-07. Colaborar en equipo compartiendo configuración
+En el próximo paso veremos cómo colaborar en equipo compartiendo
+configuración, comandos y agentes.
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*

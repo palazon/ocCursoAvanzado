@@ -1,41 +1,31 @@
 ---
-title: "05. CLI — Automatizar procesos"
-author: "JA Palazón Ferrando"
-date: "2026-05-30"
+title: "05. Conexión con sistemas externos (*MCP*)"
 ---
 
 ## Objetivo
 
-Aprender a usar OpenCode desde la línea de comandos para
-procesar lotes de documentos sin abrir la interfaz.
+Aprender a conectar OpenCode con sistemas externos: glosarios
+corporativos, bases de conocimiento, APIs y otras fuentes de
+datos.
 
-Duración estimada: **25 minutos**
+Duración estimada: **30 minutos**
 
 ---
 
-## ¿Qué es el modo CLI?
+## ¿Qué es MCP?
 
-Además del chat interactivo, OpenCode puede ejecutarse con
-instrucciones directas desde la terminal. Esto permite
-automatizar tareas repetitivas.
+MCP (Model Context Protocol) permite a OpenCode acceder a
+información externa durante una conversación, sin necesidad de
+copiar y pegar manualmente.
 
-El modo CLI es ideal para:
+Imagina que estás redactando un documento técnico y necesitas
+consultar el glosario de la empresa, buscar un término en la
+wiki interna o comprobar un dato en una API. Con MCP, OpenCode
+puede hacer esas consultas por ti en tiempo real.
 
-- **Procesar lotes** — traducir, revisar o formatear varios
-  archivos de una sola vez
-- **Integrar con scripts** — combinar OpenCode con otras
-  herramientas del sistema
-- **Automatizar en el servidor** — ejecutar tareas programadas
-  sin intervención manual
-
-El comando básico es:
-
-```bash
-opencode run "tu instrucción"
-```
-
-> `opencode` sin argumentos abre la interfaz interactiva.
-> `opencode run` ejecuta una instrucción y termina.
+MCP funciona con **servidores** que exponen recursos y
+herramientas. OpenCode se conecta a estos servidores y los usa
+cuando los necesita.
 
 ---
 
@@ -43,163 +33,167 @@ opencode run "tu instrucción"
 
 | Concepto | Qué significa |
 |----------|--------------|
-| `opencode run` | Ejecuta una instrucción en modo no interactivo |
-| **Entrada estándar** | Puedes pasar contenido por pipe (`\|`) |
-| **Archivos** | Puedes referenciar archivos locales con `@` |
-| **Salida** | El resultado se imprime en la terminal |
+| **Servidor MCP** | Un programa que ofrece datos o acciones a OpenCode |
+| **Recurso** | Algo que se puede leer (un archivo, una consulta) |
+| **Herramienta** | Algo que se puede ejecutar (buscar, calcular) |
+| **Contexto** | La información que OpenCode recibe del servidor |
 
 ---
 
 ## Manos a la obra
 
-### Ejercicio 0 — Explorar las opciones del CLI
+::: {.callout-note}
+## Nota informativa
 
-Antes de ejecutar nada, mira qué opciones ofrece el CLI:
+Los servidores MCP se instalan con `npx`, que requiere
+[Node.js](https://nodejs.org). Verifica que lo tienes con
+`node --version` antes de empezar.
+:::
 
-```bash
-opencode --help
-opencode run --help
+### Ejercicio 1 — Verificar que OpenCode soporta MCP
+
+Abre OpenCode en la carpeta del curso y escribe en *Plan*:
+
+> ¿Qué servidores MCP tienes disponibles?
+
+Si OpenCode responde que no tiene ninguno configurado, es
+normal. Vamos a añadir uno.
+
+### Ejercicio 2 — Crear un servidor MCP de sistema de archivos
+
+El servidor de sistema de archivos permite a OpenCode leer
+archivos de carpetas concretas de forma segura.
+
+Crea un archivo `.opencode/mcp.json` en la raíz del proyecto:
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/ruta/a/tu/carpeta/compartida"
+      ]
+    }
+  }
+}
 ```
 
-El primer comando muestra las opciones globales. El segundo
-muestra los flags específicos de `run`, como `--model` o
-`--temperature`. Para ver los modelos disponibles en tu
-proveedor, consulta [Proveedores de IA](proveedores-ia.qmd).
+> Cambia `/ruta/a/tu/carpeta/compartida` por una carpeta real
+> de tu sistema, por ejemplo `/home/usuario/Documentos/glosario`
+> (reemplaza `usuario` por tu nombre de usuario).
 
-### Ejercicio 1 — Probar el comando básico
+Este servidor permite a OpenCode listar y leer archivos dentro
+de esa carpeta, pero no fuera de ella.
 
-Abre una terminal en la carpeta del curso y ejecuta:
+### Ejercicio 3 — Crear un glosario corporativo
 
-```bash
-opencode run "Dime tres beneficios de versionar documentos con Git"
+Crea un archivo de glosario en la carpeta que configuraste:
+
+```markdown
+# Glosario corporativo
+
+API: Interfaz de Programación de Aplicaciones
+CRUD: Crear, Leer, Actualizar, Eliminar
+DAG: Grafo Acíclico Dirigido
+MVP: Producto Mínimo Viable
+SLA: Acuerdo de Nivel de Servicio
+WIP: Trabajo en Progreso
 ```
 
-OpenCode procesará la instrucción y te devolverá la respuesta
-en la terminal, sin abrir la interfaz gráfica.
+Guárdalo como `glosario.md` dentro de la carpeta compartida.
 
-### Ejercicio 2 — Procesar un archivo completo
+### Ejercicio 4 — Probar la conexión MCP
 
-Pásale un archivo del curso para que lo revise:
+Cierra y vuelve a abrir OpenCode para que cargue la nueva
+configuración. Luego en *Plan*:
 
-```bash
-opencode run "Revisa el estilo de este documento y sugiere mejoras" @paso-02.qmd
+> Busca en el glosario el término SLA y explícame qué significa
+
+OpenCode usará el servidor MCP de archivos para leer el
+glosario y responderte con la definición.
+
+### Ejercicio 5 — Añadir un servidor MCP de base de datos
+
+Los servidores MCP también pueden conectarse a bases de datos.
+Añade un servidor SQLite al `mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/usuario/Documentos/glosario"
+      ]
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sqlite",
+        "/home/usuario/Documentos/glosario.db"
+      ]
+    }
+  }
+}
 ```
 
-OpenCode leerá `paso-02.qmd`, lo analizará y te devolverá
-sus sugerencias directamente en la terminal.
+> También existen servidores MCP para búsqueda web, pero suelen
+> requerir una clave de API. Consulta el [paso 03](paso-03.html)
+> para más información sobre configuración de modelos y
+> proveedores. La gestión de claves de proveedores de IA se trata
+> allí.
 
-### Ejercicio 3 — Usar redirección de archivos
+### Ejercicio 6 — Usar MCP en un flujo real
 
-Puedes pasar el contenido de un archivo con `<` en lugar de
-referenciarlo con `@`:
+Combina varios servidores MCP en una sola sesión de trabajo.
+Crea un archivo `proyectos.db` con SQLite y luego consulta:
 
-```bash
-opencode run "Resume este documento en 3 líneas" < paso-03.qmd
-```
+> Usa el servidor sqlite para crear una tabla de proyectos y
+> consulta el glosario para verificar los términos técnicos
 
-> También funciona con tuberías: `cat paso-03.qmd | opencode run "..."`.
-> La redirección `<` es más directa y evita un proceso extra.
-
-### Ejercicio 4 — Guardar la salida en un archivo
-
-Redirige la salida a un archivo para usarla después:
-
-```bash
-opencode run "Traduce este documento al inglés" @paso-01.qmd > 01-agentes-en.md
-```
-
-El resultado se guarda en `01-agentes-en.md` sin mostrarlo en
-pantalla.
-
-### Ejercicio 5 — Procesar varios archivos con un bucle
-
-Usa un bucle del shell para aplicar la misma operación a
-varios archivos:
-
-```bash
-for f in *.qmd; do
-  opencode run "Revisa la ortografía de este documento" @"$f" >> revisiones.txt
-done
-```
-
-Este comando procesa todos los archivos `.qmd` del curso y
-acumula las revisiones en `revisiones.txt`.
-
-> Si procesas muchos archivos, añade `sleep 1` dentro del bucle
-> para evitar límites de tasa (rate limiting).
-
-### Ejercicio 6 — Crear un script de automatización
-
-Crea un archivo `revisar-todo.sh` en la raíz del proyecto:
-
-```bash
-#!/bin/bash
-echo "=== Revisión automática del curso ===" > informe.txt
-for f in *.qmd; do
-  echo "--- Revisando $f ---" >> informe.txt
-  opencode run "Revisa el tono y estilo de este documento" @"$f" >> informe.txt
-  echo "" >> informe.txt
-done
-echo "=== Revisión completa ===" >> informe.txt
-```
-
-Hazlo ejecutable y pruébalo:
-
-```bash
-chmod +x revisar-todo.sh
-./revisar-todo.sh
-```
-
-Abre `informe.txt` para ver los resultados de todos los
-archivos procesados.
-
-### Ejercicio 7 — Usar `opencode run` con agentes
-
-Puedes invocar agentes personalizados desde CLI:
-
-```bash
-opencode run "@revisor-estilo Revisa este documento" @paso-04.qmd
-```
-
-Siempre que el agente exista en `.opencode/agents/`,
-funcionará igual que desde el chat.
+OpenCode usará el servidor SQLite para gestionar los datos y
+el servidor de archivos para leer el glosario.
 
 ---
 
 ## Buenas prácticas
 
-- **Siempre revisa la salida** — el CLI no es interactivo, no
-  puedes corregir sobre la marcha
-- **Usa archivos pequeños** — para lotes grandes, procesa de
-  uno en uno
-- **Mide los tiempos** — cada ejecución consume tokens; calcula
-  el coste antes de lanzar procesos masivos
-- **Combina con git** — haz un commit antes de procesar, por si
-  el resultado no es el esperado
+- **Limita el alcance** — cada servidor MCP solo debe acceder a
+  lo mínimo necesario
+- **No compartas claves** — si un servidor usa API keys,
+  mantenlas fuera del repositorio
+- **Documenta los servidores** — incluye un comentario en
+  `mcp.json` explicando qué hace cada uno
 
 ---
 
-## Ideas para automatizar
+## Ideas para tus propios servidores MCP
 
-| Tarea | Comando |
-|-------|---------|
-| Revisar ortografía de todos los `.md` | `for f in *.md; do opencode run "Revisa ortografía" @"$f"; done` |
-| Traducir un lote al inglés | `for f in *.qmd; do opencode run "Traduce al inglés" @"$f" > "${f%.qmd}-en.qmd"; done` |
-| Generar resumen ejecutivo | `opencode run "Resume en 5 líneas" @informe-final.md > resumen.md` |
-| Unificar tono en varios docs | `opencode run "Aplica tono corporativo" @doc1.md @doc2.md` |
+| Servidor | Para qué sirve |
+|----------|---------------|
+| `server-filesystem` | Leer archivos de una carpeta segura |
+| `server-sqlite` | Consultar una base de datos local |
+| `server-github` | Leer issues, PRs y repositorios |
+| `server-notion` | Consultar una base de conocimiento en Notion |
+| `server-postgres` | Consultar una base de datos PostgreSQL |
 
 ---
 
 ## Resumen del paso
 
-- ✅ Has probado `opencode run` desde la terminal
-- ✅ Has procesado archivos individuales con `@`
-- ✅ Has usado tuberías para encadenar comandos
-- ✅ Has creado un script de automatización para lotes
-- ✅ Has invocado agentes desde el CLI
-- ✅ Tienes un repertorio de tareas automatizables
+- ✅ Has aprendido qué es MCP y para qué sirve
+- ✅ Has configurado un servidor MCP de sistema de archivos
+- ✅ Has creado un glosario corporativo accesible desde OpenCode
+- ✅ Has probado la conexión con consultas en tiempo real
+- ✅ Has añadido un servidor MCP de base de datos SQLite
+- ✅ Conoces las buenas prácticas para usar MCP en equipo
 
-En el próximo paso veremos cómo controlar permisos y acciones
-en entornos con documentos sensibles.
+En el próximo paso veremos cómo automatizar procesos con la CLI.
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*

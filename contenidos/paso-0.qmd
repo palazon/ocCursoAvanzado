@@ -1,0 +1,198 @@
+---
+title: "0. Datos y metadatos: la base de este curso"
+---
+
+## Objetivo
+
+Entender la estructura de un archivo `.qmd` —la diferencia entre
+datos y metadatos— y aprender a usar OpenCode como tutor técnico
+durante el curso.
+
+Duración estimada: **20 minutos**
+
+---
+
+## OpenCode como tutor técnico
+
+A lo largo de este curso aparecerán conceptos nuevos o términos
+que quizá no conozcas. En lugar de buscar en internet, puedes
+preguntárselo directamente a OpenCode. Por ejemplo:
+
+> ¿Qué es el frontmatter YAML y para qué sirve?
+
+> ¿Puedes mostrarme un ejemplo de Markdown con lista y enlace?
+
+> ¿Qué diferencia hay entre datos y metadatos en un documento?
+
+Usar OpenCode mientras aprendes sobre OpenCode es la mejor forma
+de familiarizarte con la herramienta. Ya has trabajado las ideas
+del Curso 101, aquí hay ideas para generar algo más que una simple
+respuesta. Aprovecha tu conocimiento y aprende a aprender con OpenCode.
+
+Es importante que uses Markdown pues en tus conversaciones 
+con OpenCode puedes usarlo para mejorar la comunicación con él.
+
+Por ejemplo:
+
+* En texto plano
+
+```markdown
+Necesito que generes un informe de estado de un proyecto
+de software. El proyecto se llama "Nova", dura 6 meses y
+empezó en enero. El equipo tiene 5 personas.
+El cronograma original está retrasado dos semanas por problemas con
+la API de pagos. El sprint actual va al 70 % de completitud.
+Los riesgos principales son que el desarrollador frontend está
+de vacaciones la próxima semana y que el cliente no ha firmado
+los cambios del alcance.
+El informe debe tener secciones de resumen ejecutivo,
+estado del cronograma, estado del equipo, riesgos y conclusiones.
+Usa un tono formal pero conciso.
+```
+
+* Con Markdown (estructurado)
+
+  ```markdown
+  # Rol
+  Eres un jefe de proyecto senior.
+
+  # Contexto
+  Proyecto "Nova", duración 6 meses (inicio: enero 2026).
+  Equipo: 5 personas.
+
+  # Estado actual
+  - Cronograma: 2 semanas de retraso (bloqueante: API de pagos).
+  - Sprint actual: 70 % completado.
+  - Próxima semana: desarrollador frontend de vacaciones.
+  - Pendiente: cliente no ha firmado cambios de alcance.
+
+  # Estructura del informe
+  Resumen ejecutivo → Estado del cronograma → Estado del equipo → Riesgos →  Conclusiones
+
+  # Formato
+  Lenguaje formal y conciso. Sin relleno.
+```
+
+Si al principio solo te salen *prompts* como el primero, pide a OpenCode
+que te genere el segundo, te ayudará a ver que falta o si tienes errores.
+
+---
+
+## La estructura de un archivo .qmd
+
+Este curso está escrito en archivos `.qmd` (Quarto Markdown).
+Una variación de Markdown que incorpora la capacidad de 
+usar código de R o Python mientras se genera el documento,
+y algunas otras mejoras en los formatos de salida.
+Tanto en los ficheros `.md` como en los `.qmd` puedes
+ver que están formados por *dos partes* claramente diferenciadas:
+
+```markdown
+---
+title: "Mi documento"
+autor: "Ana"
+---
+
+## Introducción
+
+Este es el contenido del documento.
+```
+
+| Parte | Formato | Contiene |
+|-------|---------|----------|
+| **Metadatos** | YAML (entre `---`) | Información *sobre* el documento: título, modelo, permisos... |
+| **Datos** | Markdown | El contenido visible: texto, tablas, listas, ejercicios... |
+
+Esta misma estructura de **datos + metadatos** aparece también
+en la definición de agentes (paso 1), skills (paso 2) y archivos
+de configuración como `opencode.jsonc`.
+
+---
+
+## Markdown mínimo
+
+No hay que tener miedo, Markdown es un sistema minimalista
+de marcas, hay que aprender pocas y son todas muy lógicas,
+en unos días de uso lo habrás incorporado.
+Lo que necesitas reconocer para leer los pasos del curso:
+
+| Elemento | Cómo se escribe |
+|----------|----------------|
+| Encabezado | `## Título de sección` |
+| Negrita | `**texto importante**` |
+| Cursiva | `*énfasis suave*` |
+| Lista con viñetas | `- elemento` |
+| Lista numerada | `1. primer paso` |
+| Enlace | `[texto](archivo.html)` |
+| Código en línea | `` `comando` `` |
+| Bloque de código | ```` ```lenguaje ```` |
+
+---
+
+## YAML mínimo
+
+El YAML del *frontmatter* sigue estas reglas básicas,
+y sí, los espacios en blanco son relevantes:
+
+```yaml
+clave: valor                            # par simple
+lista:                                  # lista con guiones
+  - elemento 1
+  - elemento 2
+anidado:                                # jerarquía por indentación
+  subclave: valor
+```
+
+No necesitas más. Con esto puedes leer y entender el *frontmatter*
+de cualquier archivo del curso.
+En resumen: un *nombre* clave y la *información* asociada ...
+
+::: {.callout-tip}
+## Misma estructura, distinto contexto
+
+Esta misma estructura de datos (Markdown) y metadatos (YAML) es la que usarás al definir **agentes** (paso 1) y **skills** (paso 2): las instrucciones van en Markdown y la configuración (modelo, temperatura, permisos...) en YAML.
+:::
+
+---
+
+## Manos a la obra
+
+### Ejercicio 1 — Identifica datos y metadatos
+
+Abre cualquier archivo `.qmd` del curso en un editor de texto
+(por ejemplo `paso-01.qmd`, si no lo tienes puedes descargarlo pulsando [aquí](paso-01.qmd)) y responde:
+
+- ¿Dónde empiezan y terminan los metadatos?
+- ¿Qué información contienen?
+- ¿Dónde empiezan los datos (el cuerpo del documento)?
+
+### Ejercicio 2 — Pregunta a OpenCode
+
+En *Plan*, escribe:
+
+> ¿Qué diferencia hay entre el YAML del frontmatter y el
+> Markdown del cuerpo de un documento .qmd?
+
+Compara la respuesta de OpenCode con lo que has visto en este
+paso. Si algo no cuadra, pregúntale de nuevo.
+
+---
+
+## Resumen del paso
+
+- ✅ Sabes que un `.qmd` tiene metadatos (YAML) y datos (Markdown)
+- ✅ Reconoces los elementos básicos de Markdown y YAML
+- ✅ Sabes que puedes preguntar a OpenCode cuando algo no te quede claro
+- ✅ Tienes las bases para leer y entender cualquier paso del curso
+
+En el primer paso empezarás a crear agentes a medida para
+tareas de documentación.
+
+---
+
+## Para profundizar
+
+- [Markdown.es](https://markdown.es/) — guía completa en castellano
+- [Tutorial de YAML (Learn X in Y Minutes)](https://learnxinyminutes.com/docs/es-es/yaml-es/) — en español
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

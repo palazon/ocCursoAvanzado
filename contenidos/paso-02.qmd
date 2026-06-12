@@ -1,7 +1,5 @@
 ---
-title: "02. Skills reutilizables"
-author: "JA Palazón Ferrando"
-date: "2026-05-30"
+title: "02. Habilidades reutilizables (*skills*)"
 ---
 
 ## Objetivo
@@ -43,10 +41,14 @@ Crear un skill es muy sencillo. Solo necesitas:
 OpenCode descubre los skills automáticamente desde `~/.config/opencode/skills/`.
 No hace falta registrarlos en ningún archivo JSON.
 
-> **Nota:** También puedes definir skills por proyecto. Crea la
-> carpeta `.opencode/skills/` dentro de tu proyecto y coloca ahí
-> los `SKILL.md`. OpenCode priorizará los skills del proyecto
-> sobre los globales si hay conflicto de nombres.
+::: {.callout-note}
+## Nota informativa
+
+También puedes definir skills por proyecto. Crea la
+carpeta `.opencode/skills/` dentro de tu proyecto y coloca ahí
+los `SKILL.md`. OpenCode priorizará los skills del proyecto
+sobre los globales si hay conflicto de nombres.
+:::
 
 ### Estructura de SKILL.md
 
@@ -107,7 +109,7 @@ necesitas registrarlo en ningún lado.
 ### Ejercicio 3 — Crear un documento de prueba
 
 Antes de probar el skill, crea un archivo con fechas en varios
-formatos. En **Build** (![Tab](tab-key.svg) `Build`), escribe:
+formatos. En *Build* (![Tab](tab-key.svg) `Build`), escribe:
 
 > Crea un archivo llamado informe.md con 3 líneas que incluyan
 > fechas en formato ISO (2025-01-15), americano (01/15/2025) y
@@ -115,7 +117,7 @@ formatos. En **Build** (![Tab](tab-key.svg) `Build`), escribe:
 
 ### Ejercicio 4 — Probar el skill desde el chat
 
-En **Plan**, prueba a cargar el skill:
+En *Plan*, prueba a cargar el skill:
 
 > Usa el skill formatear-fechas en el documento @informe.md
 
@@ -178,7 +180,7 @@ skills son globales y están disponibles desde cualquier lugar.
 - ✅ Has visto que los skills funcionan desde cualquier proyecto
 - ✅ Tienes ideas para crear tus propios skills
 
-En el próximo paso veremos cómo usar Git para versionar documentos
-y colaborar sin riesgo.
+En el próximo paso veremos cómo elegir el modelo de IA adecuado
+para cada tarea.
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*

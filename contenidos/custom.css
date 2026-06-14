@@ -423,16 +423,27 @@ kbd {
   margin: 0.3em 0.4em 0.2em;
   border-top: 1px solid var(--border);
   font-size: 0.8rem;
-  gap: 0.3em;
+  gap: 0.2em;
 }
-.toc-prevnext a {
-  display: block;
+.toc-prev {
+  align-self: flex-start;
   padding: 0.2em 0.4em;
   color: var(--accent);
   font-weight: 500;
   border-radius: 4px;
 }
-.toc-prevnext a:hover {
+.toc-prev:hover {
+  background: var(--accent-bg);
+  text-decoration: none;
+}
+.toc-next {
+  align-self: flex-end;
+  padding: 0.2em 0.4em;
+  color: var(--accent);
+  font-weight: 500;
+  border-radius: 4px;
+}
+.toc-next:hover {
   background: var(--accent-bg);
   text-decoration: none;
 }

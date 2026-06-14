@@ -45,6 +45,7 @@ format:
           if (idx > 0) {
             var prevLink = document.createElement('a');
             prevLink.href = pages[idx - 1].href;
+            prevLink.className = 'toc-prev';
             prevLink.textContent = '\u2190 ' + pages[idx - 1].label;
             nav.appendChild(prevLink);
           } else {
@@ -54,6 +55,7 @@ format:
           if (idx < pages.length - 1) {
             var nextLink = document.createElement('a');
             nextLink.href = pages[idx + 1].href;
+            nextLink.className = 'toc-next';
             nextLink.textContent = pages[idx + 1].label + ' \u2192';
             nav.appendChild(nextLink);
           }

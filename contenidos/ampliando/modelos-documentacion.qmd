@@ -1,0 +1,402 @@
+---
+title: "Modelos para creadores de documentos"
+subtitle: "Una guía para investigadores, estudiantes y profesionales"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+# Introducción
+
+¿Alguna vez te has preguntado por qué algunos documentos son más fáciles de escribir, revisar y compartir que otros? La respuesta no está en la herramienta que uses, sino en el **modelo** que sigues al crearlos.
+
+Este documento explica los diferentes modelos que puedes aplicar al crear documentos, desde informes sencillos hasta proyectos colaborativos complejos. No necesitas saber programar: solo necesitas entender cuál es la mejor manera de organizar tu trabajo escrito.
+
+> **Objetivo de este documento:** Ayudarte a elegir el modelo adecuado para tu próximo documento, ya sea un artículo académico, un informe profesional o una presentación.
+
+---
+
+# ¿Qué es un modelo en la creación de documentos?
+
+En el contexto de la creación de documentos, un **modelo** es un patrón o estructura que defines cómo organizar, escribir y distribuir tu contenido. Piensa en un modelo como el "plan de construcción" de un edificio: antes de poner el primer ladrillo, decides dónde van las paredes, las ventanas y las puertas.
+
+Un modelo incluye tres elementos fundamentales:
+
+1. **Plantillas:** Estructuras predefinidas que te dan un punto de partida (por ejemplo, una plantilla de informe con portada, índice y secciones).
+2. **Formatos:** La forma en que el documento se presenta al lector (HTML para la web, PDF para imprimir, diapositivas para presentar).
+3. **Estilos:** Las reglas visuales que mantienen la consistencia (tipografía, colores, márgenes, formato de citas).
+
+```{.callout-tip}
+**Consejo:** No intentes inventar todo desde cero. Usa una plantilla como punto de partida y adáptala a tus necesidades. Es como cocinar: puedes seguir una receta y luego agregar tus propios ingredientes.
+```
+
+---
+
+# Modelos de documentación
+
+Existen diferentes formas de abordar la escritura de un documento. A continuación, presentamos cuatro modelos que puedes aplicar según el tipo de proyecto.
+
+## Modelo lineal
+
+El modelo lineal es el más sencillo y directo. Escribes el documento de principio a fin, como si estuvieras contando una historia.
+
+### ¿Cuándo usarlo?
+
+- Informes breves (menos de 10 páginas)
+- Comunicados o memorándums
+- Artículos de opinión o editoriales
+- Documentos personales que no requieren revisión extensiva
+
+### Características
+
+| Aspecto | Descripción |
+|---------|-------------|
+| Estructura | Secuencial: introducción, desarrollo, conclusión |
+| Autores | Uno |
+| Revisión | Al final del proceso |
+| Curva de aprendizaje | Baja |
+| Ideal para | Documentos cortos y directos |
+
+```{.callout-note}
+**Nota:** El modelo lineal funciona bien cuando tienes una idea clara de lo que quieres comunicar y el documento no es muy extenso. Si el documento crece, considerar un modelo más flexible.
+```
+
+### Ejemplo de estructura lineal
+
+1. **Portada:** Título, autor, fecha
+2. **Introducción:** Contexto y objetivo del documento
+3. **Desarrollo:** Argumentos o hallazgos principales
+4. **Conclusión:** Resumen y recomendaciones
+5. **Referencias:** Fuentes consultadas
+
+---
+
+## Modelo modular
+
+El modelo modular divide el documento en **secciones independientes** que pueden escribirse, revisarse y reutilizarse por separado. Es como armar un rompecabezas: cada pieza tiene sentido por sí misma y, juntas, forman el documento completo.
+
+### ¿Cuándo usarlo?
+
+- Tesis o disertaciones
+- Manuales técnicos extensos
+- Documentos que se actualizan frecuentemente
+- Proyectos donde diferentes secciones tienen plazos distintos
+
+### Características
+
+| Aspecto | Descripción |
+|---------|-------------|
+| Estructura | Secciones autónomas que se ensamblan |
+| Autores | Uno o varios (cada uno se encarga de una sección) |
+| Revisión | Por sección, en paralelo |
+| Curva de aprendizaje | Media |
+| Ideal para | Documentos largos o con actualizaciones frecuentes |
+
+```{.callout-tip}
+**Consejo:** En Quarto, puedes usar la función `include:` o archivos parciales (`_intro.qmd`, `_metodos.qmd`, etc.) para crear secciones reutilizables. Así, un mismo método puede incluirse en varios informes sin copiar y pegar.
+```
+
+### Ejemplo de estructura modular
+
+```
+proyecto/
+├── _portada.qmd
+├── _introduccion.qmd
+├── _metodos.qmd
+├── _resultados.qmd
+├── _discusion.qmd
+├── _conclusiones.qmd
+└── documento_final.qmd   (ensambla todas las secciones)
+```
+
+### Ventajas de la modularidad
+
+- **Reutilización:** Una sección bien escrita puede usarse en múltiples documentos.
+- **Actualización fácil:** Cambiar solo la sección que necesita actualización, no todo el documento.
+- **Trabajo en paralelo:** Diferentes personas pueden escribir diferentes secciones al mismo tiempo.
+
+---
+
+## Modelo iterativo
+
+El modelo iterativo se basa en **borradores sucesivos**. Escribes una primera versión, la revisas, la mejoras y repites el proceso hasta llegar a la versión final.
+
+### ¿Cuándo usarlo?
+
+- Artículos académicos para revistas
+- Propuestas de financiamiento
+- Documentos que requieren múltiples revisiones de pares
+- Cualquier texto donde la calidad es prioritaria sobre la velocidad
+
+### Características
+
+| Aspecto | Descripción |
+|---------|-------------|
+| Estructura | Borrador → Revisión → Mejora → Borrador final |
+| Autores | Uno o varios |
+| Revisión | Continua, en cada ciclo |
+| Curva de aprendizaje | Media |
+| Ideal para | Documentos que requieren pulir el contenido |
+
+```{.callout-warning}
+**Advertencia:** No confundas "iterativo" con "procrastinar". Cada iteración debe tener un objetivo claro: mejorar la claridad, corregir datos, ajustar el tono, etc. Define cuántas iteraciones necesitas antes de empezar.
+```
+
+### Ciclo de iteración típico
+
+| Iteración | Enfoque | Duración estimada |
+|-----------|---------|-------------------|
+| 1ª | Estructura y contenido básico | 2-3 días |
+| 2ª | Claridad y coherencia | 1-2 días |
+| 3ª | Estilo y formato | 1 día |
+| 4ª | Revisión final y correcciones | 1 día |
+
+### Consejos para la iteración
+
+1. **Separa la escritura de la edición.** En la primera iteración, escribe sin detenerte a corregir.
+2. **Usa diferentes colores o marcadores** para cada tipo de cambio (contenido, estilo, formato).
+3. **Lee en voz alta** para detectar frases confusas.
+4. **Deja reposar** el borrador al menos un día antes de revisar.
+
+---
+
+## Modelo colaborativo
+
+El modelo colaborativo permite que **múltiples personas trabajen en el mismo documento** de forma coordinada. Aquí es donde las herramientas de control de versiones (como Git) brillan.
+
+### ¿Cuándo usarlo?
+
+- Proyectos de investigación con múltiples autores
+- Documentos institucionales con contribuciones de varios departamentos
+- Manuales creados por equipos
+- Libros o compilaciones editados por un equipo
+
+### Características
+
+| Aspecto | Descripción |
+|---------|-------------|
+| Estructura | Compartida, con divisiones claras de responsabilidad |
+| Autores | Múltiples |
+| Revisión | Continua, con revisiones entre pares |
+| Curva de aprendizaje | Alta (requiere conocer Git y flujo de trabajo colaborativo) |
+| Ideal para | Equipos que necesitan coordinar contribuciones |
+
+```{.callout-note}
+**Nota:** No necesitas ser programador para usar Git. Hoy en día existen interfaces visuales (como GitHub Desktop o VS Code) que hacen que el control de versiones sea accesible para cualquier persona.
+```
+
+### Flujo de trabajo colaborativo básico
+
+1. **Crear el repositorio:** Un espacio compartido donde vive el documento.
+2. **Asignar secciones:** Cada autor se encarga de una o más secciones.
+3. **Escribir en ramas separadas:** Cada autor trabaja en su propia "rama" para no interferir con los demás.
+4. **Solicitar revisión:** Cuando una sección está lista, se solicita que otros la revisen.
+5. **Integrar los cambios:** El coordinador reúne todas las contribuciones en el documento final.
+6. **Generar el documento:** Se renderiza el resultado en el formato deseado.
+
+### Buenas prácticas para la colaboración
+
+- **Define un estilo común** antes de empezar (tipografía, formato de citas, tono).
+- **Usa comentarios** en lugar de editar directamente el texto de otros autores.
+- **Establece plazos claros** para cada sección.
+- **Haz reuniones breves** de coordinación semanalmente.
+
+---
+
+# Modelos de formato
+
+Una vez que has decidido cómo escribir tu documento, es momento de decidir **cómo se verá**. El formato determina la experiencia del lector.
+
+## HTML (web)
+
+El formato HTML es ideal para documentos que se leerán en navegadores web. Es flexible, interactivo y fácil de compartir mediante un enlace.
+
+### Ventajas y desventajas
+
+| Ventajas | Desventajas |
+|----------|-------------|
+| Fácil de compartir (un enlace) | Depende de conexión a internet |
+| Interactivo (gráficos, enlaces, pestañas) | No es ideal para imprimir |
+| Se adapta a cualquier pantalla | El estilo puede variar según el navegador |
+| Soporta multimedia (video, audio) | |
+
+```{.callout-tip}
+**Consejo:** Si tu audiencia accede al documento desde dispositivos móviles, HTML es la mejor opción. El formato se adapta automáticamente al tamaño de la pantalla.
+```
+
+### Casos de uso recomendados
+
+- Páginas web de resultados de investigación
+- Documentación técnica en línea
+- Informes interactivos con gráficos dinámicos
+- Blogs académicos o profesionales
+
+---
+
+## PDF (impresión)
+
+El formato PDF garantiza que el documento se vea **exactamente igual** en cualquier dispositivo. Es el estándar para documentos formales que se imprimen o archivan.
+
+### Ventajas y desventajas
+
+| Ventajas | Desventajas |
+|----------|-------------|
+| Aspecto consistente en cualquier dispositivo | No es interactivo (enlaces limitados) |
+| Ideal para imprimir | Archivo más pesado |
+| Estándar para documentos formales | Difícil de modificar después de generar |
+| No requiere conexión a internet | No se adapta a pantallas pequeñas |
+
+```{.callout-note}
+**Nota:** Si envías tu documento a una revista académica o a un cliente formal, es muy probable que requieran el formato PDF.
+```
+
+### Casos de uso recomendados
+
+- Artículos para revistas científicas
+- Informes formales para clientes o instituciones
+- Documentos legales o administrativos
+- Tesis y disertaciones
+
+---
+
+## Presentaciones (revealjs)
+
+Las presentaciones son documentos diseñados para **proyectarse ante una audiencia**. El formato revealjs permite crear presentaciones web interactivas con animaciones y transiciones fluidas.
+
+### Ventajas y desventajas
+
+| Ventajas | Desventajas |
+|----------|-------------|
+| Interactivas y atractivas visualmente | Requieren práctica para diseñar bien |
+| Se pueden compartir como enlace | No son adecuadas para lectura detallada |
+| Soportan código, gráficos y notas del ponente | La curva de aprendizaje es mayor que con PowerPoint |
+| Funcionan en cualquier navegador | |
+
+```{.callout-warning}
+**Advertencia:** No llenes las diapositivas de texto. Una presentación es un apoyo visual, no un documento para leer. Usa frases cortas, imágenes y gráficos.
+```
+
+### Casos de uso recomendados
+
+- Presentaciones de congresos y seminarios
+- Charlas educativas o talleres
+- Reuniones de equipo con componente visual
+- Pitchs de proyectos o negocios
+
+---
+
+# Tabla comparativa de formatos
+
+| Característica | HTML | PDF | Presentación |
+|----------------|------|-----|--------------|
+| **Interactividad** | Alta | Baja | Media |
+| **Impresión** | Regular | Excelente | No aplicable |
+| **Compartir** | Enlace | Archivo | Enlace o archivo |
+| **Móvil** | Excelente | Regular | Regular |
+| **Formalidad** | Media | Alta | Baja/Media |
+| **Tamaño del archivo** | Pequeño | Medio | Variable |
+
+---
+
+# ¿Cómo elegir el modelo adecuado?
+
+Elegir el modelo correcto depende de **cuatro factores clave**. Responde estas preguntas antes de empezar:
+
+## 1. ¿Cuál es el objetivo del documento?
+
+| Objetivo | Modelo recomendado |
+|----------|-------------------|
+| Comunicar información de forma rápida | Lineal + HTML |
+| Crear un documento de referencia | Modular + PDF |
+| Producir un texto de alta calidad | Iterativo + PDF |
+| Trabajar en equipo | Colaborativo + HTML/PDF |
+
+## 2. ¿Quién es la audiencia?
+
+| Audiencia | Formato recomendado |
+|-----------|-------------------|
+| Colegas o equipo interno | HTML (fácil acceso) |
+| Clientes o instituciones | PDF (formalidad) |
+| Público general en línea | HTML (accesibilidad) |
+| Audiencia presencial | Presentación |
+
+## 3. ¿Cuántos autores participan?
+
+| Número de autores | Modelo recomendado |
+|-------------------|-------------------|
+| 1 | Lineal o Iterativo |
+| 2-3 | Modular o Colaborativo |
+| 4 o más | Colaborativo con Git |
+
+## 4. ¿Con qué frecuencia se actualizará?
+
+| Frecuencia | Modelo recomendado |
+|------------|-------------------|
+| Nunca o rara vez | Lineal |
+| Periódicamente | Modular |
+| Constantemente | Colaborativo + Iterativo |
+
+```{.callout-tip}
+**Consejo final:** No tienes que elegir un solo modelo. Puedes combinarlos. Por ejemplo: escribe de forma modular, revisa de forma iterativa y genera el resultado en HTML y PDF. La flexibilidad es tu mayor aliado.
+```
+
+---
+
+# Resumen y recomendaciones
+
+Elige tu modelo de documentación según esta guía rápida:
+
+| Situación | Modelo de documentación | Formato de salida |
+|-----------|------------------------|-------------------|
+| Comunicado breve | Lineal | HTML |
+| Informe académico | Iterativo + Modular | PDF |
+| Manual técnico | Modular | HTML + PDF |
+| Proyecto en equipo | Colaborativo | HTML + PDF |
+| Charla o seminario | Iterativo | Presentación |
+
+```{.callout-note}
+**Recuerda:** El mejor modelo es el que se adapta a tu necesidad, no al revés. Experimenta con diferentes combinaciones hasta encontrar la que te resulte más cómoda.
+```
+
+---
+
+# Referencias
+
+- Carroll, S. (2023). *Quarto: Authoring Books, Articles, Websites, Presentations, and More*. O'Reilly Media.
+- RStudio Team. (2024). *Quarto Documentation*. Disponible en: https://quarto.org/docs/
+- Git SCM. (2024). *Pro Git*. Disponible en: https://git-scm.com/book

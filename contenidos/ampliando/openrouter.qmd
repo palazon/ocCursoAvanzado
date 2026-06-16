@@ -1,0 +1,169 @@
+---
+title: "OpenRouter"
+subtitle: "Un solo acceso para todos los modelos de IA"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+    include-in-header:
+      - text: |
+          <style>
+          .callout {
+            margin-left: 15% !important;
+            margin-right: 5% !important;
+            font-size: 90% !important;
+          }
+          #tabla-modelos table td,
+          #tabla-modelos table th { padding: 6px 4px; }
+          </style>
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \usepackage{changepage}
+      - \BeforeBeginEnvironment{tcolorbox}{\begin{adjustwidth}{0.15\linewidth}{0.05\linewidth}\small}
+      - \AfterEndEnvironment{tcolorbox}{\end{adjustwidth}}
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+## ¿Qué es OpenRouter?
+
+OpenRouter es un proveedor que te da acceso a decenas de modelos de inteligencia artificial a través de un único punto de conexión. En lugar de tener que registrarte en OpenAI, Anthropic, Google, Meta y DeepSeek por separado —cada uno con su propia cuenta, su propia factura y su propia forma de conectarse—, OpenRouter unifica todo en un solo sitio.
+
+Funciona como un concentrador: tú le dices qué modelo quieres usar y él lo conecta con el proveedor original. Si mañana quieres cambiar de modelo, solo cambias el nombre en la configuración. No necesitas abrir otra cuenta, ni aprender otra interfaz, ni gestionar otra factura.
+
+## Por qué usarlo
+
+### Una sola cuenta, un solo pago
+
+Sin OpenRouter, para probar GPT-4o, Claude y Gemini necesitas tres cuentas y tres métodos de pago distintos. Con OpenRouter, creas una cuenta, añades saldo y ya tienes acceso a todos.
+
+### Cambias de modelo sin cambiar de configuración
+
+El resto de la configuración (cómo se conecta la IA a tus archivos, cómo recibe las instrucciones, cómo devuelve las respuestas) no cambia. Solo varía el modelo. Es como cambiar el motor de un coche sin tocar el resto del vehículo.
+
+### Pagas por uso, sin suscripciones
+
+OpenRouter funciona con prepago. Añades saldo y gastas según lo que uses. No hay planes mensuales ni compromisos. Si un mes apenas usas la IA, apenas pagas.
+
+::: {.callout-tip}
+## Ideal para probar
+
+OpenRouter te permite comparar modelos sin compromiso. Pruebas uno, pruebas otro, te quedas con el que mejor funciona para tu tipo de trabajo.
+:::
+
+## Primeros pasos
+
+Para empezar a usar OpenRouter necesitas tres cosas:
+
+1. **Crear una cuenta** en [openrouter.ai](https://openrouter.ai). El registro es sencillo: correo electrónico y contraseña, o puedes iniciar sesión con una cuenta de Google o GitHub.
+
+2. **Obtener tu API key**. Una vez dentro de tu cuenta, en el panel de configuración encuentras la opción de generar una clave. Es una cadena larga de letras y números que empieza por `sk-or-v1-`. Esta clave es tu identificación: OpenRouter la usa para saber quién eres y cobrarte el uso.
+
+3. **Añadir saldo**. OpenRouter funciona con prepago. Puedes añadir una cantidad inicial pequeña —cinco o diez euros son suficientes para empezar a probar—. Se te descuenta según usas los modelos.
+
+## Configurarlo en OpenCode
+
+Una vez que tienes tu API key de OpenRouter, el siguiente paso es decirle a OpenCode que la use. Esto se hace en el archivo `opencode.jsonc` de tu proyecto.
+
+No necesitas editar el archivo a mano si no quieres. Puedes pedírselo a OpenCode en lenguaje natural:
+
+*"Configura OpenRouter como proveedor con mi API key."*
+*"Cambia el modelo a Claude Sonnet."*
+*"¿Qué proveedores tengo configurados?"*
+
+Pero si prefieres hacerlo tú mismo, el archivo se ve así:
+
+```jsonc
+{
+  "provider": "openrouter",
+  "model": "openai/gpt-4o",
+  "apiKey": "sk-or-v1-tu-clave-aqui"
+}
+```
+
+Cada campo significa:
+
+- **provider**: el proveedor que vas a usar. En este caso, `"openrouter"`.
+- **model**: el modelo concreto. El nombre sigue el formato `proveedor/modelo`, como `"openai/gpt-4o"`, `"anthropic/claude-sonnet"` o `"google/gemini-pro"`.
+- **apiKey**: tu clave personal de OpenRouter, la que generaste en el paso anterior.
+
+::: {.callout-note}
+## La clave es tuya y solo tuya
+
+La API key es como una contraseña. No la compartas ni la subas a repositorios públicos. OpenCode la guarda en el archivo de configuración local, que no se sube a ningún sitio.
+:::
+
+## Ejemplo práctico durante una sesión
+
+Imagina que empiezas la mañana trabajando con GPT-4o para tareas generales. A mitad del proyecto necesitas analizar un documento denso, así que le pides a OpenCode:
+
+*"Cambia el modelo a anthropic/claude-sonnet."*
+
+OpenCode ajusta la configuración y sigues trabajando donde lo dejaste, pero ahora con Claude. Más tarde, para una tarea rápida, cambias a Gemini. Todo en la misma sesión, sin cerrar nada, sin moverte de tu ventana.
+
+El historial de la conversación se mantiene, los archivos abiertos siguen ahí, las instrucciones que has dado antes siguen vigentes. Solo cambia la inteligencia que responde.
+
+## Modelos recomendados para empezar
+
+::: {#tabla-modelos tbl-colwidths="[34,12,12,40]"}
+| Modelo | Precio aprox. | Velocidad | Ideal para |
+|--------|---------------|-----------|------------|
+| `openai/gpt-4o` | Medio | Alta | Propósito general: textos, análisis, edición |
+| `openai/gpt-4o-mini` | Muy bajo | Muy alta | Tareas rápidas, borradores, economía |
+| `anthropic/claude-sonnet` | Medio-alto | Media | Análisis profundo, documentos largos, matices |
+| `anthropic/claude-haiku` | Bajo | Muy alta | Respuestas veloces, clasificación, extracción |
+| `google/gemini-pro` | Bajo | Muy alta | Tareas rápidas, borradores, respuestas inmediatas |
+| `google/gemini-flash` | Muy bajo | Muy alta | Procesamiento rápido, bajo coste |
+| `deepseek/deepseek-chat` | Muy bajo | Alta | Código, precisión técnica, procesamiento por lotes |
+| `meta-llama/llama-3-70b` | Bajo | Alta | Textos creativos, versiones alternativas |
+| `mistral/mistral-large` | Medio | Alta | Equilibrio calidad/velocidad, multilingüe |
+| `qwen/qwen-max` | Medio | Alta | Alibaba: calidad en chino e inglés |
+| `qwen/qwen-turbo` | Bajo | Muy alta | Alibaba: rápido y económico |
+| `zhipu/glm-4` | Bajo | Alta | Zhipu: rendimiento general equilibrado |
+:::
+
+::: {.callout-warning}
+## Modelos cambiantes
+
+Los modelos disponibles, sus precios y su velocidad pueden cambiar con el tiempo. OpenRouter añade y retira modelos según la disponibilidad de los proveedores. Consulta el [catálogo actualizado](https://openrouter.ai/models) para ver la oferta más reciente.
+:::
+
+## Referencias
+
+- [OpenRouter](https://openrouter.ai) — Proveedor unificado de modelos de IA. Registro, documentación y lista de modelos disponibles.
+
+- [OpenCode](https://opencode.ai) — Asistente de IA que trabaja sobre archivos locales. Guías de configuración y uso.
+
+- [OpenRouter en OpenCode](https://opencode.ai/docs/providers#openrouter) — Documentación específica sobre cómo configurar OpenRouter como proveedor.
+
+- [Modelos en OpenRouter](https://openrouter.ai/models) — Catálogo completo con precios actualizados de cada modelo.

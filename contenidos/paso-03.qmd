@@ -4,31 +4,73 @@ title: "03. Modelos y proveedores de IA"
 
 ## Objetivo
 
-Conocer los proveedores de IA disponibles, entender cómo elegir
-el modelo adecuado según la tarea y configurarlos en OpenCode.
+Entender los modelos de IA disponibles en OpenCode, cómo alternar
+entre ellos y cómo conectar nuevos proveedores.
 
 Duración estimada: **20 minutos**
 
 ---
 
-## Por qué importa el modelo
+## Modelos: ya tenemos opciones
 
-Cada modelo de IA tiene distinto equilibrio entre **coste**,
-**velocidad** y **calidad**. Usar el modelo adecuado para cada
-tarea ahorra tiempo y dinero:
+Cuando instalas OpenCode, ya vienen configurados algunos modelos
+gratuitos (Zen). No necesitas registrar cuentas ni introducir
+claves API para empezar a trabajar:
 
-- Los modelos pequeños (GPT-4o-mini, Haiku) son rápidos y
-  baratos, ideales para revisiones rápidas
-- Los modelos grandes (GPT-4o, Sonnet) dan mejor calidad en
-  tareas complejas como generación de documentos largos
-- Los modelos locales (Llama 3, Gemma) son gratuitos y no
-  comparten datos con terceros
+- **Zen** — modelos cloud gratuitos, vienen configurados por defecto
+- **Locales** — modelos que corren en tu ordenador sin conexión (Ollama, LM Studio)
+
+Estos modelos son suficientes para la mayoría de tareas del curso.
+Si necesitas más calidad o velocidad, puedes conectar proveedores
+de pago (OpenAI, Anthropic, Google...) o usar OpenRouter como
+puerta de entrada a decenas de modelos.
 
 ---
 
-## Proveedores cloud compatibles
+## `/models` — Ver y cambiar de modelo
 
-OpenCode funciona con los principales proveedores:
+Escribe `/models` en el chat para ver los modelos disponibles y
+cambiar entre ellos:
+
+```
+/models
+```
+
+OpenCode te mostrará una lista con los modelos configurados.
+Selecciona uno y se usará en las siguientes conversaciones.
+
+[![](modelsOC.png){fig-align="center" width=40%}](modelsOC.png){target="_blank"}
+
+### Qué modelo elegir
+
+| Modelo | Tipo | Mejor para |
+|--------|------|------------|
+| Zen (gratuito) | Cloud | Uso general, aprendizaje |
+| GPT-4o-mini | Cloud | Revisiones rápidas |
+| GPT-4o | Cloud | Documentos largos, complejidad |
+| Claude Sonnet | Cloud | Análisis profundo, escritura |
+| Llama 3 | Local | Sin coste, sin conexión |
+
+[Ampliando: Modelos de IA](ampliando-modelos.qmd) — tabla
+detallada, comparativas y estrategias por tarea
+
+---
+
+## `/connect` — Conectar nuevos proveedores
+
+Si los modelos por defecto no te alcanzan, puedes conectar
+proveedores adicionales con `/connect`:
+
+```
+/connect
+```
+
+OpenCode te guiará en el proceso. Necesitarás una **clave de API**
+del proveedor que elijas.
+
+[![](connectOC.png){fig-align="center" width=40%}](connectOC.png){target="_blank"}
+
+### Proveedores clásicos
 
 | Proveedor | Modelos habituales | Variable de entorno |
 |-----------|-------------------|---------------------|
@@ -37,137 +79,59 @@ OpenCode funciona con los principales proveedores:
 | Google | Gemini Pro, Gemini Flash | `GOOGLE_API_KEY` |
 | Groq | Llama 3, Mixtral (gratuito) | `GROQ_API_KEY` |
 
-Cada proveedor requiere una clave de API que se configura como
-variable de entorno.
+### OpenRouter: puerta de entrada a múltiples modelos
 
----
+[OpenRouter](https://openrouter.ai) es un proxy que da acceso
+a modelos de diferentes proveedores con una sola cuenta y una
+sola clave API. Es útil si quieres probar varios modelos sin
+gestionar múltiples suscripciones.
 
-## Modelos locales
-
-Puedes usar modelos locales mediante servidores compatibles con
-la API de OpenAI:
-
-| Servidor | Instalación |
-|----------|-------------|
-| Ollama | `ollama pull llama3.2` — corre en `http://localhost:11434` |
-| LM Studio | Descargar desde lmstudio.ai — servidor OpenAI integrado |
-
-Los modelos locales no requieren conexión a internet ni claves,
-pero necesitan un ordenador con suficiente memoria RAM.
-
----
-
-## Cómo se configura en OpenCode
-
-### Configuración global o del proyecto
-
-En `opencode.jsonc` (global o del proyecto):
-
-```jsonc
-{
-  "model": {
-    "provider": "openai",
-    "name": "gpt-4o-mini",
-    "apiKey": "${OPENAI_API_KEY}"
-  }
-}
-```
-
-Para un modelo local con Ollama:
-
-```jsonc
-{
-  "model": {
-    "provider": "openai",
-    "name": "llama3.2",
-    "baseUrl": "http://localhost:11434/v1",
-    "apiKey": "no-key-needed"
-  }
-}
-```
-
-### Por agente
-
-Puedes asignar un modelo distinto a cada agente en su YAML:
-
-```yaml
----
-name: revisor-rapido
-model: gpt-4o-mini
-mode: subagent
----
-```
-
-### Por comando CLI
-
-Con el flag `--model`:
-
-```bash
-opencode run "Revisa este documento" @documento.md --model gpt-4o-mini
-```
+[Ampliando: Conexiones y proveedores](ampliando-conexiones.qmd)
+— configuración detallada de cada proveedor y OpenRouter
 
 ---
 
 ## Manos a la obra
 
-### Ejercicio 1 — Consultar los modelos disponibles
+### Ejercicio 1 — Consultar modelos disponibles
 
-En *Plan*, pregunta a OpenCode:
+En *Plan*, escribe:
 
-> ¿Qué modelos de IA tienes configurados y qué proveedores
-> usas?
+> ¿Qué modelos de IA tienes configurados?
 
-Si no tienes ningún modelo configurado, OpenCode usará su
-valor por defecto. Puedes ver las opciones desde la terminal:
+OpenCode te mostrará los modelos disponibles. Si no tienes
+ninguno configurado, usarás los modelos Zen por defecto.
 
-```bash
-opencode run --help
-```
+### Ejercicio 2 — Cambiar de modelo
 
-Busca el flag `--model` y los proveedores soportados.
+Ejecuta `/models` y selecciona un modelo distinto al actual.
+Luego prueba la misma tarea con ambos modelos:
 
-### Ejercicio 2 — Comparar dos modelos en la misma tarea
+> Resume este paso en 3 puntos clave
 
-Si tienes acceso a más de un modelo, prueba la misma tarea
-con ambos y compara resultados:
+¿Qué diferencias notas en velocidad y estilo?
 
-```bash
-opencode run "Resume este documento en 3 líneas" @paso-01.qmd --model gpt-4o-mini
-```
+### Ejercicio 3 — Comparar modelo gratuito con uno de pago
 
-```bash
-opencode run "Resume este documento en 3 líneas" @paso-01.qmd --model gpt-4o
-```
+Si tienes acceso a un modelo de pago (GPT-4o, Sonnet...),
+compara la respuesta con el modelo Zen:
 
-¿Qué diferencias notas en velocidad, precisión y estilo?
+> Explica qué es un skill en OpenCode en 2 párrafos
 
-### Ejercicio 3 — Configurar un modelo local (opcional)
+¿Vale la pena el coste adicional para esta tarea?
 
-Si tienes Ollama instalado, prueba un modelo local:
+### Ejercicio 4 — Conectar un proveedor (opcional)
 
-1. Descarga un modelo: `ollama pull llama3.2`
-2. Crea o modifica `opencode.jsonc` con la configuración local
-   (ver sección anterior)
-3. Reinicia OpenCode y prueba:
+Si quieres probar con otro proveedor:
 
-> Explica qué es un agente en OpenCode en dos frases
-
-Compara la respuesta con la de un modelo cloud.
+1. Ejecuta `/connect` y sigue las instrucciones
+2. Introduce tu clave de API
+3. Cambia al nuevo modelo con `/models`
+4. Prueba una tarea y compara
 
 ---
 
-## Estrategias por tarea
-
-| Tarea | Modelo recomendado | Motivo |
-|-------|--------------------|--------|
-| Revisión rápida de estilo | GPT-4o-mini / Haiku | Barato, rápido |
-| Generación de documentos largos | GPT-4o / Sonnet | Mayor calidad y coherencia |
-| Traducción | Gemini Flash | Buen equilibrio calidad/velocidad |
-| Investigación web | GPT-4o / Sonnet | Mejor comprensión de contexto |
-| Prototipado y pruebas | Modelo local (Llama 3) | Gratuito, sin límites |
-
----
-
+::: {.callout-warning}
 ## Seguridad: gestión de claves
 
 - **Nunca versiones claves API** — usa variables de entorno
@@ -180,15 +144,16 @@ ANTHROPIC_API_KEY=sk-ant-...
 
 - Añade `.env` a `.gitignore`
 - OpenCode lee `apiKey: "${VARIABLE}"` y la resuelve del entorno
+:::
 
 ---
 
 ## Resumen del paso
 
-- ✅ Conoces los principales proveedores de IA y sus modelos
-- ✅ Sabes cómo configurar un modelo en OpenCode (global, por agente, por CLI)
-- ✅ Has comparado dos modelos en la misma tarea
-- ✅ Conoces los modelos locales como alternativa gratuita
+- ✅ Sabes que OpenCode ya tiene modelos gratuitos (Zen) configurados
+- ✅ Puedes ver y cambiar de modelo con `/models`
+- ✅ Puedes conectar proveedores adicionales con `/connect`
+- ✅ Conoces la diferencia entre modelos gratuitos, de pago y locales
 - ✅ Sabes gestionar claves API de forma segura
 
 En el próximo paso veremos cómo usar Git para versionar documentos.
@@ -197,8 +162,8 @@ En el próximo paso veremos cómo usar Git para versionar documentos.
 
 ## Para profundizar
 
-- [Documentación de OpenCode sobre modelos](https://opencode.ai/docs)
+- [Ampliando: Modelos de IA](ampliando-modelos.qmd)
+- [Ampliando: Conexiones y proveedores](ampliando-conexiones.qmd)
 - [Ollama](https://ollama.ai) — modelos locales
-- [Pro Git en español](https://git-scm.com/book/es/v2)
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

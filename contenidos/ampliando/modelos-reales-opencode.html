@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Agente Scribe">
+
+<title>Los modelos (motores de IA) de OpenCode</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="modelos-reales-opencode_files/libs/clipboard/clipboard.min.js"></script>
+<script src="modelos-reales-opencode_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="modelos-reales-opencode_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="modelos-reales-opencode_files/libs/quarto-html/popper.min.js"></script>
+<script src="modelos-reales-opencode_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="modelos-reales-opencode_files/libs/quarto-html/anchor.min.js"></script>
+<link href="modelos-reales-opencode_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="modelos-reales-opencode_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="modelos-reales-opencode_files/libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="modelos-reales-opencode_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="modelos-reales-opencode_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="modelos-reales-opencode_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="modelos-reales-opencode_files/libs/bootstrap/bootstrap-a8c4371f8a3fb65efe7b8ccc094f2999.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="modelos-reales-opencode_files/libs/bootstrap/bootstrap-dark-a8c4371f8a3fb65efe7b8ccc094f2999.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="modelos-reales-opencode_files/libs/bootstrap/bootstrap-a8c4371f8a3fb65efe7b8ccc094f2999.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1</span> Introducción</a></li>
+  <li><a href="#agentes-vs.-modelos-la-diferencia-clave" id="toc-agentes-vs.-modelos-la-diferencia-clave" class="nav-link" data-scroll-target="#agentes-vs.-modelos-la-diferencia-clave"><span class="header-section-number">2</span> Agentes vs.&nbsp;Modelos: la diferencia clave</a>
+  <ul class="collapse">
+  <li><a href="#analogía-rápida-el-restaurante" id="toc-analogía-rápida-el-restaurante" class="nav-link" data-scroll-target="#analogía-rápida-el-restaurante"><span class="header-section-number">2.1</span> Analogía rápida: el restaurante</a></li>
+  <li><a href="#cómo-se-relacionan-en-la-práctica" id="toc-cómo-se-relacionan-en-la-práctica" class="nav-link" data-scroll-target="#cómo-se-relacionan-en-la-práctica"><span class="header-section-number">2.2</span> ¿Cómo se relacionan en la práctica?</a></li>
+  </ul></li>
+  <li><a href="#el-ecosistema-de-modelos-de-opencode" id="toc-el-ecosistema-de-modelos-de-opencode" class="nav-link" data-scroll-target="#el-ecosistema-de-modelos-de-opencode"><span class="header-section-number">3</span> El ecosistema de modelos de OpenCode</a>
+  <ul class="collapse">
+  <li><a href="#los-modelos-de-un-vistazo" id="toc-los-modelos-de-un-vistazo" class="nav-link" data-scroll-target="#los-modelos-de-un-vistazo"><span class="header-section-number">3.1</span> Los modelos de un vistazo</a></li>
+  </ul></li>
+  <li><a href="#modelo-1-deepseek-v4-flash-free-el-modelo-cloud-siempre-disponible" id="toc-modelo-1-deepseek-v4-flash-free-el-modelo-cloud-siempre-disponible" class="nav-link" data-scroll-target="#modelo-1-deepseek-v4-flash-free-el-modelo-cloud-siempre-disponible"><span class="header-section-number">4</span> Modelo 1: «deepseek-v4-flash-free» — El modelo cloud siempre disponible</a>
+  <ul class="collapse">
+  <li><a href="#qué-es" id="toc-qué-es" class="nav-link" data-scroll-target="#qué-es"><span class="header-section-number">4.1</span> ¿Qué es?</a></li>
+  <li><a href="#analogía-la-biblioteca-pública" id="toc-analogía-la-biblioteca-pública" class="nav-link" data-scroll-target="#analogía-la-biblioteca-pública"><span class="header-section-number">4.2</span> Analogía: La biblioteca pública</a></li>
+  <li><a href="#características-clave" id="toc-características-clave" class="nav-link" data-scroll-target="#características-clave"><span class="header-section-number">4.3</span> Características clave</a></li>
+  <li><a href="#cuándo-usarlo" id="toc-cuándo-usarlo" class="nav-link" data-scroll-target="#cuándo-usarlo"><span class="header-section-number">4.4</span> ¿Cuándo usarlo?</a></li>
+  </ul></li>
+  <li><a href="#modelo-2-qwen-32b-big-pickle-el-motor-local-de-alto-rendimiento" id="toc-modelo-2-qwen-32b-big-pickle-el-motor-local-de-alto-rendimiento" class="nav-link" data-scroll-target="#modelo-2-qwen-32b-big-pickle-el-motor-local-de-alto-rendimiento"><span class="header-section-number">5</span> Modelo 2: «qwen-32b» / «big-pickle» — El motor local de alto rendimiento</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-1" id="toc-qué-es-1" class="nav-link" data-scroll-target="#qué-es-1"><span class="header-section-number">5.1</span> ¿Qué es?</a></li>
+  <li><a href="#analogía-tu-taller-personal-de-carpintería-fina" id="toc-analogía-tu-taller-personal-de-carpintería-fina" class="nav-link" data-scroll-target="#analogía-tu-taller-personal-de-carpintería-fina"><span class="header-section-number">5.2</span> Analogía: Tu taller personal de carpintería fina</a></li>
+  <li><a href="#qué-significa-32-mil-millones-de-parámetros" id="toc-qué-significa-32-mil-millones-de-parámetros" class="nav-link" data-scroll-target="#qué-significa-32-mil-millones-de-parámetros"><span class="header-section-number">5.3</span> ¿Qué significa “32 mil millones de parámetros”?</a></li>
+  <li><a href="#características-clave-1" id="toc-características-clave-1" class="nav-link" data-scroll-target="#características-clave-1"><span class="header-section-number">5.4</span> Características clave</a></li>
+  <li><a href="#cuándo-usarlo-1" id="toc-cuándo-usarlo-1" class="nav-link" data-scroll-target="#cuándo-usarlo-1"><span class="header-section-number">5.5</span> ¿Cuándo usarlo?</a></li>
+  <li><a href="#el-apodo-big-pickle-pepinillo-grande" id="toc-el-apodo-big-pickle-pepinillo-grande" class="nav-link" data-scroll-target="#el-apodo-big-pickle-pepinillo-grande"><span class="header-section-number">5.6</span> El apodo: “Big Pickle” / “Pepinillo Grande”</a></li>
+  </ul></li>
+  <li><a href="#modelo-3-mi-qwen-mimo-la-infraestructura-que-lo-sirve-todo" id="toc-modelo-3-mi-qwen-mimo-la-infraestructura-que-lo-sirve-todo" class="nav-link" data-scroll-target="#modelo-3-mi-qwen-mimo-la-infraestructura-que-lo-sirve-todo"><span class="header-section-number">6</span> Modelo 3: «mi-qwen» / «MiMo» — La infraestructura que lo sirve todo</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-2" id="toc-qué-es-2" class="nav-link" data-scroll-target="#qué-es-2"><span class="header-section-number">6.1</span> ¿Qué es?</a></li>
+  <li><a href="#analogía-tu-propia-central-eléctrica" id="toc-analogía-tu-propia-central-eléctrica" class="nav-link" data-scroll-target="#analogía-tu-propia-central-eléctrica"><span class="header-section-number">6.2</span> Analogía: Tu propia central eléctrica</a></li>
+  <li><a href="#características-clave-2" id="toc-características-clave-2" class="nav-link" data-scroll-target="#características-clave-2"><span class="header-section-number">6.3</span> Características clave</a></li>
+  <li><a href="#cuándo-usarlo-2" id="toc-cuándo-usarlo-2" class="nav-link" data-scroll-target="#cuándo-usarlo-2"><span class="header-section-number">6.4</span> ¿Cuándo usarlo?</a></li>
+  </ul></li>
+  <li><a href="#tabla-comparativa-de-modelos" id="toc-tabla-comparativa-de-modelos" class="nav-link" data-scroll-target="#tabla-comparativa-de-modelos"><span class="header-section-number">7</span> Tabla comparativa de modelos</a>
+  <ul class="collapse">
+  <li><a href="#el-significado-de-los-colores" id="toc-el-significado-de-los-colores" class="nav-link" data-scroll-target="#el-significado-de-los-colores"><span class="header-section-number">7.1</span> El significado de los colores</a></li>
+  </ul></li>
+  <li><a href="#cuándo-usar-cada-modelo-guía-por-tarea" id="toc-cuándo-usar-cada-modelo-guía-por-tarea" class="nav-link" data-scroll-target="#cuándo-usar-cada-modelo-guía-por-tarea"><span class="header-section-number">8</span> ¿Cuándo usar cada modelo? Guía por tarea</a>
+  <ul class="collapse">
+  <li><a href="#según-el-tipo-de-contenido" id="toc-según-el-tipo-de-contenido" class="nav-link" data-scroll-target="#según-el-tipo-de-contenido"><span class="header-section-number">8.1</span> Según el tipo de contenido</a></li>
+  <li><a href="#según-la-situación" id="toc-según-la-situación" class="nav-link" data-scroll-target="#según-la-situación"><span class="header-section-number">8.2</span> Según la situación</a></li>
+  </ul></li>
+  <li><a href="#tabla-de-decisión-rápida" id="toc-tabla-de-decisión-rápida" class="nav-link" data-scroll-target="#tabla-de-decisión-rápida"><span class="header-section-number">9</span> Tabla de decisión rápida</a>
+  <ul class="collapse">
+  <li><a href="#resumen-en-tres-frases" id="toc-resumen-en-tres-frases" class="nav-link" data-scroll-target="#resumen-en-tres-frases"><span class="header-section-number">9.1</span> Resumen en tres frases</a></li>
+  </ul></li>
+  <li><a href="#preguntas-frecuentes" id="toc-preguntas-frecuentes" class="nav-link" data-scroll-target="#preguntas-frecuentes"><span class="header-section-number">10</span> Preguntas frecuentes</a>
+  <ul class="collapse">
+  <li><a href="#puedo-cambiar-de-modelo-mientras-trabajo" id="toc-puedo-cambiar-de-modelo-mientras-trabajo" class="nav-link" data-scroll-target="#puedo-cambiar-de-modelo-mientras-trabajo"><span class="header-section-number">10.1</span> ¿Puedo cambiar de modelo mientras trabajo?</a></li>
+  <li><a href="#un-modelo-es-mejor-que-otro" id="toc-un-modelo-es-mejor-que-otro" class="nav-link" data-scroll-target="#un-modelo-es-mejor-que-otro"><span class="header-section-number">10.2</span> ¿Un modelo es mejor que otro?</a></li>
+  <li><a href="#puedo-tener-ambos-modelos-configurados" id="toc-puedo-tener-ambos-modelos-configurados" class="nav-link" data-scroll-target="#puedo-tener-ambos-modelos-configurados"><span class="header-section-number">10.3</span> ¿Puedo tener ambos modelos configurados?</a></li>
+  <li><a href="#qué-modelo-usa-el-agente-explicador-cuando-no-especifico-nada" id="toc-qué-modelo-usa-el-agente-explicador-cuando-no-especifico-nada" class="nav-link" data-scroll-target="#qué-modelo-usa-el-agente-explicador-cuando-no-especifico-nada"><span class="header-section-number">10.4</span> ¿Qué modelo usa el agente <code>explicador</code> cuando no especifico nada?</a></li>
+  <li><a href="#necesito-ser-administrador-del-servidor-para-usar-el-modelo-local" id="toc-necesito-ser-administrador-del-servidor-para-usar-el-modelo-local" class="nav-link" data-scroll-target="#necesito-ser-administrador-del-servidor-para-usar-el-modelo-local"><span class="header-section-number">10.5</span> ¿Necesito ser administrador del servidor para usar el modelo local?</a></li>
+  <li><a href="#el-modelo-local-consume-muchos-recursos" id="toc-el-modelo-local-consume-muchos-recursos" class="nav-link" data-scroll-target="#el-modelo-local-consume-muchos-recursos"><span class="header-section-number">10.6</span> ¿El modelo local consume muchos recursos?</a></li>
+  </ul></li>
+  <li><a href="#glosario-de-términos" id="toc-glosario-de-términos" class="nav-link" data-scroll-target="#glosario-de-términos"><span class="header-section-number">11</span> Glosario de términos</a></li>
+  <li><a href="#resumen-final" id="toc-resumen-final" class="nav-link" data-scroll-target="#resumen-final"><span class="header-section-number">12</span> Resumen final</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Los modelos (motores de IA) de OpenCode</h1>
+<p class="subtitle lead">Entiende qué hace funcionar a tus asistentes — sin necesidad de programar</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Agente Scribe </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Invalid Date</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introducción" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introducción</h1>
+<p>Si has usado OpenCode, seguro que ya conoces a los <strong>agentes</strong>: el <code>explicador</code>, el <code>scribe</code>, el <code>general</code> y el <code>explore</code>. Pero ¿alguna vez te has preguntado <strong>qué es lo que realmente piensa</strong> cuando haces una pregunta?</p>
+<p>La respuesta son los <strong>modelos</strong> (o motores de lenguaje). Son el cerebro de la operación. Los agentes son como conductores especializados, pero el coche que conduce —el que tiene el motor— es el modelo.</p>
+<p>Este documento está escrito para <strong>creadores de documentos que no programan</strong>. No necesitas saber de inteligencia artificial ni de servidores. Solo necesitas entender qué opciones tienes, cuándo conviene usar cada una y por qué.</p>
+<blockquote class="blockquote">
+<p><strong>Objetivo de este documento:</strong> Explicarte los modelos de OpenCode (deepseek-v4-flash-free, qwen-32b/big-pickle y mi-qwen/MiMo) como si fueran herramientas de un taller creativo.</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Nota importante:</strong> Este documento habla de <strong>modelos</strong> (los motores de IA). No lo confundas con los documentos anteriores que hablaban de <strong>agentes</strong> (los perfiles especializados como <code>explicador</code> o <code>scribe</code>). Ambos conceptos se complementan, pero son cosas distintas. Lo aclaramos en la siguiente sección.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="agentes-vs.-modelos-la-diferencia-clave" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Agentes vs.&nbsp;Modelos: la diferencia clave</h1>
+<p>Esta es la confusión más habitual entre quienes empiezan con OpenCode. Vamos a aclararla de una vez.</p>
+<section id="analogía-rápida-el-restaurante" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="analogía-rápida-el-restaurante"><span class="header-section-number">2.1</span> Analogía rápida: el restaurante</h2>
+<p>Imagina que OpenCode es un <strong>restaurante</strong>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 43%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concepto</th>
+<th>En el restaurante</th>
+<th>En OpenCode</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Agente</strong></td>
+<td>El chef especializado: el pastelero, el parrillero, el salsero</td>
+<td>El perfil que usas: <code>explicador</code>, <code>scribe</code>, <code>general</code>, <code>explore</code></td>
+</tr>
+<tr class="even">
+<td><strong>Modelo</strong></td>
+<td>El tipo de cocina: gas, inducción, leña, horno de barro</td>
+<td>El motor de IA: deepseek-v4-flash-free, qwen-32b, mi-qwen</td>
+</tr>
+</tbody>
+</table>
+<p>Un mismo chef (agente) puede cocinar en diferentes tipos de cocina (modelo). Y una misma cocina (modelo) puede ser usada por diferentes chefs (agentes).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 47%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Pregunta</th>
+<th>Respuesta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>¿El <code>scribe</code> es un modelo?</td>
+<td>No.&nbsp;El <code>scribe</code> es un <strong>agente</strong> (un perfil de asistente).</td>
+</tr>
+<tr class="even">
+<td>¿<code>deepseek-v4-flash-free</code> es un agente?</td>
+<td>No.&nbsp;Es un <strong>modelo</strong> (el motor que procesa el lenguaje).</td>
+</tr>
+<tr class="odd">
+<td>¿Puedo usar el agente <code>explicador</code> con el modelo <code>qwen-32b</code>?</td>
+<td>Sí. Cada agente puede funcionar sobre diferentes modelos.</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Consejo:</strong> Cuando elijas un agente, decides <strong>cómo</strong> quieres que te ayude (explicando, redactando, investigando, explorando). Cuando elijas un modelo, decides <strong>con qué motor</strong> lo hará (rápido en la nube, o potente y privado en local).</p>
+</div>
+</div>
+</section>
+<section id="cómo-se-relacionan-en-la-práctica" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="cómo-se-relacionan-en-la-práctica"><span class="header-section-number">2.2</span> ¿Cómo se relacionan en la práctica?</h2>
+<p>Cuando escribes un prompt en OpenCode, siempre usas ambas cosas sin darte cuenta:</p>
+<pre><code>scribe: Redacta una introducción para mi informe.
+       ↑                                      ↑
+    agente                           modelo (seleccionado
+                                     en la configuración)</code></pre>
+<p>El agente le da la <strong>instrucción de estilo</strong> (redacta como un escriba profesional). El modelo le da la <strong>capacidad de procesamiento</strong> (entiende el lenguaje y genera texto).</p>
+<hr>
+</section>
+</section>
+<section id="el-ecosistema-de-modelos-de-opencode" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> El ecosistema de modelos de OpenCode</h1>
+<p>OpenCode puede funcionar con <strong>tres modelos</strong> distintos. Cada uno tiene sus propias características, ventajas y momentos ideales para usarlo.</p>
+<section id="los-modelos-de-un-vistazo" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="los-modelos-de-un-vistazo"><span class="header-section-number">3.1</span> Los modelos de un vistazo</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 31%">
+<col style="width: 13%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Nombre técnico</th>
+<th>Alias / Apodo</th>
+<th>Tipo</th>
+<th>Dónde se ejecuta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><code>deepseek-v4-flash-free</code></td>
+<td><code>opencode/deepseek-v4-flash-free</code></td>
+<td>Cloud (gratuito)</td>
+<td>Servidores de OpenCode</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><code>qwen-32b</code></td>
+<td><code>big-pickle</code> / “pepinillo grande”</td>
+<td>Local (privado)</td>
+<td>Tu propio servidor</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td><code>mi-qwen</code> (proveedor)</td>
+<td><code>MiMo</code> (“Mi Modelo”)</td>
+<td>Infraestructura local</td>
+<td>Tu propio servidor (192.168.0.127:4000)</td>
+</tr>
+</tbody>
+</table>
+<!-- Los dos últimos son, en realidad, el mismo modelo físico (qwen-32b) servido a través del proveedor mi-qwen. -->
+<p>Los modelos 2 y 3 están estrechamente relacionados: <code>qwen-32b</code> es el modelo en sí, y <code>mi-qwen</code> (apodado <code>MiMo</code>) es el <strong>proveedor</strong> que lo sirve. Pero a efectos prácticos, cuando usas <code>mi-qwen</code> estás usando el modelo <code>qwen-32b</code>.</p>
+<hr>
+</section>
+</section>
+<section id="modelo-1-deepseek-v4-flash-free-el-modelo-cloud-siempre-disponible" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Modelo 1: «deepseek-v4-flash-free» — El modelo cloud siempre disponible</h1>
+<section id="qué-es" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="qué-es"><span class="header-section-number">4.1</span> ¿Qué es?</h2>
+<p>Es el modelo <strong>por defecto de OpenCode</strong>. Un motor de inteligencia artificial que se ejecuta en los servidores de OpenCode (en la nube). Está diseñado para ser <strong>rápido, gratuito y fiable</strong>.</p>
+</section>
+<section id="analogía-la-biblioteca-pública" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="analogía-la-biblioteca-pública"><span class="header-section-number">4.2</span> Analogía: La biblioteca pública</h2>
+<p>Imagina que <code>deepseek-v4-flash-free</code> es como una <strong>biblioteca pública municipal</strong>:</p>
+<ul>
+<li><strong>Siempre abierta:</strong> No necesitas pedir cita ni instalar nada. Abres OpenCode y ya está disponible.</li>
+<li><strong>Gratuita:</strong> No pagas por usarla, entra dentro del servicio básico.</li>
+<li><strong>Bien surtida:</strong> Tiene respuestas para la mayoría de preguntas y tareas cotidianas.</li>
+<li><strong>Rápida:</strong> Encuentras lo que buscas sin largas esperas.</li>
+</ul>
+</section>
+<section id="características-clave" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="características-clave"><span class="header-section-number">4.3</span> Características clave</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Velocidad</strong></td>
+<td>Alta. Responde en pocos segundos.</td>
+</tr>
+<tr class="even">
+<td><strong>Privacidad</strong></td>
+<td>Media. Tus consultas viajan a servidores externos.</td>
+</tr>
+<tr class="odd">
+<td><strong>Disponibilidad</strong></td>
+<td>Siempre disponible mientras tengas internet.</td>
+</tr>
+<tr class="even">
+<td><strong>Costo</strong></td>
+<td>Gratuito.</td>
+</tr>
+<tr class="odd">
+<td><strong>Conexión requerida</strong></td>
+<td>Sí, necesitas internet.</td>
+</tr>
+<tr class="even">
+<td><strong>Capacidad</strong></td>
+<td>Suficiente para la mayoría de tareas de documentación.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuándo-usarlo" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="cuándo-usarlo"><span class="header-section-number">4.4</span> ¿Cuándo usarlo?</h2>
+<ul>
+<li><strong>Siempre que empieces un proyecto nuevo.</strong> Es el modelo por defecto por una razón: es rápido, fiable y no requiere configuración.</li>
+<li><strong>Cuando necesitas respuestas rápidas.</strong> Para tareas cotidianas como redactar un párrafo, resumir una idea o estructurar una sección.</li>
+<li><strong>Cuando trabajas en equipo.</strong> Como está en la nube, todos usan el mismo modelo y los resultados son consistentes.</li>
+<li><strong>Cuando no tienes acceso a tu servidor local.</strong> Si estás fuera de la oficina o tu máquina local está apagada.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Consejo:</strong> Usa <code>deepseek-v4-flash-free</code> como tu modelo predeterminado. Es como tener un asistente competente siempre disponible. Reserva los modelos locales para tareas que requieran más privacidad o potencia.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="modelo-2-qwen-32b-big-pickle-el-motor-local-de-alto-rendimiento" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Modelo 2: «qwen-32b» / «big-pickle» — El motor local de alto rendimiento</h1>
+<section id="qué-es-1" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="qué-es-1"><span class="header-section-number">5.1</span> ¿Qué es?</h2>
+<p><code>qwen-32b</code> es un modelo de inteligencia artificial con <strong>32 mil millones de parámetros</strong> que se ejecuta en un servidor local (en tu propia infraestructura). Su alias es <code>big-pickle</code>, que cariñosamente se traduce como <strong>“pepinillo grande”</strong> o <strong>“pepinote”</strong>.</p>
+</section>
+<section id="analogía-tu-taller-personal-de-carpintería-fina" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="analogía-tu-taller-personal-de-carpintería-fina"><span class="header-section-number">5.2</span> Analogía: Tu taller personal de carpintería fina</h2>
+<p>Si <code>deepseek-v4-flash-free</code> es la biblioteca pública, <code>qwen-32b</code> es tu <strong>taller de carpintería en el garaje</strong>:</p>
+<ul>
+<li><strong>Es tuyo:</strong> Nadie más lo usa. No compartes recursos con otros usuarios.</li>
+<li><strong>Es potente:</strong> Tienes maquinaria profesional (32 mil millones de parámetros) que permite trabajos más complejos.</li>
+<li><strong>Es privado:</strong> Todo lo que hagas se queda en tu taller. Nadie mira tus proyectos.</li>
+<li><strong>Requiere mantenimiento:</strong> Necesitas tener el servidor encendido y configurado.</li>
+<li><strong>Sin límites de uso:</strong> Puedes usarlo todo lo que quieras, sin restricciones de cuota.</li>
+</ul>
+</section>
+<section id="qué-significa-32-mil-millones-de-parámetros" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="qué-significa-32-mil-millones-de-parámetros"><span class="header-section-number">5.3</span> ¿Qué significa “32 mil millones de parámetros”?</h2>
+<p>Un <strong>parámetro</strong> es como una <strong>conexión neuronal</strong> en el cerebro del modelo. Cuantos más parámetros, más capacidad de comprensión y generación de lenguaje tiene.</p>
+<p>Para que te hagas una idea:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 37%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Parámetros</th>
+<th>Analogía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>deepseek-v4-flash-free</code></td>
+<td>No especificado públicamente</td>
+<td>Un asistente competente con formación universitaria</td>
+</tr>
+<tr class="even">
+<td><code>qwen-32b</code></td>
+<td>32 mil millones</td>
+<td>Un equipo de 32 especialistas trabajando en paralelo</td>
+</tr>
+</tbody>
+</table>
+<p>Cuantos más parámetros, mejor puede el modelo: - Entender instrucciones complejas y matizadas. - Mantener coherencia en textos largos. - Capturar detalles y sutilezas del lenguaje. - Generar contenido más creativo y preciso.</p>
+</section>
+<section id="características-clave-1" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="características-clave-1"><span class="header-section-number">5.4</span> Características clave</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Velocidad</strong></td>
+<td>Media-alta. Depende de la capacidad del servidor local.</td>
+</tr>
+<tr class="even">
+<td><strong>Privacidad</strong></td>
+<td>Máxima. Todo queda en tu red local.</td>
+</tr>
+<tr class="odd">
+<td><strong>Disponibilidad</strong></td>
+<td>Depende de que el servidor local esté encendido.</td>
+</tr>
+<tr class="even">
+<td><strong>Costo</strong></td>
+<td>Solo electricidad y mantenimiento del servidor. Sin cuotas por uso.</td>
+</tr>
+<tr class="odd">
+<td><strong>Conexión requerida</strong></td>
+<td>Red local (no necesitas internet externo).</td>
+</tr>
+<tr class="even">
+<td><strong>Capacidad</strong></td>
+<td>Muy alta. Ideal para tareas complejas o documentos extensos.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuándo-usarlo-1" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="cuándo-usarlo-1"><span class="header-section-number">5.5</span> ¿Cuándo usarlo?</h2>
+<ul>
+<li><strong>Cuando trabajas con información sensible o confidencial.</strong> Datos personales, secretos comerciales, documentos legales. Como todo se queda en tu servidor, no hay riesgo de filtración.</li>
+<li><strong>Cuando necesitas respuestas más profundas y matizadas.</strong> Para análisis complejos, generación de documentos largos o tareas que requieren mucha coherencia.</li>
+<li><strong>Cuando tienes mucho trabajo y necesitas evitar límites de uso.</strong> Los modelos cloud a veces tienen cuotas. El modelo local no tiene restricciones.</li>
+<li><strong>Cuando no tienes conexión a internet (pero sí red local).</strong> Si estás en una instalación sin acceso externo, el modelo local sigue funcionando.</li>
+<li><strong>Para tareas que requieren máxima calidad.</strong> Si un borrador con <code>deepseek</code> te parece correcto pero no excelente, prueba con <code>qwen-32b</code> para pulirlo.</li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Advertencia:</strong> El modelo local requiere que el servidor esté encendido y accesible. Si viajas o trabajas desde casa sin conexión a la red de la oficina, no podrás usarlo (a menos que tengas el servidor contigo).</p>
+</div>
+</div>
+</section>
+<section id="el-apodo-big-pickle-pepinillo-grande" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="el-apodo-big-pickle-pepinillo-grande"><span class="header-section-number">5.6</span> El apodo: “Big Pickle” / “Pepinillo Grande”</h2>
+<p>El alias <code>big-pickle</code> nace del juego de palabras con “Qwen” (que suena similar a “pickle” en inglés). Es un nombre cariñoso que usa el equipo para referirse a este modelo.</p>
+<p>En español lo llamamos <strong>“pepinillo grande”</strong> o <strong>“pepinote”</strong>. No te extrañes si en las conversaciones del equipo escuchas frases como:</p>
+<ul>
+<li><em>“Voy a ejecutar esto con el pepinillo grande para que quede más fino.”</em></li>
+<li><em>“El pepinote maneja mejor los documentos largos.”</em></li>
+<li><em>“¿Está encendido el pepinillo? Voy a mandarle un trabajo pesado.”</em></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="modelo-3-mi-qwen-mimo-la-infraestructura-que-lo-sirve-todo" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Modelo 3: «mi-qwen» / «MiMo» — La infraestructura que lo sirve todo</h1>
+<section id="qué-es-2" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="qué-es-2"><span class="header-section-number">6.1</span> ¿Qué es?</h2>
+<p><code>mi-qwen</code> (abreviatura de <strong>“Mi Qwen”</strong>) es el <strong>proveedor</strong> que sirve el modelo <code>qwen-32b</code>. También se le conoce como <strong><code>MiMo</code></strong> (<strong>“Mi Modelo”</strong>).</p>
+<p>Para entenderlo mejor:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 38%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Componente</th>
+<th>Descripción</th>
+<th>Analogía</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>qwen-32b</code> / <code>big-pickle</code></td>
+<td>El modelo en sí (el motor de IA)</td>
+<td>El motor del coche</td>
+</tr>
+<tr class="even">
+<td><code>mi-qwen</code> / <code>MiMo</code></td>
+<td>El proveedor (el servicio que pone el modelo a tu disposición)</td>
+<td>El concesionario y el taller que mantienen el coche</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="analogía-tu-propia-central-eléctrica" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="analogía-tu-propia-central-eléctrica"><span class="header-section-number">6.2</span> Analogía: Tu propia central eléctrica</h2>
+<p>Imagina que <code>mi-qwen</code> / <code>MiMo</code> es como tener tu <strong>propia central eléctrica en casa</strong>:</p>
+<ul>
+<li><strong>Independencia energética:</strong> No dependes de la compañía eléctrica general. Generas tu propia electricidad.</li>
+<li><strong>Sin cortes:</strong> No hay apagones por mantenimiento externo ni restricciones de horario.</li>
+<li><strong>A medida:</strong> Puedes configurar la central para que funcione exactamente como necesitas.</li>
+<li><strong>Requiere inversión inicial:</strong> Necesitas los paneles solares, las baterías, el inversor… pero luego la electricidad es prácticamente gratis.</li>
+</ul>
+<p>En términos prácticos, cuando el equipo dice “estoy usando MiMo” o “voy a mi-qwen”, está diciendo que está usando el <strong>modelo local</strong> (<code>qwen-32b</code>) a través del <strong>servicio local</strong> (<code>mi-qwen</code>).</p>
+</section>
+<section id="características-clave-2" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="características-clave-2"><span class="header-section-number">6.3</span> Características clave</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Dirección del servidor</strong></td>
+<td><code>192.168.0.127:4000</code> (en la red local)</td>
+</tr>
+<tr class="even">
+<td><strong>Privacidad</strong></td>
+<td>Absoluta. No sale de tu red.</td>
+</tr>
+<tr class="odd">
+<td><strong>Control</strong></td>
+<td>Total. Tú decides cuándo actualizar, cómo configurar, etc.</td>
+</tr>
+<tr class="even">
+<td><strong>Dependencia</strong></td>
+<td>Del servidor local. Si se apaga, no hay servicio.</td>
+</tr>
+<tr class="odd">
+<td><strong>Costo operativo</strong></td>
+<td>Electricidad + mantenimiento del hardware.</td>
+</tr>
+<tr class="even">
+<td><strong>Límites de uso</strong></td>
+<td>Ninguno. Úsalo todo lo que quieras.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuándo-usarlo-2" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="cuándo-usarlo-2"><span class="header-section-number">6.4</span> ¿Cuándo usarlo?</h2>
+<p>Técnicamente, <code>mi-qwen</code> y <code>qwen-32b</code> son inseparables: cuando activas uno, estás usando el otro. Pero a efectos prácticos:</p>
+<ul>
+<li><strong>Elige <code>mi-qwen</code> / <code>MiMo</code></strong> cuando quieras dejar claro que estás usando el <strong>entorno local completo</strong> (infraestructura + modelo).</li>
+<li><strong>Elige <code>qwen-32b</code> / <code>big-pickle</code></strong> cuando quieras referirte <strong>específicamente al modelo</strong> y sus capacidades.</li>
+</ul>
+<p>En el uso diario, la mayoría del equipo dice simplemente <em>“voy a usar el pepinillo”</em> o <em>“pásalo por MiMo”</em> y todos entienden que se refieren al modelo local.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Nota:</strong> <code>mi-qwen</code> significa “Mi Qwen” (mi versión del modelo Qwen). El apodo <code>MiMo</code> viene de “Mi Modelo”. Ambos reflejan el orgullo del equipo por tener un modelo propio, controlado y siempre disponible.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="tabla-comparativa-de-modelos" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Tabla comparativa de modelos</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 29%">
+<col style="width: 29%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Característica</th>
+<th>🌐 deepseek-v4-flash-free</th>
+<th>🥒 qwen-32b / big-pickle</th>
+<th>🏠 mi-qwen / MiMo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tipo</strong></td>
+<td>Cloud (nube)</td>
+<td>Local (servidor propio)</td>
+<td>Infraestructura local</td>
+</tr>
+<tr class="even">
+<td><strong>Velocidad</strong></td>
+<td>⚡ Alta</td>
+<td>🟡 Media-Alta</td>
+<td>🟡 Media-Alta (depende del servidor)</td>
+</tr>
+<tr class="odd">
+<td><strong>Privacidad</strong></td>
+<td>🔵 Media (viaja a externos)</td>
+<td>🟢 Máxima (todo local)</td>
+<td>🟢 Máxima (todo local)</td>
+</tr>
+<tr class="even">
+<td><strong>Disponibilidad</strong></td>
+<td>🟢 Siempre (con internet)</td>
+<td>🟡 Depende del servidor</td>
+<td>🟡 Depende del servidor</td>
+</tr>
+<tr class="odd">
+<td><strong>Conexión</strong></td>
+<td>Internet requerido</td>
+<td>Red local solamente</td>
+<td>Red local solamente</td>
+</tr>
+<tr class="even">
+<td><strong>Costo</strong></td>
+<td>Gratuito</td>
+<td>Electricidad + hardware</td>
+<td>Electricidad + hardware</td>
+</tr>
+<tr class="odd">
+<td><strong>Límites de uso</strong></td>
+<td>Puede haber cuotas</td>
+<td>Sin límites</td>
+<td>Sin límites</td>
+</tr>
+<tr class="even">
+<td><strong>Configuración</strong></td>
+<td>Ninguna (viene por defecto)</td>
+<td>Requiere configuración inicial</td>
+<td>Requiere configuración inicial</td>
+</tr>
+<tr class="odd">
+<td><strong>Capacidad</strong></td>
+<td>Buena para tareas generales</td>
+<td>Excelente para tareas complejas</td>
+<td>Excelente para tareas complejas</td>
+</tr>
+<tr class="even">
+<td><strong>Ideal para</strong></td>
+<td>Uso diario, tareas rápidas</td>
+<td>Trabajo profundo, datos sensibles</td>
+<td>Trabajo profundo, datos sensibles</td>
+</tr>
+</tbody>
+</table>
+<section id="el-significado-de-los-colores" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="el-significado-de-los-colores"><span class="header-section-number">7.1</span> El significado de los colores</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Color</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>🟢 Verde</td>
+<td>Ventaja clara</td>
+</tr>
+<tr class="even">
+<td>🟡 Amarillo</td>
+<td>Depende del contexto</td>
+</tr>
+<tr class="odd">
+<td>🔵 Azul</td>
+<td>Neutro, cumple sin destacar</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="cuándo-usar-cada-modelo-guía-por-tarea" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> ¿Cuándo usar cada modelo? Guía por tarea</h1>
+<p>No todos los modelos son igual de adecuados para todas las tareas. Esta tabla te ayuda a decidir rápidamente:</p>
+<section id="según-el-tipo-de-contenido" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="según-el-tipo-de-contenido"><span class="header-section-number">8.1</span> Según el tipo de contenido</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 51%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tarea</th>
+<th>Modelo recomendado</th>
+<th>¿Por qué?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Redactar un correo o mensaje corto</td>
+<td><code>deepseek-v4-flash-free</code></td>
+<td>Rápido, suficiente calidad, no requiere privacidad especial.</td>
+</tr>
+<tr class="even">
+<td>Escribir un informe estándar</td>
+<td><code>deepseek-v4-flash-free</code></td>
+<td>El modelo cloud maneja bien documentos de longitud media.</td>
+</tr>
+<tr class="odd">
+<td>Documento extenso (tesis, manual, libro)</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code></td>
+<td>Mayor coherencia en textos largos, más capacidad de mantener el hilo.</td>
+</tr>
+<tr class="even">
+<td>Documento con datos sensibles (nóminas, expedientes, secretos comerciales)</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code> (o <code>mi-qwen</code>)</td>
+<td>La privacidad es crítica. Todo debe quedar en local.</td>
+</tr>
+<tr class="odd">
+<td>Análisis detallado de un concepto complejo</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code></td>
+<td>Mayor profundidad y matiz en las respuestas.</td>
+</tr>
+<tr class="even">
+<td>Lluvia de ideas o brainstorming</td>
+<td><code>deepseek-v4-flash-free</code></td>
+<td>La velocidad permite iterar rápidamente.</td>
+</tr>
+<tr class="odd">
+<td>Revisión y pulido final de un texto</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code></td>
+<td>Mejor para detectar matices y mejorar la calidad del lenguaje.</td>
+</tr>
+<tr class="even">
+<td>Traducción de textos</td>
+<td>Ambos funcionan bien</td>
+<td>Si el texto es sensible, usa local. Si no, cloud es más rápido.</td>
+</tr>
+<tr class="odd">
+<td>Resumir un artículo o capítulo</td>
+<td><code>deepseek-v4-flash-free</code></td>
+<td>Tarea rápida, el modelo cloud es más que suficiente.</td>
+</tr>
+<tr class="even">
+<td>Generar múltiples versiones de un mismo texto</td>
+<td><code>deepseek-v4-flash-free</code></td>
+<td>La velocidad te permite probar variantes rápidamente.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="según-la-situación" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="según-la-situación"><span class="header-section-number">8.2</span> Según la situación</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situación</th>
+<th>Modelo recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estás en una cafetería con wifi</td>
+<td><code>deepseek-v4-flash-free</code> (no tienes acceso al servidor local)</td>
+</tr>
+<tr class="even">
+<td>Estás en la oficina con el servidor encendido</td>
+<td>Cualquiera, según la tarea</td>
+</tr>
+<tr class="odd">
+<td>El servidor local está apagado o en mantenimiento</td>
+<td><code>deepseek-v4-flash-free</code></td>
+</tr>
+<tr class="even">
+<td>Tienes una fecha de entrega ajustada</td>
+<td><code>deepseek-v4-flash-free</code> (rápido y fiable)</td>
+</tr>
+<tr class="odd">
+<td>Necesitas la mejor calidad posible sin importar el tiempo</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code></td>
+</tr>
+<tr class="even">
+<td>Estás trabajando con datos de pacientes o clientes</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code> (obligatorio por privacidad)</td>
+</tr>
+<tr class="odd">
+<td>No tienes internet pero sí red local</td>
+<td><code>qwen-32b</code> / <code>big-pickle</code> (vía <code>mi-qwen</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Advertencia de privacidad:</strong> Si trabajas con datos personales, información médica, secretos comerciales o cualquier contenido confidencial, usa siempre el modelo local (<code>qwen-32b</code> / <code>mi-qwen</code>). Los modelos cloud procesan tus consultas en servidores externos. Aunque la mayoría tienen políticas de privacidad, la única forma de garantizar que tus datos no salen de tu control es usar tu propio servidor.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="tabla-de-decisión-rápida" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Tabla de decisión rápida</h1>
+<p>¿No sabes qué modelo elegir? Responde estas preguntas en orden:</p>
+<!-- Esto es un diagrama de flujo textual para ayudar a decidir -->
+<pre><code>┌─────────────────────────────────────┐
+│   ¿Tienes acceso al servidor local?  │
+├──────────────────┬──────────────────┤
+│       NO         │       SÍ         │
+└────────┬─────────┴────────┬─────────┘
+         ▼                  ▼
+┌─────────────────┐  ┌──────────────────┐
+│ Usa             │  │ ¿Son datos       │
+│ deepseek-v4-    │  │ confidenciales?  │
+│ flash-free      │  ├────────┬─────────┤
+│ (cloud, rápido) │  │  NO    │   SÍ    │
+└─────────────────┘  └───┬────┴────┬────┘
+                         ▼         ▼
+               ┌────────────────┐  ┌─────────────────┐
+               │ ¿Tarea rápida  │  │ Usa qwen-32b    │
+               │ o superficial? │  │ / big-pickle    │
+               ├───────┬────────┤  │ (local, seguro) │
+               │  NO   │   SÍ   │  └─────────────────┘
+               └───┬───┴────┬───┘
+                   ▼        ▼
+          ┌────────────┐  ┌────────────────┐
+          │ Usa        │  │ Usa deepseek-  │
+          │ qwen-32b / │  │ v4-flash-free  │
+          │ big-pickle │  │ (cloud, rápido)│
+          │ (local,    │  └────────────────┘
+          │  potente)  │
+          └────────────┘</code></pre>
+<section id="resumen-en-tres-frases" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="resumen-en-tres-frases"><span class="header-section-number">9.1</span> Resumen en tres frases</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 57%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Situación</th>
+<th>Modelo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Quiero rapidez y no tengo datos sensibles</td>
+<td>🌐 deepseek-v4-flash-free</td>
+</tr>
+<tr class="even">
+<td>Quiero máxima calidad o trabajo con datos privados</td>
+<td>🥒 qwen-32b / big-pickle</td>
+</tr>
+<tr class="odd">
+<td>Quiero referirme a todo el ecosistema local</td>
+<td>🏠 mi-qwen / MiMo</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="preguntas-frecuentes" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Preguntas frecuentes</h1>
+<section id="puedo-cambiar-de-modelo-mientras-trabajo" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="puedo-cambiar-de-modelo-mientras-trabajo"><span class="header-section-number">10.1</span> ¿Puedo cambiar de modelo mientras trabajo?</h2>
+<p>Sí. Puedes empezar una tarea con un modelo y, si no te convence el resultado, cambiar a otro y repetir la misma consulta. El agente (explicador, scribe, etc.) se mantiene, solo cambia el motor.</p>
+</section>
+<section id="un-modelo-es-mejor-que-otro" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="un-modelo-es-mejor-que-otro"><span class="header-section-number">10.2</span> ¿Un modelo es mejor que otro?</h2>
+<p>No exactamente. Son <strong>diferentes herramientas para diferentes necesidades</strong>. <code>deepseek-v4-flash-free</code> es como un coche urbano: rápido, económico, perfecto para el día a día. <code>qwen-32b</code> es como un camión: más potente, más capacidad, pero requiere más mantenimiento. No dirías que un camión es “mejor” que un coche: cada uno tiene su uso.</p>
+</section>
+<section id="puedo-tener-ambos-modelos-configurados" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="puedo-tener-ambos-modelos-configurados"><span class="header-section-number">10.3</span> ¿Puedo tener ambos modelos configurados?</h2>
+<p>Sí. OpenCode puede tener múltiples modelos configurados. Puedes alternar entre ellos según la tarea. Esta es la configuración más común y recomendada.</p>
+</section>
+<section id="qué-modelo-usa-el-agente-explicador-cuando-no-especifico-nada" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="qué-modelo-usa-el-agente-explicador-cuando-no-especifico-nada"><span class="header-section-number">10.4</span> ¿Qué modelo usa el agente <code>explicador</code> cuando no especifico nada?</h2>
+<p>Por defecto, OpenCode usa <code>deepseek-v4-flash-free</code>. Es el modelo que viene preconfigurado. Si quieres usar otro, debes indicarlo explícitamente en la configuración.</p>
+</section>
+<section id="necesito-ser-administrador-del-servidor-para-usar-el-modelo-local" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="necesito-ser-administrador-del-servidor-para-usar-el-modelo-local"><span class="header-section-number">10.5</span> ¿Necesito ser administrador del servidor para usar el modelo local?</h2>
+<p>Para la <strong>configuración inicial</strong>, alguien con conocimientos técnicos debe instalar y poner en marcha el servidor <code>mi-qwen</code>. Pero para el <strong>uso diario</strong>, cualquier persona puede seleccionar el modelo local en OpenCode sin necesidad de conocimientos técnicos.</p>
+</section>
+<section id="el-modelo-local-consume-muchos-recursos" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="el-modelo-local-consume-muchos-recursos"><span class="header-section-number">10.6</span> ¿El modelo local consume muchos recursos?</h2>
+<p>Sí, <code>qwen-32b</code> requiere un servidor con buena tarjeta gráfica (GPU) y suficiente memoria RAM. No se ejecuta en un ordenador portátil normal. Por eso se aloja en un servidor dedicado (<code>192.168.0.127:4000</code>) al que todos los miembros del equipo se conectan por red local.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Consejo:</strong> Si escuchas a alguien del equipo decir <em>“el pepinillo está pesado hoy”</em> o <em>“MiMo está reflexionando”</em>, significa que el modelo local está procesando una tarea compleja y tardará un poco más de lo normal. Es normal, dale su tiempo.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="glosario-de-términos" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Glosario de términos</h1>
+<p>Para que no te pierdas cuando el equipo hable de estos temas:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Término</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Agente</strong></td>
+<td>Perfil especializado de asistente (<code>explicador</code>, <code>scribe</code>, <code>general</code>, <code>explore</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>Modelo</strong></td>
+<td>Motor de IA que procesa el lenguaje (<code>deepseek-v4-flash-free</code>, <code>qwen-32b</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>Parámetros</strong></td>
+<td>“Conexiones neuronales” del modelo. A más parámetros, más capacidad.</td>
+</tr>
+<tr class="even">
+<td><strong>Cloud</strong></td>
+<td>El modelo se ejecuta en servidores externos (en internet).</td>
+</tr>
+<tr class="odd">
+<td><strong>Local</strong></td>
+<td>El modelo se ejecuta en tu propia infraestructura (tu servidor).</td>
+</tr>
+<tr class="even">
+<td><strong>Proveedor</strong></td>
+<td>El servicio que pone el modelo a disposición (<code>mi-qwen</code> es un proveedor).</td>
+</tr>
+<tr class="odd">
+<td><strong>big-pickle</strong></td>
+<td>Alias de <code>qwen-32b</code> (“pepinillo grande”).</td>
+</tr>
+<tr class="even">
+<td><strong>MiMo</strong></td>
+<td>Alias de <code>mi-qwen</code> (“Mi Modelo”).</td>
+</tr>
+<tr class="odd">
+<td><strong>192.168.0.127:4000</strong></td>
+<td>Dirección del servidor local donde se ejecuta <code>mi-qwen</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="resumen-final" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Resumen final</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 23%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modelo</th>
+<th>Apodo</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>🌐 <code>deepseek-v4-flash-free</code></td>
+<td>—</td>
+<td>Tareas cotidianas, rapidez, sin datos sensibles. Es tu opción por defecto.</td>
+</tr>
+<tr class="even">
+<td>🥒 <code>qwen-32b</code></td>
+<td>big-pickle / pepinillo grande</td>
+<td>Trabajo profundo, documentos extensos, calidad superior, datos confidenciales.</td>
+</tr>
+<tr class="odd">
+<td>🏠 <code>mi-qwen</code> / <code>MiMo</code></td>
+<td>Mi Modelo</td>
+<td>Cuando quieras referirte a todo el ecosistema local (infraestructura + modelo).</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Recuerda:</strong> Los <strong>agentes</strong> deciden <strong>cómo</strong> se hace el trabajo. Los <strong>modelos</strong> deciden <strong>con qué motor</strong> se hace. Ambos trabajan juntos para darte el mejor resultado posible. Ahora que conoces los modelos, puedes elegir con más criterio y aprovechar al máximo OpenCode.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Consejo final:</strong> No te obsesiones con elegir el modelo “perfecto”. Para la mayoría de tareas diarias, <code>deepseek-v4-flash-free</code> funciona de maravilla. Cuando necesites más potencia o privacidad, ya sabes que el pepinillo grande está esperando en el servidor local.</p>
+</div>
+</div>
+<hr>
+<p><em>Documento creado por el agente Scribe — 11 de junio de 2026</em></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Equipo OpenCode">
+<meta name="dcterms.date" content="2026-06-12">
+
+<title>Modelos de acceso a LLM en OpenCode</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="acceso-llm-opencode_files/libs/clipboard/clipboard.min.js"></script>
+<script src="acceso-llm-opencode_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="acceso-llm-opencode_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="acceso-llm-opencode_files/libs/quarto-html/popper.min.js"></script>
+<script src="acceso-llm-opencode_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="acceso-llm-opencode_files/libs/quarto-html/anchor.min.js"></script>
+<link href="acceso-llm-opencode_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="acceso-llm-opencode_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="acceso-llm-opencode_files/libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="acceso-llm-opencode_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="acceso-llm-opencode_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="acceso-llm-opencode_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="acceso-llm-opencode_files/libs/bootstrap/bootstrap-a8c4371f8a3fb65efe7b8ccc094f2999.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="acceso-llm-opencode_files/libs/bootstrap/bootstrap-dark-a8c4371f8a3fb65efe7b8ccc094f2999.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="acceso-llm-opencode_files/libs/bootstrap/bootstrap-a8c4371f8a3fb65efe7b8ccc094f2999.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+</head><body class="quarto-light">\usepackage{etoolbox}
+\AtBeginEnvironment{tcolorbox}{\fontsize{7.5pt}{9pt}\selectfont}
+
+
+<link rel="stylesheet" href="custom.css">
+
+
+
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#qué-es-un-modelo-de-acceso" id="toc-qué-es-un-modelo-de-acceso" class="nav-link active" data-scroll-target="#qué-es-un-modelo-de-acceso">¿Qué es un “modelo de acceso”?</a>
+  <ul class="collapse">
+  <li><a href="#una-analogía-sencilla" id="toc-una-analogía-sencilla" class="nav-link" data-scroll-target="#una-analogía-sencilla">Una analogía sencilla</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-acceso-disponibles" id="toc-tipos-de-acceso-disponibles" class="nav-link" data-scroll-target="#tipos-de-acceso-disponibles">Tipos de acceso disponibles</a>
+  <ul class="collapse">
+  <li><a href="#acceso-cloud-proveedor-nativo" id="toc-acceso-cloud-proveedor-nativo" class="nav-link" data-scroll-target="#acceso-cloud-proveedor-nativo">1. Acceso Cloud (Proveedor Nativo)</a></li>
+  <li><a href="#acceso-local-servidor-propio" id="toc-acceso-local-servidor-propio" class="nav-link" data-scroll-target="#acceso-local-servidor-propio">2. Acceso Local (Servidor Propio)</a></li>
+  <li><a href="#acceso-desactivado" id="toc-acceso-desactivado" class="nav-link" data-scroll-target="#acceso-desactivado">3. Acceso Desactivado</a></li>
+  </ul></li>
+  <li><a href="#tabla-comparativa" id="toc-tabla-comparativa" class="nav-link" data-scroll-target="#tabla-comparativa">Tabla comparativa</a></li>
+  <li><a href="#ventajas-y-desventajas" id="toc-ventajas-y-desventajas" class="nav-link" data-scroll-target="#ventajas-y-desventajas">Ventajas y desventajas</a>
+  <ul class="collapse">
+  <li><a href="#cloud" id="toc-cloud" class="nav-link" data-scroll-target="#cloud">Cloud</a></li>
+  <li><a href="#local" id="toc-local" class="nav-link" data-scroll-target="#local">Local</a></li>
+  </ul></li>
+  <li><a href="#cuándo-conviene-cada-modelo" id="toc-cuándo-conviene-cada-modelo" class="nav-link" data-scroll-target="#cuándo-conviene-cada-modelo">¿Cuándo conviene cada modelo?</a></li>
+  <li><a href="#conceptos-clave-explicados" id="toc-conceptos-clave-explicados" class="nav-link" data-scroll-target="#conceptos-clave-explicados">Conceptos clave explicados</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-un-proveedor" id="toc-qué-es-un-proveedor" class="nav-link" data-scroll-target="#qué-es-un-proveedor">¿Qué es un “proveedor”?</a></li>
+  <li><a href="#qué-es-un-alias" id="toc-qué-es-un-alias" class="nav-link" data-scroll-target="#qué-es-un-alias">¿Qué es un “alias”?</a></li>
+  <li><a href="#qué-son-los-tokens" id="toc-qué-son-los-tokens" class="nav-link" data-scroll-target="#qué-son-los-tokens">¿Qué son los “tokens”?</a></li>
+  </ul></li>
+  <li><a href="#tabla-de-decisión-rápida" id="toc-tabla-de-decisión-rápida" class="nav-link" data-scroll-target="#tabla-de-decisión-rápida">Tabla de decisión rápida</a></li>
+  <li><a href="#glosario" id="toc-glosario" class="nav-link" data-scroll-target="#glosario">Glosario</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Modelos de acceso a LLM en OpenCode</h1>
+<p class="subtitle lead">Guía para creadores de documentos</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Equipo OpenCode </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">June 12, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="qué-es-un-modelo-de-acceso" class="level1">
+<h1>¿Qué es un “modelo de acceso”?</h1>
+<p>Cuando usas OpenCode, hablas con una inteligencia artificial (IA) que te ayuda a redactar, editar y organizar tus documentos. Pero OpenCode puede conectarse a esa IA de diferentes maneras. A eso lo llamamos <strong>modelo de acceso</strong>.</p>
+<p>No confundir con:</p>
+<ul>
+<li><strong>Modelo de IA</strong>: es el “cerebro” que responde (por ejemplo, <code>qwen-32b</code> o <code>deepseek-v4-flash-free</code>).</li>
+<li><strong>Agente</strong>: es el rol que adopta la IA (explicador, scribe, general, explore).</li>
+</ul>
+<p>El <strong>modelo de acceso</strong> es la <em>ruta</em> por la que tu pregunta llega a ese cerebro y la respuesta vuelve a tu pantalla.</p>
+<section id="una-analogía-sencilla" class="level2">
+<h2 class="anchored" data-anchor-id="una-analogía-sencilla">Una analogía sencilla</h2>
+<p>Imagina que quieres consultar una enciclopedia:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Escenario</th>
+<th>Equivalente en OpenCode</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Vas a la biblioteca pública de la ciudad</td>
+<td><strong>Acceso Cloud</strong>: usas un servicio en internet</td>
+</tr>
+<tr class="even">
+<td>Tienes la enciclopedia en tu propia estantería</td>
+<td><strong>Acceso Local</strong>: la IA vive en tu red privada</td>
+</tr>
+<tr class="odd">
+<td>La enciclopedia está cerrada por reformas</td>
+<td><strong>Acceso Desactivado</strong>: el proveedor está apagado</td>
+</tr>
+</tbody>
+</table>
+<p>En todos los casos, la enciclopedia puede ser la misma. Lo que cambia es <strong>cómo llegas a ella</strong>.</p>
+<hr>
+</section>
+</section>
+<section id="tipos-de-acceso-disponibles" class="level1">
+<h1>Tipos de acceso disponibles</h1>
+<section id="acceso-cloud-proveedor-nativo" class="level2">
+<h2 class="anchored" data-anchor-id="acceso-cloud-proveedor-nativo">1. Acceso Cloud (Proveedor Nativo)</h2>
+<p>Es la opción más sencilla. OpenCode se conecta directamente a un proveedor en la nube.</p>
+<div class="grid">
+<section id="configuración" class="level3 g-col">
+<h3 class="anchored" data-anchor-id="configuración">Configuración</h3>
+<ul>
+<li><strong>Modelo</strong>: <code>deepseek-v4-flash-free</code></li>
+<li><strong>Proveedor</strong>: <code>opencode</code> (integrado en la plataforma)</li>
+<li><strong>Configuración necesaria</strong>: ninguna</li>
+</ul>
+</section>
+<section id="características" class="level3 g-col">
+<h3 class="anchored" data-anchor-id="características">Características</h3>
+<ul>
+<li>Siempre disponible desde el primer día</li>
+<li>Gratuito y rápido</li>
+<li>No requiere instalación ni configuración adicional</li>
+</ul>
+</section>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>¿Qué pasa con mis datos?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Con el acceso Cloud, tus mensajes viajan a servidores externos para ser procesados. Es como enviar una carta por correo: alguien más la transporta. Si trabajas con información sensible, valora esta opción.</p>
+</div>
+</div>
+</section>
+<section id="acceso-local-servidor-propio" class="level2">
+<h2 class="anchored" data-anchor-id="acceso-local-servidor-propio">2. Acceso Local (Servidor Propio)</h2>
+<p>Es la opción más privada. La IA se ejecuta en un servidor dentro de tu propia red.</p>
+<div class="grid">
+<section id="configuración-1" class="level3 g-col">
+<h3 class="anchored" data-anchor-id="configuración-1">Configuración</h3>
+<ul>
+<li><strong>Modelo</strong>: <code>qwen-32b</code> (alias: <code>big-pickle</code>, cariñosamente “big pepinillo”)</li>
+<li><strong>Proveedor</strong>: <code>mi-qwen</code> (apodado “MiMo” = <em>Mi Qwen</em>)</li>
+<li><strong>Dirección del servidor</strong>: <code>http://192.168.0.127:4000/v1</code></li>
+<li><strong>Tipo de conexión</strong>: API compatible con OpenAI</li>
+<li><strong>Clave API</strong>: requerida (<code>apiKey</code>)</li>
+</ul>
+</section>
+<section id="características-1" class="level3 g-col">
+<h3 class="anchored" data-anchor-id="características-1">Características</h3>
+<ul>
+<li><strong>Privado</strong>: los datos nunca salen de tu red local</li>
+<li><strong>Sin límites de uso</strong>: pregúntale lo que quieras</li>
+<li><strong>Contexto amplio</strong>: 32 768 tokens de entrada, 4 096 de salida</li>
+<li>Requiere que tengas un servidor funcionando en tu red</li>
+</ul>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>¿Qué significa “API compatible con OpenAI”?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Significa que tu servidor local “habla el mismo idioma” que la interfaz de OpenAI. OpenCode no necesita aprender un formato nuevo: usa el estándar que ya conoce para comunicarse con tu servidor. Es como si todos los enchufes del mundo fueran del mismo tipo.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Requisito de conexión
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El acceso local solo funciona si tienes un servidor activo en tu red (por ejemplo, con Ollama, LM Studio o similar). Si el servidor está apagado, OpenCode no podrá conectar.</p>
+</div>
+</div>
+</section>
+<section id="acceso-desactivado" class="level2">
+<h2 class="anchored" data-anchor-id="acceso-desactivado">3. Acceso Desactivado</h2>
+<p>Los proveedores pueden desactivarse. Un ejemplo en la configuración actual:</p>
+<ul>
+<li>El proveedor <code>gemini</code> está <strong>desactivado</strong>.</li>
+<li>Esto significa que OpenCode no intentará conectar con ese servicio.</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>¿Para qué sirve desactivar un proveedor?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes desactivar proveedores que no usas para evitar confusiones o para ahorrar recursos. También es útil si un servicio deja de estar disponible o si cambias de opinión sobre qué modelo quieres usar.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="tabla-comparativa" class="level1">
+<h1>Tabla comparativa</h1>
+<div id="tbl-comparativa" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-comparativa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1
+</figcaption>
+<div aria-describedby="tbl-comparativa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Característica</th>
+<th>Cloud (opencode)</th>
+<th>Local (mi-qwen)</th>
+<th>Desactivado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Disponibilidad</strong></td>
+<td>Siempre disponible</td>
+<td>Solo si el servidor está encendido</td>
+<td>No disponible</td>
+</tr>
+<tr class="even">
+<td><strong>Configuración</strong></td>
+<td>Ninguna</td>
+<td>Requiere servidor + clave API</td>
+<td>Desactivado en config</td>
+</tr>
+<tr class="odd">
+<td><strong>Privacidad</strong></td>
+<td>Datos pasan por servidores externos</td>
+<td>Datos se quedan en tu red</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td><strong>Costo</strong></td>
+<td>Gratuito</td>
+<td>Gratuito (usando tu hardware)</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td><strong>Límites de uso</strong></td>
+<td>Sujeto a límites del proveedor</td>
+<td>Sin límites</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td><strong>Velocidad</strong></td>
+<td>Depende de internet</td>
+<td>Depende de tu hardware</td>
+<td>N/A</td>
+</tr>
+<tr class="odd">
+<td><strong>Tamaño de contexto</strong></td>
+<td>Variable según modelo</td>
+<td>32 768 tokens (entrada)</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td><strong>Uso ideal</strong></td>
+<td>Comenzar rápido, sin complicaciones</td>
+<td>Privacidad, uso intensivo</td>
+<td>Proveedores no deseados</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<hr>
+</section>
+<section id="ventajas-y-desventajas" class="level1">
+<h1>Ventajas y desventajas</h1>
+<section id="cloud" class="level2">
+<h2 class="anchored" data-anchor-id="cloud">Cloud</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>✔ Ventajas</th>
+<th>✘ Desventajas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Listo para usar desde el primer momento</td>
+<td>Los datos salen de tu equipo</td>
+</tr>
+<tr class="even">
+<td>No consumes recursos de tu computadora</td>
+<td>Sujeto a límites del proveedor</td>
+</tr>
+<tr class="odd">
+<td>Funciona con cualquier conexión a internet</td>
+<td>Depende de la disponibilidad del servicio</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="local" class="level2">
+<h2 class="anchored" data-anchor-id="local">Local</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>✔ Ventajas</th>
+<th>✘ Desventajas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Máxima privacidad: todo se queda en tu red</td>
+<td>Requiere configuración inicial</td>
+</tr>
+<tr class="even">
+<td>Sin límites de uso</td>
+<td>Necesitas un servidor activo</td>
+</tr>
+<tr class="odd">
+<td>Control total sobre el modelo y los datos</td>
+<td>Consume recursos de tu hardware</td>
+</tr>
+<tr class="even">
+<td>Funciona sin conexión a internet externa</td>
+<td>Velocidad depende de tu equipo</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="cuándo-conviene-cada-modelo" class="level1">
+<h1>¿Cuándo conviene cada modelo?</h1>
+<div class="grid">
+<section id="elige-cloud-si" class="level3 g-col">
+<h3 class="anchored" data-anchor-id="elige-cloud-si">Elige Cloud si…</h3>
+<ul>
+<li>Estás empezando y quieres simplicidad</li>
+<li>No te preocupa que los datos pasen por servidores externos</li>
+<li>Quieres la menor fricción posible</li>
+<li>No quieres configurar nada</li>
+</ul>
+</section>
+<section id="elige-local-si" class="level3 g-col">
+<h3 class="anchored" data-anchor-id="elige-local-si">Elige Local si…</h3>
+<ul>
+<li>Trabajas con información sensible o privada</li>
+<li>Haces un uso intensivo y no quieres límites</li>
+<li>Ya tienes un servidor de IA en tu red</li>
+<li>Prefieres el control total</li>
+</ul>
+</section>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>¿Y si quiero lo mejor de ambos mundos?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes tener ambos proveedores configurados simultáneamente. Usa Cloud para consultas rápidas y generales, y Local cuando necesites privacidad o trabajar con textos largos. OpenCode te permite cambiar entre ellos según el contexto.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="conceptos-clave-explicados" class="level1">
+<h1>Conceptos clave explicados</h1>
+<section id="qué-es-un-proveedor" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-un-proveedor">¿Qué es un “proveedor”?</h2>
+<p>En el contexto de OpenCode, un <strong>proveedor</strong> es el servicio que pone a disposición el modelo de IA. Piensa en él como el “restaurante” donde sirve el plato (el modelo). Puedes elegir en qué restaurante comer, pero el plato puede ser el mismo.</p>
+<p>Ejemplos de proveedores en este sistema:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Proveedor</th>
+<th>Alias</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>opencode</code></td>
+<td>N/A</td>
+<td>Activo</td>
+</tr>
+<tr class="even">
+<td><code>mi-qwen</code></td>
+<td>“MiMo”</td>
+<td>Activo</td>
+</tr>
+<tr class="odd">
+<td><code>gemini</code></td>
+<td>N/A</td>
+<td>Desactivado</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="qué-es-un-alias" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-un-alias">¿Qué es un “alias”?</h2>
+<p>Un alias es un nombre alternativo para referirte al mismo modelo o proveedor. Por ejemplo, <code>big-pickle</code> es el alias de <code>qwen-32b</code>, y “MiMo” es el apodo cariñoso de <code>mi-qwen</code>. Son como los sobrenombres: facilitan la conversación, pero se refieren a lo mismo.</p>
+</section>
+<section id="qué-son-los-tokens" class="level2">
+<h2 class="anchored" data-anchor-id="qué-son-los-tokens">¿Qué son los “tokens”?</h2>
+<p>Los tokens son unidades de texto que la IA puede procesar. Piensa en ellos como “palabras” (aunque no son exactamente palabras). Un contexto de 32 768 tokens significa que la IA puede “recordar” una conversación bastante extensa antes de empezar a olvidar el principio.</p>
+<hr>
+</section>
+</section>
+<section id="tabla-de-decisión-rápida" class="level1">
+<h1>Tabla de decisión rápida</h1>
+<p>¿No sabes qué elegir? Sigue esta guía:</p>
+<div id="tbl-decision" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2
+</figcaption>
+<div aria-describedby="tbl-decision-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>¿Tu prioridad es…?</th>
+<th>Elige</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Simplicidad absoluta</td>
+<td>Cloud (<code>opencode</code>)</td>
+</tr>
+<tr class="even">
+<td>Privacidad de datos</td>
+<td>Local (<code>mi-qwen</code>)</td>
+</tr>
+<tr class="odd">
+<td>Uso intensivo sin límites</td>
+<td>Local (<code>mi-qwen</code>)</td>
+</tr>
+<tr class="even">
+<td>Trabajar sin internet</td>
+<td>Local (<code>mi-qwen</code>)</td>
+</tr>
+<tr class="odd">
+<td>Textos muy largos (contexto grande)</td>
+<td>Local (<code>mi-qwen</code>)</td>
+</tr>
+<tr class="even">
+<td>No quiero configurar nada</td>
+<td>Cloud (<code>opencode</code>)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>En resumen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El modelo de acceso no cambia <em>qué</em> sabe la IA, sino <em>cómo</em> llega tu pregunta hasta ella. Cloud es como usar el autobús: fácil, pero compartido. Local es como tener tu propio coche: más trabajo, pero más control.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="glosario" class="level1">
+<h1>Glosario</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Término</th>
+<th>Definición sencilla</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>API</strong></td>
+<td>Interfaz que permite que dos programas se comuniquen. Como un traductor entre idiomas.</td>
+</tr>
+<tr class="even">
+<td><strong>API compatible con OpenAI</strong></td>
+<td>El servidor usa el mismo formato de comunicación que OpenAI, por lo que cualquier programa que sepa hablar con OpenAI también puede hablar con él.</td>
+</tr>
+<tr class="odd">
+<td><strong>Cloud (Nube)</strong></td>
+<td>Servicio alojado en servidores remotos, accesible por internet.</td>
+</tr>
+<tr class="even">
+<td><strong>Contexto</strong></td>
+<td>La cantidad de texto que la IA puede “recordar” en una conversación. Medido en tokens.</td>
+</tr>
+<tr class="odd">
+<td><strong>LLM</strong></td>
+<td><em>Large Language Model</em>. Un modelo de IA entrenado para entender y generar lenguaje natural.</td>
+</tr>
+<tr class="even">
+<td><strong>Local</strong></td>
+<td>Alojamiento en tu propia red o equipo, sin pasar por internet pública.</td>
+</tr>
+<tr class="odd">
+<td><strong>Modelo de acceso</strong></td>
+<td>La forma en que OpenCode se conecta a un modelo de IA (cloud, local, desactivado).</td>
+</tr>
+<tr class="even">
+<td><strong>Proveedor</strong></td>
+<td>El servicio que ofrece el modelo de IA (opencode, mi-qwen, gemini…).</td>
+</tr>
+<tr class="odd">
+<td><strong>Token</strong></td>
+<td>Unidad de texto que la IA procesa. Aproximadamente una palabra o parte de ella.</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

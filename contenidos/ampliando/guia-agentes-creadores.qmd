@@ -1,0 +1,293 @@
+---
+title: "Guía de Agentes de opencode para Creadores de Contenido"
+subtitle: "Cómo crear asistentes de IA especializados sin saber programar"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+## ¿Qué es opencode?
+
+**opencode** es un asistente de inteligencia artificial que trabaja desde la terminal (esa ventana negra donde los programadores escriben comandos). Su función principal es ayudar a crear y modificar archivos en un proyecto: editar texto, buscar información, organizar carpetas, escribir documentación y mucho más.
+
+Piensa en opencode como un colaborador que entiende instrucciones en lenguaje natural y las ejecuta directamente sobre los archivos de tu computadora.
+
+## ¿Qué es un agente?
+
+Un **agente** es un asistente especializado dentro de opencode. Es como darle un rol y una personalidad específica a la IA.
+
+Imagina que tienes un equipo de personas:
+
+- Una persona que solo revisa ortografía
+- Otra que sabe diseñar páginas web
+- Otra que redacta documentación técnica
+
+Cada agente es eso: una versión de opencode entrenada —mediante instrucciones escritas— para comportarse de una manera concreta y realizar un tipo de tarea.
+
+Los agentes no son programas complejos. Son **archivos de texto** con instrucciones claras. Cualquier persona, incluso sin saber programar, puede crear uno.
+
+## Partes de un agente
+
+Un agente se escribe en un archivo de texto con formato Markdown (el mismo que se usa para escribir documentos sencillos con títulos, listas y negritas). Estas son sus partes:
+
+### `description`
+
+Un texto breve que explica para qué sirve este agente. Cuando opencode lista los agentes disponibles, esta descripción es lo primero que se ve.
+
+> **Ejemplo:** *"Agente redactor de documentación técnica en español"*
+
+### `mode`
+
+Define **cuándo** puede actuar el agente. Hay tres valores:
+
+| Modo | Significado |
+|------|-------------|
+| `primary` | El agente es el asistente principal. Se usa cuando el usuario no especifica otro agente. Solo puede haber uno. |
+| `subagent` | El agente solo actúa cuando otro agente lo llama. Es como un especialista al que se recurre para tareas concretas. |
+| `all` | El agente está disponible tanto como asistente principal como para ser llamado por otros agentes. |
+
+### `permission`
+
+Define **qué puede hacer** el agente. Los permisos evitan que un agente realice acciones que no debería. Los más comunes son:
+
+| Permiso | Significado |
+|---------|-------------|
+| `read` | Leer archivos (buscar, consultar, revisar) |
+| `write` | Crear y modificar archivos |
+| `execute` | Ejecutar comandos en la terminal |
+
+Puedes combinar permisos separándolos con barras: `read|write`, `write|execute`, etc.
+
+::: {.callout-warning}
+## Seguridad
+Si un agente solo necesita leer archivos (por ejemplo, un revisor), no le des permiso de escritura. Así evitas cambios accidentales.
+:::
+
+### `temperature`
+
+Controla el equilibrio entre **creatividad** y **precisión**. Se expresa con un número del `0` al `1`:
+
+| Valor | Efecto | Ideal para... |
+|-------|--------|---------------|
+| `0.0` — `0.3` | Muy preciso, predecible, sigue las reglas al pie de la letra | Revisión técnica, traducción literal, tareas repetitivas |
+| `0.4` — `0.7` | Equilibrio entre creatividad y precisión | Redacción de documentación, sugerencias, escritura general |
+| `0.8` — `1.0` | Muy creativo, puede desviarse del guion | Lluvia de ideas, contenido promocional, textos literarios |
+
+::: {.callout-tip}
+## Regla práctica
+Para documentación técnica usa `0.3` o `0.4`. Quieres claridad, no ocurrencias.
+:::
+
+### El cuerpo del agente (la personalidad)
+
+Después de los metadatos anteriores, el archivo contiene las **instrucciones** que definen cómo debe comportarse el agente. Aquí se escribe:
+
+- Su **rol** (qué es y qué hace)
+- Su **tono** (formal, casual, didáctico)
+- Sus **reglas** (lo que debe y no debe hacer)
+- El **formato** de sus respuestas
+- **Conocimiento** que debe tener presente siempre
+
+## Ejemplo práctico: el agente `scribe`
+
+Este mismo documento ha sido creado por el agente `scribe`. Así es su definición completa:
+
+```yaml
+---
+description: "Agente redactor de documentación técnica en español. Produce guías, manuales y tutoriales."
+mode: all
+permission: read|write
+temperature: 0.4
+---
+```
+
+Y sus instrucciones (el cuerpo del agente) serían algo así:
+
+> Eres el agente `scribe`, un redactor de documentación técnica.
+>
+> - Escribes en español, con tono claro y accesible.
+> - Explicas los términos técnicos cuando los usas.
+> - Usas lenguaje sencillo, apto para personas no programadoras.
+> - Estructuras el contenido con títulos, listas y tablas.
+> - No añades opiniones personales ni contenido promocional.
+> - Prefieres ejemplos prácticos a definiciones abstractas.
+
+Este agente tiene permiso para leer y escribir archivos, trabaja con temperatura equilibrada (`0.4`), y está disponible tanto como agente principal como para ser invocado por otros agentes.
+
+## Cómo crear tu propio agente (paso a paso)
+
+### Paso 1: Crea la carpeta de agentes
+
+Los agentes se guardan dentro de la carpeta `.opencode/agents/` de tu proyecto. Si no existe, créala.
+
+### Paso 2: Crea un archivo Markdown
+
+Cada agente es un archivo con extensión `.md`. El nombre del archivo será el nombre del agente.
+
+Por ejemplo: `revisor-ortografia.md` o `disenador-web.md`.
+
+### Paso 3: Escribe los metadatos
+
+Al principio del archivo, escribe un bloque `---` (llamado "frontmatter") con los datos del agente:
+
+```yaml
+---
+description: "Describe brevemente lo que hace tu agente"
+mode: all
+permission: read|write
+temperature: 0.4
+---
+```
+
+### Paso 4: Escribe las instrucciones
+
+Debajo del bloque de metadatos, escribe en lenguaje natural cómo quieres que se comporte el agente. Sé específico. Cuanto más claro seas, mejor será el resultado.
+
+### Paso 5: Guarda el archivo
+
+Guarda el archivo en `.opencode/agents/tu-agente.md`. Ya está listo para usar.
+
+### Paso 6: Úsalo
+
+Ejecuta opencode y dile que use tu agente:
+
+```
+opencode --agent tu-agente
+```
+
+O, si ya estás dentro de opencode, escribe:
+
+```
+/tu-agente
+```
+
+## Consejos para escribir buenos prompts de agente
+
+Escribir las instrucciones de un agente es como redactar el manual de bienvenida para un empleado nuevo. Debes ser claro, completo y sin ambigüedades.
+
+### Usa un tono coherente
+
+Define el tono desde el principio. Por ejemplo:
+
+> "Eres un asistente formal y profesional. Usas tratamiento de usted. Tus respuestas son directas y sin rodeos."
+
+O si prefieres algo más cercano:
+
+> "Eres un asistente amable y conversacional. Explicas las cosas como si hablaras con un compañero de trabajo."
+
+### Sé específico sobre lo que NO debe hacer
+
+A veces es más importante decir lo que no quieres:
+
+- "No añadas bromas ni emojis."
+- "No inventes datos ni cites fuentes que no existan."
+- "No modifiques archivos sin confirmación explícita."
+
+### Dale ejemplos concretos
+
+Si quieres que el agente tenga un estilo particular, muéstrale cómo quieres que sea la salida:
+
+> Cuando escribas ejemplos de código, usa este formato:
+>
+> ```
+> # Esto es un ejemplo
+> print("Hola, mundo")
+> ```
+
+### Estructura las instrucciones con listas
+
+Las listas son más fáciles de seguir que los párrafos largos:
+
+```markdown
+Reglas:
+- Revisa la ortografía antes de escribir
+- Usa voz activa
+- Prefiere oraciones cortas (menos de 20 palabras)
+- Cada párrafo debe tratar una sola idea
+```
+
+### Define el formato de salida
+
+Si necesitas un formato concreto, descríbelo:
+
+> "Cada respuesta debe comenzar con un resumen de una línea. Luego desarrolla el contenido. Al final, incluye una sección de «Próximos pasos» si aplica."
+
+### Revisa y ajusta
+
+Los agentes no salen perfectos a la primera. Úsalos, observa dónde fallan y ajusta sus instrucciones. Es un proceso iterativo.
+
+## Dónde guardar los archivos de agente
+
+Los agentes se guardan en una carpeta llamada `.opencode` dentro de la raíz de tu proyecto. La estructura es:
+
+```
+tu-proyecto/
+  .opencode/
+    agents/
+      scribe.md
+      revisor-ortografia.md
+      disenador-web.md
+```
+
+La carpeta `.opencode` puede contener también otros archivos de configuración de opencode, pero los agentes siempre van dentro de `agents/`.
+
+::: {.callout-note}
+## Archivos ocultos
+La carpeta `.opencode` comienza con un punto. En muchos sistemas, las carpetas que empiezan con punto están ocultas. Si no la ves, activa la opción de "mostrar archivos ocultos" en tu explorador de archivos.
+:::
+
+### ¿Puedo tener agentes para todos mis proyectos?
+
+Sí. Cada proyecto puede tener sus propios agentes en su propia carpeta `.opencode/agents/`. También puedes copiar agentes de un proyecto a otro si te resultan útiles.
+
+## Resumen rápido
+
+| Concepto | Resumen |
+|----------|---------|
+| **opencode** | Asistente de IA que trabaja en la terminal y modifica archivos |
+| **Agente** | Versión especializada de opencode con rol y personalidad |
+| **description** | Texto breve que explica para qué sirve |
+| **mode** | Cuándo actúa: `primary`, `subagent` o `all` |
+| **permission** | Qué puede hacer: `read`, `write`, `execute` |
+| **temperature** | Creatividad vs precisión (`0.0` = preciso, `1.0` = creativo) |
+| **Cuerpo** | Instrucciones en lenguaje natural |
+| **Ubicación** | `.opencode/agents/<nombre>.md` |
+
+---
+
+*Documento creado por el agente `scribe` — un asistente de documentación técnica para opencode.*

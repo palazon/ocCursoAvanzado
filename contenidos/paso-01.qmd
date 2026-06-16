@@ -15,7 +15,8 @@ Duración estimada: **25 minutos**
 ## ¿Qué es un agente personalizado?
 
 Un agente personalizado es como un especialista al que llamas
-cuando lo necesitas. Mientras que el modo Build sirve para todo,
+cuando lo necesitas.
+Mientras que el modo *Build* sirve para todo,
 un agente puede estar limitado a una tarea concreta:
 
 - **Revisor de estilo** — solo lee y opina, no puede modificar
@@ -24,8 +25,9 @@ un agente puede estar limitado a una tarea concreta:
 - **Traductor corporativo** — traduce con vocabulario específico
 
 Los agentes se definen en archivos Markdown dentro de la carpeta
-`.opencode/agents/`. Cada archivo es un agente. El nombre del
-archivo es el nombre del agente.
+`.opencode/agents/`.
+Cada archivo es un agente.
+El nombre del archivo es el nombre del agente.
 
 ---
 
@@ -50,12 +52,27 @@ Campos clave:
 
 - **description** — qué hace el agente (aparece en el menú de
   autocompletado con @)
+
 - **mode** — `subagent` para que pueda invocarse desde el chat
-- **model** — modelo de IA que usará el agente (opcional; si se omite, usa el del proyecto). Ver [paso 03](paso-03.html)
+
+- **model** — modelo de IA que usará el agente (opcional; si se omite, usa el del proyecto).
+   Ver [paso 03](paso-03.html)
+
 - **permission** — controlas qué puede y qué no puede hacer
 
-Para invocarlo, escribes `@nombre-del-agente` seguido de tu
-petición.
+::: {.callout-tip}
+## Agentes locales y globales
+
+Los agentes pueden ser **del proyecto** (`.opencode/agents/`) o
+**globales** (`~/.config/opencode/agents/`). Los globales están
+disponibles en todos los proyectos.
+
+Si creas agentes globales, añade `type: hidden` en su *frontmatter*
+para que no aparezcan en el menú de autocompletado de los modos
+*Plan* y *Build*.
+:::
+
+Para invocarlo, escribes `@nombre-del-agente` seguido de tu petición.
 
 ---
 
@@ -96,11 +113,12 @@ usuario y señala:
 Puedes usar el propio OpenCode para que te ayude a crear
 el agente. En *Build*, pídele directamente:
 
-> Crea un agente revisor de estilo en
-> .opencode/agents/revisor-estilo.md que señale problemas de
+> Crea un agente revisor de estilo
+> que señale problemas de
 > redacción pero no modifique nada
 
-OpenCode te generará el archivo con la estructura adecuada.
+OpenCode te generará el archivo con la estructura adecuada
+y la ubicación pertinente.
 Puedes modificar el fichero después para ajustar el tono, añadir
 más comprobaciones o cambiar los permisos.
 :::
@@ -122,7 +140,8 @@ Cambia a *Plan* ![Tab](tab-key.svg) `Plan` y escribe:
 > @muestra-ejemplo.md @revisor-estilo Revísame este documento
 
 OpenCode invocará al agente revisor, que analizará el documento
-y te dará su opinión. Como tiene `edit: deny`, no podrá modificar
+y te dará su opinión.
+Como tiene `edit: deny`, no podrá modificar
 nada aunque se lo pidas.
 
 ### Ejercicio 5 — Crear un normalizador de formato

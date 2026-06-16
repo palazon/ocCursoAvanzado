@@ -1,0 +1,454 @@
+---
+title: "Los modelos (motores de IA) de OpenCode"
+subtitle: "Entiende qué hace funcionar a tus asistentes — sin necesidad de programar"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+# Introducción
+
+Si has usado OpenCode, seguro que ya conoces a los **agentes**: el `explicador`, el `scribe`, el `general` y el `explore`. Pero ¿alguna vez te has preguntado **qué es lo que realmente piensa** cuando haces una pregunta?
+
+La respuesta son los **modelos** (o motores de lenguaje). Son el cerebro de la operación. Los agentes son como conductores especializados, pero el coche que conduce —el que tiene el motor— es el modelo.
+
+Este documento está escrito para **creadores de documentos que no programan**. No necesitas saber de inteligencia artificial ni de servidores. Solo necesitas entender qué opciones tienes, cuándo conviene usar cada una y por qué.
+
+> **Objetivo de este documento:** Explicarte los modelos de OpenCode (deepseek-v4-flash-free, qwen-32b/big-pickle y mi-qwen/MiMo) como si fueran herramientas de un taller creativo.
+
+::: {.callout-note}
+**Nota importante:** Este documento habla de **modelos** (los motores de IA). No lo confundas con los documentos anteriores que hablaban de **agentes** (los perfiles especializados como `explicador` o `scribe`). Ambos conceptos se complementan, pero son cosas distintas. Lo aclaramos en la siguiente sección.
+:::
+
+---
+
+# Agentes vs. Modelos: la diferencia clave
+
+Esta es la confusión más habitual entre quienes empiezan con OpenCode. Vamos a aclararla de una vez.
+
+## Analogía rápida: el restaurante
+
+Imagina que OpenCode es un **restaurante**.
+
+| Concepto | En el restaurante | En OpenCode |
+|----------|------------------|-------------|
+| **Agente** | El chef especializado: el pastelero, el parrillero, el salsero | El perfil que usas: `explicador`, `scribe`, `general`, `explore` |
+| **Modelo** | El tipo de cocina: gas, inducción, leña, horno de barro | El motor de IA: deepseek-v4-flash-free, qwen-32b, mi-qwen |
+
+Un mismo chef (agente) puede cocinar en diferentes tipos de cocina (modelo). Y una misma cocina (modelo) puede ser usada por diferentes chefs (agentes).
+
+| Pregunta | Respuesta |
+|----------|-----------|
+| ¿El `scribe` es un modelo? | No. El `scribe` es un **agente** (un perfil de asistente). |
+| ¿`deepseek-v4-flash-free` es un agente? | No. Es un **modelo** (el motor que procesa el lenguaje). |
+| ¿Puedo usar el agente `explicador` con el modelo `qwen-32b`? | Sí. Cada agente puede funcionar sobre diferentes modelos. |
+
+::: {.callout-tip}
+**Consejo:** Cuando elijas un agente, decides **cómo** quieres que te ayude (explicando, redactando, investigando, explorando). Cuando elijas un modelo, decides **con qué motor** lo hará (rápido en la nube, o potente y privado en local).
+:::
+
+## ¿Cómo se relacionan en la práctica?
+
+Cuando escribes un prompt en OpenCode, siempre usas ambas cosas sin darte cuenta:
+
+```
+scribe: Redacta una introducción para mi informe.
+       ↑                                      ↑
+    agente                           modelo (seleccionado
+                                     en la configuración)
+```
+
+El agente le da la **instrucción de estilo** (redacta como un escriba profesional). El modelo le da la **capacidad de procesamiento** (entiende el lenguaje y genera texto).
+
+---
+
+# El ecosistema de modelos de OpenCode
+
+OpenCode puede funcionar con **tres modelos** distintos. Cada uno tiene sus propias características, ventajas y momentos ideales para usarlo.
+
+## Los modelos de un vistazo
+
+| # | Nombre técnico | Alias / Apodo | Tipo | Dónde se ejecuta |
+|---|---|--------------|------|-------------------|
+| 1 | `deepseek-v4-flash-free` | `opencode/deepseek-v4-flash-free` | Cloud (gratuito) | Servidores de OpenCode |
+| 2 | `qwen-32b` | `big-pickle` / "pepinillo grande" | Local (privado) | Tu propio servidor |
+| 3 | `mi-qwen` (proveedor) | `MiMo` ("Mi Modelo") | Infraestructura local | Tu propio servidor (192.168.0.127:4000) |
+
+```{=html}
+<!-- Los dos últimos son, en realidad, el mismo modelo físico (qwen-32b) servido a través del proveedor mi-qwen. -->
+```
+
+Los modelos 2 y 3 están estrechamente relacionados: `qwen-32b` es el modelo en sí, y `mi-qwen` (apodado `MiMo`) es el **proveedor** que lo sirve. Pero a efectos prácticos, cuando usas `mi-qwen` estás usando el modelo `qwen-32b`.
+
+---
+
+# Modelo 1: «deepseek-v4-flash-free» — El modelo cloud siempre disponible
+
+## ¿Qué es?
+
+Es el modelo **por defecto de OpenCode**. Un motor de inteligencia artificial que se ejecuta en los servidores de OpenCode (en la nube). Está diseñado para ser **rápido, gratuito y fiable**.
+
+## Analogía: La biblioteca pública
+
+Imagina que `deepseek-v4-flash-free` es como una **biblioteca pública municipal**:
+
+- **Siempre abierta:** No necesitas pedir cita ni instalar nada. Abres OpenCode y ya está disponible.
+- **Gratuita:** No pagas por usarla, entra dentro del servicio básico.
+- **Bien surtida:** Tiene respuestas para la mayoría de preguntas y tareas cotidianas.
+- **Rápida:** Encuentras lo que buscas sin largas esperas.
+
+## Características clave
+
+| Aspecto | Descripción |
+|---------|-------------|
+| **Velocidad** | Alta. Responde en pocos segundos. |
+| **Privacidad** | Media. Tus consultas viajan a servidores externos. |
+| **Disponibilidad** | Siempre disponible mientras tengas internet. |
+| **Costo** | Gratuito. |
+| **Conexión requerida** | Sí, necesitas internet. |
+| **Capacidad** | Suficiente para la mayoría de tareas de documentación. |
+
+## ¿Cuándo usarlo?
+
+- **Siempre que empieces un proyecto nuevo.** Es el modelo por defecto por una razón: es rápido, fiable y no requiere configuración.
+- **Cuando necesitas respuestas rápidas.** Para tareas cotidianas como redactar un párrafo, resumir una idea o estructurar una sección.
+- **Cuando trabajas en equipo.** Como está en la nube, todos usan el mismo modelo y los resultados son consistentes.
+- **Cuando no tienes acceso a tu servidor local.** Si estás fuera de la oficina o tu máquina local está apagada.
+
+::: {.callout-tip}
+**Consejo:** Usa `deepseek-v4-flash-free` como tu modelo predeterminado. Es como tener un asistente competente siempre disponible. Reserva los modelos locales para tareas que requieran más privacidad o potencia.
+:::
+
+---
+
+# Modelo 2: «qwen-32b» / «big-pickle» — El motor local de alto rendimiento
+
+## ¿Qué es?
+
+`qwen-32b` es un modelo de inteligencia artificial con **32 mil millones de parámetros** que se ejecuta en un servidor local (en tu propia infraestructura). Su alias es `big-pickle`, que cariñosamente se traduce como **"pepinillo grande"** o **"pepinote"**.
+
+## Analogía: Tu taller personal de carpintería fina
+
+Si `deepseek-v4-flash-free` es la biblioteca pública, `qwen-32b` es tu **taller de carpintería en el garaje**:
+
+- **Es tuyo:** Nadie más lo usa. No compartes recursos con otros usuarios.
+- **Es potente:** Tienes maquinaria profesional (32 mil millones de parámetros) que permite trabajos más complejos.
+- **Es privado:** Todo lo que hagas se queda en tu taller. Nadie mira tus proyectos.
+- **Requiere mantenimiento:** Necesitas tener el servidor encendido y configurado.
+- **Sin límites de uso:** Puedes usarlo todo lo que quieras, sin restricciones de cuota.
+
+## ¿Qué significa "32 mil millones de parámetros"?
+
+Un **parámetro** es como una **conexión neuronal** en el cerebro del modelo. Cuantos más parámetros, más capacidad de comprensión y generación de lenguaje tiene.
+
+Para que te hagas una idea:
+
+| Modelo | Parámetros | Analogía |
+|--------|-----------|----------|
+| `deepseek-v4-flash-free` | No especificado públicamente | Un asistente competente con formación universitaria |
+| `qwen-32b` | 32 mil millones | Un equipo de 32 especialistas trabajando en paralelo |
+
+Cuantos más parámetros, mejor puede el modelo:
+- Entender instrucciones complejas y matizadas.
+- Mantener coherencia en textos largos.
+- Capturar detalles y sutilezas del lenguaje.
+- Generar contenido más creativo y preciso.
+
+## Características clave
+
+| Aspecto | Descripción |
+|---------|-------------|
+| **Velocidad** | Media-alta. Depende de la capacidad del servidor local. |
+| **Privacidad** | Máxima. Todo queda en tu red local. |
+| **Disponibilidad** | Depende de que el servidor local esté encendido. |
+| **Costo** | Solo electricidad y mantenimiento del servidor. Sin cuotas por uso. |
+| **Conexión requerida** | Red local (no necesitas internet externo). |
+| **Capacidad** | Muy alta. Ideal para tareas complejas o documentos extensos. |
+
+## ¿Cuándo usarlo?
+
+- **Cuando trabajas con información sensible o confidencial.** Datos personales, secretos comerciales, documentos legales. Como todo se queda en tu servidor, no hay riesgo de filtración.
+- **Cuando necesitas respuestas más profundas y matizadas.** Para análisis complejos, generación de documentos largos o tareas que requieren mucha coherencia.
+- **Cuando tienes mucho trabajo y necesitas evitar límites de uso.** Los modelos cloud a veces tienen cuotas. El modelo local no tiene restricciones.
+- **Cuando no tienes conexión a internet (pero sí red local).** Si estás en una instalación sin acceso externo, el modelo local sigue funcionando.
+- **Para tareas que requieren máxima calidad.** Si un borrador con `deepseek` te parece correcto pero no excelente, prueba con `qwen-32b` para pulirlo.
+
+::: {.callout-warning}
+**Advertencia:** El modelo local requiere que el servidor esté encendido y accesible. Si viajas o trabajas desde casa sin conexión a la red de la oficina, no podrás usarlo (a menos que tengas el servidor contigo).
+:::
+
+## El apodo: "Big Pickle" / "Pepinillo Grande"
+
+El alias `big-pickle` nace del juego de palabras con "Qwen" (que suena similar a "pickle" en inglés). Es un nombre cariñoso que usa el equipo para referirse a este modelo. 
+
+En español lo llamamos **"pepinillo grande"** o **"pepinote"**. No te extrañes si en las conversaciones del equipo escuchas frases como:
+
+- *"Voy a ejecutar esto con el pepinillo grande para que quede más fino."*
+- *"El pepinote maneja mejor los documentos largos."*
+- *"¿Está encendido el pepinillo? Voy a mandarle un trabajo pesado."*
+
+---
+
+# Modelo 3: «mi-qwen» / «MiMo» — La infraestructura que lo sirve todo
+
+## ¿Qué es?
+
+`mi-qwen` (abreviatura de **"Mi Qwen"**) es el **proveedor** que sirve el modelo `qwen-32b`. También se le conoce como **`MiMo`** (**"Mi Modelo"**).
+
+Para entenderlo mejor:
+
+| Componente | Descripción | Analogía |
+|-----------|-------------|----------|
+| `qwen-32b` / `big-pickle` | El modelo en sí (el motor de IA) | El motor del coche |
+| `mi-qwen` / `MiMo` | El proveedor (el servicio que pone el modelo a tu disposición) | El concesionario y el taller que mantienen el coche |
+
+## Analogía: Tu propia central eléctrica
+
+Imagina que `mi-qwen` / `MiMo` es como tener tu **propia central eléctrica en casa**:
+
+- **Independencia energética:** No dependes de la compañía eléctrica general. Generas tu propia electricidad.
+- **Sin cortes:** No hay apagones por mantenimiento externo ni restricciones de horario.
+- **A medida:** Puedes configurar la central para que funcione exactamente como necesitas.
+- **Requiere inversión inicial:** Necesitas los paneles solares, las baterías, el inversor... pero luego la electricidad es prácticamente gratis.
+
+En términos prácticos, cuando el equipo dice "estoy usando MiMo" o "voy a mi-qwen", está diciendo que está usando el **modelo local** (`qwen-32b`) a través del **servicio local** (`mi-qwen`).
+
+## Características clave
+
+| Aspecto | Descripción |
+|---------|-------------|
+| **Dirección del servidor** | `192.168.0.127:4000` (en la red local) |
+| **Privacidad** | Absoluta. No sale de tu red. |
+| **Control** | Total. Tú decides cuándo actualizar, cómo configurar, etc. |
+| **Dependencia** | Del servidor local. Si se apaga, no hay servicio. |
+| **Costo operativo** | Electricidad + mantenimiento del hardware. |
+| **Límites de uso** | Ninguno. Úsalo todo lo que quieras. |
+
+## ¿Cuándo usarlo?
+
+Técnicamente, `mi-qwen` y `qwen-32b` son inseparables: cuando activas uno, estás usando el otro. Pero a efectos prácticos:
+
+- **Elige `mi-qwen` / `MiMo`** cuando quieras dejar claro que estás usando el **entorno local completo** (infraestructura + modelo).
+- **Elige `qwen-32b` / `big-pickle`** cuando quieras referirte **específicamente al modelo** y sus capacidades.
+
+En el uso diario, la mayoría del equipo dice simplemente *"voy a usar el pepinillo"* o *"pásalo por MiMo"* y todos entienden que se refieren al modelo local.
+
+::: {.callout-note}
+**Nota:** `mi-qwen` significa "Mi Qwen" (mi versión del modelo Qwen). El apodo `MiMo` viene de "Mi Modelo". Ambos reflejan el orgullo del equipo por tener un modelo propio, controlado y siempre disponible.
+:::
+
+---
+
+# Tabla comparativa de modelos
+
+| Característica | 🌐 deepseek-v4-flash-free | 🥒 qwen-32b / big-pickle | 🏠 mi-qwen / MiMo |
+|----------------|--------------------------|--------------------------|-------------------|
+| **Tipo** | Cloud (nube) | Local (servidor propio) | Infraestructura local |
+| **Velocidad** | ⚡ Alta | 🟡 Media-Alta | 🟡 Media-Alta (depende del servidor) |
+| **Privacidad** | 🔵 Media (viaja a externos) | 🟢 Máxima (todo local) | 🟢 Máxima (todo local) |
+| **Disponibilidad** | 🟢 Siempre (con internet) | 🟡 Depende del servidor | 🟡 Depende del servidor |
+| **Conexión** | Internet requerido | Red local solamente | Red local solamente |
+| **Costo** | Gratuito | Electricidad + hardware | Electricidad + hardware |
+| **Límites de uso** | Puede haber cuotas | Sin límites | Sin límites |
+| **Configuración** | Ninguna (viene por defecto) | Requiere configuración inicial | Requiere configuración inicial |
+| **Capacidad** | Buena para tareas generales | Excelente para tareas complejas | Excelente para tareas complejas |
+| **Ideal para** | Uso diario, tareas rápidas | Trabajo profundo, datos sensibles | Trabajo profundo, datos sensibles |
+
+## El significado de los colores
+
+| Color | Significado |
+|-------|-------------|
+| 🟢 Verde | Ventaja clara |
+| 🟡 Amarillo | Depende del contexto |
+| 🔵 Azul | Neutro, cumple sin destacar |
+
+---
+
+# ¿Cuándo usar cada modelo? Guía por tarea
+
+No todos los modelos son igual de adecuados para todas las tareas. Esta tabla te ayuda a decidir rápidamente:
+
+## Según el tipo de contenido
+
+| Tarea | Modelo recomendado | ¿Por qué? |
+|-------|-------------------|-----------|
+| Redactar un correo o mensaje corto | `deepseek-v4-flash-free` | Rápido, suficiente calidad, no requiere privacidad especial. |
+| Escribir un informe estándar | `deepseek-v4-flash-free` | El modelo cloud maneja bien documentos de longitud media. |
+| Documento extenso (tesis, manual, libro) | `qwen-32b` / `big-pickle` | Mayor coherencia en textos largos, más capacidad de mantener el hilo. |
+| Documento con datos sensibles (nóminas, expedientes, secretos comerciales) | `qwen-32b` / `big-pickle` (o `mi-qwen`) | La privacidad es crítica. Todo debe quedar en local. |
+| Análisis detallado de un concepto complejo | `qwen-32b` / `big-pickle` | Mayor profundidad y matiz en las respuestas. |
+| Lluvia de ideas o brainstorming | `deepseek-v4-flash-free` | La velocidad permite iterar rápidamente. |
+| Revisión y pulido final de un texto | `qwen-32b` / `big-pickle` | Mejor para detectar matices y mejorar la calidad del lenguaje. |
+| Traducción de textos | Ambos funcionan bien | Si el texto es sensible, usa local. Si no, cloud es más rápido. |
+| Resumir un artículo o capítulo | `deepseek-v4-flash-free` | Tarea rápida, el modelo cloud es más que suficiente. |
+| Generar múltiples versiones de un mismo texto | `deepseek-v4-flash-free` | La velocidad te permite probar variantes rápidamente. |
+
+## Según la situación
+
+| Situación | Modelo recomendado |
+|-----------|-------------------|
+| Estás en una cafetería con wifi | `deepseek-v4-flash-free` (no tienes acceso al servidor local) |
+| Estás en la oficina con el servidor encendido | Cualquiera, según la tarea |
+| El servidor local está apagado o en mantenimiento | `deepseek-v4-flash-free` |
+| Tienes una fecha de entrega ajustada | `deepseek-v4-flash-free` (rápido y fiable) |
+| Necesitas la mejor calidad posible sin importar el tiempo | `qwen-32b` / `big-pickle` |
+| Estás trabajando con datos de pacientes o clientes | `qwen-32b` / `big-pickle` (obligatorio por privacidad) |
+| No tienes internet pero sí red local | `qwen-32b` / `big-pickle` (vía `mi-qwen`) |
+
+::: {.callout-warning}
+**Advertencia de privacidad:** Si trabajas con datos personales, información médica, secretos comerciales o cualquier contenido confidencial, usa siempre el modelo local (`qwen-32b` / `mi-qwen`). Los modelos cloud procesan tus consultas en servidores externos. Aunque la mayoría tienen políticas de privacidad, la única forma de garantizar que tus datos no salen de tu control es usar tu propio servidor.
+:::
+
+---
+
+# Tabla de decisión rápida
+
+¿No sabes qué modelo elegir? Responde estas preguntas en orden:
+
+```{=html}
+<!-- Esto es un diagrama de flujo textual para ayudar a decidir -->
+```
+```
+┌─────────────────────────────────────┐
+│   ¿Tienes acceso al servidor local?  │
+├──────────────────┬──────────────────┤
+│       NO         │       SÍ         │
+└────────┬─────────┴────────┬─────────┘
+         ▼                  ▼
+┌─────────────────┐  ┌──────────────────┐
+│ Usa             │  │ ¿Son datos       │
+│ deepseek-v4-    │  │ confidenciales?  │
+│ flash-free      │  ├────────┬─────────┤
+│ (cloud, rápido) │  │  NO    │   SÍ    │
+└─────────────────┘  └───┬────┴────┬────┘
+                         ▼         ▼
+               ┌────────────────┐  ┌─────────────────┐
+               │ ¿Tarea rápida  │  │ Usa qwen-32b    │
+               │ o superficial? │  │ / big-pickle    │
+               ├───────┬────────┤  │ (local, seguro) │
+               │  NO   │   SÍ   │  └─────────────────┘
+               └───┬───┴────┬───┘
+                   ▼        ▼
+          ┌────────────┐  ┌────────────────┐
+          │ Usa        │  │ Usa deepseek-  │
+          │ qwen-32b / │  │ v4-flash-free  │
+          │ big-pickle │  │ (cloud, rápido)│
+          │ (local,    │  └────────────────┘
+          │  potente)  │
+          └────────────┘
+```
+
+## Resumen en tres frases
+
+| Situación | Modelo |
+|-----------|--------|
+| Quiero rapidez y no tengo datos sensibles | 🌐 deepseek-v4-flash-free |
+| Quiero máxima calidad o trabajo con datos privados | 🥒 qwen-32b / big-pickle |
+| Quiero referirme a todo el ecosistema local | 🏠 mi-qwen / MiMo |
+
+---
+
+# Preguntas frecuentes
+
+## ¿Puedo cambiar de modelo mientras trabajo?
+
+Sí. Puedes empezar una tarea con un modelo y, si no te convence el resultado, cambiar a otro y repetir la misma consulta. El agente (explicador, scribe, etc.) se mantiene, solo cambia el motor.
+
+## ¿Un modelo es mejor que otro?
+
+No exactamente. Son **diferentes herramientas para diferentes necesidades**. `deepseek-v4-flash-free` es como un coche urbano: rápido, económico, perfecto para el día a día. `qwen-32b` es como un camión: más potente, más capacidad, pero requiere más mantenimiento. No dirías que un camión es "mejor" que un coche: cada uno tiene su uso.
+
+## ¿Puedo tener ambos modelos configurados?
+
+Sí. OpenCode puede tener múltiples modelos configurados. Puedes alternar entre ellos según la tarea. Esta es la configuración más común y recomendada.
+
+## ¿Qué modelo usa el agente `explicador` cuando no especifico nada?
+
+Por defecto, OpenCode usa `deepseek-v4-flash-free`. Es el modelo que viene preconfigurado. Si quieres usar otro, debes indicarlo explícitamente en la configuración.
+
+## ¿Necesito ser administrador del servidor para usar el modelo local?
+
+Para la **configuración inicial**, alguien con conocimientos técnicos debe instalar y poner en marcha el servidor `mi-qwen`. Pero para el **uso diario**, cualquier persona puede seleccionar el modelo local en OpenCode sin necesidad de conocimientos técnicos.
+
+## ¿El modelo local consume muchos recursos?
+
+Sí, `qwen-32b` requiere un servidor con buena tarjeta gráfica (GPU) y suficiente memoria RAM. No se ejecuta en un ordenador portátil normal. Por eso se aloja en un servidor dedicado (`192.168.0.127:4000`) al que todos los miembros del equipo se conectan por red local.
+
+::: {.callout-tip}
+**Consejo:** Si escuchas a alguien del equipo decir *"el pepinillo está pesado hoy"* o *"MiMo está reflexionando"*, significa que el modelo local está procesando una tarea compleja y tardará un poco más de lo normal. Es normal, dale su tiempo.
+:::
+
+---
+
+# Glosario de términos
+
+Para que no te pierdas cuando el equipo hable de estos temas:
+
+| Término | Significado |
+|---------|-------------|
+| **Agente** | Perfil especializado de asistente (`explicador`, `scribe`, `general`, `explore`). |
+| **Modelo** | Motor de IA que procesa el lenguaje (`deepseek-v4-flash-free`, `qwen-32b`). |
+| **Parámetros** | "Conexiones neuronales" del modelo. A más parámetros, más capacidad. |
+| **Cloud** | El modelo se ejecuta en servidores externos (en internet). |
+| **Local** | El modelo se ejecuta en tu propia infraestructura (tu servidor). |
+| **Proveedor** | El servicio que pone el modelo a disposición (`mi-qwen` es un proveedor). |
+| **big-pickle** | Alias de `qwen-32b` ("pepinillo grande"). |
+| **MiMo** | Alias de `mi-qwen` ("Mi Modelo"). |
+| **192.168.0.127:4000** | Dirección del servidor local donde se ejecuta `mi-qwen`. |
+
+---
+
+# Resumen final
+
+| Modelo | Apodo | Cuándo usarlo |
+|--------|-------|---------------|
+| 🌐 `deepseek-v4-flash-free` | — | Tareas cotidianas, rapidez, sin datos sensibles. Es tu opción por defecto. |
+| 🥒 `qwen-32b` | big-pickle / pepinillo grande | Trabajo profundo, documentos extensos, calidad superior, datos confidenciales. |
+| 🏠 `mi-qwen` / `MiMo` | Mi Modelo | Cuando quieras referirte a todo el ecosistema local (infraestructura + modelo). |
+
+::: {.callout-note}
+**Recuerda:** Los **agentes** deciden **cómo** se hace el trabajo. Los **modelos** deciden **con qué motor** se hace. Ambos trabajan juntos para darte el mejor resultado posible. Ahora que conoces los modelos, puedes elegir con más criterio y aprovechar al máximo OpenCode.
+:::
+
+::: {.callout-tip}
+**Consejo final:** No te obsesiones con elegir el modelo "perfecto". Para la mayoría de tareas diarias, `deepseek-v4-flash-free` funciona de maravilla. Cuando necesites más potencia o privacidad, ya sabes que el pepinillo grande está esperando en el servidor local.
+:::
+
+---
+
+*Documento creado por el agente Scribe — 11 de junio de 2026*

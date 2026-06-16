@@ -1,0 +1,441 @@
+---
+title: "Ampliando: Conexiones y proveedores"
+subtitle: "Cómo conectar OpenCode con diferentes proveedores de IA"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía amplía la información sobre proveedores de IA para creadores de contenido que ya tienen algo de experiencia con OpenCode. **No necesitas saber programar** para entenderla.
+:::
+
+## Antes de empezar: conceptos básicos
+
+- **API key**: es una contraseña personal que te da acceso al modelo. No la compartas ni la subas a internet.
+- **Variable de entorno**: es un sitio seguro donde tu ordenador guarda contraseñas para que los programas puedan usarlas sin que tú las escribas cada vez.
+- **Tokens**: son las unidades que usa la IA para procesar texto. Un token es aproximadamente tres cuartas partes de una palabra. Cuando pagas "por token", pagas por cada palabra que la IA lee o escribe.
+- **.gitignore**: es un archivo que le dice a git "no guardes estos archivos". Si usas git, añadir `.env` a `.gitignore` evita que tus contraseñas se suban por error a internet.
+
+::: {.callout-note}
+## ¿No sabes por dónde empezar?
+
+- **Opción gratuita**: Groq (modelos Llama 3 sin coste)
+- **Opción más fácil**: OpenRouter (una sola clave para todos los modelos)
+- **Opción más potente**: OpenAI (GPT-4o) o Anthropic (Claude Sonnet)
+:::
+
+::: {.callout-warning}
+## Los precios y la disponibilidad cambian
+
+Los precios de los modelos y su disponibilidad cambian periódicamente. Para ver la lista actualizada de modelos disponibles, escribe `/models` dentro de OpenCode. Los precios indicados en esta guía son orientativos y pueden no estar vigentes.
+:::
+
+## Formas de conectar
+
+Hay dos formas de conectar OpenCode con un proveedor:
+
+### Opción 1: Comandos directos (el más fácil)
+
+Escribe en el chat de OpenCode uno de estos comandos:
+
+```bash
+/connect openrouter
+```
+
+```bash
+/connect ollama
+```
+
+OpenCode te guiará para elegir el modelo concreto dentro de cada opción.
+
+### Opción 2: Editar `opencode.json` (más control)
+
+Si prefieres configurarlo manualmente, edita el archivo `opencode.json` en la raíz de tu proyecto. Esta opción se explica en detalle más abajo.
+
+---
+
+## Configuración de variables de entorno
+
+::: {.callout-note}
+## Variables de entorno
+
+Cada proveedor requiere una clave de API que se almacena como variable de entorno. Crea un archivo `.env` en la raíz del proyecto con tus claves de acceso:
+
+```
+OPENAI_API_KEY=sk-proj-...
+ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_API_KEY=AIza...
+GROQ_API_KEY=gsk_...
+DEEPSEEK_API_KEY=sk-...
+```
+
+Añade `.env` a `.gitignore` para nunca versionar las claves.
+:::
+
+::: {.callout-warning}
+## Nunca subas tus claves a internet
+
+Si usas git para guardar tu proyecto, asegúrate de que `.env` está en `.gitignore`. Si tus claves se filtran, cualquiera podrá usar tu cuenta y gastar tu dinero.
+:::
+
+---
+
+## OpenAI
+
+::: {.callout-note}
+## OpenAI: el proveedor más conocido
+
+Modelos potentes pero caros. Ideal para tareas que requieren alta calidad.
+:::
+
+### Registro
+
+1. Ve a [platform.openai.com](https://platform.openai.com)
+2. Crea una cuenta o inicia sesión
+3. Ve a API Keys y genera una nueva clave
+
+### Modelos disponibles
+
+| Modelo | Coste (1M tokens entrada) | Coste (1M tokens salida) |
+|--------|---------------------------|--------------------------|
+| GPT-4o | $2.50 | $10.00 |
+| GPT-4o-mini | $0.15 | $0.60 |
+| o1 | $15.00 | $60.00 |
+
+### Configuración en OpenCode
+
+::: {.callout-tip}
+## Configurar OpenAI en OpenCode
+
+Añade esta configuración en tu archivo de configuración:
+
+```jsonc
+{
+  "model": {
+    "provider": "openai",
+    "name": "gpt-4o-mini",
+    "apiKey": "${OPENAI_API_KEY}"
+  }
+}
+```
+:::
+
+---
+
+## Anthropic
+
+::: {.callout-note}
+## Anthropic: especializado en texto largo
+
+Excelente para escritura y análisis de documentos extensos.
+:::
+
+### Registro
+
+1. Ve a [console.anthropic.com](https://console.anthropic.com)
+2. Crea una cuenta y verifica tu email
+3. Genera una clave de API
+
+### Modelos disponibles
+
+| Modelo | Coste (1M tokens entrada) | Coste (1M tokens salida) |
+|--------|---------------------------|--------------------------|
+| Claude Haiku | $0.25 | $1.25 |
+| Claude Sonnet | $3.00 | $15.00 |
+
+### Configuración en OpenCode
+
+::: {.callout-tip}
+## Configurar Anthropic en OpenCode
+
+Añade esta configuración en tu archivo de configuración:
+
+```jsonc
+{
+  "model": {
+    "provider": "anthropic",
+    "name": "claude-sonnet-4-20250514",
+    "apiKey": "${ANTHROPIC_API_KEY}"
+  }
+}
+```
+:::
+
+---
+
+## Google
+
+::: {.callout-note}
+## Google: integrado con ecosistema Google
+
+Modelos multimodales, buenos para texto e imágenes.
+:::
+
+### Registro
+
+1. Ve a [aistudio.google.com](https://aistudio.google.com)
+2. Inicia sesión con tu cuenta Google
+3. Genera una clave de API
+
+### Modelos disponibles
+
+| Modelo | Coste (1M tokens entrada) | Coste (1M tokens salida) |
+|--------|---------------------------|--------------------------|
+| Gemini Flash | $0.075 | $0.30 |
+| Gemini Pro | $1.25 | $5.00 |
+
+### Configuración en OpenCode
+
+::: {.callout-tip}
+## Configurar Google en OpenCode
+
+Añade esta configuración en tu archivo de configuración:
+
+```jsonc
+{
+  "model": {
+    "provider": "google",
+    "name": "gemini-pro",
+    "apiKey": "${GOOGLE_API_KEY}"
+  }
+}
+```
+:::
+
+---
+
+## DeepSeek
+
+::: {.callout-note}
+## DeepSeek: buen rendimiento a bajo coste
+
+Opción económica con buena calidad. Ideal para tareas rápidas y revisiones.
+:::
+
+### Registro
+
+1. Ve a [platform.deepseek.com](https://platform.deepseek.com)
+2. Crea una cuenta
+3. Genera una clave de API
+
+### Modelos disponibles
+
+| Modelo | Coste (1M tokens entrada) | Coste (1M tokens salida) |
+|--------|---------------------------|--------------------------|
+| DeepSeek V3 | $0.27 | $1.10 |
+
+### Configuración en OpenCode
+
+::: {.callout-tip}
+## Configurar DeepSeek en OpenCode
+
+Añade esta configuración en tu archivo de configuración:
+
+```jsonc
+{
+  "model": {
+    "provider": "deepseek",
+    "name": "deepseek-chat",
+    "apiKey": "${DEEPSEEK_API_KEY}"
+  }
+}
+```
+:::
+
+---
+
+## Groq (gratuito)
+
+::: {.callout-note}
+## Groq: gratis y rápido
+
+Ideal para empezar sin coste. Modelos de Meta (Llama 3) y Mistral (Mixtral).
+:::
+
+### Registro
+
+1. Ve a [console.groq.com](https://console.groq.com)
+2. Crea una cuenta
+3. Genera una clave de API
+
+### Modelos disponibles (gratuitos)
+
+| Modelo | Velocidad | Notas |
+|--------|-----------|-------|
+| Llama 3 (8B) | Muy rápida | Bueno para tareas simples |
+| Llama 3 (70B) | Rápida | Mejor calidad |
+| Mixtral | Rápida | Bueno para código |
+
+### Configuración en OpenCode
+
+::: {.callout-tip}
+## Configurar Groq en OpenCode
+
+Añade esta configuración en tu archivo de configuración:
+
+```jsonc
+{
+  "model": {
+    "provider": "groq",
+    "name": "llama3-70b-8192",
+    "apiKey": "${GROQ_API_KEY}"
+  }
+}
+```
+:::
+
+---
+
+## OpenRouter: múltiples modelos, una sola clave
+
+::: {.callout-note}
+## OpenRouter: un supermercado de modelos
+
+OpenRouter es un intermediario (*proxy*) que agrupa modelos de diferentes proveedores. Con una sola cuenta accedes a modelos de OpenAI, Anthropic, Google, Meta, Mistral y más.
+:::
+
+### Ventajas
+
+- **Una sola clave API** para todos los proveedores
+- **Precios competitivos** (a veces más baratos que directos)
+- **Sin compromiso** — pagas por uso
+- **Acceso rápido** a nuevos modelos
+
+### Registro
+
+1. Ve a [openrouter.ai](https://openrouter.ai)
+2. Crea una cuenta
+3. Añade crédito (mínimo $5)
+4. Genera una clave de API
+
+### Modelos populares en OpenRouter
+
+| Modelo | Proveedor original | Coste (1M tokens entrada) |
+|--------|-------------------|---------------------------|
+| openai/gpt-4o | OpenAI | $2.50 |
+| anthropic/claude-sonnet | Anthropic | $3.00 |
+| meta-llama/llama3-70b | Meta | $0.50 |
+| mistralai/mixtral-8x7b | Mistral | $0.25 |
+
+### Configuración en OpenCode
+
+::: {.callout-tip}
+## Configurar OpenRouter en OpenCode
+
+Añade esta configuración en tu archivo de configuración:
+
+```jsonc
+{
+  "model": {
+    "provider": "openrouter",
+    "name": "openai/gpt-4o-mini",
+    "apiKey": "${OPENROUTER_API_KEY}"
+  }
+}
+```
+:::
+
+---
+
+## Control de costes
+
+::: {.callout-warning}
+## Vigila tu gasto
+
+Los modelos de pago cobran por cada palabra que la IA lee o escribe. Unos 10.000 tokens (unas 7.500 palabras) costarían entre $0,01 y $1,50 dependiendo del modelo.
+
+- Revisa tu consumo en el panel de cada proveedor
+- Usa modelos baratos (GPT-4o-mini, Claude Haiku) para tareas simples
+- Configura límites de gasto si tu proveedor lo permite
+:::
+
+---
+
+## Errores comunes
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "Invalid API key" | Clave incorrecta o caducada | Regenera la clave en el panel del proveedor |
+| "Rate limit exceeded" | Demasiadas peticiones | Espera un momento o upgrade tu plan |
+| "Insufficient funds" | Saldo agotado | Añade crédito en tu cuenta |
+
+---
+
+## Comparativa de proveedores
+
+| Proveedor | Gratuito | Modelos | Facilidad de uso |
+|-----------|----------|---------|------------------|
+| OpenCode (Zen) | Sí | Limitados | Muy fácil |
+| OpenAI | No | GPT-4o, o1 | Fácil |
+| Anthropic | No | Claude | Fácil |
+| Google | No | Gemini | Media |
+| DeepSeek | No | DeepSeek V3 | Fácil |
+| Groq | Sí | Llama, Mixtral | Fácil |
+| OpenRouter | No | Múltiples | Fácil |
+| Ollama (local) | Sí | Llama, etc. | Media |
+
+> Para más detalles sobre modelos locales, consulta la sección [Modelos locales con Ollama](ampliando-modelos.qmd#modelos-locales-con-ollama).
+
+---
+
+## Consejos prácticos
+
+1. **Empieza con lo gratuito.** Groq ofrece modelos sin coste. OpenRouter tiene opciones gratuitas también.
+
+2. **No compartas tus claves.** Siempre usa variables de entorno (`.env`) y añade `.env` a `.gitignore`.
+
+3. **Revisa tu gasto.** Los modelos de pago cobran por uso. Revisa tu consumo periódicamente.
+
+4. **Si algo falla, revisa la clave.** El error más común es una API key incorrecta o caducada.
+
+5. **Usa comandos `/connect`** si no quieres editar archivos de configuración. Es la forma más fácil de empezar.
+
+---
+
+## Referencias
+
+- [Guía de Modelos de IA](guia-modelos-creadores.qmd) — Cómo elegir el modelo adecuado
+- [Modelos](modelos-openrouter.qmd) — Lista de modelos disponibles en OpenRouter
+- [Documentación de OpenCode](https://opencode.ai/docs/providers/) — Configuración avanzada de proveedores
+
+---
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

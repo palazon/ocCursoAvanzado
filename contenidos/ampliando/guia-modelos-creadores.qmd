@@ -1,0 +1,201 @@
+---
+title: "Guía de Modelos de IA para Creadores de Contenido"
+subtitle: "Cómo elegir y configurar el modelo adecuado en opencode"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía está pensada para documentalistas, escritores técnicos y diseñadores de documentación. **No necesitas saber programar** para entenderla ni para aplicar lo que aquí se explica.
+:::
+
+## ¿Qué es un modelo de IA?
+
+Un **modelo de inteligencia artificial** es, de forma sencilla, el "cerebro" que recibe tus instrucciones y genera respuestas. Cuando escribes un mensaje en opencode y obtienes una respuesta, esa respuesta la ha producido un modelo.
+
+**Analogía**: piensa en un modelo como el motor de un coche.
+
+- El coche es la aplicación (opencode).
+- El motor es el modelo de IA (Claude, GPT, Llama, etc.).
+- Tus instrucciones son el combustible.
+- La respuesta es el movimiento del coche.
+
+Puedes cambiar el motor sin cambiar el coche, y según qué tareas hagas te interesará un motor u otro.
+
+::: {.callout-note}
+**Vocabulario**: Cuando hablamos de "modelo local" nos referimos a un modelo que se ejecuta en tu propio ordenador. Cuando hablamos de "modelo cloud" nos referimos a un modelo que se ejecuta en servidores remotos a los que te conectas por internet.
+:::
+
+## Modelos que soporta opencode
+
+opencode puede trabajar con dos grandes familias de modelos:
+
+- **Modelos locales**: se ejecutan en tu máquina mediante **[Ollama](https://ollama.ai)**. Descargas el programa, eliges un modelo (ej. Llama 3, Mistral) y opencode se conecta a él.
+- **Modelos cloud**: se ejecutan en servidores externos. Puedes acceder a ellos a través de **[OpenRouter](https://openrouter.ai)** (un "supermercado" de modelos con un solo pago) o directamente mediante las APIs de cada proveedor (Claude, GPT, DeepSeek, Gemini...).
+
+## Modelos locales vs cloud
+
+| Aspecto | Local | Cloud |
+|---------|-------|-------|
+| Privacidad | Total (todo en tu máquina) | Depende del proveedor |
+| Coste | Gratis (solo electricidad) | Por token / usuario |
+| Velocidad | Depende de tu hardware | Rápido (servidores potentes) |
+| Sin internet | Sí | No |
+| Hardware necesario | GPU / RAM recomendada | Solo navegador |
+
+::: {.callout-tip}
+**Mi recomendación**: Si tienes un ordenador moderno con buena RAM, empieza con un modelo local. Es gratis y tus datos nunca salen de tu máquina. Si tu ordenador es más limitado, usa OpenRouter con modelos gratuitos.
+:::
+
+## Opciones gratuitas
+
+### Ollama (modelos locales)
+
+[Ollama](https://ollama.ai) es un programa gratuito que te permite descargar y ejecutar modelos de IA en tu propio ordenador.
+
+1. Instalas Ollama en tu sistema.
+2. Descargas un modelo (por ejemplo, `llama3.2` o `mistral`).
+3. opencode se conecta automáticamente a Ollama.
+
+**Ventajas**: totalmente gratis, privacidad absoluta, funciona sin internet.
+**Requisitos**: se recomienda al menos 8 GB de RAM. Para modelos grandes, 16 GB o más.
+
+### OpenRouter (modelos gratuitos vía web)
+
+[OpenRouter](https://openrouter.ai) es una plataforma que da acceso a decenas de modelos. Muchos de ellos son gratuitos y no requieren instalar nada en tu ordenador.
+
+- Modelos gratuitos disponibles: Mistral 7B, Llama 3.2, Gemini Flash, y muchos más.
+- Te registras, obtienes una clave API y la configuras en opencode.
+- No necesitas hardware potente: todo se ejecuta en la nube.
+
+## Opciones de pago
+
+Cuando necesites más potencia o calidad, puedes contratar modelos de pago. Estos son los más populares:
+
+| Modelo | Proveedor | Bueno para | Coste aprox. |
+|--------|-----------|------------|-------------|
+| **Claude** (Sonnet / Opus) | Anthropic | Documentación larga, análisis profundo | ~15-18 $/M tokens |
+| **GPT-4o** / **GPT-4** | OpenAI | Tareas versátiles, conversación | ~5-10 $/M tokens |
+| **DeepSeek V3** | DeepSeek | Buen rendimiento a bajo coste | ~0.5-2 $/M tokens |
+| **Gemini 1.5 Pro** | Google | Integración con ecosistema Google | ~3.5-7 $/M tokens |
+
+> **"Token"**: es la unidad que los modelos usan para medir texto. Un token equivale aproximadamente a 0.75 palabras. Los precios se indican por millón de tokens (M tokens). Por ejemplo, 1 millón de tokens son unas 750 000 palabras.
+
+::: {.callout-warning}
+Los precios son orientativos y cambian con frecuencia. Consulta la web de cada proveedor para precios actualizados. Algunos ofrecen capa gratuita limitada.
+:::
+
+## ¿Qué modelo elegir para cada tarea?
+
+No existe un modelo perfecto para todo. Cada uno tiene puntos fuertes distintos:
+
+| Tarea | Modelo recomendado | Motivo |
+|-------|-------------------|--------|
+| Redactar borradores | GPT-4o, Claude Sonnet | Creatividad y coherencia |
+| Revisar ortografía y estilo | DeepSeek, Gemini Flash | Rápido y económico |
+| Traducir documentos | Claude, GPT-4o | Precisión contextual |
+| Dar formato (markdown, tablas) | Cualquier modelo pequeño | Tarea mecánica, no necesita gran potencia |
+| Investigar y resumir | Claude Opus, GPT-4o | Comprensión profunda |
+| Tareas simples y rápidas | Llama 3.2, Mistral (local) | Inmediato, sin coste |
+
+::: {.callout-tip}
+**Regla práctica**: Para tareas complejas usa un modelo grande y potente (Claude, GPT-4o). Para tareas repetitivas o simples usa un modelo pequeño, barato o gratuito (DeepSeek, Llama, Mistral). Así ahorras dinero y tiempo.
+:::
+
+## Cómo se configura en opencode
+
+Hay dos formas de decirle a opencode qué modelo quieres usar.
+
+### Método 1: Comandos directos (el más fácil)
+
+Escribe en el chat de opencode uno de estos comandos:
+
+```bash
+/connect openrouter
+```
+
+```bash
+/connect ollama
+```
+
+opencode te guiará para elegir el modelo concreto dentro de cada opción.
+
+### Método 2: Editar `opencode.json` (más control)
+
+Si prefieres configurarlo manualmente, busca el archivo `opencode.json` en la raíz de tu proyecto. Puedes editarlo para indicar el modelo por defecto:
+
+```json
+{
+  "model": "claude-sonnet-4-20250514",
+  "customCommands": {
+    "model-small": {
+      "model": "deepseek-chat",
+      "description": "Modelo rápido y barato para tareas simples"
+    },
+    "model-big": {
+      "model": "claude-sonnet-4-20250514",
+      "description": "Modelo potente para tareas complejas"
+    }
+  }
+}
+```
+
+Con los `customCommands` puedes definir atajos: por ejemplo, escribe `model-small` en el chat para cambiar al modelo pequeño, o `model-big` para volver al grande.
+
+::: {.callout-note}
+**Importante**: Cuando quieras cambiar de modelo, solo tienes que modificar el nombre del modelo en `opencode.json`. No necesitas instalar nada más ni entender cómo funciona el modelo por dentro.
+:::
+
+## Consejos prácticos
+
+1. **Empieza con lo gratuito.** Usa Ollama (si tu ordenador lo permite) u OpenRouter con modelos gratuitos. No hace falta pagar para empezar a trabajar.
+
+2. **Combina modelos.** Usa un modelo pequeño y rápido para tareas mecánicas (formatear, revisar ortografía) y uno grande para tareas que requieran comprensión profunda (redactar desde cero, resumir documentación extensa).
+
+3. **Cambia de modelo según la tarea.** Una misma sesión de trabajo puede usar tres modelos distintos. opencode te permite cambiar en segundos.
+
+4. **No necesitas saber de tecnología.** Cambiar de modelo es tan simple como elegir una opción en un menú. Los modelos hacen el trabajo técnico; tú solo escribes lo que necesitas.
+
+5. **Prueba varios modelos.** Cada modelo tiene su "personalidad". Prueba Claude para documentación extensa, GPT para versatilidad, DeepSeek para tareas rápidas y económicas. Encuentra el que mejor se adapte a tu forma de trabajar.
+
+::: {.callout-tip}
+**En resumen**: los modelos de IA son herramientas, no magia. Elige el que mejor se ajuste a cada tarea, igual que elegirías un destornillador u otro según el tornillo. Y recuerda: puedes empezar sin pagar nada.
+:::

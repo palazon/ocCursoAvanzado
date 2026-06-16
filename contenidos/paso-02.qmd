@@ -25,9 +25,28 @@ los agentes, los skills:
 Mientras que un agente se define dentro de un proyecto (`.opencode/agents/`),
 un skill se define una sola vez y se usa desde cualquier carpeta.
 
+::: {.callout-note}
+## Skills locales y globales
+
+Los skills pueden ser **globales** (`~/.config/opencode/skills/`) o
+**locales** (`.opencode/skills/` dentro de un proyecto). Los locales
+tienen prioridad sobre los globales si hay conflicto de nombres.
+:::
+
 Los skills son ideales para tareas que haces a menudo pero que no
 justifican un agente dedicado: formatear fechas, revisar tablas,
 aplicar una nomenclatura concreta, etc.
+
+::: {.callout-note}
+## ¿Cómo se invoca un skill?
+
+Los skills se invocan **por nombre** desde el chat, sin usar `@`.
+El símbolo `@` se reserva para archivos y agentes.
+
+Por ejemplo:
+
+> Usa el skill formatear-fechas en el documento @informe.md
+:::
 
 ---
 
@@ -36,7 +55,7 @@ aplicar una nomenclatura concreta, etc.
 Crear un skill es muy sencillo. Solo necesitas:
 
 1. **Una carpeta** con el nombre del skill
-2. **Un archivo SKILL.md** dentro, con frontmatter YAML y las instrucciones
+2. **Un archivo `SKILL.md`** dentro, con frontmatter YAML y las instrucciones
 
 OpenCode descubre los skills automáticamente desde `~/.config/opencode/skills/`.
 No hace falta registrarlos en ningún archivo JSON.
@@ -64,7 +83,7 @@ Describe aquí lo que hace el skill. Usa un tono directo, como
 si le dieras instrucciones a un ayudante.
 ```
 
-El frontmatter YAML (entre `---`) es importante: el campo `name`
+El *frontmatter* YAML (entre `---`) es importante: el campo `name`
 identifica el skill y `description` aparece cuando se invoca.
 
 ---
@@ -73,7 +92,9 @@ identifica el skill y `description` aparece cuando se invoca.
 
 ### Ejercicio 1 — Crear la carpeta de skills
 
-Los skills se guardan en `~/.config/opencode/skills/`:
+Los skills se guardan en `~/.config/opencode/skills/`
+(el `~` representa tu directorio personal: `/home/usuario` en
+Linux o `C:\Users\usuario` en Windows):
 
 ```bash
 mkdir -p ~/.config/opencode/skills
@@ -183,4 +204,4 @@ skills son globales y están disponibles desde cualquier lugar.
 En el próximo paso veremos cómo elegir el modelo de IA adecuado
 para cada tarea.
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

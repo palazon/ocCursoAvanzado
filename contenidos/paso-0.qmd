@@ -127,6 +127,17 @@ Lo que necesitas reconocer para leer los pasos del curso:
 | Código en línea | `` `comando` `` |
 | Bloque de código | ```` ```lenguaje ```` |
 
+::: {.callout-note}
+## Recordatorio del curso 101
+
+En el curso anterior viste con más detalle la relación entre
+**Markdown** (formato ligero de marcado), **Pandoc** (conversor
+universal de documentos) y **Quarto** (sistema de publicación
+construido sobre Pandoc).
+
+Puedes consultar el material en [HTML](https://palazon.github.io/ocCursoIntro/markdown-pandoc-quarto.html)  [PDF](https://palazon.github.io/ocCursoIntro/markdown-pandoc-quarto.pdf).
+:::
+
 ---
 
 ## YAML mínimo

@@ -14,6 +14,7 @@ rm -rf "$DISTRO"/*.qmd "$DISTRO"/*.html "$DISTRO"/*_files/ \
 echo "==> Copiando fuentes desde contenidos/..."
 mkdir -p "$DISTRO"
 cp contenidos/index.qmd contenidos/paso-[0-9].qmd contenidos/paso-[0-9][0-9].qmd "$DISTRO"/
+cp contenidos/ampliando-*.qmd "$DISTRO"/ 2>/dev/null || true
 cp contenidos/custom.css contenidos/captura-tui.png contenidos/tab-key.svg \
    contenidos/_quarto.yml "$DISTRO"/
 cp README.md AGENTS.md render-all.sh "$DISTRO"/

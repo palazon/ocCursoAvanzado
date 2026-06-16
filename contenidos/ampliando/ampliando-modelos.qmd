@@ -1,0 +1,301 @@
+---
+title: "Ampliando: Modelos de IA"
+subtitle: "Tabla detallada y estrategias de uso"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía amplía la información sobre modelos de IA para creadores de contenido que ya tienen algo de experiencia con OpenCode. **No necesitas saber programar** para entenderla.
+:::
+
+## ¿Qué es un modelo de IA?
+
+Un **modelo de inteligencia artificial** es, de forma sencilla, el "cerebro" que recibe tus instrucciones y genera respuestas. Cuando escribes un mensaje en OpenCode y obtienes una respuesta, esa respuesta la ha producido un modelo.
+
+**Analogía**: piensa en un modelo como el motor de un coche.
+
+- El coche es la aplicación (OpenCode).
+- El motor es el modelo de IA (Claude, GPT, Llama, etc.).
+- Tus instrucciones son el combustible.
+- La respuesta es el movimiento del coche.
+
+Puedes cambiar el motor sin cambiar el coche, y según qué tareas hagas te interesará un motor u otro.
+
+## ¿Qué significan estas cifras?
+
+Cuando ves la tabla de modelos, aparecen términos como "128k contexto" o "coste por token". Aquí va una explicación sencilla:
+
+- **Tokens**: son las unidades que usa la IA para procesar texto. Un token es aproximadamente tres cuartas partes de una palabra. Cuando pagas "por token", pagas por cada palabra que la IA lee o escribe.
+- **Contexto** (128k, 200k, 1M): es la cantidad de texto que la IA puede "recordar" en una conversación. 128k son unas 96.000 palabras (unas 200 páginas). 1M son unas 750.000 palabras (un libro entero).
+- **API key**: es una contraseña personal que te da acceso al modelo. No la compartas ni la subas a internet.
+
+::: {.callout-note}
+## ¿Y el modelo Zen?
+
+Zen es el modelo por defecto de OpenCode. Es gratuito y no necesitas configurar nada. Para empezar, es suficiente. Cuando necesites más calidad o velocidad, podrás cambiar a otros modelos.
+:::
+
+::: {.callout-warning}
+## Los modelos cambian con frecuencia
+
+Los modelos, sus precios y su disponibilidad cambian periódicamente. Para ver la lista actualizada de modelos disponibles, escribe `/models` dentro de OpenCode. Los precios indicados en esta guía son orientativos y pueden no estar vigentes.
+:::
+
+## Tabla detallada de modelos
+
+| Modelo | Proveedor | Coste | Velocidad | Calidad | Cuánto recuerda | Ideal para |
+|--------|-----------|-------|-----------|---------|-----------------|------------|
+| Zen (por defecto) | OpenCode | Gratis | Normal | Normal | Variable | Aprendizaje, pruebas |
+| GPT-4o-mini | OpenAI | Bajo | Rápida | Alta | 20 páginas | Revisiones rápidas |
+| GPT-4o | OpenAI | Alto | Media | Muy alta | 20 páginas | Documentos largos, análisis |
+| o1 | OpenAI | Muy alto | Lenta | Muy alta | 20 páginas | Razonamiento complejo |
+| Claude Haiku | Anthropic | Bajo | Rápida | Alta | 40 páginas | Texto rápido, chat |
+| Claude Sonnet | Anthropic | Medio | Media | Muy alta | 40 páginas | Escritura, análisis profundo |
+| Gemini Flash | Google | Bajo | Muy rápida | Alta | Un libro | Documentos muy largos |
+| Gemini Pro | Google | Medio | Media | Alta | Un libro | Multimodal, código |
+| Llama 3 | Groq/Meta | Gratis | Rápida | Media-Alta | 1.500 palabras | Alternativa sin coste |
+| Mixtral | Groq/Mistral | Gratis | Rápida | Media | 6.000 palabras | Código, razonamiento |
+
+::: {.callout-note}
+## Nota sobre la columna "Cuánto recuerda"
+
+Se refiere al **contexto**. Un modelo con más contexto puede manejar documentos más largos sin perder el hilo de la conversación.
+:::
+
+---
+
+## Comparativa por tipo de tarea
+
+### Revisión de estilo
+
+| Modelo | Ventaja | Desventaja |
+|--------|---------|------------|
+| Zen | Sin coste, accesible | Menor precisión en matices |
+| GPT-4o-mini | Rápido, barato | Puede pasar por alto detalles |
+| Claude Haiku | Buen tono, mucho contexto | Requiere clave de acceso (*API key*) |
+
+### Generación de documentos largos
+
+| Modelo | Ventaja | Desventaja |
+|--------|---------|------------|
+| GPT-4o | Excelente coherencia | Coste elevado |
+| Claude Sonnet | Mejor escritura creativa | Más lento |
+| Gemini Flash | Contexto enorme (un libro) | Menor control de tono |
+
+### Investigación web
+
+| Modelo | Ventaja | Desventaja |
+|--------|---------|------------|
+| GPT-4o | Mejor comprensión de contexto | Coste alto |
+| Claude Sonnet | Análisis profundo | Sin acceso directo a web |
+| Gemini Pro | Multimodal | Configuración más compleja |
+
+### Prototipado y pruebas
+
+| Modelo | Ventaja | Desventaja |
+|--------|---------|------------|
+| Zen | Gratuito, sin configuración | Limitado para tareas complejas |
+| Llama 3 (local) | Sin coste, sin conexión | Necesita memoria suficiente |
+| Groq (Llama 3) | Gratuito, rápido | Límites de uso |
+
+---
+
+## Estrategias de uso
+
+### Modelo por defecto (Zen)
+
+- Úsalo para: ejercicios del curso, pruebas, tareas simples
+- Ventaja: no necesitas configurar nada
+- Limitación: puede ser más lento en horas punta
+
+### Alternar según la tarea
+
+::: {.callout-note}
+## Cambiar de modelo
+
+Dentro de OpenCode, escribe `/models` y selecciona el modelo que prefieras para esa tarea.
+:::
+
+- Tarea simple → modelo rápido y barato
+- Tarea compleja → modelo de mayor calidad
+- Documento largo → modelo con mayor contexto
+
+### Configuración por agente
+
+::: {.callout-tip}
+## Configuración avanzada: modelo por agente
+
+Si quieres que un agente específico use un modelo concreto, puedes configurarlo así en su archivo de definición:
+
+```yaml
+---
+name: revisor-rapido
+model: gpt-4o-mini
+mode: subagent
+---
+```
+
+Esto es opcional. Para la mayoría de usuarios, el modelo por defecto es suficiente.
+:::
+
+### Configuración por proyecto
+
+::: {.callout-tip}
+## Configuración avanzada: modelo por proyecto
+
+Si todo tu proyecto debe usar un modelo concreto, configúralo en el archivo `opencode.jsonc` (la configuración del proyecto):
+
+```jsonc
+{
+  "model": {
+    "provider": "openai",
+    "name": "gpt-4o-mini",
+    "apiKey": "${OPENAI_API_KEY}"
+  }
+}
+```
+
+Consulta la documentación de OpenCode para más detalles.
+:::
+
+### Atajos para cambiar de modelo
+
+::: {.callout-tip}
+## Atajos personalizados
+
+Puedes definir atajos en tu archivo de configuración para cambiar de modelo rápidamente:
+
+```jsonc
+{
+  "customCommands": {
+    "model-small": {
+      "model": "deepseek-chat",
+      "description": "Modelo rápido y barato para tareas simples"
+    },
+    "model-big": {
+      "model": "claude-sonnet-4-20250514",
+      "description": "Modelo potente para tareas complejas"
+    }
+  }
+}
+```
+
+Escribe `model-small` o `model-big` en el chat para cambiar al modelo que necesites.
+:::
+
+---
+
+## Modelos locales con Ollama
+
+::: {.callout-warning}
+## Modelos locales: solo para usuarios avanzados
+
+Ejecutar modelos en tu propio ordenador requiere:
+
+- Conocimientos técnicos de instalación por línea de comandos
+- Un ordenador con suficiente memoria RAM (mínimo 8GB, recomendado 16GB)
+- Paciencia: la instalación y descarga de modelos puede tardar
+
+Si no estás seguro, usa modelos en la nube (*cloud*) a través de OpenRouter o directamente.
+:::
+
+### Instalación
+
+```bash
+# Instalar Ollama (Linux/macOS)
+curl -fsSL https://ollama.ai/install.sh | sh
+
+# Descargar un modelo
+ollama pull llama3.2
+```
+
+### Configuración en OpenCode
+
+```jsonc
+{
+  "model": {
+    "provider": "openai",
+    "name": "llama3.2",
+    "baseUrl": "http://localhost:11434/v1",
+    "apiKey": "no-key-needed"
+  }
+}
+```
+
+### Ventajas y limitaciones
+
+| Aspecto | Ventaja | Limitación |
+|---------|---------|------------|
+| Coste | Gratuito | Inversión inicial en hardware |
+| Privacidad | Datos locales | — |
+| Velocidad | Depende del hardware | Más lento que en la nube (*cloud*) sin tarjeta gráfica potente (*GPU*) |
+| Calidad | Buena para tareas simples | Inferior a modelos en la nube (*cloud*) grandes |
+
+---
+
+## Consejos prácticos
+
+1. **Empieza con lo gratuito.** Usa Ollama (si tu ordenador lo permite) u OpenRouter con modelos gratuitos. No hace falta pagar para empezar a trabajar.
+
+2. **Combina modelos.** Usa un modelo pequeño y rápido para tareas mecánicas (formatear, revisar ortografía) y uno grande para tareas que requieran comprensión profunda (redactar desde cero, resumir documentación extensa).
+
+3. **Cambia de modelo según la tarea.** Una misma sesión de trabajo puede usar tres modelos distintos. OpenCode te permite cambiar en segundos.
+
+4. **No necesitas saber de tecnología.** Cambiar de modelo es tan simple como elegir una opción en un menú. Los modelos hacen el trabajo técnico; tú solo escribes lo que necesitas.
+
+5. **Prueba varios modelos.** Cada modelo tiene su "personalidad". Prueba Claude para documentación extensa, GPT para versatilidad, DeepSeek para tareas rápidas y económicas. Encuentra el que mejor se adapte a tu forma de trabajar.
+
+::: {.callout-tip}
+**En resumen**: los modelos de IA son herramientas, no magia. Elige el que mejor se ajuste a cada tarea, igual que elegirías un destornillador u otro según el tornillo. Y recuerda: puedes empezar sin pagar nada.
+:::
+
+---
+
+## Referencias
+
+- [Guía de Modelos de IA](guia-modelos-creadores.qmd) — Guía completa para elegir modelo
+- [OpenRouter](openrouter.qmd) — Cómo usar múltiples modelos con una sola clave
+- [Documentación de OpenCode](https://opencode.ai/docs/models/) — Configuración avanzada de modelos
+
+---
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

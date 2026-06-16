@@ -1,0 +1,89 @@
+---
+title: "Modelos en OpenRouter para OpenCode"
+subtitle: "Guía rápida de recomendaciones"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+    include-in-header:
+      - text: |
+          <style>
+          .callout {
+            margin-left: 15% !important;
+            margin-right: 5% !important;
+            font-size: 90% !important;
+          }
+          #tabla-modelos table td,
+          #tabla-modelos table th { padding: 6px 4px; }
+          </style>
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \usepackage{changepage}
+      - \BeforeBeginEnvironment{tcolorbox}{\begin{adjustwidth}{0.15\linewidth}{0.05\linewidth}\small}
+      - \AfterEndEnvironment{tcolorbox}{\end{adjustwidth}}
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+## Prerrequisito
+
+Para usar modelos de OpenRouter con OpenCode necesitas una **cuenta en OpenRouter con crédito disponible**. OpenCode necesita modelos compatibles con **tool calling** (llamada a herramientas), así que no todos los modelos del catálogo sirven.
+
+Si aún no tienes cuenta, consulta la guía de [OpenRouter](openrouter.qmd) para crearla y configurarla.
+
+## Modelos recomendados
+
+::: {#tabla-modelos tbl-colwidths="[25,35,20,20]"}
+| Perfil | Modelo | Coste input | Notas |
+|--------|--------|-------------|-------|
+| Máxima calidad | Claude Sonnet 4.6 / GPT | ~$3/M tokens | Lo mejor sin límite de gasto |
+| Equilibrio calidad/precio | DeepSeek V4 Flash | ~$0.15/M tokens | Buen resultado por centavos |
+| Gratis | `openrouter/free` | $0 | Para probar sin gastar |
+| Bajo presupuesto | MiniMax M3 / Nemotron | ~$0.10–0.30/M tokens | Alternativas económicas |
+:::
+
+## Visión general
+
+Si buscas lo mejor sin preocuparte por el gasto, usa **Claude** o **GPT**. Si prefieres equilibrio entre calidad y coste, **DeepSeek Flash** da muy buenos resultados por poco dinero. Y si quieres probar sin gastar nada, usa la ruta `openrouter/free`.
+
+::: {.callout-note}
+## Los modelos y precios cambian constantemente
+
+El catálogo de OpenRouter se actualiza con frecuencia. Consulta la [lista actualizada](https://openrouter.ai/models) para ver los modelos disponibles y filtrar aquellos que soportan *tool calling*, que es lo que OpenCode necesita para funcionar.
+:::
+
+## Referencias
+
+- [OpenRouter](https://openrouter.ai) — Proveedor unificado de modelos de IA. Registro, documentación y lista de modelos disponibles.
+- [Modelos en OpenRouter](https://openrouter.ai/models) — Catálogo completo con precios actualizados de cada modelo.
+- [OpenRouter en OpenCode](https://opencode.ai/docs/providers#openrouter) — Documentación específica sobre cómo configurar OpenRouter como proveedor.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modelos OpenRouter para opencode</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem; text-align: left; }
+    th { background: #f4f4f4; }
+    .nota { background: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Modelos en OpenRouter para opencode</h1>
+  <p><em>Prerrequisito:</em> Cuenta en OpenRouter con crédito. opencode necesita modelos con <strong>tool calling</strong>.</p>
+
+  <h2>Recomendaciones</h2>
+  <table>
+    <tr><th>Perfil</th><th>Recomendación</th><th>Costo input</th></tr>
+    <tr><td>Máxima calidad</td><td>Claude Sonnet 4.6 / GPT</td><td>~$3/M tokens</td></tr>
+    <tr><td>Equilibrio calidad/precio</td><td>DeepSeek V4 Flash</td><td>~$0.15/M tokens</td></tr>
+    <tr><td>Gratis</td><td><code>openrouter/free</code></td><td>$0</td></tr>
+    <tr><td>Bajo presupuesto</td><td>MiniMax M3 / Nemotron</td><td>~$0.10–0.30/M tokens</td></tr>
+  </table>
+
+  <h2>Visión divulgativa</h2>
+  <p>Si quieres lo mejor sin límite de gasto, usa Claude o GPT. Si buscas equilibrio, DeepSeek Flash da buen resultado por centavos. Para probar sin gastar, usa la ruta <code>openrouter/free</code>.</p>
+
+  <div class="nota">
+    <strong>Nota:</strong> Los modelos y precios cambian constantemente. Visita <a href="https://openrouter.ai/models">openrouter.ai/models</a> para ver el catálogo actual y filtrar por modelos con <em>tool calling</em>.
+  </div>
+</body>
+</html>

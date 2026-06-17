@@ -15,6 +15,7 @@ echo "==> Copiando fuentes desde contenidos/..."
 mkdir -p "$DISTRO"
 cp contenidos/index.qmd contenidos/paso-[0-9].qmd contenidos/paso-[0-9][0-9].qmd "$DISTRO"/
 cp contenidos/ampliando-*.qmd "$DISTRO"/ 2>/dev/null || true
+cp -r contenidos/ampliando "$DISTRO"/ 2>/dev/null || true
 cp contenidos/custom.css contenidos/captura-tui.png contenidos/tab-key.svg \
    contenidos/_quarto.yml "$DISTRO"/
 cp README.md AGENTS.md render-all.sh "$DISTRO"/
@@ -25,6 +26,13 @@ for f in *.qmd; do
   echo "     $f ..."
   quarto render "$f"
 done
+
+if [ -d "ampliando" ]; then
+  for f in ampliando/*.qmd; do
+    echo "     $f ..."
+    quarto render "$f"
+  done
+fi
 
 echo ""
 echo "========================================"

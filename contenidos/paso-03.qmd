@@ -51,7 +51,7 @@ Selecciona uno y se usará en las siguientes conversaciones.
 | Claude Sonnet | Cloud | Análisis profundo, escritura |
 | Llama 3 | Local | Sin coste, sin conexión |
 
-[Ampliando: Modelos de IA](ampliando-modelos.qmd) — tabla
+[Ampliando: Modelos de IA](ampliando/ampliando-modelos.qmd) — tabla
 detallada, comparativas y estrategias por tarea
 
 ---
@@ -86,7 +86,7 @@ a modelos de diferentes proveedores con una sola cuenta y una
 sola clave API. Es útil si quieres probar varios modelos sin
 gestionar múltiples suscripciones.
 
-[Ampliando: Conexiones y proveedores](ampliando-conexiones.qmd)
+[Ampliando: Conexiones y proveedores](ampliando/ampliando-conexiones.qmd)
 — configuración detallada de cada proveedor y OpenRouter
 
 ---
@@ -162,8 +162,8 @@ En el próximo paso veremos cómo usar Git para versionar documentos.
 
 ## Para profundizar
 
-- [Ampliando: Modelos de IA](ampliando-modelos.qmd)
-- [Ampliando: Conexiones y proveedores](ampliando-conexiones.qmd)
+- [Ampliando: Modelos de IA](ampliando/ampliando-modelos.qmd)
+- [Ampliando: Conexiones y proveedores](ampliando/ampliando-conexiones.qmd)
 - [Ollama](https://ollama.ai) — modelos locales
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

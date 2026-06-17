@@ -1,0 +1,361 @@
+---
+title: "Ampliando: Git para creadores de contenido"
+subtitle: "Guía detallada de control de versiones"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+::: {.callout-note}
+## Has visto lo básico en el paso 4
+
+Este documento amplía lo que viste en el paso 4. Si no lo has
+visto aún, te recomiendo empezar por allí.
+:::
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía amplía la información sobre Git para creadores de contenido que ya tienen algo de experiencia con OpenCode. **No necesitas saber programar** para entenderla. Git es una herramienta que también sirve para gestionar documentos, no solo código.
+:::
+
+## ¿Qué es Git?
+
+Git es un sistema de control de versiones. Esto significa que guarda "fotos" de tus documentos en momentos importantes. Si algo sale mal, puedes volver a cualquier foto anterior.
+
+**Analogía**: piensa en Git como un álbum de fotos:
+
+- Cada commit es una foto de tus archivos
+- El historial es el álbum completo
+- Puedes volver atrás en cualquier momento
+- Podrías crear tus propias fotos sin conflictos, o colaborar con otros
+
+Git no borra nada. Cada versión queda guardada para siempre (a menos que borres el repositorio entero).
+
+## OpenCode y Git
+
+OpenCode puede ayudarte con muchas tareas de Git:
+
+- Ejecutar comandos git por ti
+- Explicar la salida de `git status` o `git diff`
+- Sugerir reglas para `.gitignore`
+- Ayudarte a redactar mensajes de commit descriptivos
+- Explicar errores comunes de Git
+
+Si no estás seguro de un comando, pregunta a OpenCode antes
+de ejecutarlo. Por ejemplo, puedes escribir:
+
+> "¿Qué hace este comando: `git log --oneline --graph`?"
+
+OpenCode te explicará el resultado antes de que lo ejecutes.
+
+## ¿Por qué Git si no programo?
+
+Git fue creado para programadores, pero hoy lo usan escritores, diseñadores, traductores y cualquier persona que trabaje con documentos versionados.
+
+**Ventajas para creadores de contenido:**
+
+| Ventaja | Ejemplo práctico |
+|---------|------------------|
+| Historial completo | Saber quién cambió qué línea y cuándo |
+| Volver atrás | Recuperar un párrafo que borraste por error |
+| Colaborar sin conflictos | Varios autores trabajando a la vez |
+| Ramas de experimento | Probar una reestructuración sin afectar el original |
+| Mensajes descriptivos | Cada cambio lleva una explicación de por qué se hizo |
+
+Si alguna vez has tenido archivos como `informe-v3-final-definitivo.docx`, `informe-v3-final-definitivo-copia.docx`, `informe-v3-final-definitivo-copia-2.docx`... Git es la solución.
+
+## Conceptos clave expandidos
+
+### Repositorio
+
+Un repositorio es un directorio que Git controla. Contiene todos tus archivos y un directorio oculto `.git/` donde se guarda el historial.
+
+```bash
+# Crear un repositorio
+mkdir mi-proyecto
+cd mi-proyecto
+git init
+```
+
+Después de `git init`, el directorio tiene un subdirectorio `.git/` que no debes tocar. Ahí está todo el historial.
+
+### Commit
+
+Un commit es una "foto" de tus archivos en un momento dado. Cada commit tiene:
+
+- Un identificador único (hash)
+- Un mensaje que describe qué cambió
+- El autor y la fecha
+- Los archivos exactos en ese momento
+
+```bash
+# Crear un commit
+git add documento.md
+git commit -m "Añade introducción al documento"
+```
+
+El mensaje del commit debe ser claro y descriptivo. No escribas "cambio" o "update". Mejor: "Añade sección de conclusiones" o "Corrige erratas en capítulo 2".
+
+### Staging (área de preparación)
+
+Antes de hacer un commit, Git tiene un área intermedia donde seleccionas qué archivos quieres incluir. Esto se llama "staging".
+
+```bash
+# Añadir un archivo al staging
+git add documento.md
+
+# Añadir todos los archivos al staging
+git add .
+
+# Ver qué hay en el staging
+git status
+```
+
+¿Por qué no se guardan todos los cambios directamente? Porque a veces solo quieres guardar parte de lo que has modificado. El staging te da control sobre qué entra en cada commit.
+
+### Historial
+
+El historial es la lista ordenada de todos los commits. Puedes verlo con:
+
+```bash
+# Historial resumido
+git log --oneline
+
+# Historial detallado
+git log
+
+# Historial con diferencias
+git log -p
+```
+
+Cada línea de `git log --oneline` muestra el hash abreviado y el mensaje del commit. Es la forma más rápida de ver qué ha pasado.
+
+### Rama (branch)
+
+Una rama es una línea de trabajo independiente. Por defecto, tienes una rama principal (normalmente `main`). Las ramas te permiten:
+
+- Experimentar sin tocar la versión principal
+- Podrías trabajar en una funcionalidad mientras otra persona corrige errores
+- Fusionar los resultados cuando estén listos
+
+```bash
+# Crear y cambiarse a una rama nueva
+git switch -c experimento
+
+# Volver a la rama principal
+git switch main
+
+# Fusionar la rama experimento en main
+git merge experimento
+```
+
+Las ramas son como pestañas en un navegador: cada una muestra una versión diferente del mismo proyecto, y puedes cambiar entre ellas.
+
+## Flujo de trabajo detallado
+
+### Flujo diario
+
+El flujo básico es siempre el mismo:
+
+```
+1. git status         → ¿Qué ha cambiado?
+2. git diff           → ¿Qué exactamente?
+3. git add archivo    → Preparo el cambio
+4. git commit -m "..." → Lo guardo en el historial
+```
+
+**Consejo**: haz commits con frecuencia. Es mejor hacer 5 commits pequeños que 1 commit gigante con 50 cambios. Los commits pequeños son más fáciles de entender y deshacer si algo sale mal.
+
+### Deshacer cambios
+
+Si has modificado un archivo y no te gusta el resultado:
+
+```bash
+# Deshacer cambios en un archivo (volver al último commit)
+git restore documento.md
+
+# Guardar cambios temporalmente y limpiar el área de trabajo
+git stash
+
+# Recuperar los cambios guardados
+git stash pop
+```
+
+`git restore` descarta los cambios no guardados. `git stash` los guarda temporalmente (como una nota adhesiva) y te devuelve un área de trabajo limpia.
+
+::: {.callout-warning}
+## Atención con git restore
+
+El comando `git restore` descarta los cambios que no están en el staging. Si quieres guardar una copia de seguridad antes, usa `git stash` o simplemente copia el archivo a otro sitio.
+:::
+
+### Ramas para experimentar
+
+Las ramas son ideales para probar cosas nuevas sin riesgo:
+
+```bash
+# Crear rama de experimentación
+git switch -c nueva-estructura
+
+# Hacer cambios y commits en la rama nueva
+git add .
+git commit -m "Prueba nueva estructura de capítulos"
+
+# Si no te gusta, vuelves a main y borras la rama
+git switch main
+git branch -d nueva-estructura
+
+# Si te gusta, la fusionas
+git switch main
+git merge nueva-estructura
+```
+
+**Ejemplo práctico**: estás escribiendo un informe y quieres probar un orden diferente de secciones. Crea una rama, mueve las secciones, y si no te convence, vuelves a la versión anterior con `git switch main`.
+
+## Git local vs. servidores
+
+Git funciona en tu ordenador (local). No necesitas conexión a internet para guardar commits o ver el historial.
+
+Sin embargo, puedes sincronizar tu repositorio con un servidor en la nube para:
+
+- **Hacer copias de seguridad** en otro sitio
+- **Colaborar** con otros (o incluso contigo mismo)
+- **Acceder** desde varios ordenadores
+
+Los servidores de Git más populares son:
+
+| Servicio | Características | Gratis |
+|----------|----------------|--------|
+| [GitHub](https://github.com/) | El más popular, integrado con muchas herramientas | Sí (repositorios públicos) |
+| [GitLab](https://gitlab.com/) | Alternativa completa, incluye CI/CD | Sí |
+| [Bitbucket](https://bitbucket.org/) | Integrado con Jira, bueno para equipos | Sí (hasta 5 usuarios) |
+| [Codeberg](https://codeberg.org/) | Sin ánimo de lucro, alojado en la UE, sin rastreo | Sí (ilimitado) |
+
+::: {.callout-tip}
+## Codeberg: la opción europea
+
+Si eres europeo o te importa la privacidad, Codeberg es una
+excelente alternativa:
+
+- **Sin ánimo de lucro**: gestionado por una asociación en Berlín
+- **Cumple con el RGPD**: tus datos están protegidos por la legislación europea
+- **Sin rastreo**: no vende tus datos ni usa tu código para entrenar IA
+- **Código abierto**: basado en Forgejo, puedes migrar fácilmente
+- **Repositorios ilimitados**: públicos y privados, sin coste
+:::
+
+::: {.callout-note}
+## No necesitas un servidor para empezar
+
+Puedes trabajar perfectamente sin un servidor. Solo necesitas sincronizar cuando quieras:
+
+- Hacer copias de seguridad
+- Colaborar con otros
+- Trabajar desde varios ordenadores
+:::
+
+Para sincronizar con un servidor, primero crea un repositorio en GitHub (o similar) y luego:
+
+```bash
+# Añadir el servidor como origen
+git remote add origin https://github.com/tu-usuario/tu-repositorio.git
+
+# Subir tus commits
+git push -u origin main
+
+# Bajar cambios del servidor
+git pull
+```
+
+## Tabla de comandos completa
+
+| Comando | Para qué sirve |
+|---------|---------------|
+| `git init` | Crear un repositorio nuevo |
+| `git config --global user.name "Nombre"` | Configurar tu nombre |
+| `git config --global user.email "email"` | Configurar tu correo |
+| `git status` | Ver el estado actual del repositorio |
+| `git diff` | Ver cambios sin commited |
+| `git add archivo` | Añadir un archivo al staging |
+| `git add .` | Añadir todos los archivos al staging |
+| `git commit -m "mensaje"` | Guardar un commit con mensaje |
+| `git log --oneline` | Historial resumido |
+| `git log` | Historial detallado |
+| `git show HASH` | Ver qué cambió en un commit concreto |
+| `git restore archivo` | Deshacer cambios en un archivo |
+| `git stash` | Guardar cambios temporalmente |
+| `git stash pop` | Recuperar cambios guardados |
+| `git switch -c NOMBRE` | Crear y cambiarse a una rama nueva |
+| `git switch NOMBRE` | Cambiar a una rama existente |
+| `git merge NOMBRE` | Fusionar una rama en la actual |
+| `git branch` | Ver todas las ramas |
+| `git branch -d NOMBRE` | Borrar una rama |
+| `git remote add ORIGIN URL` | Añadir un servidor remoto |
+| `git push` | Subir commits al servidor |
+| `git pull` | Bajar cambios del servidor |
+
+## Consejos prácticos
+
+1. **Haz commits pequeños y frecuentes.** Es mejor guardar 5 cambios pequeños que 1 cambio gigante. Los commits pequeños son más fáciles de entender y deshacer.
+
+2. **Escribe mensajes descriptivos.** No uses "cambio" o "update". Describe qué has hecho: "Añade sección de conclusiones", "Corrige erratas en capítulo 2", "Reestructura apartado 3".
+
+3. **Usa .gitignore desde el principio.** Crea un archivo `.gitignore` para que Git ignore archivos temporales, HTML generados y otros archivos que no necesitas versionar.
+
+4. **No tengas miedo de experimentar.** Con las ramas, puedes probar cosas nuevas sin riesgo. Si no te gusta, vuelves atrás.
+
+5. **Sincroniza con frecuencia.** Si trabajas con un servidor, sube tus cambios regularmente para no perder trabajo.
+
+6. **Revisa antes de commit.** Usa `git status` y `git diff` antes de cada commit para asegurarte de que estás guardando lo que quieres.
+
+::: {.callout-tip}
+**En resumen**: Git es tu aliado para no perder trabajo. Piensa en cada commit como una foto de tus documentos. Si algo sale mal, siempre puedes volver a la foto anterior. Y si quieres experimentar, crea una rama nueva y juega sin miedo.
+:::
+
+---
+
+## Referencias
+
+- [Pro Git](https://git-scm.com/book/es/v2) — Libro oficial de Git en español (gratuito)
+- [GitHub Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf) — Resumen de comandos útiles
+- [Learn Git Branching](https://learngitbranching.js.org/?locale=es) — Tutorial interactivo para practicar ramas
+
+---
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

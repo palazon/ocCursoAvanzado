@@ -8,7 +8,7 @@
 
 <meta name="author" content="JA Palazón Ferrando">
 
-<title>Ampliando: Modelos de IA</title>
+<title>Ampliando: Git para creadores de contenido</title>
 <style>
 
 code{white-space: pre-wrap;}
@@ -2209,41 +2209,36 @@ vertical-align: -.125em;
     <h2 id="toc-title">Contenidos</h2>
    
   <ul>
-  <li><a href="#qué-es-un-modelo-de-ia" id="toc-qué-es-un-modelo-de-ia" class="nav-link active" data-scroll-target="#qué-es-un-modelo-de-ia">¿Qué es un modelo de IA?</a></li>
-  <li><a href="#qué-significan-estas-cifras" id="toc-qué-significan-estas-cifras" class="nav-link" data-scroll-target="#qué-significan-estas-cifras">¿Qué significan estas cifras?</a></li>
-  <li><a href="#tabla-detallada-de-modelos" id="toc-tabla-detallada-de-modelos" class="nav-link" data-scroll-target="#tabla-detallada-de-modelos">Tabla detallada de modelos</a></li>
-  <li><a href="#comparativa-por-tipo-de-tarea" id="toc-comparativa-por-tipo-de-tarea" class="nav-link" data-scroll-target="#comparativa-por-tipo-de-tarea">Comparativa por tipo de tarea</a>
+  <li><a href="#qué-es-git" id="toc-qué-es-git" class="nav-link active" data-scroll-target="#qué-es-git">¿Qué es Git?</a></li>
+  <li><a href="#opencode-y-git" id="toc-opencode-y-git" class="nav-link" data-scroll-target="#opencode-y-git">OpenCode y Git</a></li>
+  <li><a href="#por-qué-git-si-no-programo" id="toc-por-qué-git-si-no-programo" class="nav-link" data-scroll-target="#por-qué-git-si-no-programo">¿Por qué Git si no programo?</a></li>
+  <li><a href="#conceptos-clave-expandidos" id="toc-conceptos-clave-expandidos" class="nav-link" data-scroll-target="#conceptos-clave-expandidos">Conceptos clave expandidos</a>
   <ul class="collapse">
-  <li><a href="#revisión-de-estilo" id="toc-revisión-de-estilo" class="nav-link" data-scroll-target="#revisión-de-estilo">Revisión de estilo</a></li>
-  <li><a href="#generación-de-documentos-largos" id="toc-generación-de-documentos-largos" class="nav-link" data-scroll-target="#generación-de-documentos-largos">Generación de documentos largos</a></li>
-  <li><a href="#investigación-web" id="toc-investigación-web" class="nav-link" data-scroll-target="#investigación-web">Investigación web</a></li>
-  <li><a href="#prototipado-y-pruebas" id="toc-prototipado-y-pruebas" class="nav-link" data-scroll-target="#prototipado-y-pruebas">Prototipado y pruebas</a></li>
+  <li><a href="#repositorio" id="toc-repositorio" class="nav-link" data-scroll-target="#repositorio">Repositorio</a></li>
+  <li><a href="#commit" id="toc-commit" class="nav-link" data-scroll-target="#commit">Commit</a></li>
+  <li><a href="#staging-área-de-preparación" id="toc-staging-área-de-preparación" class="nav-link" data-scroll-target="#staging-área-de-preparación">Staging (área de preparación)</a></li>
+  <li><a href="#historial" id="toc-historial" class="nav-link" data-scroll-target="#historial">Historial</a></li>
+  <li><a href="#rama-branch" id="toc-rama-branch" class="nav-link" data-scroll-target="#rama-branch">Rama (branch)</a></li>
   </ul></li>
-  <li><a href="#estrategias-de-uso" id="toc-estrategias-de-uso" class="nav-link" data-scroll-target="#estrategias-de-uso">Estrategias de uso</a>
+  <li><a href="#flujo-de-trabajo-detallado" id="toc-flujo-de-trabajo-detallado" class="nav-link" data-scroll-target="#flujo-de-trabajo-detallado">Flujo de trabajo detallado</a>
   <ul class="collapse">
-  <li><a href="#modelo-por-defecto-zen" id="toc-modelo-por-defecto-zen" class="nav-link" data-scroll-target="#modelo-por-defecto-zen">Modelo por defecto (Zen)</a></li>
-  <li><a href="#alternar-según-la-tarea" id="toc-alternar-según-la-tarea" class="nav-link" data-scroll-target="#alternar-según-la-tarea">Alternar según la tarea</a></li>
-  <li><a href="#configuración-por-agente" id="toc-configuración-por-agente" class="nav-link" data-scroll-target="#configuración-por-agente">Configuración por agente</a></li>
-  <li><a href="#configuración-por-proyecto" id="toc-configuración-por-proyecto" class="nav-link" data-scroll-target="#configuración-por-proyecto">Configuración por proyecto</a></li>
-  <li><a href="#atajos-para-cambiar-de-modelo" id="toc-atajos-para-cambiar-de-modelo" class="nav-link" data-scroll-target="#atajos-para-cambiar-de-modelo">Atajos para cambiar de modelo</a></li>
+  <li><a href="#flujo-diario" id="toc-flujo-diario" class="nav-link" data-scroll-target="#flujo-diario">Flujo diario</a></li>
+  <li><a href="#deshacer-cambios" id="toc-deshacer-cambios" class="nav-link" data-scroll-target="#deshacer-cambios">Deshacer cambios</a></li>
+  <li><a href="#ramas-para-experimentar" id="toc-ramas-para-experimentar" class="nav-link" data-scroll-target="#ramas-para-experimentar">Ramas para experimentar</a></li>
   </ul></li>
-  <li><a href="#modelos-locales-con-ollama" id="toc-modelos-locales-con-ollama" class="nav-link" data-scroll-target="#modelos-locales-con-ollama">Modelos locales con Ollama</a>
-  <ul class="collapse">
-  <li><a href="#instalación" id="toc-instalación" class="nav-link" data-scroll-target="#instalación">Instalación</a></li>
-  <li><a href="#configuración-en-opencode" id="toc-configuración-en-opencode" class="nav-link" data-scroll-target="#configuración-en-opencode">Configuración en OpenCode</a></li>
-  <li><a href="#ventajas-y-limitaciones" id="toc-ventajas-y-limitaciones" class="nav-link" data-scroll-target="#ventajas-y-limitaciones">Ventajas y limitaciones</a></li>
-  </ul></li>
+  <li><a href="#git-local-vs.-servidores" id="toc-git-local-vs.-servidores" class="nav-link" data-scroll-target="#git-local-vs.-servidores">Git local vs. servidores</a></li>
+  <li><a href="#tabla-de-comandos-completa" id="toc-tabla-de-comandos-completa" class="nav-link" data-scroll-target="#tabla-de-comandos-completa">Tabla de comandos completa</a></li>
   <li><a href="#consejos-prácticos" id="toc-consejos-prácticos" class="nav-link" data-scroll-target="#consejos-prácticos">Consejos prácticos</a></li>
   <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="ampliando-modelos.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="ampliando-git.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Ampliando: Modelos de IA</h1>
-<p class="subtitle lead">Tabla detallada y estrategias de uso</p>
+<h1 class="title">Ampliando: Git para creadores de contenido</h1>
+<p class="subtitle lead">Guía detallada de control de versiones</p>
 </div>
 
 
@@ -2272,6 +2267,19 @@ vertical-align: -.125em;
 </header>
 
 
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Has visto lo básico en el paso 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este documento amplía lo que viste en el paso 4. Si no lo has visto aún, te recomiendo empezar por allí.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -2282,514 +2290,403 @@ vertical-align: -.125em;
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Esta guía amplía la información sobre modelos de IA para creadores de contenido que ya tienen algo de experiencia con OpenCode. <strong>No necesitas saber programar</strong> para entenderla.</p>
+<p>Esta guía amplía la información sobre Git para creadores de contenido que ya tienen algo de experiencia con OpenCode. <strong>No necesitas saber programar</strong> para entenderla. Git es una herramienta que también sirve para gestionar documentos, no solo código.</p>
 </div>
 </div>
-<section id="qué-es-un-modelo-de-ia" class="level2">
-<h2 class="anchored" data-anchor-id="qué-es-un-modelo-de-ia">¿Qué es un modelo de IA?</h2>
-<p>Un <strong>modelo de inteligencia artificial</strong> es, de forma sencilla, el “cerebro” que recibe tus instrucciones y genera respuestas. Cuando escribes un mensaje en OpenCode y obtienes una respuesta, esa respuesta la ha producido un modelo.</p>
-<p><strong>Analogía</strong>: piensa en un modelo como el motor de un coche.</p>
+<section id="qué-es-git" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-git">¿Qué es Git?</h2>
+<p>Git es un sistema de control de versiones. Esto significa que guarda “fotos” de tus documentos en momentos importantes. Si algo sale mal, puedes volver a cualquier foto anterior.</p>
+<p><strong>Analogía</strong>: piensa en Git como un álbum de fotos:</p>
 <ul>
-<li>El coche es la aplicación (OpenCode).</li>
-<li>El motor es el modelo de IA (Claude, GPT, Llama, etc.).</li>
-<li>Tus instrucciones son el combustible.</li>
-<li>La respuesta es el movimiento del coche.</li>
+<li>Cada commit es una foto de tus archivos</li>
+<li>El historial es el álbum completo</li>
+<li>Puedes volver atrás en cualquier momento</li>
+<li>Podrías crear tus propias fotos sin conflictos, o colaborar con otros</li>
 </ul>
-<p>Puedes cambiar el motor sin cambiar el coche, y según qué tareas hagas te interesará un motor u otro.</p>
+<p>Git no borra nada. Cada versión queda guardada para siempre (a menos que borres el repositorio entero).</p>
 </section>
-<section id="qué-significan-estas-cifras" class="level2">
-<h2 class="anchored" data-anchor-id="qué-significan-estas-cifras">¿Qué significan estas cifras?</h2>
-<p>Cuando ves la tabla de modelos, aparecen términos como “128k contexto” o “coste por token”. Aquí va una explicación sencilla:</p>
+<section id="opencode-y-git" class="level2">
+<h2 class="anchored" data-anchor-id="opencode-y-git">OpenCode y Git</h2>
+<p>OpenCode puede ayudarte con muchas tareas de Git:</p>
 <ul>
-<li><strong>Tokens</strong>: son las unidades que usa la IA para procesar texto. Un token es aproximadamente tres cuartas partes de una palabra. Cuando pagas “por token”, pagas por cada palabra que la IA lee o escribe.</li>
-<li><strong>Contexto</strong> (128k, 200k, 1M): es la cantidad de texto que la IA puede “recordar” en una conversación. 128k son unas 96.000 palabras (unas 200 páginas). 1M son unas 750.000 palabras (un libro entero).</li>
-<li><strong>API key</strong>: es una contraseña personal que te da acceso al modelo. No la compartas ni la subas a internet.</li>
+<li>Ejecutar comandos git por ti</li>
+<li>Explicar la salida de <code>git status</code> o <code>git diff</code></li>
+<li>Sugerir reglas para <code>.gitignore</code></li>
+<li>Ayudarte a redactar mensajes de commit descriptivos</li>
+<li>Explicar errores comunes de Git</li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>¿Y el modelo Zen?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Zen es el modelo por defecto de OpenCode. Es gratuito y no necesitas configurar nada. Para empezar, es suficiente. Cuando necesites más calidad o velocidad, podrás cambiar a otros modelos.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Aviso</span>Los modelos cambian con frecuencia
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Los modelos, sus precios y su disponibilidad cambian periódicamente. Para ver la lista actualizada de modelos disponibles, escribe <code>/models</code> dentro de OpenCode. Los precios indicados en esta guía son orientativos y pueden no estar vigentes.</p>
-</div>
-</div>
+<p>Si no estás seguro de un comando, pregunta a OpenCode antes de ejecutarlo. Por ejemplo, puedes escribir:</p>
+<blockquote class="blockquote">
+<p>“¿Qué hace este comando: <code>git log --oneline --graph</code>?”</p>
+</blockquote>
+<p>OpenCode te explicará el resultado antes de que lo ejecutes.</p>
 </section>
-<section id="tabla-detallada-de-modelos" class="level2">
-<h2 class="anchored" data-anchor-id="tabla-detallada-de-modelos">Tabla detallada de modelos</h2>
+<section id="por-qué-git-si-no-programo" class="level2">
+<h2 class="anchored" data-anchor-id="por-qué-git-si-no-programo">¿Por qué Git si no programo?</h2>
+<p>Git fue creado para programadores, pero hoy lo usan escritores, diseñadores, traductores y cualquier persona que trabaje con documentos versionados.</p>
+<p><strong>Ventajas para creadores de contenido:</strong></p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 14%">
-<col style="width: 9%">
-<col style="width: 14%">
-<col style="width: 12%">
-<col style="width: 22%">
-<col style="width: 16%">
+<col style="width: 33%">
+<col style="width: 66%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Modelo</th>
-<th>Proveedor</th>
-<th>Coste</th>
-<th>Velocidad</th>
-<th>Calidad</th>
-<th>Cuánto recuerda</th>
-<th>Ideal para</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Zen (por defecto)</td>
-<td>OpenCode</td>
-<td>Gratis</td>
-<td>Normal</td>
-<td>Normal</td>
-<td>Variable</td>
-<td>Aprendizaje, pruebas</td>
-</tr>
-<tr class="even">
-<td>GPT-4o-mini</td>
-<td>OpenAI</td>
-<td>Bajo</td>
-<td>Rápida</td>
-<td>Alta</td>
-<td>20 páginas</td>
-<td>Revisiones rápidas</td>
-</tr>
-<tr class="odd">
-<td>GPT-4o</td>
-<td>OpenAI</td>
-<td>Alto</td>
-<td>Media</td>
-<td>Muy alta</td>
-<td>20 páginas</td>
-<td>Documentos largos, análisis</td>
-</tr>
-<tr class="even">
-<td>o1</td>
-<td>OpenAI</td>
-<td>Muy alto</td>
-<td>Lenta</td>
-<td>Muy alta</td>
-<td>20 páginas</td>
-<td>Razonamiento complejo</td>
-</tr>
-<tr class="odd">
-<td>Claude Haiku</td>
-<td>Anthropic</td>
-<td>Bajo</td>
-<td>Rápida</td>
-<td>Alta</td>
-<td>40 páginas</td>
-<td>Texto rápido, chat</td>
-</tr>
-<tr class="even">
-<td>Claude Sonnet</td>
-<td>Anthropic</td>
-<td>Medio</td>
-<td>Media</td>
-<td>Muy alta</td>
-<td>40 páginas</td>
-<td>Escritura, análisis profundo</td>
-</tr>
-<tr class="odd">
-<td>Gemini Flash</td>
-<td>Google</td>
-<td>Bajo</td>
-<td>Muy rápida</td>
-<td>Alta</td>
-<td>Un libro</td>
-<td>Documentos muy largos</td>
-</tr>
-<tr class="even">
-<td>Gemini Pro</td>
-<td>Google</td>
-<td>Medio</td>
-<td>Media</td>
-<td>Alta</td>
-<td>Un libro</td>
-<td>Multimodal, código</td>
-</tr>
-<tr class="odd">
-<td>Llama 3</td>
-<td>Groq/Meta</td>
-<td>Gratis</td>
-<td>Rápida</td>
-<td>Media-Alta</td>
-<td>1.500 palabras</td>
-<td>Alternativa sin coste</td>
-</tr>
-<tr class="even">
-<td>Mixtral</td>
-<td>Groq/Mistral</td>
-<td>Gratis</td>
-<td>Rápida</td>
-<td>Media</td>
-<td>6.000 palabras</td>
-<td>Código, razonamiento</td>
-</tr>
-</tbody>
-</table>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Nota sobre la columna “Cuánto recuerda”
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Se refiere al <strong>contexto</strong>. Un modelo con más contexto puede manejar documentos más largos sin perder el hilo de la conversación.</p>
-</div>
-</div>
-<hr>
-</section>
-<section id="comparativa-por-tipo-de-tarea" class="level2">
-<h2 class="anchored" data-anchor-id="comparativa-por-tipo-de-tarea">Comparativa por tipo de tarea</h2>
-<section id="revisión-de-estilo" class="level3">
-<h3 class="anchored" data-anchor-id="revisión-de-estilo">Revisión de estilo</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 27%">
-<col style="width: 31%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Modelo</th>
 <th>Ventaja</th>
-<th>Desventaja</th>
+<th>Ejemplo práctico</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Zen</td>
-<td>Sin coste, accesible</td>
-<td>Menor precisión en matices</td>
+<td>Historial completo</td>
+<td>Saber quién cambió qué línea y cuándo</td>
 </tr>
 <tr class="even">
-<td>GPT-4o-mini</td>
-<td>Rápido, barato</td>
-<td>Puede pasar por alto detalles</td>
+<td>Volver atrás</td>
+<td>Recuperar un párrafo que borraste por error</td>
 </tr>
 <tr class="odd">
-<td>Claude Haiku</td>
-<td>Buen tono, mucho contexto</td>
-<td>Requiere clave de acceso (<em>API key</em>)</td>
+<td>Colaborar sin conflictos</td>
+<td>Varios autores trabajando a la vez</td>
+</tr>
+<tr class="even">
+<td>Ramas de experimento</td>
+<td>Probar una reestructuración sin afectar el original</td>
+</tr>
+<tr class="odd">
+<td>Mensajes descriptivos</td>
+<td>Cada cambio lleva una explicación de por qué se hizo</td>
 </tr>
 </tbody>
 </table>
+<p>Si alguna vez has tenido archivos como <code>informe-v3-final-definitivo.docx</code>, <code>informe-v3-final-definitivo-copia.docx</code>, <code>informe-v3-final-definitivo-copia-2.docx</code>… Git es la solución.</p>
 </section>
-<section id="generación-de-documentos-largos" class="level3">
-<h3 class="anchored" data-anchor-id="generación-de-documentos-largos">Generación de documentos largos</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Modelo</th>
-<th>Ventaja</th>
-<th>Desventaja</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>GPT-4o</td>
-<td>Excelente coherencia</td>
-<td>Coste elevado</td>
-</tr>
-<tr class="even">
-<td>Claude Sonnet</td>
-<td>Mejor escritura creativa</td>
-<td>Más lento</td>
-</tr>
-<tr class="odd">
-<td>Gemini Flash</td>
-<td>Contexto enorme (un libro)</td>
-<td>Menor control de tono</td>
-</tr>
-</tbody>
-</table>
+<section id="conceptos-clave-expandidos" class="level2">
+<h2 class="anchored" data-anchor-id="conceptos-clave-expandidos">Conceptos clave expandidos</h2>
+<section id="repositorio" class="level3">
+<h3 class="anchored" data-anchor-id="repositorio">Repositorio</h3>
+<p>Un repositorio es un directorio que Git controla. Contiene todos tus archivos y un directorio oculto <code>.git/</code> donde se guarda el historial.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un repositorio</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> mi-proyecto</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> mi-proyecto</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Después de <code>git init</code>, el directorio tiene un subdirectorio <code>.git/</code> que no debes tocar. Ahí está todo el historial.</p>
 </section>
-<section id="investigación-web" class="level3">
-<h3 class="anchored" data-anchor-id="investigación-web">Investigación web</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Modelo</th>
-<th>Ventaja</th>
-<th>Desventaja</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>GPT-4o</td>
-<td>Mejor comprensión de contexto</td>
-<td>Coste alto</td>
-</tr>
-<tr class="even">
-<td>Claude Sonnet</td>
-<td>Análisis profundo</td>
-<td>Sin acceso directo a web</td>
-</tr>
-<tr class="odd">
-<td>Gemini Pro</td>
-<td>Multimodal</td>
-<td>Configuración más compleja</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="prototipado-y-pruebas" class="level3">
-<h3 class="anchored" data-anchor-id="prototipado-y-pruebas">Prototipado y pruebas</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 27%">
-<col style="width: 31%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Modelo</th>
-<th>Ventaja</th>
-<th>Desventaja</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Zen</td>
-<td>Gratuito, sin configuración</td>
-<td>Limitado para tareas complejas</td>
-</tr>
-<tr class="even">
-<td>Llama 3 (local)</td>
-<td>Sin coste, sin conexión</td>
-<td>Necesita memoria suficiente</td>
-</tr>
-<tr class="odd">
-<td>Groq (Llama 3)</td>
-<td>Gratuito, rápido</td>
-<td>Límites de uso</td>
-</tr>
-</tbody>
-</table>
-<hr>
-</section>
-</section>
-<section id="estrategias-de-uso" class="level2">
-<h2 class="anchored" data-anchor-id="estrategias-de-uso">Estrategias de uso</h2>
-<section id="modelo-por-defecto-zen" class="level3">
-<h3 class="anchored" data-anchor-id="modelo-por-defecto-zen">Modelo por defecto (Zen)</h3>
+<section id="commit" class="level3">
+<h3 class="anchored" data-anchor-id="commit">Commit</h3>
+<p>Un commit es una “foto” de tus archivos en un momento dado. Cada commit tiene:</p>
 <ul>
-<li>Úsalo para: ejercicios del curso, pruebas, tareas simples</li>
-<li>Ventaja: no necesitas configurar nada</li>
-<li>Limitación: puede ser más lento en horas punta</li>
+<li>Un identificador único (hash)</li>
+<li>Un mensaje que describe qué cambió</li>
+<li>El autor y la fecha</li>
+<li>Los archivos exactos en ese momento</li>
 </ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear un commit</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add documento.md</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Añade introducción al documento&quot;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>El mensaje del commit debe ser claro y descriptivo. No escribas “cambio” o “update”. Mejor: “Añade sección de conclusiones” o “Corrige erratas en capítulo 2”.</p>
 </section>
-<section id="alternar-según-la-tarea" class="level3">
-<h3 class="anchored" data-anchor-id="alternar-según-la-tarea">Alternar según la tarea</h3>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>Cambiar de modelo
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Dentro de OpenCode, escribe <code>/models</code> y selecciona el modelo que prefieras para esa tarea.</p>
-</div>
-</div>
-<ul>
-<li>Tarea simple → modelo rápido y barato</li>
-<li>Tarea compleja → modelo de mayor calidad</li>
-<li>Documento largo → modelo con mayor contexto</li>
-</ul>
+<section id="staging-área-de-preparación" class="level3">
+<h3 class="anchored" data-anchor-id="staging-área-de-preparación">Staging (área de preparación)</h3>
+<p>Antes de hacer un commit, Git tiene un área intermedia donde seleccionas qué archivos quieres incluir. Esto se llama “staging”.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadir un archivo al staging</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add documento.md</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadir todos los archivos al staging</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver qué hay en el staging</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>¿Por qué no se guardan todos los cambios directamente? Porque a veces solo quieres guardar parte de lo que has modificado. El staging te da control sobre qué entra en cada commit.</p>
 </section>
-<section id="configuración-por-agente" class="level3">
-<h3 class="anchored" data-anchor-id="configuración-por-agente">Configuración por agente</h3>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Consejo</span>Configuración avanzada: modelo por agente
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Si quieres que un agente específico use un modelo concreto, puedes configurarlo así en su archivo de definición:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> revisor-rapido</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">model</span><span class="kw">:</span><span class="at"> gpt-4o-mini</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span><span class="kw">:</span><span class="at"> subagent</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Esto es opcional. Para la mayoría de usuarios, el modelo por defecto es suficiente.</p>
-</div>
-</div>
-</section>
-<section id="configuración-por-proyecto" class="level3">
-<h3 class="anchored" data-anchor-id="configuración-por-proyecto">Configuración por proyecto</h3>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Consejo</span>Configuración avanzada: modelo por proyecto
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Si todo tu proyecto debe usar un modelo concreto, configúralo en el archivo <code>opencode.jsonc</code> (la configuración del proyecto):</p>
-<pre class="jsonc"><code>{
-  &quot;model&quot;: {
-    &quot;provider&quot;: &quot;openai&quot;,
-    &quot;name&quot;: &quot;gpt-4o-mini&quot;,
-    &quot;apiKey&quot;: &quot;${OPENAI_API_KEY}&quot;
-  }
-}</code></pre>
-<p>Consulta la documentación de OpenCode para más detalles.</p>
-</div>
-</div>
-</section>
-<section id="atajos-para-cambiar-de-modelo" class="level3">
-<h3 class="anchored" data-anchor-id="atajos-para-cambiar-de-modelo">Atajos para cambiar de modelo</h3>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Consejo</span>Atajos personalizados
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Puedes definir atajos en tu archivo de configuración para cambiar de modelo rápidamente:</p>
-<pre class="jsonc"><code>{
-  &quot;customCommands&quot;: {
-    &quot;model-small&quot;: {
-      &quot;model&quot;: &quot;deepseek-chat&quot;,
-      &quot;description&quot;: &quot;Modelo rápido y barato para tareas simples&quot;
-    },
-    &quot;model-big&quot;: {
-      &quot;model&quot;: &quot;claude-sonnet-4-20250514&quot;,
-      &quot;description&quot;: &quot;Modelo potente para tareas complejas&quot;
-    }
-  }
-}</code></pre>
-<p>Escribe <code>model-small</code> o <code>model-big</code> en el chat para cambiar al modelo que necesites.</p>
-</div>
-</div>
-<hr>
-</section>
-</section>
-<section id="modelos-locales-con-ollama" class="level2">
-<h2 class="anchored" data-anchor-id="modelos-locales-con-ollama">Modelos locales con Ollama</h2>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Aviso</span>Modelos locales: solo para usuarios avanzados
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ejecutar modelos en tu propio ordenador requiere:</p>
-<ul>
-<li>Conocimientos técnicos de instalación por línea de comandos</li>
-<li>Un ordenador con suficiente memoria RAM (mínimo 8GB, recomendado 16GB)</li>
-<li>Paciencia: la instalación y descarga de modelos puede tardar</li>
-</ul>
-<p>Si no estás seguro, usa modelos en la nube (<em>cloud</em>) a través de OpenRouter o directamente.</p>
-</div>
-</div>
-<section id="instalación" class="level3">
-<h3 class="anchored" data-anchor-id="instalación">Instalación</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalar Ollama (Linux/macOS)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://ollama.ai/install.sh <span class="kw">|</span> <span class="fu">sh</span></span>
+<section id="historial" class="level3">
+<h3 class="anchored" data-anchor-id="historial">Historial</h3>
+<p>El historial es la lista ordenada de todos los commits. Puedes verlo con:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Historial resumido</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Descargar un modelo</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> pull llama3.2</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Historial detallado</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Historial con diferencias</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-p</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cada línea de <code>git log --oneline</code> muestra el hash abreviado y el mensaje del commit. Es la forma más rápida de ver qué ha pasado.</p>
 </section>
-<section id="configuración-en-opencode" class="level3">
-<h3 class="anchored" data-anchor-id="configuración-en-opencode">Configuración en OpenCode</h3>
-<pre class="jsonc"><code>{
-  &quot;model&quot;: {
-    &quot;provider&quot;: &quot;openai&quot;,
-    &quot;name&quot;: &quot;llama3.2&quot;,
-    &quot;baseUrl&quot;: &quot;http://localhost:11434/v1&quot;,
-    &quot;apiKey&quot;: &quot;no-key-needed&quot;
-  }
-}</code></pre>
+<section id="rama-branch" class="level3">
+<h3 class="anchored" data-anchor-id="rama-branch">Rama (branch)</h3>
+<p>Una rama es una línea de trabajo independiente. Por defecto, tienes una rama principal (normalmente <code>main</code>). Las ramas te permiten:</p>
+<ul>
+<li>Experimentar sin tocar la versión principal</li>
+<li>Podrías trabajar en una funcionalidad mientras otra persona corrige errores</li>
+<li>Fusionar los resultados cuando estén listos</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear y cambiarse a una rama nueva</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> experimento</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Volver a la rama principal</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fusionar la rama experimento en main</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge experimento</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Las ramas son como pestañas en un navegador: cada una muestra una versión diferente del mismo proyecto, y puedes cambiar entre ellas.</p>
 </section>
-<section id="ventajas-y-limitaciones" class="level3">
-<h3 class="anchored" data-anchor-id="ventajas-y-limitaciones">Ventajas y limitaciones</h3>
+</section>
+<section id="flujo-de-trabajo-detallado" class="level2">
+<h2 class="anchored" data-anchor-id="flujo-de-trabajo-detallado">Flujo de trabajo detallado</h2>
+<section id="flujo-diario" class="level3">
+<h3 class="anchored" data-anchor-id="flujo-diario">Flujo diario</h3>
+<p>El flujo básico es siempre el mismo:</p>
+<pre><code>1. git status         → ¿Qué ha cambiado?
+2. git diff           → ¿Qué exactamente?
+3. git add archivo    → Preparo el cambio
+4. git commit -m &quot;...&quot; → Lo guardo en el historial</code></pre>
+<p><strong>Consejo</strong>: haz commits con frecuencia. Es mejor hacer 5 commits pequeños que 1 commit gigante con 50 cambios. Los commits pequeños son más fáciles de entender y deshacer si algo sale mal.</p>
+</section>
+<section id="deshacer-cambios" class="level3">
+<h3 class="anchored" data-anchor-id="deshacer-cambios">Deshacer cambios</h3>
+<p>Si has modificado un archivo y no te gusta el resultado:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Deshacer cambios en un archivo (volver al último commit)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> restore documento.md</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Guardar cambios temporalmente y limpiar el área de trabajo</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Recuperar los cambios guardados</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> stash pop</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>git restore</code> descarta los cambios no guardados. <code>git stash</code> los guarda temporalmente (como una nota adhesiva) y te devuelve un área de trabajo limpia.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Atención con git restore
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El comando <code>git restore</code> descarta los cambios que no están en el staging. Si quieres guardar una copia de seguridad antes, usa <code>git stash</code> o simplemente copia el archivo a otro sitio.</p>
+</div>
+</div>
+</section>
+<section id="ramas-para-experimentar" class="level3">
+<h3 class="anchored" data-anchor-id="ramas-para-experimentar">Ramas para experimentar</h3>
+<p>Las ramas son ideales para probar cosas nuevas sin riesgo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear rama de experimentación</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> nueva-estructura</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Hacer cambios y commits en la rama nueva</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;Prueba nueva estructura de capítulos&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Si no te gusta, vuelves a main y borras la rama</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-d</span> nueva-estructura</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Si te gusta, la fusionas</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge nueva-estructura</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Ejemplo práctico</strong>: estás escribiendo un informe y quieres probar un orden diferente de secciones. Crea una rama, mueve las secciones, y si no te convence, vuelves a la versión anterior con <code>git switch main</code>.</p>
+</section>
+</section>
+<section id="git-local-vs.-servidores" class="level2">
+<h2 class="anchored" data-anchor-id="git-local-vs.-servidores">Git local vs. servidores</h2>
+<p>Git funciona en tu ordenador (local). No necesitas conexión a internet para guardar commits o ver el historial.</p>
+<p>Sin embargo, puedes sincronizar tu repositorio con un servidor en la nube para:</p>
+<ul>
+<li><strong>Hacer copias de seguridad</strong> en otro sitio</li>
+<li><strong>Colaborar</strong> con otros (o incluso contigo mismo)</li>
+<li><strong>Acceder</strong> desde varios ordenadores</li>
+</ul>
+<p>Los servidores de Git más populares son:</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 30%">
-<col style="width: 30%">
-<col style="width: 40%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Aspecto</th>
-<th>Ventaja</th>
-<th>Limitación</th>
+<th>Servicio</th>
+<th>Características</th>
+<th>Gratis</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Coste</td>
-<td>Gratuito</td>
-<td>Inversión inicial en hardware</td>
+<td><a href="https://github.com/">GitHub</a></td>
+<td>El más popular, integrado con muchas herramientas</td>
+<td>Sí (repositorios públicos)</td>
 </tr>
 <tr class="even">
-<td>Privacidad</td>
-<td>Datos locales</td>
-<td>—</td>
+<td><a href="https://gitlab.com/">GitLab</a></td>
+<td>Alternativa completa, incluye CI/CD</td>
+<td>Sí</td>
 </tr>
 <tr class="odd">
-<td>Velocidad</td>
-<td>Depende del hardware</td>
-<td>Más lento que en la nube (<em>cloud</em>) sin tarjeta gráfica potente (<em>GPU</em>)</td>
+<td><a href="https://bitbucket.org/">Bitbucket</a></td>
+<td>Integrado con Jira, bueno para equipos</td>
+<td>Sí (hasta 5 usuarios)</td>
 </tr>
 <tr class="even">
-<td>Calidad</td>
-<td>Buena para tareas simples</td>
-<td>Inferior a modelos en la nube (<em>cloud</em>) grandes</td>
+<td><a href="https://codeberg.org/">Codeberg</a></td>
+<td>Sin ánimo de lucro, alojado en la UE, sin rastreo</td>
+<td>Sí (ilimitado)</td>
 </tr>
 </tbody>
 </table>
-<hr>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Consejo</span>Codeberg: la opción europea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si eres europeo o te importa la privacidad, Codeberg es una excelente alternativa:</p>
+<ul>
+<li><strong>Sin ánimo de lucro</strong>: gestionado por una asociación en Berlín</li>
+<li><strong>Cumple con el RGPD</strong>: tus datos están protegidos por la legislación europea</li>
+<li><strong>Sin rastreo</strong>: no vende tus datos ni usa tu código para entrenar IA</li>
+<li><strong>Código abierto</strong>: basado en Forgejo, puedes migrar fácilmente</li>
+<li><strong>Repositorios ilimitados</strong>: públicos y privados, sin coste</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>No necesitas un servidor para empezar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Puedes trabajar perfectamente sin un servidor. Solo necesitas sincronizar cuando quieras:</p>
+<ul>
+<li>Hacer copias de seguridad</li>
+<li>Colaborar con otros</li>
+<li>Trabajar desde varios ordenadores</li>
+</ul>
+</div>
+</div>
+<p>Para sincronizar con un servidor, primero crea un repositorio en GitHub (o similar) y luego:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Añadir el servidor como origen</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/tu-usuario/tu-repositorio.git</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Subir tus commits</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Bajar cambios del servidor</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
+<section id="tabla-de-comandos-completa" class="level2">
+<h2 class="anchored" data-anchor-id="tabla-de-comandos-completa">Tabla de comandos completa</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Comando</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>git init</code></td>
+<td>Crear un repositorio nuevo</td>
+</tr>
+<tr class="even">
+<td><code>git config --global user.name &quot;Nombre&quot;</code></td>
+<td>Configurar tu nombre</td>
+</tr>
+<tr class="odd">
+<td><code>git config --global user.email &quot;email&quot;</code></td>
+<td>Configurar tu correo</td>
+</tr>
+<tr class="even">
+<td><code>git status</code></td>
+<td>Ver el estado actual del repositorio</td>
+</tr>
+<tr class="odd">
+<td><code>git diff</code></td>
+<td>Ver cambios sin commited</td>
+</tr>
+<tr class="even">
+<td><code>git add archivo</code></td>
+<td>Añadir un archivo al staging</td>
+</tr>
+<tr class="odd">
+<td><code>git add .</code></td>
+<td>Añadir todos los archivos al staging</td>
+</tr>
+<tr class="even">
+<td><code>git commit -m &quot;mensaje&quot;</code></td>
+<td>Guardar un commit con mensaje</td>
+</tr>
+<tr class="odd">
+<td><code>git log --oneline</code></td>
+<td>Historial resumido</td>
+</tr>
+<tr class="even">
+<td><code>git log</code></td>
+<td>Historial detallado</td>
+</tr>
+<tr class="odd">
+<td><code>git show HASH</code></td>
+<td>Ver qué cambió en un commit concreto</td>
+</tr>
+<tr class="even">
+<td><code>git restore archivo</code></td>
+<td>Deshacer cambios en un archivo</td>
+</tr>
+<tr class="odd">
+<td><code>git stash</code></td>
+<td>Guardar cambios temporalmente</td>
+</tr>
+<tr class="even">
+<td><code>git stash pop</code></td>
+<td>Recuperar cambios guardados</td>
+</tr>
+<tr class="odd">
+<td><code>git switch -c NOMBRE</code></td>
+<td>Crear y cambiarse a una rama nueva</td>
+</tr>
+<tr class="even">
+<td><code>git switch NOMBRE</code></td>
+<td>Cambiar a una rama existente</td>
+</tr>
+<tr class="odd">
+<td><code>git merge NOMBRE</code></td>
+<td>Fusionar una rama en la actual</td>
+</tr>
+<tr class="even">
+<td><code>git branch</code></td>
+<td>Ver todas las ramas</td>
+</tr>
+<tr class="odd">
+<td><code>git branch -d NOMBRE</code></td>
+<td>Borrar una rama</td>
+</tr>
+<tr class="even">
+<td><code>git remote add ORIGIN URL</code></td>
+<td>Añadir un servidor remoto</td>
+</tr>
+<tr class="odd">
+<td><code>git push</code></td>
+<td>Subir commits al servidor</td>
+</tr>
+<tr class="even">
+<td><code>git pull</code></td>
+<td>Bajar cambios del servidor</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="consejos-prácticos" class="level2">
 <h2 class="anchored" data-anchor-id="consejos-prácticos">Consejos prácticos</h2>
 <ol type="1">
-<li><p><strong>Empieza con lo gratuito.</strong> Usa Ollama (si tu ordenador lo permite) u OpenRouter con modelos gratuitos. No hace falta pagar para empezar a trabajar.</p></li>
-<li><p><strong>Combina modelos.</strong> Usa un modelo pequeño y rápido para tareas mecánicas (formatear, revisar ortografía) y uno grande para tareas que requieran comprensión profunda (redactar desde cero, resumir documentación extensa).</p></li>
-<li><p><strong>Cambia de modelo según la tarea.</strong> Una misma sesión de trabajo puede usar tres modelos distintos. OpenCode te permite cambiar en segundos.</p></li>
-<li><p><strong>No necesitas saber de tecnología.</strong> Cambiar de modelo es tan simple como elegir una opción en un menú. Los modelos hacen el trabajo técnico; tú solo escribes lo que necesitas.</p></li>
-<li><p><strong>Prueba varios modelos.</strong> Cada modelo tiene su “personalidad”. Prueba Claude para documentación extensa, GPT para versatilidad, DeepSeek para tareas rápidas y económicas. Encuentra el que mejor se adapte a tu forma de trabajar.</p></li>
+<li><p><strong>Haz commits pequeños y frecuentes.</strong> Es mejor guardar 5 cambios pequeños que 1 cambio gigante. Los commits pequeños son más fáciles de entender y deshacer.</p></li>
+<li><p><strong>Escribe mensajes descriptivos.</strong> No uses “cambio” o “update”. Describe qué has hecho: “Añade sección de conclusiones”, “Corrige erratas en capítulo 2”, “Reestructura apartado 3”.</p></li>
+<li><p><strong>Usa .gitignore desde el principio.</strong> Crea un archivo <code>.gitignore</code> para que Git ignore archivos temporales, HTML generados y otros archivos que no necesitas versionar.</p></li>
+<li><p><strong>No tengas miedo de experimentar.</strong> Con las ramas, puedes probar cosas nuevas sin riesgo. Si no te gusta, vuelves atrás.</p></li>
+<li><p><strong>Sincroniza con frecuencia.</strong> Si trabajas con un servidor, sube tus cambios regularmente para no perder trabajo.</p></li>
+<li><p><strong>Revisa antes de commit.</strong> Usa <code>git status</code> y <code>git diff</code> antes de cada commit para asegurarte de que estás guardando lo que quieres.</p></li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -2801,7 +2698,7 @@ Consejo
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>En resumen</strong>: los modelos de IA son herramientas, no magia. Elige el que mejor se ajuste a cada tarea, igual que elegirías un destornillador u otro según el tornillo. Y recuerda: puedes empezar sin pagar nada.</p>
+<p><strong>En resumen</strong>: Git es tu aliado para no perder trabajo. Piensa en cada commit como una foto de tus documentos. Si algo sale mal, siempre puedes volver a la foto anterior. Y si quieres experimentar, crea una rama nueva y juega sin miedo.</p>
 </div>
 </div>
 <hr>
@@ -2809,9 +2706,9 @@ Consejo
 <section id="referencias" class="level2">
 <h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
 <ul>
-<li><a href="guia-modelos-creadores.qmd">Guía de Modelos de IA</a> — Guía completa para elegir modelo</li>
-<li><a href="openrouter.qmd">OpenRouter</a> — Cómo usar múltiples modelos con una sola clave</li>
-<li><a href="https://opencode.ai/docs/models/">Documentación de OpenCode</a> — Configuración avanzada de modelos</li>
+<li><a href="https://git-scm.com/book/es/v2">Pro Git</a> — Libro oficial de Git en español (gratuito)</li>
+<li><a href="https://education.github.com/git-cheat-sheet-education.pdf">GitHub Cheat Sheet</a> — Resumen de comandos útiles</li>
+<li><a href="https://learngitbranching.js.org/?locale=es">Learn Git Branching</a> — Tutorial interactivo para practicar ramas</li>
 </ul>
 <hr>
 <p><em>Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026</em></p>

@@ -18,6 +18,14 @@ con el manejo básico de OpenCode.
 
 ---
 
+## ¿Para quién es este curso?
+
+Dirigido a quienes ya han completado OpenCode 101 o tienen
+experiencia básica con OpenCode y quieren automatizar tareas,
+crear herramientas reutilizables y trabajar en equipo con IA.
+
+---
+
 ## ¿Qué aprenderás?
 
 | Capacidad | Para qué sirve |
@@ -38,12 +46,15 @@ con el manejo básico de OpenCode.
 | Paso | Título | Qué aprenderás |
 |------|--------|---------------|
 | [0](paso-0.html) | [Antes de empezar](paso-0.html) | Preparar el entorno y conocer la estructura de OpenCode |
+| **I — Automatización e IA** | | |
 | [01](paso-01.html) | [Procedimientos a medida (*agents*)](paso-01.html) | Crear asistentes especializados |
 | [02](paso-02.html) | [Habilidades reutilizables (*skills*)](paso-02.html) | Skills reutilizables para documentación |
 | [03](paso-03.html) | [Modelos y proveedores de IA](paso-03.html) | Elegir el modelo adecuado para cada tarea |
+| **II — Herramientas externas** | | |
 | [04](paso-04.html) | [Control de versiones (*git*)](paso-04.html) | Versionar documentos y colaborar |
 | [05](paso-05.html) | [Conexión con sistemas externos (*MCP*)](paso-05.html) | Conectar sistemas externos |
 | [06](paso-06.html) | [Automatiza desde la terminal (*CLI*)](paso-06.html) | Automatizar procesos con opencode run |
+| **III — Colaboración** | | |
 | [07](paso-07.html) | [Permisos: controla acciones (*permissions*)](paso-07.html) | Control de acciones en entornos sensibles |
 | [08](paso-08.html) | [Colaboración en equipo](paso-08.html) | Compartir configuración en equipo |
 
@@ -59,13 +70,39 @@ misma carpeta mientras lees.
 
 ---
 
+## Cómo empezar
+
+### A. Desde la distribución local (recomendado)
+
+Abre `cursoAvanzadoOpencode/index.html` en tu navegador. Todo
+está listo para seguir los ejercicios con OpenCode abierto a su
+lado.
+
+### B. Online
+
+Abre `https://palazon.github.io/ocCursoAvanzado/contenidos/` en
+tu navegador.
+
+### C. Desde los fuentes
+
+Los archivos `.qmd` (formato Quarto) están en `contenidos/`.
+Para regenerar los HTML:
+
+```bash
+bash render-all.sh
+```
+
+---
+
 ## Requisitos
 
 - OpenCode instalado (ver [OpenCode 101](https://github.com/palazon/ocCursoIntro) si necesitas ayuda)
 - Soltura básica con OpenCode: modos Plan/Build, referencias `@`, chat
 - Un navegador web para ver los HTML generados
-- Quarto (opcional, solo para regenerar los HTML)
+- Git (para los ejercicios del paso 4)
+- Node.js (opcional, para el paso 5 — MCP con SQLite)
+- Quarto (opcional, solo para modificar fuentes)
 
 ---
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

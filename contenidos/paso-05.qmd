@@ -4,11 +4,18 @@ title: "05. Conexión con sistemas externos (*MCP*)"
 
 ## Objetivo
 
-Aprender a conectar OpenCode con sistemas externos: glosarios
-corporativos, bases de conocimiento, APIs y otras fuentes de
-datos.
+Entender qué es MCP y por qué añadir contexto actualizado
+mejora las respuestas de OpenCode.
 
-Duración estimada: **30 minutos**
+Duración estimada: **15 minutos**
+
+::: {.callout-note}
+## Node.js es necesario
+
+Los servidores MCP se instalan con `npx`, que requiere
+[Node.js](https://nodejs.org). Verifica que lo tienes con
+`node --version` antes de empezar.
+:::
 
 ---
 
@@ -18,182 +25,203 @@ MCP (Model Context Protocol) permite a OpenCode acceder a
 información externa durante una conversación, sin necesidad de
 copiar y pegar manualmente.
 
-Imagina que estás redactando un documento técnico y necesitas
-consultar el glosario de la empresa, buscar un término en la
-wiki interna o comprobar un dato en una API. Con MCP, OpenCode
-puede hacer esas consultas por ti en tiempo real.
+**Analogía**: piensa en MCP como una biblioteca personal que
+OpenCode puede consultar cuando lo necesita. En lugar de darte
+la respuesta de memoria, busca en fuentes reales y actualizadas.
 
-MCP funciona con **servidores** que exponen recursos y
-herramientas. OpenCode se conecta a estos servidores y los usa
-cuando los necesita.
+MCP fue creado por Anthropic en 2024 y donado a la Linux Foundation
+en 2025. Es un estándar abierto que funciona con múltiples
+herramientas: Claude, ChatGPT, Cursor, VS Code y otras.
 
----
+::: {.callout-tip}
+## ¿Por qué importa el contexto actualizado?
 
-## Conceptos clave
+Los modelos de IA tienen una fecha de corte de conocimiento.
+Por ejemplo, un modelo entrenado hasta 2024 no sabe lo que
+ha pasado en 2025. MCP resuelve esto: permite a OpenCode
+buscar información actualizada en fuentes reales, no solo
+usar lo que aprendió durante su entrenamiento.
 
-| Concepto | Qué significa |
-|----------|--------------|
-| **Servidor MCP** | Un programa que ofrece datos o acciones a OpenCode |
-| **Recurso** | Algo que se puede leer (un archivo, una consulta) |
-| **Herramienta** | Algo que se puede ejecutar (buscar, calcular) |
-| **Contexto** | La información que OpenCode recibe del servidor |
+Sin MCP: el modelo responde con lo que "recuerda" (puede estar
+desfasado).
 
----
-
-## Manos a la obra
-
-::: {.callout-note}
-## Nota informativa
-
-Los servidores MCP se instalan con `npx`, que requiere
-[Node.js](https://nodejs.org). Verifica que lo tienes con
-`node --version` antes de empezar.
+Con MCP: el modelo busca en la fuente actualizada y responde
+con información reciente.
 :::
 
-### Ejercicio 1 — Verificar que OpenCode soporta MCP
+---
 
-Abre OpenCode en la carpeta del curso y escribe en *Plan*:
+## ¿Para qué sirve?
 
-> ¿Qué servidores MCP tienes disponibles?
+| Situación | Sin MCP | Con MCP |
+|-----------|---------|---------|
+| Consultar un glosario | Copias y pegas el documento | OpenCode lo lee directamente |
+| Buscar en una wiki | Abres el navegador y buscas | OpenCode busca por ti |
+| Consultar una base de datos | Escribes la consulta SQL | OpenCode la ejecuta |
 
-Si OpenCode responde que no tiene ninguno configurado, es
-normal. Vamos a añadir uno.
+**Ventaja clave**: el contexto se actualiza automáticamente.
+Si alguien modifica el glosario, OpenCode siempre verá la
+versión más reciente.
 
-### Ejercicio 2 — Crear un servidor MCP de sistema de archivos
+---
 
-El servidor de sistema de archivos permite a OpenCode leer
-archivos de carpetas concretas de forma segura.
+## Instalación: proyecto o global
 
-Crea un archivo `.opencode/mcp.json` en la raíz del proyecto:
+Los servidores MCP se configuran en un archivo de configuración.
+Puedes instalarlos de dos formas:
+
+### Por proyecto (recomendado)
+
+Crea `.opencode/mcp.json` en la raíz de tu proyecto:
 
 ```json
 {
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/ruta/a/tu/carpeta/compartida"
-      ]
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/ruta"]
     }
   }
 }
 ```
 
-> Cambia `/ruta/a/tu/carpeta/compartida` por una carpeta real
-> de tu sistema, por ejemplo `/home/usuario/Documentos/glosario`
-> (reemplaza `usuario` por tu nombre de usuario).
+### Global
 
-Este servidor permite a OpenCode listar y leer archivos dentro
-de esa carpeta, pero no fuera de ella.
+Edita `~/.config/opencode/opencode.json` para que esté disponible
+en todos tus proyectos.
 
-### Ejercicio 3 — Crear un glosario corporativo
+### Desde OpenCode (más fácil)
 
-Crea un archivo de glosario en la carpeta que configuraste:
+También puedes pedirle a OpenCode que instale y configure
+el servidor MCP por ti. Escribe en el chat:
+
+> Configura un servidor MCP de sistema de archivos para poder
+> leer archivos de mi carpeta de glosarios
+
+OpenCode creará el archivo de configuración automáticamente.
+
+---
+
+## Remoto o local
+
+Los servidores MCP pueden ser:
+
+| Tipo | Ejemplo | Cuándo usarlo |
+|------|---------|---------------|
+| **Remoto** | GitHub, Notion, Brave Search | Servicios en la nube |
+| **Local** | filesystem, sqlite | Datos en tu ordenador |
+| **Desarrollado por ti** | Tu propio servidor | Necesidades específicas |
+
+Los servidores locales son ideales para datos sensibles que no
+quieres subir a la nube. Los remotos son más fáciles de
+configurar y no requieren instalación.
+
+---
+
+## Diversidad de modos de instalación
+
+Los MCP se instalan de formas muy diferentes, dependiendo del
+tipo de servidor:
+
+| Modo | Ejemplo | Cuándo usarlo |
+|------|---------|---------------|
+| `npx` (local) | filesystem, sqlite | Datos en tu ordenador |
+| Remoto (URL) | flashcards, context7 | Servicios en la nube |
+| Desde OpenCode | cualquiera | La más fácil |
+| Con dependencias | anki, docker | Requieren software extra |
+
+> **Consejo**: antes de instalar un MCP, es buena idea preguntar
+> qué necesita. Algunos requieren API keys, otros software
+> adicional (como Node.js o Docker). Preguntar antes ahorra
+> tiempo y evita sorpresas.
+
+---
+
+## Ejemplo rápido: un glosario consultable
+
+Imagina que tienes un glosario de términos técnicos en tu
+equipo. Sin MCP, tendrías que copiar y pegar el documento
+cada vez que OpenCode necesite consultar algo. Con MCP,
+OpenCode puede leerlo directamente.
+
+### Paso 1 — Crear el glosario
+
+Crea un archivo `glosario.md` en una carpeta de tu elección:
 
 ```markdown
-# Glosario corporativo
+# Glosario
 
 API: Interfaz de Programación de Aplicaciones
-CRUD: Crear, Leer, Actualizar, Eliminar
-DAG: Grafo Acíclico Dirigido
-MVP: Producto Mínimo Viable
 SLA: Acuerdo de Nivel de Servicio
-WIP: Trabajo en Progreso
+MVP: Producto Mínimo Viable
 ```
 
-Guárdalo como `glosario.md` dentro de la carpeta compartida.
+### Paso 2 — Decirle a OpenCode que use el glosario
 
-### Ejercicio 4 — Probar la conexión MCP
+Escribe en el chat:
 
-Cierra y vuelve a abrir OpenCode para que cargue la nueva
-configuración. Luego en *Plan*:
+> Configura un servidor MCP para que puedas leer archivos de
+> la carpeta donde tengo el glosario
 
-> Busca en el glosario el término SLA y explícame qué significa
+OpenCode creará la configuración y podrás preguntarle:
 
-OpenCode usará el servidor MCP de archivos para leer el
-glosario y responderte con la definición.
+> ¿Qué significa SLA según el glosario?
 
-### Ejercicio 5 — Añadir un servidor MCP de base de datos
-
-Los servidores MCP también pueden conectarse a bases de datos.
-Añade un servidor SQLite al `mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/home/usuario/Documentos/glosario"
-      ]
-    },
-    "sqlite": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-sqlite",
-        "/home/usuario/Documentos/glosario.db"
-      ]
-    }
-  }
-}
-```
-
-> También existen servidores MCP para búsqueda web, pero suelen
-> requerir una clave de API. Consulta el [paso 03](paso-03.html)
-> para más información sobre configuración de modelos y
-> proveedores. La gestión de claves de proveedores de IA se trata
-> allí.
-
-### Ejercicio 6 — Usar MCP en un flujo real
-
-Combina varios servidores MCP en una sola sesión de trabajo.
-Crea un archivo `proyectos.db` con SQLite y luego consulta:
-
-> Usa el servidor sqlite para crear una tabla de proyectos y
-> consulta el glosario para verificar los términos técnicos
-
-OpenCode usará el servidor SQLite para gestionar los datos y
-el servidor de archivos para leer el glosario.
+Y OpenCode responderá con la definición actualizada.
 
 ---
 
-## Buenas prácticas
+## Ejemplo: flashcards de estudio
 
-- **Limita el alcance** — cada servidor MCP solo debe acceder a
-  lo mínimo necesario
-- **No compartas claves** — si un servidor usa API keys,
-  mantenlas fuera del repositorio
-- **Documenta los servidores** — incluye un comentario en
-  `mcp.json` explicando qué hace cada uno
+Los MCP no solo sirven para consultar información externa.
+También pueden ayudarte a aprender. Flashcards MCP permite
+crear tarjetas de estudio con repetición espaciada, directamente
+desde OpenCode.
 
----
+### Paso 1 — Preguntar por prerequisites
 
-## Ideas para tus propios servidores MCP
+Antes de instalar un MCP, es buena idea saber qué necesita.
+Escribe en *Plan*:
 
-| Servidor | Para qué sirve |
-|----------|---------------|
-| `server-filesystem` | Leer archivos de una carpeta segura |
-| `server-sqlite` | Consultar una base de datos local |
-| `server-github` | Leer issues, PRs y repositorios |
-| `server-notion` | Consultar una base de conocimiento en Notion |
-| `server-postgres` | Consultar una base de datos PostgreSQL |
+> ¿Qué necesita el MCP de flashcards para funcionar?
+
+OpenCode te informará si necesita API keys, software
+adicional, o si es remoto (sin nada extra). En este caso,
+el MCP es remoto: solo necesita una URL.
+
+### Paso 2 — Instalar desde OpenCode
+
+La forma más fácil de instalar un MCP es pedirle a OpenCode
+que lo configure. Escribe en *Plan*:
+
+> Configura el MCP de flashcards para crear tarjetas de estudio
+
+OpenCode creará la configuración automáticamente en
+`opencode.json`.
+
+### Paso 3 — Crear flashcards
+
+Una vez instalado, puedes usarlo para crear tarjetas:
+
+> Crea flashcards sobre los conceptos clave de MCP
+
+OpenCode creará preguntas y respuestas, y usará repetición
+espaciada para recordarte cuándo repasar cada tarjeta.
 
 ---
 
 ## Resumen del paso
 
-- ✅ Has aprendido qué es MCP y para qué sirve
-- ✅ Has configurado un servidor MCP de sistema de archivos
-- ✅ Has creado un glosario corporativo accesible desde OpenCode
-- ✅ Has probado la conexión con consultas en tiempo real
-- ✅ Has añadido un servidor MCP de base de datos SQLite
-- ✅ Conoces las buenas prácticas para usar MCP en equipo
+- MCP permite a OpenCode acceder a información externa
+- Añade contexto actualizado sin copiar y pegar
+- Se instala por proyecto, globalmente, o desde OpenCode
+- Puede ser remoto (URL) o local (con `npx`)
+- Antes de instalar, pregunta qué necesita el MCP
+
+> ¿Quieres saber más? En la guía de ampliación encontrarás
+> ejercicios detallados, tipos de servidores y configuración:
+> [Ampliando: MCP](ampliando/ampliando-mcp.qmd)
 
 En el próximo paso veremos cómo automatizar procesos con la CLI.
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

@@ -7,7 +7,7 @@ title: "05. Conexión con sistemas externos (*MCP*)"
 Entender qué es MCP y por qué añadir contexto actualizado
 mejora las respuestas de OpenCode.
 
-Duración estimada: **15 minutos**
+Duración estimada: **25 minutos**
 
 ::: {.callout-note}
 ## Node.js es necesario

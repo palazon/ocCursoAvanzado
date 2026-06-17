@@ -1,0 +1,376 @@
+---
+title: "Ampliando: CLI para creadores de contenido"
+subtitle: "Automatización avanzada con opencode run"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    code-block-bg: "#F0F0F0"
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+      - \fvset{fontsize=\small}
+---
+
+::: {.callout-note}
+## Has visto lo básico en el paso 6
+
+Este documento amplía lo que viste en el paso 6. Si no lo has
+visto aún, te recomiendo empezar por allí.
+:::
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía amplía la información sobre la CLI de OpenCode para
+quienes quieren automatizar tareas repetitivas. **No necesitas
+ser programador**, pero sí aprender algunos conceptos básicos
+de la *shell*. Los ejemplos usan comandos simples que puedes
+copiar y pegar directamente.
+:::
+
+## ¿Por qué usar CLI?
+
+| Ventaja | Chat interactivo | CLI |
+|---------|------------------|-----|
+| Velocidad | Lento (conversación) | Rápido (directo) |
+| Precisión | El modelo decide | Tú decides exactamente |
+| Escalabilidad | Limitada (1 archivo) | Sin límite |
+| Automatización | No posible | Scripts programables |
+| Repetibilidad | Variable | Consistente |
+| Coste | Mayor (historial) | Menor (sin contexto) |
+| Ahorro de tokens | Historial acumulado | Sin historial |
+
+::: {.callout-note}
+## Ahorro de tokens
+
+En chat, cada mensaje incluye el historial completo de la conversación.
+En CLI, cada `opencode run` es independiente: solo procesa la instrucción
+actual. Esto reduce significativamente el consumo de tokens.
+:::
+
+### Ejemplo práctico
+
+**En chat** (lento, paso a paso):
+
+```
+Tú: "Revisa ortografía de paso-01.qmd"
+OpenCode: [procesa]
+Tú: "Ahora paso-02.qmd"
+OpenCode: [procesa]
+Tú: "Y también paso-03.qmd"
+...
+```
+
+**En CLI** (rápido, automatizado):
+
+```bash
+for f in paso-*.qmd; do
+  opencode run "Revisa ortografía" @"$f"
+done
+```
+
+::: {.callout-note}
+## ¿Cuándo usar cada uno?
+
+- **Chat**: explorar, aprender, tareas únicas, cuando no sabes
+  exactamente qué quieres hacer
+- **CLI**: lotes, automatización, tareas repetitivas, cuando
+  sabes exactamente qué necesitas
+:::
+
+---
+
+## Conceptos básicos de la shell
+
+Antes de usar la CLI de OpenCode, es útil entender algunos
+conceptos fundamentales de la línea de comandos.
+
+### Línea de comandos (*shell*)
+
+La *shell* es un programa que interpreta comandos de texto.
+En lugar de hacer clic en botones, escribes instrucciones
+directamente.
+
+### Entrada y salida estándar
+
+| Concepto | Significado | Ejemplo |
+|----------|-------------|---------|
+| **Entrada estándar** (*stdin*) | Por defecto, el teclado | Texto que escribes |
+| **Salida estándar** (*stdout*) | Por defecto, la pantalla | Resultado del comando |
+| **Error** (*stderr*) | Mensajes de error | "Archivo no encontrado" |
+
+### Redirección
+
+La redirección te permite controlar de dónde viene la entrada
+y adónde va la salida:
+
+| Símbolo | Función | Ejemplo |
+|---------|---------|---------|
+| `<` | Entrada desde archivo | `opencode run "..." < archivo.md` |
+| `>` | Salida a archivo (sobrescribe) | `> resultado.md` |
+| `>>` | Salida a archivo (añade) | `>> informe.txt` |
+
+### Tuberías (*pipes*)
+
+La tubería `|` conecta la salida de un comando con la entrada
+del siguiente:
+
+```bash
+cat archivo.md | opencode run "Resume esto"
+```
+
+**Analogía**: piensa en la tubería como una cadena de producción.
+El resultado de un paso alimenta al siguiente.
+
+### Ejercicios básicos
+
+**Ejercicio 1** — Redirección de entrada:
+
+```bash
+echo "Hola mundo" > test.txt
+opencode run "¿Qué dice este archivo?" < test.txt
+```
+
+**Ejercicio 2** — Redirección de salida:
+
+```bash
+opencode run "Dime tres frutas" > frutas.txt
+cat frutas.txt
+```
+
+**Ejercicio 3** — Tubería:
+
+```bash
+echo "Python, R, JavaScript" | opencode run "¿Cuáles son estos lenguajes?"
+```
+
+::: {.callout-note}
+## Recuerda: texto plano
+
+Lo que pasa por una tubería es texto plano. Por eso Markdown
+es ideal: es legible tanto para ti como para OpenCode. Si le
+pasas un archivo `.qmd`, OpenCode recibirá el contenido sin
+formato.
+:::
+
+---
+
+## Redirección y tuberías
+
+Cuando trabajas con `opencode run`, tienes dos formas de pasar
+el contenido de un archivo:
+
+| Método | Sintaxis | Cuándo usarlo |
+|--------|----------|---------------|
+| Redirección `<` | `opencode run "..." < archivo` | Más directo, evita proceso extra |
+| Tubería `|` | `cat archivo | opencode run "..."` | Cuando necesitas encadenar comandos |
+
+**Analogía**: piensa en la redirección como entregar un
+documento directamente a OpenCode. La tubería es como pasar
+el documento por varias manos antes de que llegue a OpenCode.
+
+### Ejercicio 1 — Probar ambas formas
+
+```bash
+opencode run "Resume este documento en 3 líneas" < paso-03.qmd
+```
+
+```bash
+cat paso-03.qmd | opencode run "Resume este documento en 3 líneas"
+```
+
+Ambos comandos dan el mismo resultado. Usa `<` cuando sea
+posible: es más limpio y rápido.
+
+---
+
+## Guardar salida en archivos
+
+Puedes guardar el resultado de `opencode run` en un archivo
+para usarlo después:
+
+| Operador | Qué hace | Ejemplo |
+|----------|----------|---------|
+| `>` | Sobrescribe el archivo | `> resultado.md` |
+| `>>` | Añade al final del archivo | `>> informe.txt` |
+
+### Ejercicio 2 — Traducir y guardar
+
+```bash
+opencode run "Traduce este documento al inglés" @paso-01.qmd > 01-agentes-en.md
+```
+
+El resultado se guarda en `01-agentes-en.md` sin mostrarlo en
+pantalla. Puedes abrirlo después para revisarlo.
+
+### Ejercicio 3 — Acumular resultados
+
+```bash
+opencode run "¿Qué errores hay en este archivo?" @paso-01.qmd > informe.txt
+opencode run "¿Qué errores hay en este archivo?" @paso-02.qmd >> informe.txt
+```
+
+El primer comando crea `informe.txt`. El segundo añade los
+resultados del segundo archivo al final del mismo.
+
+---
+
+## Procesar varios archivos
+
+Si tienes varios archivos que necesitan la misma operación,
+puedes usar un bucle `for` de la *shell*:
+
+### Ejercicio 4 — Revisar todos los archivos
+
+```bash
+for f in *.qmd; do
+  opencode run "Revisa la ortografía de este documento" @"$f" >> revisiones.txt
+done
+```
+
+Este comando procesa todos los archivos `.qmd` del directorio
+y acumula las revisiones en `revisiones.txt`.
+
+**Consejo**: si procesas muchos archivos, añade `sleep 1`
+dentro del bucle para evitar límites de tasa:
+
+```bash
+for f in *.qmd; do
+  opencode run "Revisa la ortografía" @"$f" >> revisiones.txt
+  sleep 1
+done
+```
+
+---
+
+## Scripts de automatización
+
+Para tareas que repites frecuentemente, puedes crear un script
+de shell que ejecuta varios comandos en secuencia.
+
+### Ejercicio 5 — Crear un script de revisión
+
+Crea un archivo `revisar-todo.sh` en la raíz del proyecto:
+
+```bash
+#!/bin/bash
+echo "=== Revisión automática del curso ===" > informe.txt
+for f in *.qmd; do
+  echo "--- Revisando $f ---" >> informe.txt
+  opencode run "Revisa el tono y estilo de este documento" @"$f" >> informe.txt
+  echo "" >> informe.txt
+done
+echo "=== Revisión completa ===" >> informe.txt
+```
+
+Hazlo ejecutable y pruébalo:
+
+```bash
+chmod +x revisar-todo.sh
+./revisar-todo.sh
+```
+
+Abre `informe.txt` para ver los resultados de todos los
+archivos procesados.
+
+::: {.callout-note}
+## ¿Qué es `chmod +x`?
+
+El comando `chmod +x revisar-todo.sh` hace que el archivo sea
+ejecutable. Sin esto, el sistema no te dejaría ejecutarlo
+directamente con `./revisar-todo.sh`.
+:::
+
+::: {.callout-tip}
+## No te agobies
+
+Si no sabes cómo escribir un script, ¡pide ayuda a OpenCode!
+Escríbele algo como: "Crea un script que revise la ortografía
+de todos los archivos .qmd". OpenCode generará el código por ti.
+:::
+
+---
+
+## Usar agentes desde CLI
+
+Si tienes agentes personalizados configurados en `.opencode/agents/`,
+puedes invocarlos desde la terminal:
+
+### Ejercicio 6 — Invocar un agente
+
+```bash
+opencode run "@revisor-estilo Revisa este documento" @paso-04.qmd
+```
+
+Funciona igual que desde el chat: el agente recibe la instrucción
+y procesa el archivo que le indiques.
+
+---
+
+## Buenas prácticas
+
+| Práctica | Por qué es importante |
+|----------|----------------------|
+| **Revisa siempre la salida** | El CLI no es interactivo; no puedes corregir sobre la marcha |
+| **Usa archivos pequeños** | Para lotes grandes, procesa de uno en uno |
+| **Mide los tiempos** | Cada ejecución consume tokens; calcula el coste antes de lanzar procesos masivos |
+| **Combina con git** | Haz un commit antes de procesar, por si el resultado no es el esperado |
+
+---
+
+## Ideas para automatizar
+
+| Tarea | Comando |
+|-------|---------|
+| Revisar ortografía de todos los `.md` | `for f in *.md; do opencode run "Revisa ortografía" @"$f"; done` |
+| Traducir un lote al inglés | `for f in *.qmd; do opencode run "Traduce al inglés" @"$f" > "${f%.qmd}-en.qmd"; done` |
+| Generar resumen ejecutivo | `opencode run "Resume en 5 líneas" @informe-final.md > resumen.md` |
+| Unificar tono en varios docs | `opencode run "Aplica tono corporativo" @doc1.md @doc2.md` |
+
+---
+
+> ¿Necesitas más ejemplos? Prueba a pedirle a OpenCode que
+> te ayude a crear scripts personalizados para tu flujo de
+> trabajo. La CLI es muy flexible y se adapta a casi cualquier
+> necesidad de automatización.
+
+---
+
+## Referencias
+
+- [Documentación oficial de OpenCode](https://opencode.ai)
+- [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
+- [Explainshell](https://explainshell.com/) — explica comandos gráficamente
+- [Shell Check](https://www.shellcheck.net/) — analiza scripts de shell

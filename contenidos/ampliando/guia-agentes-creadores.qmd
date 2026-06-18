@@ -43,7 +43,7 @@ format:
 
 ## ¿Qué es opencode?
 
-**opencode** es un asistente de inteligencia artificial que trabaja desde la terminal (esa ventana negra donde los programadores escriben comandos). Su función principal es ayudar a crear y modificar archivos en un proyecto: editar texto, buscar información, organizar carpetas, escribir documentación y mucho más.
+**opencode** es un asistente de inteligencia artificial que trabaja desde la terminal (esa ventana negra donde los programadores escriben comandos). Su función principal es ayudar a crear y modificar archivos en un proyecto: editar texto, buscar información, organizar directorios, escribir documentación y mucho más.
 
 Piensa en opencode como un colaborador que entiende instrucciones en lenguaje natural y las ejecuta directamente sobre los archivos de tu computadora.
 
@@ -151,9 +151,9 @@ Este agente tiene permiso para leer y escribir archivos, trabaja con temperatura
 
 ## Cómo crear tu propio agente (paso a paso)
 
-### Paso 1: Crea la carpeta de agentes
+### Paso 1: Crea el directorio de agentes
 
-Los agentes se guardan dentro de la carpeta `.opencode/agents/` de tu proyecto. Si no existe, créala.
+Los agentes se guardan dentro del directorio `.opencode/agents/` de tu proyecto. Si no existe, créalo.
 
 ### Paso 2: Crea un archivo Markdown
 
@@ -253,7 +253,7 @@ Los agentes no salen perfectos a la primera. Úsalos, observa dónde fallan y aj
 
 ## Dónde guardar los archivos de agente
 
-Los agentes se guardan en una carpeta llamada `.opencode` dentro de la raíz de tu proyecto. La estructura es:
+Los agentes se guardan en un directorio llamado `.opencode` dentro de la raíz de tu proyecto. La estructura es:
 
 ```
 tu-proyecto/
@@ -264,16 +264,16 @@ tu-proyecto/
       disenador-web.md
 ```
 
-La carpeta `.opencode` puede contener también otros archivos de configuración de opencode, pero los agentes siempre van dentro de `agents/`.
+El directorio `.opencode` puede contener también otros archivos de configuración de opencode, pero los agentes siempre van dentro de `agents/`.
 
 ::: {.callout-note}
 ## Archivos ocultos
-La carpeta `.opencode` comienza con un punto. En muchos sistemas, las carpetas que empiezan con punto están ocultas. Si no la ves, activa la opción de "mostrar archivos ocultos" en tu explorador de archivos.
+El directorio `.opencode` comienza con un punto. En muchos sistemas, los directorios que empiezan con punto están ocultos. Si no lo ves, activa la opción de "mostrar archivos ocultos" en tu explorador de archivos.
 :::
 
 ### ¿Puedo tener agentes para todos mis proyectos?
 
-Sí. Cada proyecto puede tener sus propios agentes en su propia carpeta `.opencode/agents/`. También puedes copiar agentes de un proyecto a otro si te resultan útiles.
+Sí. Cada proyecto puede tener sus propios agentes en su propio directorio `.opencode/agents/`. También puedes copiar agentes de un proyecto a otro si te resultan útiles.
 
 ## Resumen rápido
 

@@ -9,6 +9,15 @@ agentes con otros miembros del equipo.
 
 Duración estimada: **25 minutos**
 
+::: {.callout-tip}
+## ¿Por qué compartir configuración?
+
+Si trabajas en equipo, cada miembro puede tener sus propias
+preferencias. Pero la configuración del proyecto (agentes,
+comandos, scripts) debe ser la misma para todos. Así todos
+trabajan con las mismas herramientas.
+:::
+
 ---
 
 ## Compartir configuración
@@ -18,7 +27,7 @@ proyecto, de modo que todo el equipo pueda usar los mismos
 agentes, comandos y skills.
 
 La clave está en **versionar la configuración** junto con el
-proyecto. Todo lo que está dentro de la carpeta del proyecto
+proyecto. Todo lo que está dentro del directorio del proyecto
 se puede compartir con Git: agentes, `opencode.jsonc`,
 `mcp.json` y scripts.
 
@@ -26,6 +35,11 @@ Lo que **no se comparte** es la configuración global
 (`~/.config/opencode/`), como skills personales o claves de
 API. Para más detalles sobre proveedores y seguridad de claves,
 consulta el [paso 03](paso-03.html).
+
+**Analogía**: piensa en la configuración del proyecto como
+una receta de cocina. Si todos los cocineros usan la misma
+receta, el plato saldrá igual. Si cada uno improvisa, el
+resultado será impredecible.
 
 ---
 
@@ -43,10 +57,14 @@ consulta el [paso 03](paso-03.html).
 
 ---
 
-*Compartir la configuración con Git es el método recomendado,
-pero no el único. Puedes copiar la carpeta del proyecto por
+::: {.callout-note}
+## Compartir la configuración
+
+Compartir la configuración con Git es el método recomendado,
+pero no el único. Puedes copiar el directorio del proyecto por
 red, USB o cualquier otro medio. Lo importante es que la
-configuración de OpenCode viaje siempre con el código.*
+configuración de OpenCode viaje siempre con el código.
+:::
 
 ## Manos a la obra
 
@@ -112,7 +130,7 @@ con las instrucciones para el equipo:
 1. Clona el repositorio
 2. Copia `mcp.template.json` como `mcp.json`
 3. Ajusta las rutas en `mcp.json` a tu máquina
-4. Si usas skills, cópialos desde la carpeta compartida
+4. Si usas skills, cópialos desde el directorio compartido
 
 Comandos disponibles:
 - `bash render-all.sh` — genera los HTML del curso
@@ -121,7 +139,7 @@ Comandos disponibles:
 
 ### Ejercicio 4 — Simular la incorporación de un nuevo miembro
 
-Clona el repositorio en otra carpeta para ver qué recibe un
+Clona el repositorio en otro directorio para ver qué recibe un
 compañero:
 
 ```bash
@@ -130,7 +148,7 @@ git clone /ruta/del/proyecto curso-clonado
 cd curso-clonado
 ```
 
-Abre OpenCode en esa carpeta y comprueba que los agentes
+Abre OpenCode en ese directorio y comprueba que los agentes
 están disponibles:
 
 > @revisor-estilo ¿Qué puedes hacer?
@@ -141,7 +159,7 @@ reconocerá automáticamente.
 ### Ejercicio 5 — Compartir skills manualmente
 
 Aunque los skills no se versionan con Git, puedes compartir
-la carpeta del skill para que cada miembro la copie:
+el directorio del skill para que cada miembro la copie:
 
 ```bash
 cp -r ~/.config/opencode/skills/formatear-fechas /tmp/compartir/
@@ -217,11 +235,14 @@ con el repositorio.
 
 ## Buenas prácticas
 
-- **No versiones claves** — usa plantillas y `.gitignore`
-- **Documenta el onboarding** — explica en el README qué
+- **No versiones las claves** — usa plantillas y `.gitignore`
+
+- **Documenta el *onboarding*** — explica en el README qué
   hacer al unirse al proyecto
+
 - **Usa comandos personalizados** — evita que cada miembro
   tenga que recordar rutas y scripts
+
 - **Revisa los permisos** — si el equipo crece, revisa quién
   puede modificar la configuración compartida
 
@@ -236,6 +257,18 @@ con el repositorio.
 - ✅ Has creado un script para compartir skills
 - ✅ Has estandarizado comandos del equipo
 - ✅ Tienes un flujo de trabajo colaborativo con Git
+
+::: {.callout-tip}
+## Pide a OpenCode que documente la configuración
+
+Si no sabes cómo crear el `README` o la plantilla de
+configuración, pide ayuda a OpenCode. Por ejemplo:
+
+"Crea un archivo README.md con las instrucciones para
+configurar el proyecto en un equipo nuevo"
+
+OpenCode generará la documentación por ti.
+:::
 
 ---
 
@@ -252,4 +285,4 @@ Has terminado los 8 pasos del curso avanzado. Ahora sabes:
 07. Controlar permisos y acciones
 08. Colaborar en equipo compartiendo configuración
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

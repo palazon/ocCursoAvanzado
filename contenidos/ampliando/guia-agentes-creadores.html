@@ -8,7 +8,7 @@
 
 <meta name="author" content="JA Palazón Ferrando">
 
-<title>Cómo OpenCode recuerda (o no) lo que haces</title>
+<title>Guía de Agentes de opencode para Creadores de Contenido</title>
 <style>
 
 code{white-space: pre-wrap;}
@@ -2209,38 +2209,49 @@ vertical-align: -.125em;
     <h2 id="toc-title">Contenidos</h2>
    
   <ul>
-  <li><a href="#qué-es-opencode-y-por-qué-debería-importarte" id="toc-qué-es-opencode-y-por-qué-debería-importarte" class="nav-link active" data-scroll-target="#qué-es-opencode-y-por-qué-debería-importarte">¿Qué es OpenCode y por qué debería importarte?</a></li>
-  <li><a href="#el-problema-cada-sesión-empieza-en-blanco" id="toc-el-problema-cada-sesión-empieza-en-blanco" class="nav-link" data-scroll-target="#el-problema-cada-sesión-empieza-en-blanco">El problema: cada sesión empieza en blanco</a></li>
-  <li><a href="#la-memoria-básica-las-instrucciones-permanentes" id="toc-la-memoria-básica-las-instrucciones-permanentes" class="nav-link" data-scroll-target="#la-memoria-básica-las-instrucciones-permanentes">La memoria básica: las instrucciones permanentes</a>
+  <li><a href="#qué-es-opencode" id="toc-qué-es-opencode" class="nav-link active" data-scroll-target="#qué-es-opencode">¿Qué es opencode?</a></li>
+  <li><a href="#qué-es-un-agente" id="toc-qué-es-un-agente" class="nav-link" data-scroll-target="#qué-es-un-agente">¿Qué es un agente?</a></li>
+  <li><a href="#partes-de-un-agente" id="toc-partes-de-un-agente" class="nav-link" data-scroll-target="#partes-de-un-agente">Partes de un agente</a>
   <ul class="collapse">
-  <li><a href="#instrucciones-para-tu-proyecto" id="toc-instrucciones-para-tu-proyecto" class="nav-link" data-scroll-target="#instrucciones-para-tu-proyecto">Instrucciones para tu proyecto</a></li>
-  <li><a href="#instrucciones-globales-para-todos-tus-proyectos" id="toc-instrucciones-globales-para-todos-tus-proyectos" class="nav-link" data-scroll-target="#instrucciones-globales-para-todos-tus-proyectos">Instrucciones globales (para todos tus proyectos)</a></li>
-  <li><a href="#combinando-ambos" id="toc-combinando-ambos" class="nav-link" data-scroll-target="#combinando-ambos">Combinando ambos</a></li>
-  <li><a href="#el-límite-de-este-enfoque" id="toc-el-límite-de-este-enfoque" class="nav-link" data-scroll-target="#el-límite-de-este-enfoque">El límite de este enfoque</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><code>description</code></a></li>
+  <li><a href="#mode" id="toc-mode" class="nav-link" data-scroll-target="#mode"><code>mode</code></a></li>
+  <li><a href="#permission" id="toc-permission" class="nav-link" data-scroll-target="#permission"><code>permission</code></a></li>
+  <li><a href="#temperature" id="toc-temperature" class="nav-link" data-scroll-target="#temperature"><code>temperature</code></a></li>
+  <li><a href="#el-cuerpo-del-agente-la-personalidad" id="toc-el-cuerpo-del-agente-la-personalidad" class="nav-link" data-scroll-target="#el-cuerpo-del-agente-la-personalidad">El cuerpo del agente (la personalidad)</a></li>
   </ul></li>
-  <li><a href="#los-skills-conocimiento-especializado-a-la-carta" id="toc-los-skills-conocimiento-especializado-a-la-carta" class="nav-link" data-scroll-target="#los-skills-conocimiento-especializado-a-la-carta">Los <em>skills</em>: conocimiento especializado a la carta</a></li>
-  <li><a href="#la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo" id="toc-la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo" class="nav-link" data-scroll-target="#la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo">La memoria avanzada: cuando el asistente recuerda por sí mismo</a>
+  <li><a href="#ejemplo-práctico-el-agente-scribe" id="toc-ejemplo-práctico-el-agente-scribe" class="nav-link" data-scroll-target="#ejemplo-práctico-el-agente-scribe">Ejemplo práctico: el agente <code>scribe</code></a></li>
+  <li><a href="#cómo-crear-tu-propio-agente-paso-a-paso" id="toc-cómo-crear-tu-propio-agente-paso-a-paso" class="nav-link" data-scroll-target="#cómo-crear-tu-propio-agente-paso-a-paso">Cómo crear tu propio agente (paso a paso)</a>
   <ul class="collapse">
-  <li><a href="#sistema-de-bloques-de-memoria" id="toc-sistema-de-bloques-de-memoria" class="nav-link" data-scroll-target="#sistema-de-bloques-de-memoria">Sistema de bloques de memoria</a></li>
-  <li><a href="#sistema-de-búsqueda-semántica" id="toc-sistema-de-búsqueda-semántica" class="nav-link" data-scroll-target="#sistema-de-búsqueda-semántica">Sistema de búsqueda semántica</a></li>
-  <li><a href="#sistema-de-captura-automática" id="toc-sistema-de-captura-automática" class="nav-link" data-scroll-target="#sistema-de-captura-automática">Sistema de captura automática</a></li>
-  <li><a href="#sistema-de-grafo-de-conocimiento" id="toc-sistema-de-grafo-de-conocimiento" class="nav-link" data-scroll-target="#sistema-de-grafo-de-conocimiento">Sistema de grafo de conocimiento</a></li>
-  <li><a href="#comparativa-rápida" id="toc-comparativa-rápida" class="nav-link" data-scroll-target="#comparativa-rápida">Comparativa rápida</a></li>
+  <li><a href="#paso-1-crea-el-directorio-de-agentes" id="toc-paso-1-crea-el-directorio-de-agentes" class="nav-link" data-scroll-target="#paso-1-crea-el-directorio-de-agentes">Paso 1: Crea el directorio de agentes</a></li>
+  <li><a href="#paso-2-crea-un-archivo-markdown" id="toc-paso-2-crea-un-archivo-markdown" class="nav-link" data-scroll-target="#paso-2-crea-un-archivo-markdown">Paso 2: Crea un archivo Markdown</a></li>
+  <li><a href="#paso-3-escribe-los-metadatos" id="toc-paso-3-escribe-los-metadatos" class="nav-link" data-scroll-target="#paso-3-escribe-los-metadatos">Paso 3: Escribe los metadatos</a></li>
+  <li><a href="#paso-4-escribe-las-instrucciones" id="toc-paso-4-escribe-las-instrucciones" class="nav-link" data-scroll-target="#paso-4-escribe-las-instrucciones">Paso 4: Escribe las instrucciones</a></li>
+  <li><a href="#paso-5-guarda-el-archivo" id="toc-paso-5-guarda-el-archivo" class="nav-link" data-scroll-target="#paso-5-guarda-el-archivo">Paso 5: Guarda el archivo</a></li>
+  <li><a href="#paso-6-úsalo" id="toc-paso-6-úsalo" class="nav-link" data-scroll-target="#paso-6-úsalo">Paso 6: Úsalo</a></li>
   </ul></li>
-  <li><a href="#qué-estrategia-te-conviene-según-tu-equipo" id="toc-qué-estrategia-te-conviene-según-tu-equipo" class="nav-link" data-scroll-target="#qué-estrategia-te-conviene-según-tu-equipo">¿Qué estrategia te conviene según tu equipo?</a></li>
-  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a>
+  <li><a href="#consejos-para-escribir-buenos-prompts-de-agente" id="toc-consejos-para-escribir-buenos-prompts-de-agente" class="nav-link" data-scroll-target="#consejos-para-escribir-buenos-prompts-de-agente">Consejos para escribir buenos prompts de agente</a>
   <ul class="collapse">
-  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
+  <li><a href="#usa-un-tono-coherente" id="toc-usa-un-tono-coherente" class="nav-link" data-scroll-target="#usa-un-tono-coherente">Usa un tono coherente</a></li>
+  <li><a href="#sé-específico-sobre-lo-que-no-debe-hacer" id="toc-sé-específico-sobre-lo-que-no-debe-hacer" class="nav-link" data-scroll-target="#sé-específico-sobre-lo-que-no-debe-hacer">Sé específico sobre lo que NO debe hacer</a></li>
+  <li><a href="#dale-ejemplos-concretos" id="toc-dale-ejemplos-concretos" class="nav-link" data-scroll-target="#dale-ejemplos-concretos">Dale ejemplos concretos</a></li>
+  <li><a href="#estructura-las-instrucciones-con-listas" id="toc-estructura-las-instrucciones-con-listas" class="nav-link" data-scroll-target="#estructura-las-instrucciones-con-listas">Estructura las instrucciones con listas</a></li>
+  <li><a href="#define-el-formato-de-salida" id="toc-define-el-formato-de-salida" class="nav-link" data-scroll-target="#define-el-formato-de-salida">Define el formato de salida</a></li>
+  <li><a href="#revisa-y-ajusta" id="toc-revisa-y-ajusta" class="nav-link" data-scroll-target="#revisa-y-ajusta">Revisa y ajusta</a></li>
   </ul></li>
+  <li><a href="#dónde-guardar-los-archivos-de-agente" id="toc-dónde-guardar-los-archivos-de-agente" class="nav-link" data-scroll-target="#dónde-guardar-los-archivos-de-agente">Dónde guardar los archivos de agente</a>
+  <ul class="collapse">
+  <li><a href="#puedo-tener-agentes-para-todos-mis-proyectos" id="toc-puedo-tener-agentes-para-todos-mis-proyectos" class="nav-link" data-scroll-target="#puedo-tener-agentes-para-todos-mis-proyectos">¿Puedo tener agentes para todos mis proyectos?</a></li>
+  </ul></li>
+  <li><a href="#resumen-rápido" id="toc-resumen-rápido" class="nav-link" data-scroll-target="#resumen-rápido">Resumen rápido</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="informe-memoria-opencode-creadores.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="guia-agentes-creadores.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Cómo OpenCode recuerda (o no) lo que haces</h1>
-<p class="subtitle lead">Guía para creadores de documentación</p>
+<h1 class="title">Guía de Agentes de opencode para Creadores de Contenido</h1>
+<p class="subtitle lead">Cómo crear asistentes de IA especializados sin saber programar</p>
 </div>
 
 
@@ -2269,289 +2280,354 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="qué-es-opencode-y-por-qué-debería-importarte" class="level1">
-<h1>¿Qué es OpenCode y por qué debería importarte?</h1>
-<p>Imagina un asistente que trabaja contigo en la terminal, ayudándote a escribir documentos, estructurar guías, revisar texto y dar formato. Puedes pedirle en lenguaje natural: “pásame esto a markdown”, “revisa la ortografía de este informe”, o “genera una tabla de contenidos para esta guía”.</p>
-<p>Eso es OpenCode: un asistente de IA que entiende tu proyecto y trabaja sobre tus archivos.</p>
-<p>Pero hay un detalle importante: <strong>cada vez que inicias una conversación, el asistente empieza desde cero</strong>. No recuerda lo que hiciste ayer, ni las preferencias que le dijiste la semana pasada, ni cómo está organizado tu proyecto de documentación.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="qué-es-opencode" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-opencode">¿Qué es opencode?</h2>
+<p><strong>opencode</strong> es un asistente de inteligencia artificial que trabaja desde la terminal (esa ventana negra donde los programadores escriben comandos). Su función principal es ayudar a crear y modificar archivos en un proyecto: editar texto, buscar información, organizar directorios, escribir documentación y mucho más.</p>
+<p>Piensa en opencode como un colaborador que entiende instrucciones en lenguaje natural y las ejecuta directamente sobre los archivos de tu computadora.</p>
+</section>
+<section id="qué-es-un-agente" class="level2">
+<h2 class="anchored" data-anchor-id="qué-es-un-agente">¿Qué es un agente?</h2>
+<p>Un <strong>agente</strong> es un asistente especializado dentro de opencode. Es como darle un rol y una personalidad específica a la IA.</p>
+<p>Imagina que tienes un equipo de personas:</p>
+<ul>
+<li>Una persona que solo revisa ortografía</li>
+<li>Otra que sabe diseñar páginas web</li>
+<li>Otra que redacta documentación técnica</li>
+</ul>
+<p>Cada agente es eso: una versión de opencode entrenada —mediante instrucciones escritas— para comportarse de una manera concreta y realizar un tipo de tarea.</p>
+<p>Los agentes no son programas complejos. Son <strong>archivos de texto</strong> con instrucciones claras. Cualquier persona, incluso sin saber programar, puede crear uno.</p>
+</section>
+<section id="partes-de-un-agente" class="level2">
+<h2 class="anchored" data-anchor-id="partes-de-un-agente">Partes de un agente</h2>
+<p>Un agente se escribe en un archivo de texto con formato Markdown (el mismo que se usa para escribir documentos sencillos con títulos, listas y negritas). Estas son sus partes:</p>
+<section id="description" class="level3">
+<h3 class="anchored" data-anchor-id="description"><code>description</code></h3>
+<p>Un texto breve que explica para qué sirve este agente. Cuando opencode lista los agentes disponibles, esta descripción es lo primero que se ve.</p>
+<blockquote class="blockquote">
+<p><strong>Ejemplo:</strong> <em>“Agente redactor de documentación técnica en español”</em></p>
+</blockquote>
+</section>
+<section id="mode" class="level3">
+<h3 class="anchored" data-anchor-id="mode"><code>mode</code></h3>
+<p>Define <strong>cuándo</strong> puede actuar el agente. Hay tres valores:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Modo</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>primary</code></td>
+<td>El agente es el asistente principal. Se usa cuando el usuario no especifica otro agente. Solo puede haber uno.</td>
+</tr>
+<tr class="even">
+<td><code>subagent</code></td>
+<td>El agente solo actúa cuando otro agente lo llama. Es como un especialista al que se recurre para tareas concretas.</td>
+</tr>
+<tr class="odd">
+<td><code>all</code></td>
+<td>El agente está disponible tanto como asistente principal como para ser llamado por otros agentes.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="permission" class="level3">
+<h3 class="anchored" data-anchor-id="permission"><code>permission</code></h3>
+<p>Define <strong>qué puede hacer</strong> el agente. Los permisos evitan que un agente realice acciones que no debería. Los más comunes son:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Permiso</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read</code></td>
+<td>Leer archivos (buscar, consultar, revisar)</td>
+</tr>
+<tr class="even">
+<td><code>write</code></td>
+<td>Crear y modificar archivos</td>
+</tr>
+<tr class="odd">
+<td><code>execute</code></td>
+<td>Ejecutar comandos en la terminal</td>
+</tr>
+</tbody>
+</table>
+<p>Puedes combinar permisos separándolos con barras: <code>read|write</code>, <code>write|execute</code>, etc.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>¿Quieres continuar una sesión anterior?
+<span class="screen-reader-only">Aviso</span>Seguridad
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Puedes reiniciar una sesión con el flag <code>-c</code> o indicando el número de sesión. Así el asistente recupera el contexto previo sin empezar de cero.</p>
+<p>Si un agente solo necesita leer archivos (por ejemplo, un revisor), no le des permiso de escritura. Así evitas cambios accidentales.</p>
 </div>
 </div>
-<p>Esta breve guía explica cómo funciona esa memoria, qué opciones tienes para mejorarla y cuál te conviene según tu forma de trabajar.</p>
 </section>
-<section id="el-problema-cada-sesión-empieza-en-blanco" class="level1">
-<h1>El problema: cada sesión empieza en blanco</h1>
-<p>Imagina que cada mañana llega un becario nuevo a tu equipo. Es brillante, escribe bien y aprende rápido, pero al día siguiente aparece otro becario que no sabe nada de lo que hicisteis el día anterior. No conoce el manual de estilo, no sabe qué guías estáis escribiendo, ni qué formatos preferís.</p>
-<p>Trabajar con OpenCode por defecto es exactamente eso.</p>
-<p><strong>Por qué está diseñado así:</strong></p>
-<ul>
-<li><strong>Privacidad:</strong> OpenCode no guarda nada de tus conversaciones a menos que tú se lo pidas explícitamente.</li>
-<li><strong>Simplicidad:</strong> sin estado persistente, no hay configuraciones que se rompan ni datos que se corrompan.</li>
-<li><strong>Flexibilidad:</strong> puedes usar OpenCode para proyectos muy diferentes sin que se mezclen.</li>
-</ul>
-<p>Pero para el trabajo real de documentación, necesitas que el asistente recuerde al menos algunas cosas: tu guía de estilo, las convenciones de tu equipo, los formatos que usáis habitualmente.</p>
-</section>
-<section id="la-memoria-básica-las-instrucciones-permanentes" class="level1">
-<h1>La memoria básica: las instrucciones permanentes</h1>
-<p>La forma más sencilla de que OpenCode recuerde información es escribirla en un archivo de instrucciones. Es como dejarle una nota al becario antes de que empiece su jornada.</p>
-<section id="instrucciones-para-tu-proyecto" class="level2">
-<h2 class="anchored" data-anchor-id="instrucciones-para-tu-proyecto">Instrucciones para tu proyecto</h2>
-<p>Crea un archivo llamado <code>AGENTS.md</code> en el directorio raíz de tu proyecto. Todo lo que escribas ahí, el asistente lo leerá al empezar cada sesión.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># AGENTS.md (ejemplo para un proyecto de documentación)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Guía de estilo</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usamos tono formal pero accesible</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Títulos en mayúscula solo la primera letra</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Las listas deben tener línea en blanco entre elementos</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Formatos de salida</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Documentos técnicos: Quarto con HTML y PDF</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Guías rápidas: Markdown</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Manuales de usuario: Quarto con EPUB</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convenciones</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Las capturas de pantalla van en /img</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los diagramas en /assets/diagrams</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los archivos fuente en /src</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Puedes pedirle a OpenCode que genere este archivo automáticamente con el comando <code>/init</code>. Él mismo escaneará tu proyecto y creará un resumen con lo más importante.</p>
-</section>
-<section id="instrucciones-globales-para-todos-tus-proyectos" class="level2">
-<h2 class="anchored" data-anchor-id="instrucciones-globales-para-todos-tus-proyectos">Instrucciones globales (para todos tus proyectos)</h2>
-<p>Si trabajas en varios proyectos de documentación y quieres que el asistente recuerde siempre ciertas cosas (por ejemplo, tu nombre, tu tono preferido, o reglas generales de estilo), puedes crear un archivo en tu directorio personal:</p>
-<pre><code>~/.config/OpenCode/AGENTS.md</code></pre>
-<p>Este archivo se aplica a <strong>todos</strong> los proyectos en los que uses OpenCode. Es útil para:</p>
-<ul>
-<li>Tu forma de trabajar preferida</li>
-<li>Recordatorios generales de estilo</li>
-<li>Preferencias personales de formato</li>
-</ul>
-</section>
-<section id="combinando-ambos" class="level2">
-<h2 class="anchored" data-anchor-id="combinando-ambos">Combinando ambos</h2>
-<p>Lo bueno es que ambos archivos se complementan. Las instrucciones globales y las del proyecto se mezclan, así que el asistente recibe toda la información relevante en cada sesión.</p>
+<section id="temperature" class="level3">
+<h3 class="anchored" data-anchor-id="temperature"><code>temperature</code></h3>
+<p>Controla el equilibrio entre <strong>creatividad</strong> y <strong>precisión</strong>. Se expresa con un número del <code>0</code> al <code>1</code>:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 43%">
-<col style="width: 41%">
+<col style="width: 23%">
+<col style="width: 26%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Tipo</th>
-<th>Dónde se guarda</th>
-<th>Para qué sirve</th>
+<th>Valor</th>
+<th>Efecto</th>
+<th>Ideal para…</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Del proyecto</td>
-<td><code>AGENTS.md</code> en tu proyecto</td>
-<td>Reglas específicas de ese proyecto</td>
+<td><code>0.0</code> — <code>0.3</code></td>
+<td>Muy preciso, predecible, sigue las reglas al pie de la letra</td>
+<td>Revisión técnica, traducción literal, tareas repetitivas</td>
 </tr>
 <tr class="even">
-<td>Globales</td>
-<td><code>~/.config/OpenCode/AGENTS.md</code></td>
-<td>Tus preferencias personales en todos los proyectos</td>
+<td><code>0.4</code> — <code>0.7</code></td>
+<td>Equilibrio entre creatividad y precisión</td>
+<td>Redacción de documentación, sugerencias, escritura general</td>
+</tr>
+<tr class="odd">
+<td><code>0.8</code> — <code>1.0</code></td>
+<td>Muy creativo, puede desviarse del guion</td>
+<td>Lluvia de ideas, contenido promocional, textos literarios</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="el-límite-de-este-enfoque" class="level2">
-<h2 class="anchored" data-anchor-id="el-límite-de-este-enfoque">El límite de este enfoque</h2>
-<p>Las instrucciones en <code>AGENTS.md</code> son <strong>estáticas</strong>. Si cambias algo, tienes que editarlas a mano. El asistente no aprende de tus conversaciones ni guarda automáticamente los descubrimientos que hace mientras trabaja.</p>
-<p>Para eso necesitas niveles más avanzados de memoria.</p>
-</section>
-</section>
-<section id="los-skills-conocimiento-especializado-a-la-carta" class="level1">
-<h1>Los <em>skills</em>: conocimiento especializado a la carta</h1>
-<p>Los <em>skills</em> (habilidades o competencias) son como fichas de consulta rápida. Contienen instrucciones muy concretas sobre una tarea específica, y el asistente las carga solo cuando las necesita.</p>
-<p>Por ejemplo, puedes tener un skill para el formato de tus documentos Quarto. Cuando el asistente vea que estás trabajando con un archivo <code>.qmd</code>, cargará automáticamente las instrucciones de estilo.</p>
-<pre><code>.OpenCode/skills/estilo-quarto/
-└── SKILL.md   ← &quot;Para documentos Quarto, usa estos formatos...&quot;</code></pre>
-<p>La ventaja es que el asistente no lleva todo ese conocimiento encima todo el tiempo (lo que ahorra espacio en su “cabeza”), pero lo tiene disponible cuando lo necesita.</p>
-<p>Son útiles para:</p>
-<ul>
-<li><p>Reglas de formato específicas (Quarto, Markdown, LaTeX)</p></li>
-<li><p>Guías de estilo para distintos tipos de documento</p></li>
-<li><p>Plantillas de estructura recurrente</p></li>
-<li><p>Listas de comprobación para revisar documentación</p></li>
-</ul>
-</section>
-<section id="la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo" class="level1">
-<h1>La memoria avanzada: cuando el asistente recuerda por sí mismo</h1>
-<p>Si trabajas con muchos proyectos o equipos grandes, las instrucciones estáticas se quedan cortas. Necesitas que el asistente recuerde automáticamente lo que ha aprendido.</p>
-<p>La comunidad de OpenCode ha creado varios sistemas para añadir memoria persistente. Aquí tienes los más relevantes explicados sin tecnicismos.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Consejo</span>Más información
+<span class="screen-reader-only">Consejo</span>Regla práctica
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Consulta la <a href="https://opencode.ai/docs/plugins/">documentación de plugins de OpenCode</a> para ver ejemplos prácticos y guías de implementación de cada sistema de memoria.</p>
+<p>Para documentación técnica usa <code>0.3</code> o <code>0.4</code>. Quieres claridad, no ocurrencias.</p>
 </div>
 </div>
-<section id="sistema-de-bloques-de-memoria" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-bloques-de-memoria">Sistema de bloques de memoria</h2>
-<p>Algunos <em>plugins</em> añaden “bloques de memoria” que el asistente puede leer y modificar por sí mismo.</p>
-<p><strong>Dónde se guarda la memoria:</strong></p>
-<div data-tbl-colwidths="[17,33,50]">
+</section>
+<section id="el-cuerpo-del-agente-la-personalidad" class="level3">
+<h3 class="anchored" data-anchor-id="el-cuerpo-del-agente-la-personalidad">El cuerpo del agente (la personalidad)</h3>
+<p>Después de los metadatos anteriores, el archivo contiene las <strong>instrucciones</strong> que definen cómo debe comportarse el agente. Aquí se escribe:</p>
+<ul>
+<li>Su <strong>rol</strong> (qué es y qué hace)</li>
+<li>Su <strong>tono</strong> (formal, casual, didáctico)</li>
+<li>Sus <strong>reglas</strong> (lo que debe y no debe hacer)</li>
+<li>El <strong>formato</strong> de sus respuestas</li>
+<li><strong>Conocimiento</strong> que debe tener presente siempre</li>
+</ul>
+</section>
+</section>
+<section id="ejemplo-práctico-el-agente-scribe" class="level2">
+<h2 class="anchored" data-anchor-id="ejemplo-práctico-el-agente-scribe">Ejemplo práctico: el agente <code>scribe</code></h2>
+<p>Este mismo documento ha sido creado por el agente <code>scribe</code>. Así es su definición completa:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Agente redactor de documentación técnica en español. Produce guías, manuales y tutoriales.&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span><span class="kw">:</span><span class="at"> all</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">permission</span><span class="kw">:</span><span class="at"> read|write</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">temperature</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.4</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y sus instrucciones (el cuerpo del agente) serían algo así:</p>
+<blockquote class="blockquote">
+<p>Eres el agente <code>scribe</code>, un redactor de documentación técnica.</p>
+<ul>
+<li>Escribes en español, con tono claro y accesible.</li>
+<li>Explicas los términos técnicos cuando los usas.</li>
+<li>Usas lenguaje sencillo, apto para personas no programadoras.</li>
+<li>Estructuras el contenido con títulos, listas y tablas.</li>
+<li>No añades opiniones personales ni contenido promocional.</li>
+<li>Prefieres ejemplos prácticos a definiciones abstractas.</li>
+</ul>
+</blockquote>
+<p>Este agente tiene permiso para leer y escribir archivos, trabaja con temperatura equilibrada (<code>0.4</code>), y está disponible tanto como agente principal como para ser invocado por otros agentes.</p>
+</section>
+<section id="cómo-crear-tu-propio-agente-paso-a-paso" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-crear-tu-propio-agente-paso-a-paso">Cómo crear tu propio agente (paso a paso)</h2>
+<section id="paso-1-crea-el-directorio-de-agentes" class="level3">
+<h3 class="anchored" data-anchor-id="paso-1-crea-el-directorio-de-agentes">Paso 1: Crea el directorio de agentes</h3>
+<p>Los agentes se guardan dentro del directorio <code>.opencode/agents/</code> de tu proyecto. Si no existe, créalo.</p>
+</section>
+<section id="paso-2-crea-un-archivo-markdown" class="level3">
+<h3 class="anchored" data-anchor-id="paso-2-crea-un-archivo-markdown">Paso 2: Crea un archivo Markdown</h3>
+<p>Cada agente es un archivo con extensión <code>.md</code>. El nombre del archivo será el nombre del agente.</p>
+<p>Por ejemplo: <code>revisor-ortografia.md</code> o <code>disenador-web.md</code>.</p>
+</section>
+<section id="paso-3-escribe-los-metadatos" class="level3">
+<h3 class="anchored" data-anchor-id="paso-3-escribe-los-metadatos">Paso 3: Escribe los metadatos</h3>
+<p>Al principio del archivo, escribe un bloque <code>---</code> (llamado “frontmatter”) con los datos del agente:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Describe brevemente lo que hace tu agente&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mode</span><span class="kw">:</span><span class="at"> all</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">permission</span><span class="kw">:</span><span class="at"> read|write</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">temperature</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.4</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="paso-4-escribe-las-instrucciones" class="level3">
+<h3 class="anchored" data-anchor-id="paso-4-escribe-las-instrucciones">Paso 4: Escribe las instrucciones</h3>
+<p>Debajo del bloque de metadatos, escribe en lenguaje natural cómo quieres que se comporte el agente. Sé específico. Cuanto más claro seas, mejor será el resultado.</p>
+</section>
+<section id="paso-5-guarda-el-archivo" class="level3">
+<h3 class="anchored" data-anchor-id="paso-5-guarda-el-archivo">Paso 5: Guarda el archivo</h3>
+<p>Guarda el archivo en <code>.opencode/agents/tu-agente.md</code>. Ya está listo para usar.</p>
+</section>
+<section id="paso-6-úsalo" class="level3">
+<h3 class="anchored" data-anchor-id="paso-6-úsalo">Paso 6: Úsalo</h3>
+<p>Ejecuta opencode y dile que use tu agente:</p>
+<pre><code>opencode --agent tu-agente</code></pre>
+<p>O, si ya estás dentro de opencode, escribe:</p>
+<pre><code>/tu-agente</code></pre>
+</section>
+</section>
+<section id="consejos-para-escribir-buenos-prompts-de-agente" class="level2">
+<h2 class="anchored" data-anchor-id="consejos-para-escribir-buenos-prompts-de-agente">Consejos para escribir buenos prompts de agente</h2>
+<p>Escribir las instrucciones de un agente es como redactar el manual de bienvenida para un empleado nuevo. Debes ser claro, completo y sin ambigüedades.</p>
+<section id="usa-un-tono-coherente" class="level3">
+<h3 class="anchored" data-anchor-id="usa-un-tono-coherente">Usa un tono coherente</h3>
+<p>Define el tono desde el principio. Por ejemplo:</p>
+<blockquote class="blockquote">
+<p>“Eres un asistente formal y profesional. Usas tratamiento de usted. Tus respuestas son directas y sin rodeos.”</p>
+</blockquote>
+<p>O si prefieres algo más cercano:</p>
+<blockquote class="blockquote">
+<p>“Eres un asistente amable y conversacional. Explicas las cosas como si hablaras con un compañero de trabajo.”</p>
+</blockquote>
+</section>
+<section id="sé-específico-sobre-lo-que-no-debe-hacer" class="level3">
+<h3 class="anchored" data-anchor-id="sé-específico-sobre-lo-que-no-debe-hacer">Sé específico sobre lo que NO debe hacer</h3>
+<p>A veces es más importante decir lo que no quieres:</p>
+<ul>
+<li>“No añadas bromas ni emojis.”</li>
+<li>“No inventes datos ni cites fuentes que no existan.”</li>
+<li>“No modifiques archivos sin confirmación explícita.”</li>
+</ul>
+</section>
+<section id="dale-ejemplos-concretos" class="level3">
+<h3 class="anchored" data-anchor-id="dale-ejemplos-concretos">Dale ejemplos concretos</h3>
+<p>Si quieres que el agente tenga un estilo particular, muéstrale cómo quieres que sea la salida:</p>
+<blockquote class="blockquote">
+<p>Cuando escribas ejemplos de código, usa este formato:</p>
+<pre><code># Esto es un ejemplo
+print(&quot;Hola, mundo&quot;)</code></pre>
+</blockquote>
+</section>
+<section id="estructura-las-instrucciones-con-listas" class="level3">
+<h3 class="anchored" data-anchor-id="estructura-las-instrucciones-con-listas">Estructura las instrucciones con listas</h3>
+<p>Las listas son más fáciles de seguir que los párrafos largos:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="an">Reglas:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Revisa la ortografía antes de escribir</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usa voz activa</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Prefiere oraciones cortas (menos de 20 palabras)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Cada párrafo debe tratar una sola idea</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="define-el-formato-de-salida" class="level3">
+<h3 class="anchored" data-anchor-id="define-el-formato-de-salida">Define el formato de salida</h3>
+<p>Si necesitas un formato concreto, descríbelo:</p>
+<blockquote class="blockquote">
+<p>“Cada respuesta debe comenzar con un resumen de una línea. Luego desarrolla el contenido. Al final, incluye una sección de «Próximos pasos» si aplica.”</p>
+</blockquote>
+</section>
+<section id="revisa-y-ajusta" class="level3">
+<h3 class="anchored" data-anchor-id="revisa-y-ajusta">Revisa y ajusta</h3>
+<p>Los agentes no salen perfectos a la primera. Úsalos, observa dónde fallan y ajusta sus instrucciones. Es un proceso iterativo.</p>
+</section>
+</section>
+<section id="dónde-guardar-los-archivos-de-agente" class="level2">
+<h2 class="anchored" data-anchor-id="dónde-guardar-los-archivos-de-agente">Dónde guardar los archivos de agente</h2>
+<p>Los agentes se guardan en un directorio llamado <code>.opencode</code> dentro de la raíz de tu proyecto. La estructura es:</p>
+<pre><code>tu-proyecto/
+  .opencode/
+    agents/
+      scribe.md
+      revisor-ortografia.md
+      disenador-web.md</code></pre>
+<p>El directorio <code>.opencode</code> puede contener también otros archivos de configuración de opencode, pero los agentes siempre van dentro de <code>agents/</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Archivos ocultos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El directorio <code>.opencode</code> comienza con un punto. En muchos sistemas, los directorios que empiezan con punto están ocultos. Si no lo ves, activa la opción de “mostrar archivos ocultos” en tu explorador de archivos.</p>
+</div>
+</div>
+<section id="puedo-tener-agentes-para-todos-mis-proyectos" class="level3">
+<h3 class="anchored" data-anchor-id="puedo-tener-agentes-para-todos-mis-proyectos">¿Puedo tener agentes para todos mis proyectos?</h3>
+<p>Sí. Cada proyecto puede tener sus propios agentes en su propio directorio <code>.opencode/agents/</code>. También puedes copiar agentes de un proyecto a otro si te resultan útiles.</p>
+</section>
+</section>
+<section id="resumen-rápido" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-rápido">Resumen rápido</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 33%">
-<col style="width: 50%">
+<col style="width: 52%">
+<col style="width: 47%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Tipo</th>
-<th>Se recuerda …</th>
-<th>Ejemplo</th>
+<th>Concepto</th>
+<th>Resumen</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Global</td>
-<td>En todos los proyectos</td>
-<td>“La autora prefiere tono formal”</td>
+<td><strong>opencode</strong></td>
+<td>Asistente de IA que trabaja en la terminal y modifica archivos</td>
 </tr>
 <tr class="even">
-<td>Del proyecto</td>
-<td>Solo en ese proyecto</td>
-<td>“Este manual usa convención X para los ejemplos”</td>
+<td><strong>Agente</strong></td>
+<td>Versión especializada de opencode con rol y personalidad</td>
+</tr>
+<tr class="odd">
+<td><strong>description</strong></td>
+<td>Texto breve que explica para qué sirve</td>
+</tr>
+<tr class="even">
+<td><strong>mode</strong></td>
+<td>Cuándo actúa: <code>primary</code>, <code>subagent</code> o <code>all</code></td>
+</tr>
+<tr class="odd">
+<td><strong>permission</strong></td>
+<td>Qué puede hacer: <code>read</code>, <code>write</code>, <code>execute</code></td>
+</tr>
+<tr class="even">
+<td><strong>temperature</strong></td>
+<td>Creatividad vs precisión (<code>0.0</code> = preciso, <code>1.0</code> = creativo)</td>
+</tr>
+<tr class="odd">
+<td><strong>Cuerpo</strong></td>
+<td>Instrucciones en lenguaje natural</td>
+</tr>
+<tr class="even">
+<td><strong>Ubicación</strong></td>
+<td><code>.opencode/agents/&lt;nombre&gt;.md</code></td>
 </tr>
 </tbody>
 </table>
-</div>
-<p><strong>Cómo funciona:</strong> El asistente tiene tres bloques por defecto:</p>
-<ol type="1">
-<li><p><strong>Comportamiento</strong> — cómo debe actuar y responder el asistente</p></li>
-<li><p><strong>Preferencias del usuario</strong> — tus costumbres y configuración personal</p></li>
-<li><p><strong>Contexto del proyecto</strong> — lo específico de cada proyecto</p></li>
-</ol>
-<p>El asistente puede añadir, modificar o borrar información de estos bloques durante la conversación. Así, si descubre algo relevante, lo guarda automáticamente para la próxima sesión.</p>
-</section>
-<section id="sistema-de-búsqueda-semántica" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-búsqueda-semántica">Sistema de búsqueda semántica</h2>
-<p>Otros <em>plugins</em> almacenan la memoria en una base de datos que entiende el significado de lo que guardas, no solo las palabras exactas.</p>
-<p>Esto significa que si guardas “en este proyecto usamos el formato APA para las referencias”, y más tarde preguntas “¿cómo se citan las fuentes aquí?”, el asistente encontrará esa memoria aunque uses palabras diferentes.</p>
-<p><strong>Dos niveles de memoria:</strong></p>
-<ul>
-<li><p><strong>Tuya personal:</strong> preferencias que te siguen a cualquier proyecto (“siempre uso tamaño 11pt para los PDFs”)</p></li>
-<li><p><strong>Del proyecto:</strong> cosas específicas de ese proyecto (“este manual usa notas al pie en lugar de citas entre paréntesis”)</p></li>
-</ul>
-</section>
-<section id="sistema-de-captura-automática" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-captura-automática">Sistema de captura automática</h2>
-<p>Hay <em>plugins</em> que observan lo que haces y lo guardan ellos solos. Mientras trabajas (lees archivos, haces cambios, ejecutas comandos), el plugin va tomando notas. Luego, con la ayuda de la IA, comprime esas notas en observaciones útiles.</p>
-<p>Al empezar una nueva sesión, el asistente recibe un resumen de lo más importante que ocurrió en sesiones anteriores. Es como si el becario llegara cada mañana con un informe de lo que se hizo el día anterior.</p>
-</section>
-<section id="sistema-de-grafo-de-conocimiento" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-grafo-de-conocimiento">Sistema de grafo de conocimiento</h2>
-<p>Los más avanzados construyen un “mapa de conceptos” donde conectan ideas: una decisión de formato lleva a un estilo concreto, que a su vez afecta a ciertos tipos de documento. Esto permite al asistente navegar relaciones complejas entre la información que ha aprendido.</p>
-</section>
-<section id="comparativa-rápida" class="level2">
-<h2 class="anchored" data-anchor-id="comparativa-rápida">Comparativa rápida</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 21%">
-<col style="width: 34%">
-<col style="width: 25%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Sistema</th>
-<th>Lo bueno</th>
-<th>Lo menos bueno</th>
-<th>Ideal para</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Instrucciones (AGENTS.md)</td>
-<td>Sencillo, sin instalación</td>
-<td>No aprende solo</td>
-<td>Proyectos pequeños, equipos de 1-2 personas</td>
-</tr>
-<tr class="even">
-<td>Skills</td>
-<td>Ligero, bajo demanda</td>
-<td>Hay que crearlos manualmente</td>
-<td>Tareas repetitivas con formato fijo</td>
-</tr>
-<tr class="odd">
-<td>Bloques de memoria</td>
-<td>El asistente se actualiza solo</td>
-<td>Requiere instalar un plugin</td>
-<td>Equipos pequeños que quieren persistencia básica</td>
-</tr>
-<tr class="even">
-<td>Búsqueda semántica</td>
-<td>Encuentra memorias relacionadas</td>
-<td>Más complejo de configurar</td>
-<td>Proyectos grandes con mucha documentación</td>
-</tr>
-<tr class="odd">
-<td>Captura automática</td>
-<td>No requiere acción manual</td>
-<td>Consume más recursos</td>
-<td>Equipos que quieren “configurar y olvidar”</td>
-</tr>
-<tr class="even">
-<td>Grafo de conocimiento</td>
-<td>Relaciona conceptos complejos</td>
-<td>El más complejo</td>
-<td>Grandes equipos con documentación interconectada</td>
-</tr>
-</tbody>
-</table>
-</section>
-</section>
-<section id="qué-estrategia-te-conviene-según-tu-equipo" class="level1">
-<h1>¿Qué estrategia te conviene según tu equipo?</h1>
-<p>No necesitas instalar sistemas complicados desde el principio. La mayoría de los equipos de documentación pueden seguir esta progresión:</p>
-<p><strong>Nivel 1 — Un proyecto pequeño (1-3 personas)</strong></p>
-<p>Crea un <code>AGENTS.md</code> con vuestra guía de estilo y las convenciones del proyecto. Es suficiente para la mayoría de los casos. Si usáis Quarto o Markdown, añadid un skill con las reglas de formato.</p>
-<p><strong>Nivel 2 — Varios proyectos (equipo de documentación)</strong></p>
-<p>Además del <code>AGENTS.md</code> de cada proyecto, cread un archivo global con las preferencias del equipo. Así todos los miembros tienen la misma base aunque trabajen en proyectos distintos.</p>
-<p><strong>Nivel 3 — Equipo grande o documentación extensa</strong></p>
-<p>Instalad un sistema de memoria con búsqueda semántica. Especialmente si manejáis muchos términos técnicos, glosarios, o convenciones que cambian con el tiempo. El asistente encontrará la información relevante aunque uses palabras distintas para preguntar.</p>
-<p><strong>Nivel 4 — Documentación interconectada (varios manuales, productos, versiones)</strong></p>
-<p>Combinad varios sistemas: instrucciones globales para el equipo, skills para formatos específicos, y un grafo de conocimiento para relacionar conceptos entre distintos manuales y productos.</p>
-</section>
-<section id="conclusión" class="level1">
-<h1>Conclusión</h1>
-<p>OpenCode no recuerda nada entre sesiones por decisión de diseño, pero ofrece un abanico de opciones para que recuerde exactamente lo que tú necesitas:</p>
-<ul>
-<li>Las <strong>instrucciones</strong> son como un manual de estilo que el asistente lee siempre</li>
-<li>Los <em>skills</em> son fichas de consulta rápida para tareas concretas</li>
-<li>Los <em>plugins</em> de memoria permiten que el asistente aprenda y recuerde por sí mismo</li>
-</ul>
-<p>La clave está en elegir lo que necesitas según tu equipo y tus proyectos. Para un equipo pequeño de documentación, las instrucciones y los skills suelen ser más que suficientes. Para equipos grandes con mucha documentación interconectada, los sistemas de memoria avanzada marcan la diferencia entre repetir explicaciones cada sesión y retomar el trabajo exactamente donde lo dejaste.</p>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<ul>
-<li><a href="https://OpenCode.ai">OpenCode</a> — Asistente de IA que trabaja sobre archivos locales. Guías de configuración y uso.</li>
-<li><a href="https://OpenCode.ai/docs/rules/">Rules (AGENTS.md)</a> — Cómo crear instrucciones personalizadas para OpenCode mediante archivos AGENTS.md.</li>
-<li><a href="https://OpenCode.ai/docs/skills/">Agent Skills</a> — Sistema de habilidades reutilizables que se cargan bajo demanda.</li>
-<li><a href="https://OpenCode.ai/docs/plugins/">Plugins</a> — Cómo extender OpenCode con plugins para añadir funcionalidades como memoria persistente.</li>
-<li><a href="https://github.com/anomalyco/OpenCode">OpenCode en GitHub</a> — Repositorio oficial del código fuente.</li>
-</ul>
-</section>
+<hr>
+<p><em>Documento creado por el agente <code>scribe</code> — un asistente de documentación técnica para opencode.</em></p>
 </section>
 
 </main>

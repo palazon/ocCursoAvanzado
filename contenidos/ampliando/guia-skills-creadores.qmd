@@ -96,7 +96,7 @@ agente = *qué hacer* (acción activa)
 
 ## Anatomía de un skill
 
-Cada skill vive dentro de una carpeta con su nombre:
+Cada skill vive dentro de un directorio con su nombre:
 
 ```
 .opencode/skills/<nombre>/SKILL.md
@@ -209,11 +209,11 @@ Hay dos lugares donde puedes colocar skills:
 | **Proyecto** | Solo afecta a ese proyecto | `.opencode/skills/<nombre>/SKILL.md` |
 | **Global** | Afecta a todos los proyectos | `~/.config/opencode/skills/<nombre>/SKILL.md` |
 
-- Los skills de **proyecto** van dentro del repositorio o carpeta del proyecto. Son ideales para convenciones de equipo.
-- Los skills **globales** van en tu carpeta personal de configuración. Sirven para reglas que aplicas siempre, como tu guía de estilo personal.
+- Los skills de **proyecto** van dentro del repositorio o directorio del proyecto. Son ideales para convenciones de equipo.
+- Los skills **globales** van en tu directorio personal de configuración. Sirven para reglas que aplicas siempre, como tu guía de estilo personal.
 
 ::: {.callout-tip}
-Si trabajas con un equipo, usa skills de proyecto y versiona la carpeta `.opencode/` con Git. Así todo el mundo comparte las mismas reglas.
+Si trabajas con un equipo, usa skills de proyecto y versiona el directorio `.opencode/` con Git. Así todo el mundo comparte las mismas reglas.
 :::
 
 ## Consejos para escribir descripciones efectivas

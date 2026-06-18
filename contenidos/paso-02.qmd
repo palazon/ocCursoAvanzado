@@ -9,6 +9,15 @@ tareas repetitivas de documentación.
 
 Duración estimada: **25 minutos**
 
+::: {.callout-tip}
+## ¿Por qué crear skills?
+
+Un skill es como una receta que le das a OpenCode. Si repites
+la misma tarea muchas veces, crear un skill te ahorra tiempo:
+escribes la instrucción una sola vez y la reutilizas siempre
+que la necesites.
+:::
+
 ---
 
 ## ¿Qué es un skill?
@@ -19,11 +28,11 @@ los agentes, los skills:
 
 - **No están siempre disponibles** — se cargan bajo demanda
 - **Son multiplataforma** — valen para cualquier proyecto
-- **Se guardan en tu carpeta de configuración** global
+- **Se guardan en tu directorio de configuración** global
 - **Se invocan por nombre** desde el chat
 
 Mientras que un agente se define dentro de un proyecto (`.opencode/agents/`),
-un skill se define una sola vez y se usa desde cualquier carpeta.
+un skill se define una sola vez y se usa desde cualquier directorio.
 
 ::: {.callout-note}
 ## Skills locales y globales
@@ -54,7 +63,7 @@ Por ejemplo:
 
 Crear un skill es muy sencillo. Solo necesitas:
 
-1. **Una carpeta** con el nombre del skill
+1. **Un directorio** con el nombre del skill
 2. **Un archivo `SKILL.md`** dentro, con frontmatter YAML y las instrucciones
 
 OpenCode descubre los skills automáticamente desde `~/.config/opencode/skills/`.
@@ -64,7 +73,7 @@ No hace falta registrarlos en ningún archivo JSON.
 ## Nota informativa
 
 También puedes definir skills por proyecto. Crea la
-carpeta `.opencode/skills/` dentro de tu proyecto y coloca ahí
+directorio `.opencode/skills/` dentro de tu proyecto y coloca ahí
 los `SKILL.md`. OpenCode priorizará los skills del proyecto
 sobre los globales si hay conflicto de nombres.
 :::
@@ -90,7 +99,7 @@ identifica el skill y `description` aparece cuando se invoca.
 
 ## Manos a la obra
 
-### Ejercicio 1 — Crear la carpeta de skills
+### Ejercicio 1 — Crear el directorio de skills
 
 Los skills se guardan en `~/.config/opencode/skills/`
 (el `~` representa tu directorio personal: `/home/usuario` en
@@ -102,7 +111,7 @@ mkdir -p ~/.config/opencode/skills
 
 ### Ejercicio 2 — Crear un skill de normalización de fechas
 
-Crea la carpeta y el archivo del skill:
+Crea el directorio y el archivo del skill:
 
 ```bash
 mkdir -p ~/.config/opencode/skills/formatear-fechas
@@ -172,7 +181,7 @@ OpenCode lo descubrirá automáticamente al reiniciar.
 
 ### Ejercicio 6 — Skills desde cualquier proyecto
 
-Abre una terminal en otra carpeta cualquiera y prueba:
+Abre una terminal en otro directorio cualquiera y prueba:
 
 > Usa el skill revisar-tablas
 

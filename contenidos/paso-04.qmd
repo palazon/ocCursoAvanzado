@@ -81,7 +81,7 @@ ha hecho cada cambio.
 
 Tu mejor amigo del futuro eres tú. Y Git puede ayudarte a serlo aún más.
 
-### Paso 2 — Crear carpeta y repositorio
+### Paso 2 — Crear directorio y repositorio
 
 ```bash
 mkdir ~/mi-proyecto

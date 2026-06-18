@@ -10,6 +10,14 @@ formato.
 
 Duración estimada: **25 minutos**
 
+::: {.callout-tip}
+## ¿Por qué crear agentes?
+
+Si siempre le pides a OpenCode lo mismo —revisar estilo, traducir,
+formatear— puedes crear un agente dedicado. Así no tienes que
+recordar cada vez qué debe hacer y qué no. El agente ya lo sabe.
+:::
+
 ---
 
 ## ¿Qué es un agente personalizado?
@@ -24,7 +32,7 @@ un agente puede estar limitado a una tarea concreta:
 - **Normalizador** — aplica un formato corporativo estándar
 - **Traductor corporativo** — traduce con vocabulario específico
 
-Los agentes se definen en archivos Markdown dentro de la carpeta
+Los agentes se definen en archivos Markdown dentro del directorio
 `.opencode/agents/`.
 Cada archivo es un agente.
 El nombre del archivo es el nombre del agente.
@@ -78,7 +86,7 @@ Para invocarlo, escribes `@nombre-del-agente` seguido de tu petición.
 
 ## Manos a la obra
 
-### Ejercicio 1 — Crear la carpeta de agentes
+### Ejercicio 1 — Crear el directorio de agentes
 
 ```bash
 mkdir -p .opencode/agents
@@ -206,4 +214,4 @@ no hace cambios. Luego cambia a Build y vuelve a invocarlo.
 En el próximo paso veremos cómo crear skills reutilizables para
 tareas de documentación.
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

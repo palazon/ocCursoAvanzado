@@ -9,20 +9,50 @@ en entornos con documentos sensibles.
 
 Duración estimada: **20 minutos**
 
+::: {.callout-tip}
+## ¿Por qué aprender sobre permisos?
+
+Controlar qué puede y qué no puede hacer OpenCode te da
+tranquilidad. No es solo para empresas: si trabajas con
+documentos importantes, los permisos evitan errores costosos.
+
+Si no usas Git para versionar tus documentos, esto es aún
+más crítico: sin historial de cambios, una modificación
+accidental puede ser irreversible. Usar tirantes y correa
+siempre aumenta la seguridad.
+:::
+
 ---
 
 ## ¿Por qué controlar permisos?
 
-En entornos corporativos o con información sensible, es
-importante limitar las acciones del asistente: que pueda
-leer pero no modificar, o que no pueda ejecutar comandos.
+A veces es conveniente limitar lo que OpenCode puede hacer.
+No por desconfianza, sino por prudencia: evitar modificaciones
+accidentales, proteger archivos importantes o simplemente
+trabajar más tranquilo.
 
-OpenCode permite definir permisos a distintos niveles:
+**Ejemplos cotidianos**:
 
-- **Global** — para todos los proyectos
-- **Por proyecto** — en `opencode.jsonc`
-- **Por agente** — en cada agente individual
-- **Por acción** — editar archivos, ejecutar bash, acceder a rutas
+- **Evitar borrados accidentales** — si estás revisando un
+  documento importante, puedes denegar la edición para que
+  OpenCode solo lea y sugiera cambios, sin tocar el original
+
+- **Proteger archivos privados** — si tienes un directorio con
+  datos personales, puedes impedir que OpenCode la lea
+
+- **Limitar comandos del sistema** — si no necesitas que
+  OpenCode ejecute comandos bash, puedes desactivarlos
+
+- **Trabajar en equipo sin riesgos** — que cada miembro
+  solo pueda modificar ciertos directorios
+
+**Documento protegido**: cuando un documento está terminado
+y no debe modificarse, puedes cambiar su permiso a solo
+lectura. Así OpenCode puede consultarlo pero no alterarlo.
+
+**Analogía**: piensa en los permisos como las llaves de una
+casa. No todas las puertas necesitan la misma llave. A OpenCode
+le das las llaves que necesita para trabajar, ni más ni menos.
 
 ---
 
@@ -89,9 +119,9 @@ Pruébalo en *Build*:
 
 OpenCode debería responder que no tiene permiso para editar.
 
-### Ejercicio 3 — Permitir solo lectura de ciertas carpetas
+### Ejercicio 3 — Permitir solo lectura de ciertos directorios
 
-A veces quieres que OpenCode lea archivos de una carpeta
+A veces quieres que OpenCode lea archivos de un directorio
 pero no de otras:
 
 ```jsonc
@@ -105,7 +135,7 @@ pero no de otras:
 }
 ```
 
-Crea una carpeta `privado/` en la raíz del proyecto con un
+Crea un directorio `privado/` en la raíz del proyecto con un
 archivo de prueba y comprueba que OpenCode no puede leerlo.
 
 ### Ejercicio 4 — Denegar bash pero permitir edición
@@ -127,7 +157,7 @@ sustitúyelo por:
 
 Pruébalo: pide a OpenCode que liste los archivos con bash:
 
-> Lista los archivos de esta carpeta con bash
+> Lista los archivos de este directorio con bash
 
 Debería responder que no tiene permiso.
 
@@ -173,16 +203,42 @@ Resultado: el agente revisor no puede editar (por su propio
 permiso) ni ejecutar bash (por el proyecto). El resto de
 agentes sí pueden editar, pero ninguno puede ejecutar bash.
 
+### Ejercicio 7 — Proteger un documento terminado
+
+Imagina que `paso-01.qmd` ya está revisado y no debe
+modificarse. Puedes protegerlo creando un archivo
+`opencode.jsonc` en la raíz:
+
+```jsonc
+{
+  "permission": {
+    "read": {
+      "deny": ["paso-01.qmd"]
+    }
+  }
+}
+```
+
+Ahora OpenCode no podrá leer ese archivo específico. Prueba
+a pedirle que lo revise:
+
+> Revisa el estilo de paso-01.qmd
+
+Debería indicar que no tiene permiso para leerlo.
+
 ---
 
 ## Buenas prácticas
 
 - **Principio de mínimo privilegio** — otorga solo los
   permisos necesarios para cada tarea
+
 - **Documenta los permisos** — incluye comentarios en
   `opencode.jsonc` explicando por qué existen restricciones
+
 - **Prueba cada restricción** — verifica que el
   comportamiento es el esperado antes de desplegar
+
 - **Revisa periódicamente** — los permisos deben revisarse
   igual que cualquier otra configuración
 
@@ -192,12 +248,25 @@ agentes sí pueden editar, pero ninguno puede ejecutar bash.
 
 - ✅ Has visto los niveles de permisos (global, proyecto, agente)
 - ✅ Has restringido la edición en el proyecto
-- ✅ Has limitado el acceso a carpetas concretas
+- ✅ Has limitado el acceso a directorios concretos
 - ✅ Has denegado la ejecución de bash
 - ✅ Has combinado permisos en un agente revisor
 - ✅ Conoces el principio de mínimo privilegio
 
+::: {.callout-tip}
+## Pide a OpenCode que configure los permisos
+
+Ahora que entiendes cómo se controlan los permisos y para qué
+sirven, puedes pedirle a OpenCode que realice los ajustes
+pertinentes. Por ejemplo, escribe en *Plan*:
+
+"Crea un archivo opencode.jsonc que deniegue bash pero permita
+edición, y que solo pueda leer el directorio docs/"
+
+OpenCode generará la configuración por ti.
+:::
+
 En el próximo paso veremos cómo colaborar en equipo compartiendo
 configuración, comandos y agentes.
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

@@ -395,8 +395,8 @@ cada concepto.
 
 ### Ejercicio 1 {-}
 
-Antes de configurar servidores MCP, necesitamos una carpeta de
-trabajo con contenido. Crea una carpeta llamada `glosario` dentro
+Antes de configurar servidores MCP, necesitamos un directorio de
+trabajo con contenido. Crea un directorio llamado `glosario` dentro
 de `Documentos` y guarda un archivo llamado `glosario.md` con
 este contenido:
 
@@ -417,7 +417,7 @@ Forma en que dos aplicaciones se comunican entre sí.
 ### Ejercicio 2 {-}
 
 El servidor de sistema de archivos permite a OpenCode leer
-archivos de carpetas concretas de forma segura.
+archivos de directorios concretos de forma segura.
 
 Crea un archivo `.opencode/mcp.json` en la raíz del proyecto:
 
@@ -429,14 +429,14 @@ Crea un archivo `.opencode/mcp.json` en la raíz del proyecto:
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/ruta/a/tu/carpeta/compartida"
+        "/ruta/a/tu/directorio/compartido"
       ]
     }
   }
 }
 ```
 
-> Cambia `/ruta/a/tu/carpeta/compartida` por una carpeta real
+> Cambia `/ruta/a/tu/directorio/compartido` por un directorio real
 > de tu sistema, por ejemplo `/home/usuario/Documentos/glosario`
 
 ### Ejercicio 3 {-}
@@ -538,7 +538,7 @@ Añade un servidor SQLite al `mcp.json`:
 
 | Servidor | Para qué sirve |
 |----------|---------------|
-| `server-filesystem` | Leer archivos de una carpeta segura |
+| `server-filesystem` | Leer archivos de un directorio seguro |
 | `server-sqlite` | Consultar una base de datos local |
 | `server-github` | Leer issues, PRs y repositorios |
 | `server-notion` | Consultar una base de conocimiento en Notion |

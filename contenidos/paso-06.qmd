@@ -79,7 +79,7 @@ proveedor, consulta el [paso 03](paso-03.html).
 
 ### Ejercicio 1 — Probar el comando básico
 
-Abre una terminal en la carpeta del curso y ejecuta:
+Abre una terminal en el directorio del curso y ejecuta:
 
 ```bash
 opencode run "Dime tres beneficios de versionar documentos con Git"

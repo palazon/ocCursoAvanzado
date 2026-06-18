@@ -82,7 +82,7 @@ Es como dejarle una nota al becario antes de que empiece su jornada.
 
 ## Instrucciones para tu proyecto
 
-Crea un archivo llamado `AGENTS.md` en la carpeta raíz de tu proyecto.
+Crea un archivo llamado `AGENTS.md` en el directorio raíz de tu proyecto.
 Todo lo que escribas ahí, el asistente lo leerá al empezar cada sesión.
 
 ```markdown
@@ -109,7 +109,7 @@ Puedes pedirle a OpenCode que genere este archivo automáticamente con el comand
 
 ## Instrucciones globales (para todos tus proyectos)
 
-Si trabajas en varios proyectos de documentación y quieres que el asistente recuerde siempre ciertas cosas (por ejemplo, tu nombre, tu tono preferido, o reglas generales de estilo), puedes crear un archivo en tu carpeta personal:
+Si trabajas en varios proyectos de documentación y quieres que el asistente recuerde siempre ciertas cosas (por ejemplo, tu nombre, tu tono preferido, o reglas generales de estilo), puedes crear un archivo en tu directorio personal:
 
 ```
 ~/.config/OpenCode/AGENTS.md

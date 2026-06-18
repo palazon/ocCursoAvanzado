@@ -96,7 +96,7 @@ También puedes pedirle a OpenCode que instale y configure
 el servidor MCP por ti. Escribe en el chat:
 
 > Configura un servidor MCP de sistema de archivos para poder
-> leer archivos de mi carpeta de glosarios
+> leer archivos de mi directorio de glosarios
 
 OpenCode creará el archivo de configuración automáticamente.
 
@@ -146,7 +146,7 @@ OpenCode puede leerlo directamente.
 
 ### Paso 1 — Crear el glosario
 
-Crea un archivo `glosario.md` en una carpeta de tu elección:
+Crea un archivo `glosario.md` en un directorio de tu elección:
 
 ```markdown
 # Glosario
@@ -161,7 +161,7 @@ MVP: Producto Mínimo Viable
 Escribe en el chat:
 
 > Configura un servidor MCP para que puedas leer archivos de
-> la carpeta donde tengo el glosario
+> el directorio donde tengo el glosario
 
 OpenCode creará la configuración y podrás preguntarle:
 

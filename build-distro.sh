@@ -35,6 +35,11 @@ if [ -d "ampliando" ]; then
 fi
 
 echo ""
+echo "==> Empaquetando $DISTRO.zip..."
+zip -r "../$DISTRO.zip" .
+
+echo ""
 echo "========================================"
 echo "  Distro lista en $DISTRO/"
+echo "  ZIP creado: ../$DISTRO.zip"
 echo "========================================"

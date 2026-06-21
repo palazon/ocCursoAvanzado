@@ -56,7 +56,14 @@ Solo necesitas un navegador. Abre
 [**este enlace**](https://palazon.github.io/ocCursoAvanzado/) y
 sigue el curso sin descargar ni instalar ningún fichero del curso.
 
-### B. Desde los fuentes (avanzado, para usuarios de Git)
+### B. Desde la distribución local
+
+Descarga [cursoAvanzadoOpencode.zip](cursoAvanzadoOpencode.zip),
+descomprime y abre `cursoAvanzadoOpencode/index.html` en tu navegador.
+Todo está listo para seguir los ejercicios con OpenCode abierto a su
+lado.
+
+### C. Desde los fuentes (avanzado, para usuarios de Git)
 
 Clona el repositorio. Los archivos `.qmd` (formato Quarto) están en
 `contenidos/`. Para regenerar los HTML:

@@ -218,7 +218,7 @@ tareas de documentación.
 ## ¿Quieres saber más?
 
 Para más detalles sobre agentes, consulta:
-[Ampliando: Agentes](ampliando/ampliando-agentes.qmd)
+Ampliando agentes ([HTML](ampliando/ampliando-agentes.html){target="_blank"} | [PDF](ampliando/ampliando-agentes.pdf){target="_blank"})
 :::
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

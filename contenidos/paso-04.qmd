@@ -245,7 +245,7 @@ a revisar qué vas a guardar. Los dos últimos son siempre necesarios.
 
 En la guía de ampliación encontrarás ramas, deshacer cambios
 y **cómo sincronizar con servidores** como GitHub o GitLab:
-[Ampliando: Git](ampliando/ampliando-git.qmd)
+Ampliando git ([HTML](ampliando/ampliando-git.html){target="_blank"} | [PDF](ampliando/ampliando-git.pdf){target="_blank"})
 :::
 
 Te imaginas dentro de unos meses la tranquilidad de saber que

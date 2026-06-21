@@ -220,7 +220,7 @@ espaciada para recordarte cuándo repasar cada tarjeta.
 
 > ¿Quieres saber más? En la guía de ampliación encontrarás
 > ejercicios detallados, tipos de servidores y configuración:
-> [Ampliando: MCP](ampliando/ampliando-mcp.qmd)
+> Ampliando MCP ([HTML](ampliando/ampliando-mcp.html){target="_blank"} | [PDF](ampliando/ampliando-mcp.pdf){target="_blank"})
 
 En el próximo paso veremos cómo automatizar procesos con la CLI.
 

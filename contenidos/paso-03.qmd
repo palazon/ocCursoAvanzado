@@ -71,7 +71,7 @@ Selecciona uno y se usará en las siguientes conversaciones.
 | Claude Sonnet | Cloud | Análisis profundo, escritura |
 | Llama 3 | Local | Sin coste, sin conexión |
 
-[Ampliando: Modelos de IA](ampliando/ampliando-modelos.qmd) — tabla
+Ampliando Modelos de IA ([HTML](ampliando/ampliando-modelos.html){target="_blank"} | [PDF](ampliando/ampliando-modelos.pdf){target="_blank"}) — tabla
 detallada, comparativas y estrategias por tarea
 
 ---
@@ -106,7 +106,7 @@ a modelos de diferentes proveedores con una sola cuenta y una
 sola clave API. Es útil si quieres probar varios modelos sin
 gestionar múltiples suscripciones.
 
-[Ampliando: Conexiones y proveedores](ampliando/ampliando-conexiones.qmd)
+Ampliando Conexiones y proveedores ([HTML](ampliando/ampliando-conexiones.html){target="_blank"} | [PDF](ampliando/ampliando-conexiones.pdf){target="_blank"})
 — configuración detallada de cada proveedor y OpenRouter
 
 ---
@@ -182,9 +182,9 @@ En el próximo paso veremos cómo usar Git para versionar documentos.
 
 ## Para profundizar
 
-- [Ampliando: Modelos de IA](ampliando/ampliando-modelos.qmd)
-- [Ampliando: Conexiones y proveedores](ampliando/ampliando-conexiones.qmd)
-- [Ampliando: Elegir modelo IA](ampliando/guia-elegir-modelo-ia-opencode.qmd) — comparativa y guía por tarea
+- Ampliando modelos de IA ([HTML](ampliando/ampliando-modelos.html){target="_blank"} | [PDF](ampliando/ampliando-modelos.pdf){target="_blank"})
+- Ampliando conexiones y proveedores ([HTML](ampliando/ampliando-conexiones.html){target="_blank"} | [PDF](ampliando/ampliando-conexiones.pdf){target="_blank"})
+- Ampliando elegir modelo IA ([HTML](ampliando/guia-elegir-modelo-ia-opencode.html){target="_blank"} | [PDF](ampliando/guia-elegir-modelo-ia-opencode.pdf){target="_blank"}) — comparativa y guía por tarea
 - [Ollama](https://ollama.ai) — modelos locales
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

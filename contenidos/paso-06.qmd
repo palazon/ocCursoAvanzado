@@ -9,6 +9,15 @@ procesar documentos sin abrir la interfaz.
 
 Duración estimada: **25 minutos**
 
+::: {.callout-tip}
+## ¿Por qué usar CLI?
+
+El modo CLI es más rápido, preciso y escalable que el chat.
+Ideal cuando sabes exactamente qué quieres hacer y necesitas
+procesar varios archivos. Para más detalles, consulta la
+guía de ampliación: Ampliando CLI ([HTML](ampliando/ampliando-cli.html){target="_blank"} | [PDF](ampliando/ampliando-cli.pdf))
+:::
+
 ---
 
 ## ¿Qué es el modo CLI?
@@ -45,7 +54,7 @@ opencode run "tu instrucción"
 El modo CLI es más rápido, preciso y escalable que el chat.
 Ideal cuando sabes exactamente qué quieres hacer y necesitas
 procesar varios archivos. Para más detalles, consulta la
-guía de ampliación: [Ampliando: CLI](ampliando/ampliando-cli.qmd)
+guía de ampliación: Ampliando CLI ([HTML](ampliando/ampliando-cli.html){target="_blank"} | [PDF](ampliando/ampliando-cli.pdf))
 :::
 
 ---
@@ -63,7 +72,7 @@ guía de ampliación: [Ampliando: CLI](ampliando/ampliando-cli.qmd)
 
 ## Manos a la obra
 
-### Ejercicio 0 — Explorar las opciones del CLI
+### Ejercicio 1 — Explorar las opciones del CLI
 
 Antes de ejecutar nada, mira qué opciones ofrece el CLI:
 
@@ -77,7 +86,7 @@ muestra los flags específicos de `run`, como `--model` o
 `--temperature`. Para ver los modelos disponibles en tu
 proveedor, consulta el [paso 03](paso-03.html).
 
-### Ejercicio 1 — Probar el comando básico
+### Ejercicio 2 — Probar el comando básico
 
 Abre una terminal en el directorio del curso y ejecuta:
 
@@ -88,7 +97,7 @@ opencode run "Dime tres beneficios de versionar documentos con Git"
 OpenCode procesará la instrucción y te devolverá la respuesta
 en la terminal, sin abrir la interfaz gráfica.
 
-### Ejercicio 2 — Procesar un archivo completo
+### Ejercicio 3 — Procesar un archivo completo
 
 Pásale un archivo del curso para que lo revise:
 
@@ -99,18 +108,61 @@ opencode run "Revisa el estilo de este documento y sugiere mejoras" @paso-02.qmd
 OpenCode leerá `paso-02.qmd`, lo analizará y te devolverá
 sus sugerencias directamente en la terminal.
 
+### Ejercicio 4 — Guardar resultado en archivo
+
+Redirige la salida a un archivo para revisarla después:
+
+```bash
+opencode run "Resume este documento en 5 puntos" @paso-02.qmd > resumen.md
+```
+
+El resultado se guarda en `resumen.md` en lugar de mostrarse
+en la terminal. Usa `>` para sobrescribir o `>>` para añadir
+al final de un archivo existente.
+
+### Ejercicio 5 — Procesar varios archivos
+
+Usa un bucle `for` para aplicar la misma instrucción a varios archivos:
+
+```bash
+for archivo in paso-01.qmd paso-02.qmd paso-03.qmd; do
+  opencode run "Cuenta el número de secciones" @$archivo
+done
+```
+
+Esto es lo que hace la CLI poderosa: la misma instrucción
+aplicada a múltiples archivos, sin repetir el proceso manualmente.
+
+---
+
+## Ideas para tus propios comandos CLI
+
+| Comando | Para qué sirve |
+|---------|---------------|
+| `opencode run "Revisa la ortografía" @archivo.qmd` | Corrección rápida |
+| `opencode run "Traduce al inglés" @documento.qmd > traduccion.qmd` | Traducción y guardado |
+| `opencode run "Genera un resumen ejecutivo" @informe.qmd` | Resúmenes automáticos |
+| `opencode run "Extrae las referencias bibliográficas" @tesis.qmd` | Extracción de datos |
+
+: {tbl-colwidths="[75,25]"}
+
 ---
 
 ## Resumen del paso
 
 - ✅ Has probado `opencode run` desde la terminal
 - ✅ Has procesado archivos individuales con `@`
+- ✅ Has guardado resultados en archivos
+- ✅ Has procesado varios archivos con un bucle `for`
 - ✅ Conoces la diferencia entre interfaz interactiva y CLI
 
-> ¿Quieres saber más? En la guía de ampliación encontrarás
-> ejercicios avanzados, scripts de automatización y uso de
-> agentes desde la terminal:
-> [Ampliando: CLI](ampliando/ampliando-cli.qmd)
+::: {.callout-tip}
+## ¿Quieres saber más?
+
+En la guía de ampliación encontrarás ejercicios avanzados,
+scripts de automatización y uso de agentes desde la terminal:
+Ampliando CLI ([HTML](ampliando/ampliando-cli.html){target="_blank"} | [PDF](ampliando/ampliando-cli.pdf))
+:::
 
 En el próximo paso veremos cómo controlar permisos y acciones
 en entornos con documentos sensibles.

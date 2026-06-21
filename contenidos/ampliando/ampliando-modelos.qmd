@@ -298,4 +298,6 @@ ollama pull llama3.2
 
 ---
 
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*
+
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

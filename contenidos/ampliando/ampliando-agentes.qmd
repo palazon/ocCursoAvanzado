@@ -425,3 +425,5 @@ Así podrás comprobar el efecto de tus cambios.
 ---
 
 *Documento creado por el agente `scribe` — un asistente de documentación técnica para OpenCode.*
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*

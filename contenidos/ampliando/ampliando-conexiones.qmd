@@ -438,4 +438,6 @@ Los modelos de pago cobran por cada palabra que la IA lee o escribe. Unos 10.000
 
 ---
 
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*
+
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

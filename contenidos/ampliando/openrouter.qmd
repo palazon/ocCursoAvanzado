@@ -167,3 +167,5 @@ Los modelos disponibles, sus precios y su velocidad pueden cambiar con el tiempo
 - [OpenRouter en OpenCode](https://opencode.ai/docs/providers#openrouter) — Documentación específica sobre cómo configurar OpenRouter como proveedor.
 
 - [Modelos en OpenRouter](https://openrouter.ai/models) — Catálogo completo con precios actualizados de cada modelo.
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*

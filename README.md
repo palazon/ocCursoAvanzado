@@ -16,9 +16,25 @@ crear herramientas reutilizables y trabajar en equipo con IA.
 
 | Bloque | Pasos | Contenido |
 |--------|-------|-----------|
+| Preparación | 0 | Datos y metadatos, estructura de OpenCode |
 | I — Automatización e IA | 01 – 03 | Agentes a medida, skills reutilizables, modelos de IA |
 | II — Herramientas externas | 04 – 06 | Git, MCP, CLI |
 | III — Colaboración | 07 – 08 | Permisos, colaboración en equipo |
+
+### Guías complementarias (ampliando/)
+
+Cada paso tiene una guía detallada en `contenidos/ampliando/`:
+
+| Paso | Guía |
+|------|------|
+| 01 | `ampliando-agentes.qmd` |
+| 02 | `ampliando-skills.qmd`, `ampliando-memoria.qmd` |
+| 03 | `ampliando-modelos.qmd`, `ampliando-conexiones.qmd`, `guia-elegir-modelo-ia-opencode.qmd` |
+| 04 | `ampliando-git.qmd` |
+| 05 | `ampliando-mcp.qmd` |
+| 06 | `ampliando-cli.qmd` |
+| 07 | `ampliando-permisos.qmd` |
+| 08 | `ampliando-documentacion.qmd`, `ampliando-memoria.qmd` |
 
 ## Cómo empezar
 
@@ -53,4 +69,4 @@ bash render-all.sh
 
 ---
 
-*Curso OpenCode 102 · Idea original de JA Palazón · Mayo 2026*
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

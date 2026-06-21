@@ -199,3 +199,5 @@ Con los `customCommands` puedes definir atajos: por ejemplo, escribe `model-smal
 ::: {.callout-tip}
 **En resumen**: los modelos de IA son herramientas, no magia. Elige el que mejor se ajuste a cada tarea, igual que elegirías un destornillador u otro según el tornillo. Y recuerda: puedes empezar sin pagar nada.
 :::
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*

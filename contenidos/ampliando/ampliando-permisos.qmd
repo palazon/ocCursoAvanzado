@@ -1,0 +1,400 @@
+---
+title: "Ampliando: Permisos para creadores de contenido"
+subtitle: "Casos de uso reales y mejores prácticas"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    code-block-bg: "#F0F0F0"
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+      - \fvset{fontsize=\small}
+---
+
+::: {.callout-note}
+## Has visto lo básico en el paso 7
+
+Este documento amplía lo que viste en el paso 7. Si no lo has
+visto aún, te recomiendo empezar por allí.
+:::
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Para creadores de contenido que trabajan en equipo o manejan
+documentos sensibles: profesorado, editores, departamentos
+legales, o cualquier persona que quiera proteger sus archivos.
+**No necesitas saber programar** para entenderla.
+:::
+
+## Casos de uso reales
+
+### Institución educativa
+
+Imagina una universidad donde profesores y comparten documentos
+con estudiantes. Cada rol tiene necesidades diferentes:
+
+**Estudiantes** — pueden leer materiales y entregar trabajos,
+pero no modificar los documentos del profesor:
+
+```jsonc
+{
+  "permission": {
+    "edit": "deny",
+    "write": "allow",
+    "bash": "deny",
+    "read": {
+      "allow": ["materiales/", "entregas/"],
+      "deny": ["calificaciones/", "privado/"]
+    }
+  }
+}
+```
+
+**Profesores** — pueden editar sus materiales y revisar
+entregas, pero no ejecutar comandos del sistema:
+
+```jsonc
+{
+  "permission": {
+    "edit": "allow",
+    "write": "allow",
+    "bash": "deny",
+    "read": "allow"
+  }
+}
+```
+
+**Administradores** — acceso completo para configurar
+el sistema:
+
+```jsonc
+{
+  "permission": {
+    "edit": "allow",
+    "write": "allow",
+    "bash": "allow",
+    "read": "allow"
+  }
+}
+```
+
+::: {.callout-tip}
+## Consejo para instituciones
+
+Guarda cada configuración en un archivo `opencode.jsonc`
+separado por roles. Así puedes reutilizarlos en diferentes
+proyectos o asignarlos a agentes específicos.
+:::
+
+### Equipo de publicación
+
+En una editorial, el flujo de trabajo sigue un camino:
+Escritor → Editor → Revisor → Director. Cada uno necesita
+permisos diferentes:
+
+**Escritor** — crea y modifica borradores:
+
+```jsonc
+{
+  "permission": {
+    "edit": "allow",
+    "write": "allow",
+    "bash": "deny",
+    "read": {
+      "allow": ["borradores/", "plantillas/"],
+      "deny": ["publicados/", "legales/"]
+    }
+  }
+}
+```
+
+**Editor** — revisa y aprueba cambios:
+
+```jsonc
+{
+  "permission": {
+    "edit": "allow",
+    "write": "allow",
+    "bash": "deny",
+    "read": "allow"
+  }
+}
+```
+
+**Revisor** — solo lee y comenta, sin modificar:
+
+```jsonc
+{
+  "permission": {
+    "edit": "deny",
+    "write": "deny",
+    "bash": "deny",
+    "read": {
+      "allow": ["borradores/", "revisiones/"],
+      "deny": ["privado/"]
+    }
+  }
+}
+```
+
+**Director** — acceso completo para decisiones finales:
+
+```jsonc
+{
+  "permission": {
+    "edit": "allow",
+    "write": "allow",
+    "bash": "allow",
+    "read": "allow"
+  }
+}
+```
+
+### Departamento legal
+
+Los documentos legales requieren máxima protección.
+OpenCode puede consultar contratos y normativas, pero
+nunca debe modificarlos:
+
+```jsonc
+{
+  "permission": {
+    "edit": "deny",
+    "write": "deny",
+    "bash": "deny",
+    "read": {
+      "allow": ["contratos/", "normativas/"],
+      "deny": ["confidencial/", "litigios/"]
+    }
+  }
+}
+```
+
+::: {.callout-warning}
+## Documentos legales
+
+En entornos legales, considera usar Git para versionar
+todos los cambios. Así tienes un registro completo de
+quién accedió a cada documento y cuándo.
+:::
+
+### Uso personal
+
+Si usas OpenCode para gestionar documentos personales
+(fotos familiares, documentos financieros, proyectos
+privados), puedes proteger tus archivos más sensibles:
+
+```jsonc
+{
+  "permission": {
+    "edit": "allow",
+    "write": "allow",
+    "bash": "deny",
+    "read": {
+      "allow": ["documentos/", "proyectos/"],
+      "deny": ["financiero/", "privado/", "fotos/"]
+    }
+  }
+}
+```
+
+**Analogía**: es como tener diferentes llaves para
+diferentes habitaciones de tu casa. La llave principal
+abre todo, pero puedes dar copias parciales a quien
+necesite acceso limitado.
+
+## Matriz de permisos por rol
+
+La siguiente tabla muestra qué permisos necesita
+cada rol en un equipo típico:
+
+| Rol | edit | write | bash | read | browser |
+|-----|------|-------|------|------|---------|
+| Estudiante | deny | allow | deny | allow | allow |
+| Profesor | allow | allow | deny | allow | allow |
+| Escritor | allow | allow | deny | allow | allow |
+| Editor | allow | allow | deny | allow | allow |
+| Revisor | deny | deny | deny | allow | deny |
+| Administrador | allow | allow | allow | allow | allow |
+
+**Cómo leer esta tabla**:
+
+- **edit** — ¿puede modificar archivos existentes?
+- **write** — ¿puede crear archivos nuevos?
+- **bash** — ¿puede ejecutar comandos del sistema?
+- **read** — ¿puede leer archivos?
+- **browser** — ¿puede navegar por internet?
+
+::: {.callout-note}
+## Principio de mínimo privilegio
+
+Otorga solo los permisos necesarios para cada tarea.
+Si un revisor solo necesita leer, no le des permiso
+de escritura. Si un escritor no necesita ejecutar
+comandos, deniega bash.
+:::
+
+## Depuración de permisos
+
+Cuando algo no funciona como esperas, sigue estos
+pasos para diagnosticar el problema:
+
+### Síntoma: "No tengo permiso para editar"
+
+**Causa probable**: Hay un `edit: deny` en la
+configuración del proyecto o del agente.
+
+**Solución**:
+
+1. Revisa `opencode.jsonc` en la raíz del proyecto
+2. Revisa el archivo del agente en `.opencode/agents/`
+3. Busca cualquier `edit: deny`
+4. Modifica o elimina la restricción
+
+### Síntoma: OpenCode no puede leer ciertos archivos
+
+**Causa probable**: El directorio está en la lista
+`deny` de `read`.
+
+**Solución**:
+
+1. Revisa la sección `read` en `opencode.jsonc`
+2. Añade el directorio a la lista `allow`
+3. Recarga OpenCode
+
+### Síntoma: Bash no funciona aunque está permitido
+
+**Causa probable**: La configuración global tiene
+`bash: deny` y prevalece sobre la del proyecto.
+
+**Solución**:
+
+1. Revisa `~/.config/opencode/opencode.jsonc`
+2. Verifica que no tenga `bash: deny`
+3. Recuerda: los permisos más restrictivos ganan
+
+### Tabla de diagnóstico rápido
+
+| Síntoma | Causa | Solución |
+|---------|-------|----------|
+| No edita archivos | `edit: deny` | Revisar `opencode.jsonc` del proyecto |
+| No lee directorios | `read.deny` contiene el dir | Añadir a `read.allow` |
+| No ejecuta bash | `bash: deny` | Verificar config global y proyecto |
+| Agente no funciona | Permiso del agente restrictivo | Revisar `.opencode/agents/*.md` |
+| Cambios no se guardan | `write: deny` | Permitir `write` en config |
+
+## Permisos y Git
+
+Los permisos de OpenCode y Git se complementan:
+OpenCode controla **quién puede hacer qué** en tiempo
+real, Git controla **qué se guarda** y **quién cambió qué**.
+
+### Flujo de trabajo recomendado
+
+1. **Configura permisos** — define qué puede hacer OpenCode
+2. **Trabaja normalmente** — OpenCode respeta los permisos
+3. **Commitea cambios** — Git guarda una instantánea
+4. **Revisa el historial** — Git te muestra quién hizo qué
+
+### Ejemplo práctico
+
+Imagina un equipo que trabaja en un manual:
+
+- El **escritor** crea contenido (permiso: edit + write)
+- El **editor** revisa y corrige (permiso: edit + write)
+- El **revisor** solo comenta (permiso: read)
+- Git guarda cada cambio con el autor y la fecha
+
+Si el revisor intenta modificar un archivo, OpenCode
+lo deniega. Si alguien borra algo por error, Git lo
+recupera.
+
+::: {.callout-tip}
+## Consejo avanzado
+
+Usa `git diff` después de cada sesión para ver qué
+cambios hizo OpenCode. Si algo no te gusta, puedes
+deshacerlo con `git checkout` o `git restore`.
+:::
+
+## Lista de verificación
+
+Antes de configurar permisos, responde estas preguntas:
+
+- [ ] **¿Quiénes usarán OpenCode?** — estudiantes,
+  profesores, editores, etc.
+- [ ] **¿Qué archivos necesitan protegerse?** — documentos
+  sensibles, datos privados, configuraciones
+- [ ] **¿Quién necesita ejecutar bash?** — solo
+  administradores o también usuarios avanzados
+- [ ] **¿Los permisos son consistentes con Git?** — si
+  usas Git, asegúrate de que los permisos no interfieran
+- [ ] **¿Has probado cada restricción?** — verifica que
+  el comportamiento es el esperado
+- [ ] **¿Documentaste los permisos?** — incluye comentarios
+  explicando por qué existen restricciones
+
+## Errores comunes
+
+| Error | Causa | Solución |
+|-------|-------|----------|
+| "No tengo permiso para editar" | `edit: deny` en proyecto | Revisar `opencode.jsonc` |
+| Agente no puede leer archivos | Permiso de agente más restrictivo | Verificar `.opencode/agents/*.md` |
+| Bash no funciona | `deny` global prevalece | Verificar config global |
+| OpenCode lee archivos privados | Falta `read.deny` | Añadir directorios a `deny` |
+| Cambios no se guardan | `write: deny` | Permitir `write` en config |
+| Permisos no se aplican | OpenCode no se recargó | Cerrar y volver a abrir |
+
+::: {.callout-warning}
+## Recuerda
+
+Los permisos más restrictivos ganan. Si el proyecto
+deniega bash y el agente lo permite, bash seguirá
+denegado. Siempre verifica la jerarquía:
+global → proyecto → agente.
+:::
+
+## Referencias
+
+- [Documentación oficial de permisos de OpenCode](https://opencode.ai/docs/permissions/)
+- [Documentación de configuración de OpenCode](https://opencode.ai/docs/config/)
+- [Principio de mínimo privilegio](https://www.techtarget.com/searchsecurity/definition/principle-of-least-privilege-POLP) — concepto de seguridad
+
+---
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

@@ -413,4 +413,6 @@ El mejor modelo es el que se adapta a tu necesidad, no al revés. Experimenta co
 
 ---
 
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*
+
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

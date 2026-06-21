@@ -87,3 +87,5 @@ El catálogo de OpenRouter se actualiza con frecuencia. Consulta la [lista actua
 - [OpenRouter](https://openrouter.ai) — Proveedor unificado de modelos de IA. Registro, documentación y lista de modelos disponibles.
 - [Modelos en OpenRouter](https://openrouter.ai/models) — Catálogo completo con precios actualizados de cada modelo.
 - [OpenRouter en OpenCode](https://opencode.ai/docs/providers#openrouter) — Documentación específica sobre cómo configurar OpenRouter como proveedor.
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*

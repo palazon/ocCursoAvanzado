@@ -242,6 +242,16 @@ Debería indicar que no tiene permiso para leerlo.
 - **Revisa periódicamente** — los permisos deben revisarse
   igual que cualquier otra configuración
 
+::: {.callout-tip}
+## ¿Quieres saber más?
+
+En la guía de ampliando encontrarás casos de uso reales,
+matrices de permisos por rol y cómo depurar problemas:
+Ampliando permisos 
+([HTML](ampliando/ampliando-permisos.html){target="_blank"} |
+ [PDF](ampliando/ampliando-permisos.pdf){target="_blank"})
+:::
+
 ---
 
 ## Resumen del paso

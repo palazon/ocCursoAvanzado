@@ -374,3 +374,5 @@ y procesa el archivo que le indiques.
 - [GNU Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
 - [Explainshell](https://explainshell.com/) — explica comandos gráficamente
 - [Shell Check](https://www.shellcheck.net/) — analiza scripts de shell
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*

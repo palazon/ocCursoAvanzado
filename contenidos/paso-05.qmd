@@ -144,7 +144,7 @@ equipo. Sin MCP, tendrías que copiar y pegar el documento
 cada vez que OpenCode necesite consultar algo. Con MCP,
 OpenCode puede leerlo directamente.
 
-### Paso 1 — Crear el glosario
+### Ejercicio 1 — Crear el glosario
 
 Crea un archivo `glosario.md` en un directorio de tu elección:
 
@@ -156,7 +156,7 @@ SLA: Acuerdo de Nivel de Servicio
 MVP: Producto Mínimo Viable
 ```
 
-### Paso 2 — Decirle a OpenCode que use el glosario
+### Ejercicio 2 — Decirle a OpenCode que use el glosario
 
 Escribe en el chat:
 
@@ -178,7 +178,7 @@ También pueden ayudarte a aprender. Flashcards MCP permite
 crear tarjetas de estudio con repetición espaciada, directamente
 desde OpenCode.
 
-### Paso 1 — Preguntar por prerequisites
+### Ejercicio 3 — Preguntar por prerequisites
 
 Antes de instalar un MCP, es buena idea saber qué necesita.
 Escribe en *Plan*:
@@ -189,7 +189,7 @@ OpenCode te informará si necesita API keys, software
 adicional, o si es remoto (sin nada extra). En este caso,
 el MCP es remoto: solo necesita una URL.
 
-### Paso 2 — Instalar desde OpenCode
+### Ejercicio 4 — Instalar desde OpenCode
 
 La forma más fácil de instalar un MCP es pedirle a OpenCode
 que lo configure. Escribe en *Plan*:
@@ -199,7 +199,7 @@ que lo configure. Escribe en *Plan*:
 OpenCode creará la configuración automáticamente en
 `opencode.json`.
 
-### Paso 3 — Crear flashcards
+### Ejercicio 5 — Crear flashcards
 
 Una vez instalado, puedes usarlo para crear tarjetas:
 

@@ -60,7 +60,7 @@ del trabajo, y en casi todo puede ayudarte OpenCode.
 
 Vamos a crear un proyecto desde cero con buenas prácticas.
 
-### Paso 1 — Configurar Git por primera vez
+### Ejercicio 1 — Configurar Git por primera vez
 
 Abre una terminal y escribe tu nombre y correo. Git los usará
 para firmar tus commits:
@@ -81,7 +81,7 @@ ha hecho cada cambio.
 
 Tu mejor amigo del futuro eres tú. Y Git puede ayudarte a serlo aún más.
 
-### Paso 2 — Crear directorio y repositorio
+### Ejercicio 2 — Crear directorio y repositorio
 
 ```bash
 mkdir ~/mi-proyecto
@@ -92,7 +92,7 @@ git init
 Esto crea un directorio vacío con un repositorio Git. El directorio
 oculto `.git/` guardará todo el historial. No lo toques manualmente.
 
-### Paso 3 — Crear `.gitignore` antes del primer commit
+### Ejercicio 3 — Crear `.gitignore` antes del primer commit
 
 Buena práctica: crea un archivo `.gitignore` para que Git ignore
 archivos que no necesitas versionar. Así reduces el número de
@@ -117,7 +117,7 @@ automáticamente no necesitan guardarse en el historial. Así
 Git trabaja más rápido y el historial es más limpio.
 :::
 
-### Paso 4 — Primer commit
+### Ejercicio 4 — Primer commit
 
 Como ejemplo, creamos un fichero desde la terminal. En el día a
 día, OpenCode irá guardando los nuevos ficheros y los cambios
@@ -141,7 +141,7 @@ o "update". Mejor: "Añade sección de conclusiones" o
 "Corrige erratas en capítulo 2".
 :::
 
-### Paso 5 — Ver el historial
+### Ejercicio 5 — Ver el historial
 
 En ocasiones quieres ver lo que has ido guardando, de forma global:
 
@@ -156,7 +156,7 @@ a1b2c3d Primer commit: documento inicial
 b4e5f6g Añade .gitignore para ignorar archivos temporales
 ```
 
-### Paso 6 — Hacer un cambio y ver la diferencia
+### Ejercicio 6 — Hacer un cambio y ver la diferencia
 
 Como ejemplo, añadimos una línea al fichero existente en el
 directorio del repositorio. Para verlo más fácil, usamos un
@@ -170,7 +170,7 @@ git diff
 Git te muestra exactamente qué líneas has añadido (verde) y
 cuáles has quitado (rojo).
 
-### Paso 7 — Segundo commit
+### Ejercicio 7 — Segundo commit
 
 Cuando estés satisfecho con el cambio:
 
@@ -179,7 +179,7 @@ git add documento.md
 git commit -m "Añade segunda línea al documento"
 ```
 
-### Paso 8 — Ver el estado
+### Ejercicio 8 — Ver el estado
 
 Antes de cada commit, revisa qué hay pendiente:
 

@@ -275,3 +275,5 @@ La clave está en elegir lo que necesitas según tu equipo y tus proyectos. Para
 - [Agent Skills](https://OpenCode.ai/docs/skills/) — Sistema de habilidades reutilizables que se cargan bajo demanda.
 - [Plugins](https://OpenCode.ai/docs/plugins/) — Cómo extender OpenCode con plugins para añadir funcionalidades como memoria persistente.
 - [OpenCode en GitHub](https://github.com/anomalyco/OpenCode) — Repositorio oficial del código fuente.
+
+*Curso completo disponible en: [palazon.github.io/ocCursoAvanzado](https://palazon.github.io/ocCursoAvanzado/)*

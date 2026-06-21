@@ -36,8 +36,10 @@ fi
 
 echo ""
 echo "==> Empaquetando $DISTRO.zip..."
-rm -f "../$DISTRO.zip"
-zip -r "../$DISTRO.zip" .
+cd ..
+rm -f "$DISTRO.zip"
+zip -r "$DISTRO.zip" "$DISTRO"/
+cd "$DISTRO"
 
 echo ""
 echo "========================================"

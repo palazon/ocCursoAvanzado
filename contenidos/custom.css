@@ -327,9 +327,11 @@ div.callout-important:not(.callout-titled) .callout-icon::before {
   font-size: 0.85rem;
 }
 
-.sidebar #TOC {
-  position: sticky;
-  top: 2rem;
+.sidebar {
+  position: sticky !important;
+  top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 #TOC a {

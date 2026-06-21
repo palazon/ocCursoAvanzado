@@ -1,0 +1,197 @@
+---
+title: "FAQ — Preguntas frecuentes del curso OpenCode 102"
+---
+
+## Agentes y skills
+
+### ¿Qué diferencia hay entre un agente y un skill?
+
+Un **agente** es un procedimiento completo que OpenCode ejecuta paso a paso para realizar una tarea compleja. Un **skill** es un conjunto de instrucciones reutilizables que OpenCode carga automáticamente cuando detecta un tipo de archivo o tarea concreta. Piensa en el agente como una receta y en el skill como un manual de estilo.
+
+📖 [Paso 01 — Procedimientos a medida](paso-01.html) · [Paso 02 — Habilidades reutilizables](paso-02.html)
+
+### ¿Cómo creo un agente personalizado?
+
+Crea un archivo `.md` dentro de `.opencode/agents/` con un nombre descriptivo. Escribe las instrucciones paso a paso que el agente debe seguir. También puedes pedirle a OpenCode que lo cree por ti describiendo la tarea que quieres automatizar.
+
+📖 [Paso 01 — Crear un agente](paso-01.html)
+
+### ¿Cómo creo un skill reutilizable?
+
+Crea un archivo `SKILL.md` dentro de `.opencode/skills/nombre-del-skill/`. Define cuándo se debe activar (detalles del archivo o tarea) y qué instrucciones debe seguir OpenCode. El skill se cargará automáticamente cuando detecte el contexto adecuado.
+
+📖 [Paso 02 — Crear un skill](paso-02.html)
+
+### ¿Cuándo usar un agente y cuándo un skill?
+
+Usa un **agente** para tareas puntuales y complejas: generar un informe completo, migrar documentos o crear una estructura de proyecto. Usa un **skill** para instrucciones que se repiten automáticamente: formatos de archivo, estilos de escritura o convenciones de un proyecto.
+
+📖 [Paso 01 — Procedimientos a medida](paso-01.html) · [Paso 02 — Habilidades reutilizables](paso-02.html)
+
+---
+
+## Modelos de IA
+
+### ¿Cómo cambio el modelo de IA en OpenCode?
+
+Escribe `/model` en el chat y selecciona el modelo que quieras usar. También puedes configurar un modelo por defecto en tu archivo de configuración del proyecto.
+
+📖 [Paso 03 — Modelos y proveedores](paso-03.html)
+
+### ¿Qué es OpenRouter y cuándo usarlo?
+
+OpenRouter es un servicio que te da acceso a múltiples modelos de IA (GPT, Claude, Llama, etc.) con una sola cuenta y clave API. Es útil si quieres probar varios modelos sin gestionar múltiples suscripciones.
+
+📖 [Paso 03 — OpenRouter](paso-03.html)
+
+### ¿Puedo usar modelos locales con OpenCode?
+
+Sí. Si tienes instalado Ollama u otro servidor local compatible, puedes conectarlo a OpenCode y usar modelos sin conexión a internet ni coste adicional. Es ideal para trabajar sin dependencia de la nube.
+
+📖 [Paso 03 — Modelos locales](paso-03.html)
+
+### ¿Cómo elijo el modelo adecuado para mi tarea?
+
+Depende de la complejidad y el tipo de tarea. Para tareas sencillas, un modelo rápido y económico basta. Para análisis profundo o escritura compleja, modelos como Claude Sonnet o GPT-4o ofrecen mejores resultados. Consulta la guía de modelos para una comparativa detallada.
+
+📖 [Paso 03 — Elegir un modelo](paso-03.html)
+
+---
+
+## Git
+
+### ¿Qué es Git y por qué usarlo con OpenCode?
+
+Git es un sistema de control de versiones que guarda el historial de cambios de tus archivos. Con OpenCode, Git te permite deshacer errores, trabajar en equipo y sincronizar tu proyecto con GitHub o GitLab.
+
+📖 [Paso 04 — Control de versiones](paso-04.html)
+
+### ¿Cómo inicializo un repositorio Git?
+
+Abre la terminal en el directorio de tu proyecto y ejecuta `git init`. Luego haz tu primera captura con `git add .` y `git commit -m "mensaje descriptivo"`. OpenCode puede guiarte en el proceso.
+
+📖 [Paso 04 — Primeros pasos con Git](paso-04.html)
+
+### ¿Cómo sincronizo cambios con GitHub?
+
+Crea un repositorio en GitHub, añade el remoto con `git remote add origin URL` y sube los cambios con `git push`. Para descargar cambios de otros, usa `git pull`.
+
+📖 [Paso 04 — Sincronizar con GitHub](paso-04.html)
+
+### ¿Qué hago si tengo un conflicto de fusión?
+
+Un conflicto ocurre cuando dos personas modifican la misma línea. Git te marca las diferencias. Elige la versión correcta, edita el archivo y marca como resuelto con `git add`. Luego continua con el commit.
+
+📖 [Paso 04 — Conflictos de fusión](paso-04.html)
+
+---
+
+## MCP
+
+### ¿Qué es MCP (Model Context Protocol)?
+
+MCP es un protocolo que permite a OpenCode conectarse a bases de datos, archivos y servicios externos. Amplía el contexto disponible para que el asistente pueda trabajar con información que está fuera de tu proyecto.
+
+📖 [Paso 05 — Conexión con sistemas externos](paso-05.html)
+
+### ¿Cómo configuro un servidor MCP?
+
+Añade la configuración del servidor en tu archivo `opencode.json` bajo la clave `mcpServers`. Especifica el comando, los argumentos y las variables de entorno necesarias. OpenCode se conectará automáticamente al iniciar.
+
+📖 [Paso 05 — Configurar un servidor MCP](paso-05.html)
+
+### ¿Qué servidores MCP puedo usar?
+
+Hay servidores para bases de datos (SQLite, PostgreSQL), almacenamiento (Google Drive, S3), búsqueda web y más. Elige según la fuente de datos que necesites consultar. La lista de servidores disponibles crece constantemente.
+
+📖 [Paso 05 — Tipos de servidores](paso-05.html)
+
+---
+
+## CLI
+
+### ¿Qué es la CLI de OpenCode?
+
+La CLI (interfaz de línea de comandos) te permite ejecutar tareas de OpenCode directamente desde la terminal, sin abrir el chat interactivo. Es ideal para automatizar procesos y trabajar con múltiples archivos de golpe.
+
+📖 [Paso 06 — Automatiza desde la terminal](paso-06.html)
+
+### ¿Qué ventajas tiene la CLI sobre el chat?
+
+La CLI es más rápida, precisa y escalable. No necesitas mantener una conversación: escribes una instrucción y OpenCode la ejecuta. Además, consume menos tokens porque no arrastra historial de chat.
+
+📖 [Paso 06 — Ventajas de la CLI](paso-06.html)
+
+### ¿Cómo ejecuto una tarea completa desde la terminal?
+
+Usa `opencode run "instrucción"` seguido de la tarea que quieras ejecutar. Por ejemplo: `opencode run "revisa la ortografía de todos los .md del directorio"`. OpenCode procesará los archivos y aplicará los cambios.
+
+📖 [Paso 06 — Ejemplos prácticos](paso-06.html)
+
+---
+
+## Permisos
+
+### ¿Qué son los permisos en OpenCode?
+
+Los permisos controlan qué acciones puede hacer OpenCode sin pedir confirmación: leer archivos, escribir contenido, ejecutar comandos o hacer commit en Git. Configurar permisos adecuados agiliza tu flujo de trabajo sin sacrificar seguridad.
+
+📖 [Paso 07 — Permisos](paso-07.html)
+
+### ¿Cómo configuro permisos para mi equipo?
+
+Crea un archivo `opencode.json` en la raíz del proyecto con las reglas de permisos. Define qué acciones están permitidas, cuáles requieren confirmación y cuáles están prohibidas. Comparte este archivo con tu equipo vía Git.
+
+📖 [Paso 07 — Configurar permisos](paso-07.html)
+
+### ¿Qué pasa si no uso Git?
+
+Los permisos son aún más importantes sin Git, porque no tienes un historial de cambios al que recurrir. Configura permisos conservadores: que OpenCode pida confirmación antes de escribir o ejecutar comandos.
+
+📖 [Paso 07 — Permisos sin Git](paso-07.html)
+
+---
+
+## Colaboración
+
+### ¿Cómo comparto mi configuración con el equipo?
+
+Guarda la configuración de OpenCode (archivos `opencode.json`, skills, agentes) en el repositorio Git del proyecto. Cuando tu equipo cloné el repositorio, tendrá acceso a la misma configuración automáticamente.
+
+📖 [Paso 08 — Colaboración en equipo](paso-08.html)
+
+### ¿Qué es AGENTS.md?
+
+Es un archivo que documenta la configuración de OpenCode del proyecto: agentes disponibles, skills, permisos y convenciones. Sirve como referencia para nuevos miembros del equipo y como recordatorio para los que ya están.
+
+📖 [Paso 08 — Documentar la configuración](paso-08.html)
+
+### ¿Cómo documentamos nuestra configuración?
+
+Pide a OpenCode que genere un `AGENTS.md` describiendo los agentes, skills y permisos del proyecto. Actualízalo cuando hagas cambios en la configuración. Mantenerlo al día ahorra tiempo al equipo.
+
+📖 [Paso 08 — Colaboración en equipo](paso-08.html)
+
+---
+
+## Solución de problemas
+
+### OpenCode no encuentra mi skill o agente, ¿qué hago?
+
+Verifica que el archivo está en la ruta correcta: `.opencode/skills/nombre/SKILL.md` para skills y `.opencode/agents/nombre.md` para agentes. Revisa la sintaxis del archivo y asegúrate de que el nombre del directorio coincide con el del skill.
+
+📖 [Paso 01 — Agentes](paso-01.html) · [Paso 02 — Skills](paso-02.html)
+
+### El modelo no responde como esperaba, ¿qué pruebo?
+
+Prueba a cambiar de modelo con `/model`. No todos los modelos rinden igual en todas las tareas. Si el problema persiste, reformula tu prompt con más contexto y instrucciones más específicas.
+
+📖 [Paso 03 — Elegir un modelo](paso-03.html)
+
+### ¿Cómo reporto un problema o sugiero una mejora?
+
+Abre un [issue en GitHub](https://github.com/palazon/ocCursoAvanzado/issues) describiendo el problema con detalle: qué pasos seguiste, qué resultado esperabas y qué obtuviste. Incluye capturas de pantalla si es posible.
+
+---
+
+*Curso OpenCode 102 · Preguntas frecuentes · Junio 2026*

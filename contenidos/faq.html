@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>FAQ — Preguntas frecuentes del curso OpenCode 102</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="faq_files/libs/clipboard/clipboard.min.js"></script>
+<script src="faq_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="faq_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="faq_files/libs/quarto-html/popper.min.js"></script>
+<script src="faq_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="faq_files/libs/quarto-html/anchor.min.js"></script>
+<link href="faq_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="faq_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="faq_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="faq_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="faq_files/libs/bootstrap/bootstrap-ba13d4a16a61746bd6fb80a772d4709f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#agentes-y-skills" id="toc-agentes-y-skills" class="nav-link active" data-scroll-target="#agentes-y-skills">Agentes y skills</a>
+  <ul class="collapse">
+  <li><a href="#qué-diferencia-hay-entre-un-agente-y-un-skill" id="toc-qué-diferencia-hay-entre-un-agente-y-un-skill" class="nav-link" data-scroll-target="#qué-diferencia-hay-entre-un-agente-y-un-skill">¿Qué diferencia hay entre un agente y un skill?</a></li>
+  <li><a href="#cómo-creo-un-agente-personalizado" id="toc-cómo-creo-un-agente-personalizado" class="nav-link" data-scroll-target="#cómo-creo-un-agente-personalizado">¿Cómo creo un agente personalizado?</a></li>
+  <li><a href="#cómo-creo-un-skill-reutilizable" id="toc-cómo-creo-un-skill-reutilizable" class="nav-link" data-scroll-target="#cómo-creo-un-skill-reutilizable">¿Cómo creo un skill reutilizable?</a></li>
+  <li><a href="#cuándo-usar-un-agente-y-cuándo-un-skill" id="toc-cuándo-usar-un-agente-y-cuándo-un-skill" class="nav-link" data-scroll-target="#cuándo-usar-un-agente-y-cuándo-un-skill">¿Cuándo usar un agente y cuándo un skill?</a></li>
+  </ul></li>
+  <li><a href="#modelos-de-ia" id="toc-modelos-de-ia" class="nav-link" data-scroll-target="#modelos-de-ia">Modelos de IA</a>
+  <ul class="collapse">
+  <li><a href="#cómo-cambio-el-modelo-de-ia-en-opencode" id="toc-cómo-cambio-el-modelo-de-ia-en-opencode" class="nav-link" data-scroll-target="#cómo-cambio-el-modelo-de-ia-en-opencode">¿Cómo cambio el modelo de IA en OpenCode?</a></li>
+  <li><a href="#qué-es-openrouter-y-cuándo-usarlo" id="toc-qué-es-openrouter-y-cuándo-usarlo" class="nav-link" data-scroll-target="#qué-es-openrouter-y-cuándo-usarlo">¿Qué es OpenRouter y cuándo usarlo?</a></li>
+  <li><a href="#puedo-usar-modelos-locales-con-opencode" id="toc-puedo-usar-modelos-locales-con-opencode" class="nav-link" data-scroll-target="#puedo-usar-modelos-locales-con-opencode">¿Puedo usar modelos locales con OpenCode?</a></li>
+  <li><a href="#cómo-elijo-el-modelo-adecuado-para-mi-tarea" id="toc-cómo-elijo-el-modelo-adecuado-para-mi-tarea" class="nav-link" data-scroll-target="#cómo-elijo-el-modelo-adecuado-para-mi-tarea">¿Cómo elijo el modelo adecuado para mi tarea?</a></li>
+  </ul></li>
+  <li><a href="#git" id="toc-git" class="nav-link" data-scroll-target="#git">Git</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-git-y-por-qué-usarlo-con-opencode" id="toc-qué-es-git-y-por-qué-usarlo-con-opencode" class="nav-link" data-scroll-target="#qué-es-git-y-por-qué-usarlo-con-opencode">¿Qué es Git y por qué usarlo con OpenCode?</a></li>
+  <li><a href="#cómo-inicializo-un-repositorio-git" id="toc-cómo-inicializo-un-repositorio-git" class="nav-link" data-scroll-target="#cómo-inicializo-un-repositorio-git">¿Cómo inicializo un repositorio Git?</a></li>
+  <li><a href="#cómo-sincronizo-cambios-con-github" id="toc-cómo-sincronizo-cambios-con-github" class="nav-link" data-scroll-target="#cómo-sincronizo-cambios-con-github">¿Cómo sincronizo cambios con GitHub?</a></li>
+  <li><a href="#qué-hago-si-tengo-un-conflicto-de-fusión" id="toc-qué-hago-si-tengo-un-conflicto-de-fusión" class="nav-link" data-scroll-target="#qué-hago-si-tengo-un-conflicto-de-fusión">¿Qué hago si tengo un conflicto de fusión?</a></li>
+  </ul></li>
+  <li><a href="#mcp" id="toc-mcp" class="nav-link" data-scroll-target="#mcp">MCP</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-mcp-model-context-protocol" id="toc-qué-es-mcp-model-context-protocol" class="nav-link" data-scroll-target="#qué-es-mcp-model-context-protocol">¿Qué es MCP (Model Context Protocol)?</a></li>
+  <li><a href="#cómo-configuro-un-servidor-mcp" id="toc-cómo-configuro-un-servidor-mcp" class="nav-link" data-scroll-target="#cómo-configuro-un-servidor-mcp">¿Cómo configuro un servidor MCP?</a></li>
+  <li><a href="#qué-servidores-mcp-puedo-usar" id="toc-qué-servidores-mcp-puedo-usar" class="nav-link" data-scroll-target="#qué-servidores-mcp-puedo-usar">¿Qué servidores MCP puedo usar?</a></li>
+  </ul></li>
+  <li><a href="#cli" id="toc-cli" class="nav-link" data-scroll-target="#cli">CLI</a>
+  <ul class="collapse">
+  <li><a href="#qué-es-la-cli-de-opencode" id="toc-qué-es-la-cli-de-opencode" class="nav-link" data-scroll-target="#qué-es-la-cli-de-opencode">¿Qué es la CLI de OpenCode?</a></li>
+  <li><a href="#qué-ventajas-tiene-la-cli-sobre-el-chat" id="toc-qué-ventajas-tiene-la-cli-sobre-el-chat" class="nav-link" data-scroll-target="#qué-ventajas-tiene-la-cli-sobre-el-chat">¿Qué ventajas tiene la CLI sobre el chat?</a></li>
+  <li><a href="#cómo-ejecuto-una-tarea-completa-desde-la-terminal" id="toc-cómo-ejecuto-una-tarea-completa-desde-la-terminal" class="nav-link" data-scroll-target="#cómo-ejecuto-una-tarea-completa-desde-la-terminal">¿Cómo ejecuto una tarea completa desde la terminal?</a></li>
+  </ul></li>
+  <li><a href="#permisos" id="toc-permisos" class="nav-link" data-scroll-target="#permisos">Permisos</a>
+  <ul class="collapse">
+  <li><a href="#qué-son-los-permisos-en-opencode" id="toc-qué-son-los-permisos-en-opencode" class="nav-link" data-scroll-target="#qué-son-los-permisos-en-opencode">¿Qué son los permisos en OpenCode?</a></li>
+  <li><a href="#cómo-configuro-permisos-para-mi-equipo" id="toc-cómo-configuro-permisos-para-mi-equipo" class="nav-link" data-scroll-target="#cómo-configuro-permisos-para-mi-equipo">¿Cómo configuro permisos para mi equipo?</a></li>
+  <li><a href="#qué-pasa-si-no-uso-git" id="toc-qué-pasa-si-no-uso-git" class="nav-link" data-scroll-target="#qué-pasa-si-no-uso-git">¿Qué pasa si no uso Git?</a></li>
+  </ul></li>
+  <li><a href="#colaboración" id="toc-colaboración" class="nav-link" data-scroll-target="#colaboración">Colaboración</a>
+  <ul class="collapse">
+  <li><a href="#cómo-comparto-mi-configuración-con-el-equipo" id="toc-cómo-comparto-mi-configuración-con-el-equipo" class="nav-link" data-scroll-target="#cómo-comparto-mi-configuración-con-el-equipo">¿Cómo comparto mi configuración con el equipo?</a></li>
+  <li><a href="#qué-es-agents.md" id="toc-qué-es-agents.md" class="nav-link" data-scroll-target="#qué-es-agents.md">¿Qué es AGENTS.md?</a></li>
+  <li><a href="#cómo-documentamos-nuestra-configuración" id="toc-cómo-documentamos-nuestra-configuración" class="nav-link" data-scroll-target="#cómo-documentamos-nuestra-configuración">¿Cómo documentamos nuestra configuración?</a></li>
+  </ul></li>
+  <li><a href="#solución-de-problemas" id="toc-solución-de-problemas" class="nav-link" data-scroll-target="#solución-de-problemas">Solución de problemas</a>
+  <ul class="collapse">
+  <li><a href="#opencode-no-encuentra-mi-skill-o-agente-qué-hago" id="toc-opencode-no-encuentra-mi-skill-o-agente-qué-hago" class="nav-link" data-scroll-target="#opencode-no-encuentra-mi-skill-o-agente-qué-hago">OpenCode no encuentra mi skill o agente, ¿qué hago?</a></li>
+  <li><a href="#el-modelo-no-responde-como-esperaba-qué-pruebo" id="toc-el-modelo-no-responde-como-esperaba-qué-pruebo" class="nav-link" data-scroll-target="#el-modelo-no-responde-como-esperaba-qué-pruebo">El modelo no responde como esperaba, ¿qué pruebo?</a></li>
+  <li><a href="#cómo-reporto-un-problema-o-sugiero-una-mejora" id="toc-cómo-reporto-un-problema-o-sugiero-una-mejora" class="nav-link" data-scroll-target="#cómo-reporto-un-problema-o-sugiero-una-mejora">¿Cómo reporto un problema o sugiero una mejora?</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">FAQ — Preguntas frecuentes del curso OpenCode 102</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="agentes-y-skills" class="level2">
+<h2 class="anchored" data-anchor-id="agentes-y-skills">Agentes y skills</h2>
+<section id="qué-diferencia-hay-entre-un-agente-y-un-skill" class="level3">
+<h3 class="anchored" data-anchor-id="qué-diferencia-hay-entre-un-agente-y-un-skill">¿Qué diferencia hay entre un agente y un skill?</h3>
+<p>Un <strong>agente</strong> es un procedimiento completo que OpenCode ejecuta paso a paso para realizar una tarea compleja. Un <strong>skill</strong> es un conjunto de instrucciones reutilizables que OpenCode carga automáticamente cuando detecta un tipo de archivo o tarea concreta. Piensa en el agente como una receta y en el skill como un manual de estilo.</p>
+<p>📖 <a href="paso-01.html">Paso 01 — Procedimientos a medida</a> · <a href="paso-02.html">Paso 02 — Habilidades reutilizables</a></p>
+</section>
+<section id="cómo-creo-un-agente-personalizado" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-creo-un-agente-personalizado">¿Cómo creo un agente personalizado?</h3>
+<p>Crea un archivo <code>.md</code> dentro de <code>.opencode/agents/</code> con un nombre descriptivo. Escribe las instrucciones paso a paso que el agente debe seguir. También puedes pedirle a OpenCode que lo cree por ti describiendo la tarea que quieres automatizar.</p>
+<p>📖 <a href="paso-01.html">Paso 01 — Crear un agente</a></p>
+</section>
+<section id="cómo-creo-un-skill-reutilizable" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-creo-un-skill-reutilizable">¿Cómo creo un skill reutilizable?</h3>
+<p>Crea un archivo <code>SKILL.md</code> dentro de <code>.opencode/skills/nombre-del-skill/</code>. Define cuándo se debe activar (detalles del archivo o tarea) y qué instrucciones debe seguir OpenCode. El skill se cargará automáticamente cuando detecte el contexto adecuado.</p>
+<p>📖 <a href="paso-02.html">Paso 02 — Crear un skill</a></p>
+</section>
+<section id="cuándo-usar-un-agente-y-cuándo-un-skill" class="level3">
+<h3 class="anchored" data-anchor-id="cuándo-usar-un-agente-y-cuándo-un-skill">¿Cuándo usar un agente y cuándo un skill?</h3>
+<p>Usa un <strong>agente</strong> para tareas puntuales y complejas: generar un informe completo, migrar documentos o crear una estructura de proyecto. Usa un <strong>skill</strong> para instrucciones que se repiten automáticamente: formatos de archivo, estilos de escritura o convenciones de un proyecto.</p>
+<p>📖 <a href="paso-01.html">Paso 01 — Procedimientos a medida</a> · <a href="paso-02.html">Paso 02 — Habilidades reutilizables</a></p>
+<hr>
+</section>
+</section>
+<section id="modelos-de-ia" class="level2">
+<h2 class="anchored" data-anchor-id="modelos-de-ia">Modelos de IA</h2>
+<section id="cómo-cambio-el-modelo-de-ia-en-opencode" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-cambio-el-modelo-de-ia-en-opencode">¿Cómo cambio el modelo de IA en OpenCode?</h3>
+<p>Escribe <code>/model</code> en el chat y selecciona el modelo que quieras usar. También puedes configurar un modelo por defecto en tu archivo de configuración del proyecto.</p>
+<p>📖 <a href="paso-03.html">Paso 03 — Modelos y proveedores</a></p>
+</section>
+<section id="qué-es-openrouter-y-cuándo-usarlo" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-openrouter-y-cuándo-usarlo">¿Qué es OpenRouter y cuándo usarlo?</h3>
+<p>OpenRouter es un servicio que te da acceso a múltiples modelos de IA (GPT, Claude, Llama, etc.) con una sola cuenta y clave API. Es útil si quieres probar varios modelos sin gestionar múltiples suscripciones.</p>
+<p>📖 <a href="paso-03.html">Paso 03 — OpenRouter</a></p>
+</section>
+<section id="puedo-usar-modelos-locales-con-opencode" class="level3">
+<h3 class="anchored" data-anchor-id="puedo-usar-modelos-locales-con-opencode">¿Puedo usar modelos locales con OpenCode?</h3>
+<p>Sí. Si tienes instalado Ollama u otro servidor local compatible, puedes conectarlo a OpenCode y usar modelos sin conexión a internet ni coste adicional. Es ideal para trabajar sin dependencia de la nube.</p>
+<p>📖 <a href="paso-03.html">Paso 03 — Modelos locales</a></p>
+</section>
+<section id="cómo-elijo-el-modelo-adecuado-para-mi-tarea" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-elijo-el-modelo-adecuado-para-mi-tarea">¿Cómo elijo el modelo adecuado para mi tarea?</h3>
+<p>Depende de la complejidad y el tipo de tarea. Para tareas sencillas, un modelo rápido y económico basta. Para análisis profundo o escritura compleja, modelos como Claude Sonnet o GPT-4o ofrecen mejores resultados. Consulta la guía de modelos para una comparativa detallada.</p>
+<p>📖 <a href="paso-03.html">Paso 03 — Elegir un modelo</a></p>
+<hr>
+</section>
+</section>
+<section id="git" class="level2">
+<h2 class="anchored" data-anchor-id="git">Git</h2>
+<section id="qué-es-git-y-por-qué-usarlo-con-opencode" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-git-y-por-qué-usarlo-con-opencode">¿Qué es Git y por qué usarlo con OpenCode?</h3>
+<p>Git es un sistema de control de versiones que guarda el historial de cambios de tus archivos. Con OpenCode, Git te permite deshacer errores, trabajar en equipo y sincronizar tu proyecto con GitHub o GitLab.</p>
+<p>📖 <a href="paso-04.html">Paso 04 — Control de versiones</a></p>
+</section>
+<section id="cómo-inicializo-un-repositorio-git" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-inicializo-un-repositorio-git">¿Cómo inicializo un repositorio Git?</h3>
+<p>Abre la terminal en el directorio de tu proyecto y ejecuta <code>git init</code>. Luego haz tu primera captura con <code>git add .</code> y <code>git commit -m "mensaje descriptivo"</code>. OpenCode puede guiarte en el proceso.</p>
+<p>📖 <a href="paso-04.html">Paso 04 — Primeros pasos con Git</a></p>
+</section>
+<section id="cómo-sincronizo-cambios-con-github" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-sincronizo-cambios-con-github">¿Cómo sincronizo cambios con GitHub?</h3>
+<p>Crea un repositorio en GitHub, añade el remoto con <code>git remote add origin URL</code> y sube los cambios con <code>git push</code>. Para descargar cambios de otros, usa <code>git pull</code>.</p>
+<p>📖 <a href="paso-04.html">Paso 04 — Sincronizar con GitHub</a></p>
+</section>
+<section id="qué-hago-si-tengo-un-conflicto-de-fusión" class="level3">
+<h3 class="anchored" data-anchor-id="qué-hago-si-tengo-un-conflicto-de-fusión">¿Qué hago si tengo un conflicto de fusión?</h3>
+<p>Un conflicto ocurre cuando dos personas modifican la misma línea. Git te marca las diferencias. Elige la versión correcta, edita el archivo y marca como resuelto con <code>git add</code>. Luego continua con el commit.</p>
+<p>📖 <a href="paso-04.html">Paso 04 — Conflictos de fusión</a></p>
+<hr>
+</section>
+</section>
+<section id="mcp" class="level2">
+<h2 class="anchored" data-anchor-id="mcp">MCP</h2>
+<section id="qué-es-mcp-model-context-protocol" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-mcp-model-context-protocol">¿Qué es MCP (Model Context Protocol)?</h3>
+<p>MCP es un protocolo que permite a OpenCode conectarse a bases de datos, archivos y servicios externos. Amplía el contexto disponible para que el asistente pueda trabajar con información que está fuera de tu proyecto.</p>
+<p>📖 <a href="paso-05.html">Paso 05 — Conexión con sistemas externos</a></p>
+</section>
+<section id="cómo-configuro-un-servidor-mcp" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-configuro-un-servidor-mcp">¿Cómo configuro un servidor MCP?</h3>
+<p>Añade la configuración del servidor en tu archivo <code>opencode.json</code> bajo la clave <code>mcpServers</code>. Especifica el comando, los argumentos y las variables de entorno necesarias. OpenCode se conectará automáticamente al iniciar.</p>
+<p>📖 <a href="paso-05.html">Paso 05 — Configurar un servidor MCP</a></p>
+</section>
+<section id="qué-servidores-mcp-puedo-usar" class="level3">
+<h3 class="anchored" data-anchor-id="qué-servidores-mcp-puedo-usar">¿Qué servidores MCP puedo usar?</h3>
+<p>Hay servidores para bases de datos (SQLite, PostgreSQL), almacenamiento (Google Drive, S3), búsqueda web y más. Elige según la fuente de datos que necesites consultar. La lista de servidores disponibles crece constantemente.</p>
+<p>📖 <a href="paso-05.html">Paso 05 — Tipos de servidores</a></p>
+<hr>
+</section>
+</section>
+<section id="cli" class="level2">
+<h2 class="anchored" data-anchor-id="cli">CLI</h2>
+<section id="qué-es-la-cli-de-opencode" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-la-cli-de-opencode">¿Qué es la CLI de OpenCode?</h3>
+<p>La CLI (interfaz de línea de comandos) te permite ejecutar tareas de OpenCode directamente desde la terminal, sin abrir el chat interactivo. Es ideal para automatizar procesos y trabajar con múltiples archivos de golpe.</p>
+<p>📖 <a href="paso-06.html">Paso 06 — Automatiza desde la terminal</a></p>
+</section>
+<section id="qué-ventajas-tiene-la-cli-sobre-el-chat" class="level3">
+<h3 class="anchored" data-anchor-id="qué-ventajas-tiene-la-cli-sobre-el-chat">¿Qué ventajas tiene la CLI sobre el chat?</h3>
+<p>La CLI es más rápida, precisa y escalable. No necesitas mantener una conversación: escribes una instrucción y OpenCode la ejecuta. Además, consume menos tokens porque no arrastra historial de chat.</p>
+<p>📖 <a href="paso-06.html">Paso 06 — Ventajas de la CLI</a></p>
+</section>
+<section id="cómo-ejecuto-una-tarea-completa-desde-la-terminal" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-ejecuto-una-tarea-completa-desde-la-terminal">¿Cómo ejecuto una tarea completa desde la terminal?</h3>
+<p>Usa <code>opencode run "instrucción"</code> seguido de la tarea que quieras ejecutar. Por ejemplo: <code>opencode run "revisa la ortografía de todos los .md del directorio"</code>. OpenCode procesará los archivos y aplicará los cambios.</p>
+<p>📖 <a href="paso-06.html">Paso 06 — Ejemplos prácticos</a></p>
+<hr>
+</section>
+</section>
+<section id="permisos" class="level2">
+<h2 class="anchored" data-anchor-id="permisos">Permisos</h2>
+<section id="qué-son-los-permisos-en-opencode" class="level3">
+<h3 class="anchored" data-anchor-id="qué-son-los-permisos-en-opencode">¿Qué son los permisos en OpenCode?</h3>
+<p>Los permisos controlan qué acciones puede hacer OpenCode sin pedir confirmación: leer archivos, escribir contenido, ejecutar comandos o hacer commit en Git. Configurar permisos adecuados agiliza tu flujo de trabajo sin sacrificar seguridad.</p>
+<p>📖 <a href="paso-07.html">Paso 07 — Permisos</a></p>
+</section>
+<section id="cómo-configuro-permisos-para-mi-equipo" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-configuro-permisos-para-mi-equipo">¿Cómo configuro permisos para mi equipo?</h3>
+<p>Crea un archivo <code>opencode.json</code> en la raíz del proyecto con las reglas de permisos. Define qué acciones están permitidas, cuáles requieren confirmación y cuáles están prohibidas. Comparte este archivo con tu equipo vía Git.</p>
+<p>📖 <a href="paso-07.html">Paso 07 — Configurar permisos</a></p>
+</section>
+<section id="qué-pasa-si-no-uso-git" class="level3">
+<h3 class="anchored" data-anchor-id="qué-pasa-si-no-uso-git">¿Qué pasa si no uso Git?</h3>
+<p>Los permisos son aún más importantes sin Git, porque no tienes un historial de cambios al que recurrir. Configura permisos conservadores: que OpenCode pida confirmación antes de escribir o ejecutar comandos.</p>
+<p>📖 <a href="paso-07.html">Paso 07 — Permisos sin Git</a></p>
+<hr>
+</section>
+</section>
+<section id="colaboración" class="level2">
+<h2 class="anchored" data-anchor-id="colaboración">Colaboración</h2>
+<section id="cómo-comparto-mi-configuración-con-el-equipo" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-comparto-mi-configuración-con-el-equipo">¿Cómo comparto mi configuración con el equipo?</h3>
+<p>Guarda la configuración de OpenCode (archivos <code>opencode.json</code>, skills, agentes) en el repositorio Git del proyecto. Cuando tu equipo cloné el repositorio, tendrá acceso a la misma configuración automáticamente.</p>
+<p>📖 <a href="paso-08.html">Paso 08 — Colaboración en equipo</a></p>
+</section>
+<section id="qué-es-agents.md" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-agents.md">¿Qué es AGENTS.md?</h3>
+<p>Es un archivo que documenta la configuración de OpenCode del proyecto: agentes disponibles, skills, permisos y convenciones. Sirve como referencia para nuevos miembros del equipo y como recordatorio para los que ya están.</p>
+<p>📖 <a href="paso-08.html">Paso 08 — Documentar la configuración</a></p>
+</section>
+<section id="cómo-documentamos-nuestra-configuración" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-documentamos-nuestra-configuración">¿Cómo documentamos nuestra configuración?</h3>
+<p>Pide a OpenCode que genere un <code>AGENTS.md</code> describiendo los agentes, skills y permisos del proyecto. Actualízalo cuando hagas cambios en la configuración. Mantenerlo al día ahorra tiempo al equipo.</p>
+<p>📖 <a href="paso-08.html">Paso 08 — Colaboración en equipo</a></p>
+<hr>
+</section>
+</section>
+<section id="solución-de-problemas" class="level2">
+<h2 class="anchored" data-anchor-id="solución-de-problemas">Solución de problemas</h2>
+<section id="opencode-no-encuentra-mi-skill-o-agente-qué-hago" class="level3">
+<h3 class="anchored" data-anchor-id="opencode-no-encuentra-mi-skill-o-agente-qué-hago">OpenCode no encuentra mi skill o agente, ¿qué hago?</h3>
+<p>Verifica que el archivo está en la ruta correcta: <code>.opencode/skills/nombre/SKILL.md</code> para skills y <code>.opencode/agents/nombre.md</code> para agentes. Revisa la sintaxis del archivo y asegúrate de que el nombre del directorio coincide con el del skill.</p>
+<p>📖 <a href="paso-01.html">Paso 01 — Agentes</a> · <a href="paso-02.html">Paso 02 — Skills</a></p>
+</section>
+<section id="el-modelo-no-responde-como-esperaba-qué-pruebo" class="level3">
+<h3 class="anchored" data-anchor-id="el-modelo-no-responde-como-esperaba-qué-pruebo">El modelo no responde como esperaba, ¿qué pruebo?</h3>
+<p>Prueba a cambiar de modelo con <code>/model</code>. No todos los modelos rinden igual en todas las tareas. Si el problema persiste, reformula tu prompt con más contexto y instrucciones más específicas.</p>
+<p>📖 <a href="paso-03.html">Paso 03 — Elegir un modelo</a></p>
+</section>
+<section id="cómo-reporto-un-problema-o-sugiero-una-mejora" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-reporto-un-problema-o-sugiero-una-mejora">¿Cómo reporto un problema o sugiero una mejora?</h3>
+<p>Abre un <a href="https://github.com/palazon/ocCursoAvanzado/issues">issue en GitHub</a> describiendo el problema con detalle: qué pasos seguiste, qué resultado esperabas y qué obtuviste. Incluye capturas de pantalla si es posible.</p>
+<hr>
+<p><em>Curso OpenCode 102 · Preguntas frecuentes · Junio 2026</em></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>
+(function() {
+  if (location.pathname.includes('index.html')) return;
+  var toc = document.getElementById('TOC');
+  if (!toc) return;
+
+  var pages = [
+    { href: 'paso-0.html',  label: 'Paso 0' },
+    { href: 'paso-01.html', label: 'Paso 01' },
+    { href: 'paso-02.html', label: 'Paso 02' },
+    { href: 'paso-03.html', label: 'Paso 03' },
+    { href: 'paso-04.html', label: 'Paso 04' },
+    { href: 'paso-05.html', label: 'Paso 05' },
+    { href: 'paso-06.html', label: 'Paso 06' },
+    { href: 'paso-07.html', label: 'Paso 07' },
+    { href: 'paso-08.html', label: 'Paso 08' },
+  ];
+
+  var current = location.pathname.split('/').pop();
+  var idx = pages.findIndex(function(p) { return p.href === current; });
+  if (idx === -1) return;
+
+  var nav = document.createElement('div');
+  nav.className = 'toc-prevnext';
+
+  if (idx > 0) {
+    var prevLink = document.createElement('a');
+    prevLink.href = pages[idx - 1].href;
+    prevLink.className = 'toc-prev';
+    prevLink.textContent = '\u2190 ' + pages[idx - 1].label;
+    nav.appendChild(prevLink);
+  } else {
+    nav.appendChild(document.createElement('span'));
+  }
+
+  if (idx < pages.length - 1) {
+    var nextLink = document.createElement('a');
+    nextLink.href = pages[idx + 1].href;
+    nextLink.className = 'toc-next';
+    nextLink.textContent = pages[idx + 1].label + ' \u2192';
+    nav.appendChild(nextLink);
+  }
+
+  toc.appendChild(nav);
+
+  var link = document.createElement('a');
+  link.href = 'index.html';
+  link.textContent = '\u2190 Volver al \u00edndice';
+  link.className = 'toc-back-btn';
+  toc.append(link);
+})();
+</script>
+
+
+
+
+</body></html>

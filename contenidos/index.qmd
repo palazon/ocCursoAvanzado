@@ -80,7 +80,7 @@ lado.
 
 ### B. Online
 
-Abre `https://palazon.github.io/ocCursoAvanzado/contenidos/` en
+Abre `https://palazon.github.io/ocCursoAvanzado/` en
 tu navegador.
 
 ### C. Desde los fuentes
@@ -102,6 +102,12 @@ bash render-all.sh
 - Git (para los ejercicios del paso 4)
 - Node.js (opcional, para el paso 5 — MCP con SQLite)
 - Quarto (opcional, solo para modificar fuentes)
+
+---
+
+## ¿Preguntas?
+
+Consulta las [**preguntas frecuentes**](faq.html){target="_blank"} del curso para resolver dudas habituales.
 
 ---
 

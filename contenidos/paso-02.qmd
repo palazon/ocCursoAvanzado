@@ -213,4 +213,16 @@ skills son globales y están disponibles desde cualquier lugar.
 En el próximo paso veremos cómo elegir el modelo de IA adecuado
 para cada tarea.
 
+::: {.callout-tip}
+## ¿Quieres saber más?
+
+Para más detalles sobre skills, consulta:
+[Ampliando: Skills](ampliando/ampliando-skills.qmd)
+
+¿Sabías que los skills también sirven como memoria? Cuando el
+asistente ve un archivo `.qmd`, carga automáticamente las
+instrucciones de estilo del skill. Más detalles en:
+[Ampliando: Memoria](ampliando/ampliando-memoria.qmd)
+:::
+
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

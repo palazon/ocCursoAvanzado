@@ -1,0 +1,419 @@
+---
+title: "Guía de *Skills* para Creadores de Contenido"
+subtitle: "Dando instrucciones a OpenCode para que siga tus reglas"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    code-block-bg: "#F0F0F0"
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+      - \fvset{fontsize=\small}
+      - \AtBeginEnvironment{tabular}{\footnotesize}
+      - \AtBeginEnvironment{longtable}{\footnotesize}
+---
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía amplía la información sobre *skills* de OpenCode para creadores de contenido que ya tienen algo de experiencia. **No necesitas saber programar** para entenderla.
+:::
+
+## ¿Qué es un *skill* en OpenCode?
+
+Un ***skill*** (habilidad o destreza) es un conjunto de instrucciones escritas que OpenCode carga automáticamente cuando detecta que la tarea que le pides encaja con el propósito del *skill*.
+
+Piénsalo como una *guía de referencia o manual de instrucciones*:
+
+- Le dice al modelo *cómo* abordar cierto tipo de tareas.
+- Le recuerda *qué* convenciones, reglas o pasos seguir.
+- Se activa solo, sin que tengas que mencionarlo.
+
+::: {.callout-note}
+Los *skills* no son código ejecutable. Son **texto instructivo** que el modelo lee antes de responder. Es como darle a un asistente un manual de procedimientos antes de que empiece a trabajar.
+:::
+
+## Agente vs *Skill*
+
+| Aspecto | Agente | *Skill* |
+|---------|--------|-------|
+| **¿Qué es?** | Un asistente con rol y personalidad definidos | Instrucciones + flujo de trabajo |
+| **¿Cómo se activa?** | Manualmente, escribiendo `@nombre` | Automáticamente, según la tarea |
+| **¿Tiene herramientas propias?** | Sí, puede tener acceso a herramientas y permisos | No, solo aporta contexto textual |
+| **¿Puede ejecutar acciones?** | Sí, actúa por sí mismo | No, solo guía al modelo principal |
+| **Ejemplo** | `@editor` que revisa ortografía | *Skill* que aplica guía de estilo automáticamente |
+
+::: {.callout-warning}
+Los *skills* **no se invocan manualmente**. Si necesitas activar algo explícitamente, probablemente necesitas un **agente**, no un *skill*.
+:::
+
+## Cuándo usar *skill* vs agente
+
+Usa un **skill** cuando:
+
+- Tienes conocimiento contextual que debe aplicarse cada vez que aparece cierto tipo de tarea (ej.: "cada vez que generes documentación, sigue estas reglas de estilo").
+- Quieres que el modelo recuerde convenciones sin que tú las tengas que escribir cada vez.
+- El flujo de trabajo es predecible y repetitivo.
+
+Usa un **agente** cuando:
+
+- Necesitas que alguien (aunque sea IA) tome un rol activo: revisar, editar, proponer cambios.
+- Quieres invocar una capacidad concreta escribiendo `@nombre`.
+- El agente necesita herramientas específicas (navegador, shell, etc.).
+
+::: {.callout-tip}
+**Regla práctica:**  
+skill = *qué saber* (conocimiento pasivo)  
+agente = *qué hacer* (acción activa)
+:::
+
+## Anatomía de un *skill*
+
+Cada *skill* vive dentro de un directorio con su nombre:
+
+```
+.opencode/skills/<nombre>/SKILL.md
+```
+
+Ejemplo de estructura:
+
+```
+.opencode/skills/
+└── revisar-estilo/
+    └── SKILL.md
+```
+
+El archivo *SKILL.md* tiene dos partes:
+
+1. ***Frontmatter* YAML** — metadatos que OpenCode lee para saber cuándo activar el *skill*.
+2. **Cuerpo en *Markdown*** — las instrucciones, ejemplos y flujos de trabajo.
+
+```markdown
+---
+name: revisar-estilo
+description: >
+  Revisa que la documentación generada siga la guía de estilo interna.
+  Usa cuando se genere documentación nueva o se modifique la existente.
+---
+
+# Skill: Revisión de Estilo
+
+## Reglas generales
+
+- Tono: claro, directo, sin jerga innecesaria.
+- Todas las cabeceras usan formato "Title Case".
+- Los ejemplos de código deben incluir el lenguaje en el bloque.
+
+## Flujo de trabajo
+
+1. Lee el documento generado.
+2. Identifica infracciones de estilo.
+3. Sugiere correcciones específicas.
+4. No modifiques el contenido sin permiso explícito.
+
+```
+
+::: {.callout-note}
+El ***frontmatter*** es el bloque de metadatos entre `---` al inicio del archivo. OpenCode lo usa para decidir si el *skill* es relevante para la tarea actual. El **cuerpo** es lo que se inyecta en el contexto del modelo.
+:::
+
+## Cómo se activa un *skill*
+
+El modelo principal de OpenCode decide automáticamente si cargar un *skill*. Lo hace comparando la ***description*** del *skill* con la tarea que le acabas de pedir.
+
+No puedes forzar la activación de un *skill*. Depende de:
+
+- Que la *description* del *skill* coincida con la tarea.
+- Que el modelo considere relevante el *skill* en ese momento.
+
+::: {.callout-warning}
+Si necesitas asegurarte de que algo se cargue siempre, considera usar **instrucciones del proyecto** en lugar de un *skill*. Los *skills* son contextuales, no obligatorios.
+:::
+
+## Ejemplo práctico
+
+*Skill* para **documentalistas** que quieren mantener una guía de estilo coherente.
+
+Archivo: `.opencode/skills/estilo-documentacion/SKILL.md`
+
+```markdown
+---
+name: estilo-documentacion
+description: >
+  Aplica la guía de estilo de documentación técnica.
+  Usa cuando generes, edites o revises documentación en español.
+  Usa SOLO cuando trabajes con archivos .qmd, .md o .Rmd.
+---
+
+# Guía de Estilo para Documentación Técnica
+
+## Voz y tono
+
+- Usa voz activa: "El sistema procesa los datos" (no "los datos son procesados").
+- Trata a la persona lectora de "tú".
+- Sé concisa: una idea por párrafo.
+
+## Convenciones de formato
+
+- **Títulos**: `## Title Case` (nunca todo mayúsculas).
+- **Código**: usa bloques con nombre de lenguaje: ` ```python `.
+- **Énfasis**: usa *cursiva* para términos nuevos, **negrita** para acciones importantes.
+
+## Lo que NO debes hacer
+
+- No uses notas al pie en documentación técnica.
+- No uses emojis a menos que la usuaria lo solicite.
+- No añadas jerga innecesaria.
+
+## Flujo de revisión
+
+1. Identifica el tipo de archivo (`.qmd`, `.md`, `.Rmd`).
+2. Revisa tono, formato y convenciones según esta guía.
+3. Si encuentras una infracción, señala la línea y sugiere una corrección.
+4. Pregunta antes de aplicar cambios automáticamente.
+```
+
+## Ubicación de los *skills*
+
+Hay dos lugares donde puedes colocar *skills*:
+
+| Ubicación | Alcance | Ejemplo de ruta |
+|-----------|---------|-----------------|
+| **Proyecto** | Solo afecta a ese proyecto | `.opencode/skills/<nombre>/SKILL.md` |
+| **Global** | Afecta a todos los proyectos | `~/.config/opencode/skills/<nombre>/SKILL.md` |
+
+- Los *skills* de **proyecto** van dentro del repositorio o directorio del proyecto. Son ideales para convenciones de equipo.
+- Los *skills* **globales** van en tu directorio personal de configuración. Sirven para reglas que aplicas siempre, como tu guía de estilo personal.
+
+::: {.callout-tip}
+Si trabajas con un equipo, usa *skills* de proyecto y versiona el directorio `.opencode/` con Git. Así todo el mundo comparte las mismas reglas.
+:::
+
+## Consejos para escribir *descriptions* efectivas
+
+La *description* es lo que OpenCode usa para decidir si cargar tu *skill*. Una buena *description* marca la diferencia.
+
+### Haz esto
+
+- **Pon las palabras clave al inicio.**  
+  ✅ `"Revisa que la documentación siga la guía de estilo..."`  
+  ❌ `"Skill para cuando necesites que alguien revise..."`
+
+- **Sé específica.**  
+  ✅ `"Usa cuando generes archivos .qmd o .md en español."`  
+  ❌ `"Para documentación."`
+
+- **Usa frases como "Usa cuando ..." o "Usa SOLO cuando ...".**  
+  Esto ayuda al modelo a emparejar el skill con la tarea.
+
+- **Menciona el tipo de archivo, lenguaje o formato.**  
+  Ejemplo: `"Usa SOLO cuando trabajes con archivos Python (.py)."`
+
+### Tabla de patrones recomendados
+
+| Patrón | Ejemplo |
+|--------|---------|
+| `Usa cuando...` | `Usa cuando revises documentación existente.` |
+| `Usa SOLO cuando ...` | `Usa SOLO cuando modifiques archivos .qmd ...` |
+| `Usa para...` | `Usa para aplicar convenciones de escritura inclusiva.` |
+
+::: {.callout-warning}
+Una descripción demasiado genérica hará que el skill se active en contextos inapropiados o que no se active nunca. Invertir tiempo en una buena descripción es clave.
+:::
+
+## Cómo empezar en 3 pasos
+
+### Paso 1: Crea el directorio
+
+Los *skills* se guardan en `.opencode/skills/<nombre>/` dentro de tu proyecto. Si no existe, créala.
+
+### Paso 2: Crea el archivo
+
+Cada *skill* es un archivo *SKILL.md* dentro de su directorio:
+
+```
+.opencode/skills/estilo-documentacion/SKILL.md
+.opencode/skills/revisar-textos/SKILL.md
+```
+
+### Paso 3: Escribe y guarda
+
+Escribe el *frontmatter* YAML (con `---`) y las instrucciones en el cuerpo. Guarda el archivo.
+
+### Pruébalo
+
+Abre OpenCode y realiza una tarea que coincida con la *description* de tu *skill*. Si la *description* es buena, el *skill* se cargará automáticamente.
+
+::: {.callout-note}
+## Archivos ocultos
+El directorio `.opencode` comienza con un punto. En muchos sistemas está oculto. Si no lo ves, activa "mostrar archivos ocultos" en tu explorador.
+:::
+
+## Errores comunes
+
+| Error | Consecuencia | Solución |
+|-------|--------------|----------|
+| *Description* demasiado genérica | El *skill* se activa en contextos inapropiados | Sé específico y usa "Usa cuando ..." |
+| No guardar en `.opencode/skills/<nombre>/` | OpenCode no encuentra el *skill* | Verifica la ruta exacta |
+| Instrucciones vagas en el cuerpo | El modelo no sabe qué hacer | Sé claro y usa ejemplos |
+| Mezclar varios temas en un *skill* | Resultados inconsistentes | Crea un *skill* por tema |
+| Usar *skill* cuando necesitas agente | No se activa o no ejecuta acciones | Usa `@nombre` para invocar un agente |
+
+## Consejos rápidos
+
+- **Un *skill*, un tema**. No metas reglas de estilo, traducción y revisión en el mismo *skill*.
+- **Empieza simple**. Un *skill* con 5 reglas claras es mejor que uno con 50 confusas.
+- **Prueba y ajusta**. Los *skills* no salen perfectos a la primera. Observa cuándo se activan y ajusta la *description*.
+- **Copia y adapta**. Si un *skill* te funciona bien, cópialo y cambia solo lo necesario para otro contexto.
+
+## Resumen rápido
+
+| Concepto | Clave |
+|----------|-------|
+| ***Skill*** | Instrucciones que se cargan automáticamente según la tarea |
+| **Activación** | Automática, la decide el modelo |
+| **Estructura** | *Frontmatter* YAML (metadatos) + cuerpo en *Markdown* (instrucciones) |
+| **Ubicación** | Proyecto (`.opencode/`) o global (`~/.config/opencode/`) |
+| ***Description*** | Debe ser específica, con *keywords* al inicio |
+| **Diferencia con agente** | *Skill* = conocimiento pasivo; agente = rol activo con herramientas |
+
+## Referencias
+
+- [Documentación de Skills](https://opencode.ai/docs/skills/) — Cómo crear y usar skills
+- [Documentación oficial de OpenCode](https://opencode.ai)
+
+---
+
+\appendix
+
+## Anexo: Skill *quarto-authoring* para copiar
+
+### Descarga el fichero
+
+El fichero completo del skill está en: [quarto-authoring-SKILL.md](quarto-authoring-SKILL.md)
+
+1. Ábrelo con tu editor de texto
+2. Estudia el contenido
+3. Si te gusta (o lo modificas), cópialo a `.opencode/skills/quarto-authoring/SKILL.md`
+
+### Qué incluye este skill
+
+Este skill le indica a OpenCode cómo trabajar con documentos *Quarto*. Cubre:
+
+- *Callouts* (bloques de nota, advertencia, consejo)
+- *Cross-references* (referencias a figuras, tablas, secciones, ecuaciones)
+- Tablas y figuras con *captions* y *alt text*
+- *Citations* (referencias bibliográficas)
+- *Divs* y *spans* (contenedor con formato)
+- Configuración de documentos HTML, PDF y presentaciones *RevealJS*
+
+### Ejemplo: *callouts*
+
+Los *callouts* son bloques destacados para notas, advertencias o consejos:
+
+```markdown
+::: {.callout-note}
+Esta es una nota informativa.
+:::
+
+::: {.callout-warning}
+## Título personalizado
+Esta es una advertencia.
+:::
+```
+
+Tipos disponibles: `note`, `warning`, `important`, `tip`, `caution`.
+
+### Otros elementos
+
+- ***Cross-references***: usa `@fig-nombre`, `@tbl-nombre`, `@sec-nombre`, `@eq-nombre` para referenciar elementos.
+- **Tablas**: define una tabla con *caption* usando `::: {#tbl-ejemplo}`.
+- **Figuras**: incluye `fig-alt` para accesibilidad: `![Caption](image.png){#fig-name fig-alt="Alt text"}`.
+- ***Citations***: referencia bibliográfica con `@autor2020` o `[@autor2020; @autor2021]`.
+
+Consulta el fichero completo para ver todos los detalles y *workflows* comunes.
+
+### Sugerencias de personalización
+
+#### Cambiar la *description*
+
+Adapta la descripción a tu tipo de documentos:
+
+| Tipo de documento | *Description* personalizada |
+|-------------------|---------------------------|
+| Informes técnicos | "Usa cuando generes informes técnicos en formato *.qmd*" |
+| Tutoriales | "Usa cuando crees tutoriales o guías paso a paso" |
+| Artículos académicos | "Usa cuando trabajes con artículos que incluyan *citations* y referencias" |
+
+#### Añadir reglas específicas
+
+Puedes añadir reglas de estilo en el cuerpo del skill:
+
+```markdown
+# Guía de Estilo para Quarto
+
+## Convenciones de formato
+
+- Usa voz activa en los textos.
+- Trata a la persona lectora de "tú".
+- Incluye `fig-alt` en todas las figuras.
+- Usa `#| label:` en todos los bloques de código.
+```
+
+### Preguntas de reflexión
+
+Antes de crear tu propio skill, considera estas preguntas:
+
+1. **¿Qué tipo de documentos creas con más frecuencia?** Artículos, tutoriales, informes ... El tipo define qué skill necesitas.
+
+2. **¿Qué elementos de *Quarto* usas siempre?** *Callouts*, *cross-references*, tablas ... El skill puede recordarte las convenciones.
+
+3. **¿Qué errores quieres evitar?** Revisa la tabla de errores comunes y piensa cómo los aplicarías a tu caso.
+
+4. **¿Cuándo debería activarse el skill?** Piensa en frases clave para la *description*: "Usa cuando generes archivos *.qmd*".
+
+::: {.callout-note}
+## Consejo
+Respóndelas antes de copiar el ejemplo del anexo.
+Te ayudarán a personalizar tu skill desde el principio.
+
+Si lo prefieres, usa esta configuración inicial y ve
+experimentando versiones.
+Así podrás comprobar el efecto de tus cambios.
+:::
+
+---
+
+*Documento creado por el agente `escribidor` — un asistente de documentación técnica para OpenCode.*

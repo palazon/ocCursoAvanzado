@@ -8,7 +8,7 @@
 
 <meta name="author" content="JA Palazón Ferrando">
 
-<title>Cómo OpenCode recuerda (o no) lo que haces</title>
+<title>Modelos para creadores de documentos</title>
 <style>
 
 code{white-space: pre-wrap;}
@@ -20,41 +20,6 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
-}
-
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -2209,38 +2174,75 @@ vertical-align: -.125em;
     <h2 id="toc-title">Contenidos</h2>
    
   <ul>
-  <li><a href="#qué-es-opencode-y-por-qué-debería-importarte" id="toc-qué-es-opencode-y-por-qué-debería-importarte" class="nav-link active" data-scroll-target="#qué-es-opencode-y-por-qué-debería-importarte">¿Qué es OpenCode y por qué debería importarte?</a></li>
-  <li><a href="#el-problema-cada-sesión-empieza-en-blanco" id="toc-el-problema-cada-sesión-empieza-en-blanco" class="nav-link" data-scroll-target="#el-problema-cada-sesión-empieza-en-blanco">El problema: cada sesión empieza en blanco</a></li>
-  <li><a href="#la-memoria-básica-las-instrucciones-permanentes" id="toc-la-memoria-básica-las-instrucciones-permanentes" class="nav-link" data-scroll-target="#la-memoria-básica-las-instrucciones-permanentes">La memoria básica: las instrucciones permanentes</a>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#qué-es-un-modelo-en-la-creación-de-documentos" id="toc-qué-es-un-modelo-en-la-creación-de-documentos" class="nav-link" data-scroll-target="#qué-es-un-modelo-en-la-creación-de-documentos">¿Qué es un modelo en la creación de documentos?</a></li>
+  <li><a href="#modelos-de-documentación" id="toc-modelos-de-documentación" class="nav-link" data-scroll-target="#modelos-de-documentación">Modelos de documentación</a>
   <ul class="collapse">
-  <li><a href="#instrucciones-para-tu-proyecto" id="toc-instrucciones-para-tu-proyecto" class="nav-link" data-scroll-target="#instrucciones-para-tu-proyecto">Instrucciones para tu proyecto</a></li>
-  <li><a href="#instrucciones-globales-para-todos-tus-proyectos" id="toc-instrucciones-globales-para-todos-tus-proyectos" class="nav-link" data-scroll-target="#instrucciones-globales-para-todos-tus-proyectos">Instrucciones globales (para todos tus proyectos)</a></li>
-  <li><a href="#combinando-ambos" id="toc-combinando-ambos" class="nav-link" data-scroll-target="#combinando-ambos">Combinando ambos</a></li>
-  <li><a href="#el-límite-de-este-enfoque" id="toc-el-límite-de-este-enfoque" class="nav-link" data-scroll-target="#el-límite-de-este-enfoque">El límite de este enfoque</a></li>
+  <li><a href="#modelo-lineal" id="toc-modelo-lineal" class="nav-link" data-scroll-target="#modelo-lineal">Modelo lineal</a>
+  <ul class="collapse">
+  <li><a href="#cuándo-usarlo" id="toc-cuándo-usarlo" class="nav-link" data-scroll-target="#cuándo-usarlo">¿Cuándo usarlo?</a></li>
+  <li><a href="#características" id="toc-características" class="nav-link" data-scroll-target="#características">Características</a></li>
+  <li><a href="#ejemplo-de-estructura-lineal" id="toc-ejemplo-de-estructura-lineal" class="nav-link" data-scroll-target="#ejemplo-de-estructura-lineal">Ejemplo de estructura lineal</a></li>
   </ul></li>
-  <li><a href="#los-skills-conocimiento-especializado-a-la-carta" id="toc-los-skills-conocimiento-especializado-a-la-carta" class="nav-link" data-scroll-target="#los-skills-conocimiento-especializado-a-la-carta">Los <em>skills</em>: conocimiento especializado a la carta</a></li>
-  <li><a href="#la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo" id="toc-la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo" class="nav-link" data-scroll-target="#la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo">La memoria avanzada: cuando el asistente recuerda por sí mismo</a>
+  <li><a href="#modelo-modular" id="toc-modelo-modular" class="nav-link" data-scroll-target="#modelo-modular">Modelo modular</a>
   <ul class="collapse">
-  <li><a href="#sistema-de-bloques-de-memoria" id="toc-sistema-de-bloques-de-memoria" class="nav-link" data-scroll-target="#sistema-de-bloques-de-memoria">Sistema de bloques de memoria</a></li>
-  <li><a href="#sistema-de-búsqueda-semántica" id="toc-sistema-de-búsqueda-semántica" class="nav-link" data-scroll-target="#sistema-de-búsqueda-semántica">Sistema de búsqueda semántica</a></li>
-  <li><a href="#sistema-de-captura-automática" id="toc-sistema-de-captura-automática" class="nav-link" data-scroll-target="#sistema-de-captura-automática">Sistema de captura automática</a></li>
-  <li><a href="#sistema-de-grafo-de-conocimiento" id="toc-sistema-de-grafo-de-conocimiento" class="nav-link" data-scroll-target="#sistema-de-grafo-de-conocimiento">Sistema de grafo de conocimiento</a></li>
-  <li><a href="#comparativa-rápida" id="toc-comparativa-rápida" class="nav-link" data-scroll-target="#comparativa-rápida">Comparativa rápida</a></li>
+  <li><a href="#cuándo-usarlo-1" id="toc-cuándo-usarlo-1" class="nav-link" data-scroll-target="#cuándo-usarlo-1">¿Cuándo usarlo?</a></li>
+  <li><a href="#características-1" id="toc-características-1" class="nav-link" data-scroll-target="#características-1">Características</a></li>
+  <li><a href="#ejemplo-de-estructura-modular" id="toc-ejemplo-de-estructura-modular" class="nav-link" data-scroll-target="#ejemplo-de-estructura-modular">Ejemplo de estructura modular</a></li>
+  <li><a href="#ventajas-de-la-modularidad" id="toc-ventajas-de-la-modularidad" class="nav-link" data-scroll-target="#ventajas-de-la-modularidad">Ventajas de la modularidad</a></li>
   </ul></li>
-  <li><a href="#qué-estrategia-te-conviene-según-tu-equipo" id="toc-qué-estrategia-te-conviene-según-tu-equipo" class="nav-link" data-scroll-target="#qué-estrategia-te-conviene-según-tu-equipo">¿Qué estrategia te conviene según tu equipo?</a></li>
-  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a>
+  <li><a href="#modelo-iterativo" id="toc-modelo-iterativo" class="nav-link" data-scroll-target="#modelo-iterativo">Modelo iterativo</a>
   <ul class="collapse">
+  <li><a href="#cuándo-usarlo-2" id="toc-cuándo-usarlo-2" class="nav-link" data-scroll-target="#cuándo-usarlo-2">¿Cuándo usarlo?</a></li>
+  <li><a href="#características-2" id="toc-características-2" class="nav-link" data-scroll-target="#características-2">Características</a></li>
+  <li><a href="#ciclo-de-iteración-típico" id="toc-ciclo-de-iteración-típico" class="nav-link" data-scroll-target="#ciclo-de-iteración-típico">Ciclo de iteración típico</a></li>
+  <li><a href="#consejos-para-la-iteración" id="toc-consejos-para-la-iteración" class="nav-link" data-scroll-target="#consejos-para-la-iteración">Consejos para la iteración</a></li>
+  </ul></li>
+  <li><a href="#modelo-colaborativo" id="toc-modelo-colaborativo" class="nav-link" data-scroll-target="#modelo-colaborativo">Modelo colaborativo</a>
+  <ul class="collapse">
+  <li><a href="#cuándo-usarlo-3" id="toc-cuándo-usarlo-3" class="nav-link" data-scroll-target="#cuándo-usarlo-3">¿Cuándo usarlo?</a></li>
+  <li><a href="#características-3" id="toc-características-3" class="nav-link" data-scroll-target="#características-3">Características</a></li>
+  <li><a href="#flujo-de-trabajo-colaborativo-básico" id="toc-flujo-de-trabajo-colaborativo-básico" class="nav-link" data-scroll-target="#flujo-de-trabajo-colaborativo-básico">Flujo de trabajo colaborativo básico</a></li>
+  <li><a href="#buenas-prácticas-para-la-colaboración" id="toc-buenas-prácticas-para-la-colaboración" class="nav-link" data-scroll-target="#buenas-prácticas-para-la-colaboración">Buenas prácticas para la colaboración</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#modelos-de-formato" id="toc-modelos-de-formato" class="nav-link" data-scroll-target="#modelos-de-formato">Modelos de formato</a>
+  <ul class="collapse">
+  <li><a href="#html-web" id="toc-html-web" class="nav-link" data-scroll-target="#html-web">HTML (web)</a>
+  <ul class="collapse">
+  <li><a href="#ventajas-y-desventajas" id="toc-ventajas-y-desventajas" class="nav-link" data-scroll-target="#ventajas-y-desventajas">Ventajas y desventajas</a></li>
+  <li><a href="#casos-de-uso-recomendados" id="toc-casos-de-uso-recomendados" class="nav-link" data-scroll-target="#casos-de-uso-recomendados">Casos de uso recomendados</a></li>
+  </ul></li>
+  <li><a href="#pdf-impresión" id="toc-pdf-impresión" class="nav-link" data-scroll-target="#pdf-impresión">PDF (impresión)</a>
+  <ul class="collapse">
+  <li><a href="#ventajas-y-desventajas-1" id="toc-ventajas-y-desventajas-1" class="nav-link" data-scroll-target="#ventajas-y-desventajas-1">Ventajas y desventajas</a></li>
+  <li><a href="#casos-de-uso-recomendados-1" id="toc-casos-de-uso-recomendados-1" class="nav-link" data-scroll-target="#casos-de-uso-recomendados-1">Casos de uso recomendados</a></li>
+  </ul></li>
+  <li><a href="#presentaciones-revealjs" id="toc-presentaciones-revealjs" class="nav-link" data-scroll-target="#presentaciones-revealjs">Presentaciones (revealjs)</a>
+  <ul class="collapse">
+  <li><a href="#ventajas-y-desventajas-2" id="toc-ventajas-y-desventajas-2" class="nav-link" data-scroll-target="#ventajas-y-desventajas-2">Ventajas y desventajas</a></li>
+  <li><a href="#casos-de-uso-recomendados-2" id="toc-casos-de-uso-recomendados-2" class="nav-link" data-scroll-target="#casos-de-uso-recomendados-2">Casos de uso recomendados</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#tabla-comparativa-de-formatos" id="toc-tabla-comparativa-de-formatos" class="nav-link" data-scroll-target="#tabla-comparativa-de-formatos">Tabla comparativa de formatos</a></li>
+  <li><a href="#cómo-elegir-el-modelo-adecuado" id="toc-cómo-elegir-el-modelo-adecuado" class="nav-link" data-scroll-target="#cómo-elegir-el-modelo-adecuado">¿Cómo elegir el modelo adecuado?</a>
+  <ul class="collapse">
+  <li><a href="#cuál-es-el-objetivo-del-documento" id="toc-cuál-es-el-objetivo-del-documento" class="nav-link" data-scroll-target="#cuál-es-el-objetivo-del-documento">1. ¿Cuál es el objetivo del documento?</a></li>
+  <li><a href="#quién-es-la-audiencia" id="toc-quién-es-la-audiencia" class="nav-link" data-scroll-target="#quién-es-la-audiencia">2. ¿Quién es la audiencia?</a></li>
+  <li><a href="#cuántos-autores-participan" id="toc-cuántos-autores-participan" class="nav-link" data-scroll-target="#cuántos-autores-participan">3. ¿Cuántos autores participan?</a></li>
+  <li><a href="#con-qué-frecuencia-se-actualizará" id="toc-con-qué-frecuencia-se-actualizará" class="nav-link" data-scroll-target="#con-qué-frecuencia-se-actualizará">4. ¿Con qué frecuencia se actualizará?</a></li>
+  </ul></li>
+  <li><a href="#resumen-y-recomendaciones" id="toc-resumen-y-recomendaciones" class="nav-link" data-scroll-target="#resumen-y-recomendaciones">Resumen y recomendaciones</a></li>
   <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
-  </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="informe-memoria-opencode-creadores.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Otros formatos</h2><ul><li><a href="ampliando-documentacion.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Cómo OpenCode recuerda (o no) lo que haces</h1>
-<p class="subtitle lead">Guía para creadores de documentación</p>
+<h1 class="title">Modelos para creadores de documentos</h1>
+<p class="subtitle lead">Una guía para investigadores, estudiantes y profesionales</p>
 </div>
 
 
@@ -2257,7 +2259,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Fecha de publicación</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">18 de junio de 2026</p>
+      <p class="date">21 de junio de 2026</p>
     </div>
   </div>
   
@@ -2269,289 +2271,804 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="qué-es-opencode-y-por-qué-debería-importarte" class="level1">
-<h1>¿Qué es OpenCode y por qué debería importarte?</h1>
-<p>Imagina un asistente que trabaja contigo en la terminal, ayudándote a escribir documentos, estructurar guías, revisar texto y dar formato. Puedes pedirle en lenguaje natural: “pásame esto a markdown”, “revisa la ortografía de este informe”, o “genera una tabla de contenidos para esta guía”.</p>
-<p>Eso es OpenCode: un asistente de IA que entiende tu proyecto y trabaja sobre tus archivos.</p>
-<p>Pero hay un detalle importante: <strong>cada vez que inicias una conversación, el asistente empieza desde cero</strong>. No recuerda lo que hiciste ayer, ni las preferencias que le dijiste la semana pasada, ni cómo está organizado tu proyecto de documentación.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Nota</span>¿Quieres continuar una sesión anterior?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Puedes reiniciar una sesión con el flag <code>-c</code> o indicando el número de sesión. Así el asistente recupera el contexto previo sin empezar de cero.</p>
-</div>
-</div>
-<p>Esta breve guía explica cómo funciona esa memoria, qué opciones tienes para mejorarla y cuál te conviene según tu forma de trabajar.</p>
+<section id="introducción" class="level1">
+<h1>Introducción</h1>
+<p>¿Alguna vez te has preguntado por qué algunos documentos son más fáciles de escribir, revisar y compartir que otros? La respuesta no está en la herramienta que uses, sino en el <strong>modelo</strong> que sigues al crearlos.</p>
+<p>Este documento explica los diferentes modelos que puedes aplicar al crear documentos, desde informes sencillos hasta proyectos colaborativos complejos. No necesitas saber programar: solo necesitas entender cuál es la mejor manera de organizar tu trabajo escrito.</p>
+<blockquote class="blockquote">
+<p><strong>Objetivo de este documento:</strong> Ayudarte a elegir el modelo adecuado para tu próximo documento, ya sea un artículo académico, un informe profesional o una presentación.</p>
+</blockquote>
+<hr>
 </section>
-<section id="el-problema-cada-sesión-empieza-en-blanco" class="level1">
-<h1>El problema: cada sesión empieza en blanco</h1>
-<p>Imagina que cada mañana llega un becario nuevo a tu equipo. Es brillante, escribe bien y aprende rápido, pero al día siguiente aparece otro becario que no sabe nada de lo que hicisteis el día anterior. No conoce el manual de estilo, no sabe qué guías estáis escribiendo, ni qué formatos preferís.</p>
-<p>Trabajar con OpenCode por defecto es exactamente eso.</p>
-<p><strong>Por qué está diseñado así:</strong></p>
-<ul>
-<li><strong>Privacidad:</strong> OpenCode no guarda nada de tus conversaciones a menos que tú se lo pidas explícitamente.</li>
-<li><strong>Simplicidad:</strong> sin estado persistente, no hay configuraciones que se rompan ni datos que se corrompan.</li>
-<li><strong>Flexibilidad:</strong> puedes usar OpenCode para proyectos muy diferentes sin que se mezclen.</li>
-</ul>
-<p>Pero para el trabajo real de documentación, necesitas que el asistente recuerde al menos algunas cosas: tu guía de estilo, las convenciones de tu equipo, los formatos que usáis habitualmente.</p>
-</section>
-<section id="la-memoria-básica-las-instrucciones-permanentes" class="level1">
-<h1>La memoria básica: las instrucciones permanentes</h1>
-<p>La forma más sencilla de que OpenCode recuerde información es escribirla en un archivo de instrucciones. Es como dejarle una nota al becario antes de que empiece su jornada.</p>
-<section id="instrucciones-para-tu-proyecto" class="level2">
-<h2 class="anchored" data-anchor-id="instrucciones-para-tu-proyecto">Instrucciones para tu proyecto</h2>
-<p>Crea un archivo llamado <code>AGENTS.md</code> en el directorio raíz de tu proyecto. Todo lo que escribas ahí, el asistente lo leerá al empezar cada sesión.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># AGENTS.md (ejemplo para un proyecto de documentación)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Guía de estilo</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Usamos tono formal pero accesible</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Títulos en mayúscula solo la primera letra</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Las listas deben tener línea en blanco entre elementos</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">## Formatos de salida</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Documentos técnicos: Quarto con HTML y PDF</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Guías rápidas: Markdown</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Manuales de usuario: Quarto con EPUB</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Convenciones</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Las capturas de pantalla van en /img</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los diagramas en /assets/diagrams</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Los archivos fuente en /src</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Puedes pedirle a OpenCode que genere este archivo automáticamente con el comando <code>/init</code>. Él mismo escaneará tu proyecto y creará un resumen con lo más importante.</p>
-</section>
-<section id="instrucciones-globales-para-todos-tus-proyectos" class="level2">
-<h2 class="anchored" data-anchor-id="instrucciones-globales-para-todos-tus-proyectos">Instrucciones globales (para todos tus proyectos)</h2>
-<p>Si trabajas en varios proyectos de documentación y quieres que el asistente recuerde siempre ciertas cosas (por ejemplo, tu nombre, tu tono preferido, o reglas generales de estilo), puedes crear un archivo en tu directorio personal:</p>
-<pre><code>~/.config/OpenCode/AGENTS.md</code></pre>
-<p>Este archivo se aplica a <strong>todos</strong> los proyectos en los que uses OpenCode. Es útil para:</p>
-<ul>
-<li>Tu forma de trabajar preferida</li>
-<li>Recordatorios generales de estilo</li>
-<li>Preferencias personales de formato</li>
-</ul>
-</section>
-<section id="combinando-ambos" class="level2">
-<h2 class="anchored" data-anchor-id="combinando-ambos">Combinando ambos</h2>
-<p>Lo bueno es que ambos archivos se complementan. Las instrucciones globales y las del proyecto se mezclan, así que el asistente recibe toda la información relevante en cada sesión.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 43%">
-<col style="width: 41%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Tipo</th>
-<th>Dónde se guarda</th>
-<th>Para qué sirve</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Del proyecto</td>
-<td><code>AGENTS.md</code> en tu proyecto</td>
-<td>Reglas específicas de ese proyecto</td>
-</tr>
-<tr class="even">
-<td>Globales</td>
-<td><code>~/.config/OpenCode/AGENTS.md</code></td>
-<td>Tus preferencias personales en todos los proyectos</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="el-límite-de-este-enfoque" class="level2">
-<h2 class="anchored" data-anchor-id="el-límite-de-este-enfoque">El límite de este enfoque</h2>
-<p>Las instrucciones en <code>AGENTS.md</code> son <strong>estáticas</strong>. Si cambias algo, tienes que editarlas a mano. El asistente no aprende de tus conversaciones ni guarda automáticamente los descubrimientos que hace mientras trabaja.</p>
-<p>Para eso necesitas niveles más avanzados de memoria.</p>
-</section>
-</section>
-<section id="los-skills-conocimiento-especializado-a-la-carta" class="level1">
-<h1>Los <em>skills</em>: conocimiento especializado a la carta</h1>
-<p>Los <em>skills</em> (habilidades o competencias) son como fichas de consulta rápida. Contienen instrucciones muy concretas sobre una tarea específica, y el asistente las carga solo cuando las necesita.</p>
-<p>Por ejemplo, puedes tener un skill para el formato de tus documentos Quarto. Cuando el asistente vea que estás trabajando con un archivo <code>.qmd</code>, cargará automáticamente las instrucciones de estilo.</p>
-<pre><code>.OpenCode/skills/estilo-quarto/
-└── SKILL.md   ← &quot;Para documentos Quarto, usa estos formatos...&quot;</code></pre>
-<p>La ventaja es que el asistente no lleva todo ese conocimiento encima todo el tiempo (lo que ahorra espacio en su “cabeza”), pero lo tiene disponible cuando lo necesita.</p>
-<p>Son útiles para:</p>
-<ul>
-<li><p>Reglas de formato específicas (Quarto, Markdown, LaTeX)</p></li>
-<li><p>Guías de estilo para distintos tipos de documento</p></li>
-<li><p>Plantillas de estructura recurrente</p></li>
-<li><p>Listas de comprobación para revisar documentación</p></li>
-</ul>
-</section>
-<section id="la-memoria-avanzada-cuando-el-asistente-recuerda-por-sí-mismo" class="level1">
-<h1>La memoria avanzada: cuando el asistente recuerda por sí mismo</h1>
-<p>Si trabajas con muchos proyectos o equipos grandes, las instrucciones estáticas se quedan cortas. Necesitas que el asistente recuerde automáticamente lo que ha aprendido.</p>
-<p>La comunidad de OpenCode ha creado varios sistemas para añadir memoria persistente. Aquí tienes los más relevantes explicados sin tecnicismos.</p>
+<section id="qué-es-un-modelo-en-la-creación-de-documentos" class="level1">
+<h1>¿Qué es un modelo en la creación de documentos?</h1>
+<p>En el contexto de la creación de documentos, un <strong>modelo</strong> es un patrón o estructura que defines cómo organizar, escribir y distribuir tu contenido. Piensa en un modelo como el “plan de construcción” de un edificio: antes de poner el primer ladrillo, decides dónde van las paredes, las ventanas y las puertas.</p>
+<p>Un modelo incluye tres elementos fundamentales:</p>
+<ol type="1">
+<li><strong>Plantillas:</strong> Estructuras predefinidas que te dan un punto de partida (por ejemplo, una plantilla de informe con portada, índice y secciones).</li>
+<li><strong>Formatos:</strong> La forma en que el documento se presenta al lector (HTML para la web, PDF para imprimir, diapositivas para presentar).</li>
+<li><strong>Estilos:</strong> Las reglas visuales que mantienen la consistencia (tipografía, colores, márgenes, formato de citas).</li>
+</ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Consejo</span>Más información
+<span class="screen-reader-only">Consejo</span>Consejo
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Consulta la <a href="https://opencode.ai/docs/plugins/">documentación de plugins de OpenCode</a> para ver ejemplos prácticos y guías de implementación de cada sistema de memoria.</p>
+<p>No intentes inventar todo desde cero. Usa una plantilla como punto de partida y adáptala a tus necesidades. Es como cocinar: puedes seguir una receta y luego agregar tus propios ingredientes.</p>
 </div>
 </div>
-<section id="sistema-de-bloques-de-memoria" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-bloques-de-memoria">Sistema de bloques de memoria</h2>
-<p>Algunos <em>plugins</em> añaden “bloques de memoria” que el asistente puede leer y modificar por sí mismo.</p>
-<p><strong>Dónde se guarda la memoria:</strong></p>
-<div data-tbl-colwidths="[17,33,50]">
+<hr>
+</section>
+<section id="modelos-de-documentación" class="level1">
+<h1>Modelos de documentación</h1>
+<p>Existen diferentes formas de abordar la escritura de un documento. A continuación, presentamos cuatro modelos que puedes aplicar según el tipo de proyecto.</p>
+<section id="modelo-lineal" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-lineal">Modelo lineal</h2>
+<p>El modelo lineal es el más sencillo y directo. Escribes el documento de principio a fin, como si estuvieras contando una historia.</p>
+<section id="cuándo-usarlo" class="level3">
+<h3 class="anchored" data-anchor-id="cuándo-usarlo">¿Cuándo usarlo?</h3>
+<ul>
+<li>Informes breves (menos de 10 páginas)</li>
+<li>Comunicados o memorándums</li>
+<li>Artículos de opinión o editoriales</li>
+<li>Documentos personales que no requieren revisión extensiva</li>
+</ul>
+</section>
+<section id="características" class="level3">
+<h3 class="anchored" data-anchor-id="características">Características</h3>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 17%">
-<col style="width: 33%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Tipo</th>
-<th>Se recuerda …</th>
-<th>Ejemplo</th>
+<th>Aspecto</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Global</td>
-<td>En todos los proyectos</td>
-<td>“La autora prefiere tono formal”</td>
+<td>Estructura</td>
+<td>Secuencial: introducción, desarrollo, conclusión</td>
 </tr>
 <tr class="even">
-<td>Del proyecto</td>
-<td>Solo en ese proyecto</td>
-<td>“Este manual usa convención X para los ejemplos”</td>
+<td>Autores</td>
+<td>Uno</td>
+</tr>
+<tr class="odd">
+<td>Revisión</td>
+<td>Al final del proceso</td>
+</tr>
+<tr class="even">
+<td>Curva de aprendizaje</td>
+<td>Baja</td>
+</tr>
+<tr class="odd">
+<td>Ideal para</td>
+<td>Documentos cortos y directos</td>
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p><strong>Cómo funciona:</strong> El asistente tiene tres bloques por defecto:</p>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El modelo lineal funciona bien cuando tienes una idea clara de lo que quieres comunicar y el documento no es muy extenso. Si el documento crece, considerar un modelo más flexible.</p>
+</div>
+</div>
+</section>
+<section id="ejemplo-de-estructura-lineal" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-de-estructura-lineal">Ejemplo de estructura lineal</h3>
 <ol type="1">
-<li><p><strong>Comportamiento</strong> — cómo debe actuar y responder el asistente</p></li>
-<li><p><strong>Preferencias del usuario</strong> — tus costumbres y configuración personal</p></li>
-<li><p><strong>Contexto del proyecto</strong> — lo específico de cada proyecto</p></li>
+<li><strong>Portada:</strong> Título, autor, fecha</li>
+<li><strong>Introducción:</strong> Contexto y objetivo del documento</li>
+<li><strong>Desarrollo:</strong> Argumentos o hallazgos principales</li>
+<li><strong>Conclusión:</strong> Resumen y recomendaciones</li>
+<li><strong>Referencias:</strong> Fuentes consultadas</li>
 </ol>
-<p>El asistente puede añadir, modificar o borrar información de estos bloques durante la conversación. Así, si descubre algo relevante, lo guarda automáticamente para la próxima sesión.</p>
+<hr>
 </section>
-<section id="sistema-de-búsqueda-semántica" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-búsqueda-semántica">Sistema de búsqueda semántica</h2>
-<p>Otros <em>plugins</em> almacenan la memoria en una base de datos que entiende el significado de lo que guardas, no solo las palabras exactas.</p>
-<p>Esto significa que si guardas “en este proyecto usamos el formato APA para las referencias”, y más tarde preguntas “¿cómo se citan las fuentes aquí?”, el asistente encontrará esa memoria aunque uses palabras diferentes.</p>
-<p><strong>Dos niveles de memoria:</strong></p>
+</section>
+<section id="modelo-modular" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-modular">Modelo modular</h2>
+<p>El modelo modular divide el documento en <strong>secciones independientes</strong> que pueden escribirse, revisarse y reutilizarse por separado. Es como armar un rompecabezas: cada pieza tiene sentido por sí misma y, juntas, forman el documento completo.</p>
+<section id="cuándo-usarlo-1" class="level3">
+<h3 class="anchored" data-anchor-id="cuándo-usarlo-1">¿Cuándo usarlo?</h3>
 <ul>
-<li><p><strong>Tuya personal:</strong> preferencias que te siguen a cualquier proyecto (“siempre uso tamaño 11pt para los PDFs”)</p></li>
-<li><p><strong>Del proyecto:</strong> cosas específicas de ese proyecto (“este manual usa notas al pie en lugar de citas entre paréntesis”)</p></li>
+<li>Tesis o disertaciones</li>
+<li>Manuales técnicos extensos</li>
+<li>Documentos que se actualizan frecuentemente</li>
+<li>Proyectos donde diferentes secciones tienen plazos distintos</li>
 </ul>
 </section>
-<section id="sistema-de-captura-automática" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-captura-automática">Sistema de captura automática</h2>
-<p>Hay <em>plugins</em> que observan lo que haces y lo guardan ellos solos. Mientras trabajas (lees archivos, haces cambios, ejecutas comandos), el plugin va tomando notas. Luego, con la ayuda de la IA, comprime esas notas en observaciones útiles.</p>
-<p>Al empezar una nueva sesión, el asistente recibe un resumen de lo más importante que ocurrió en sesiones anteriores. Es como si el becario llegara cada mañana con un informe de lo que se hizo el día anterior.</p>
-</section>
-<section id="sistema-de-grafo-de-conocimiento" class="level2">
-<h2 class="anchored" data-anchor-id="sistema-de-grafo-de-conocimiento">Sistema de grafo de conocimiento</h2>
-<p>Los más avanzados construyen un “mapa de conceptos” donde conectan ideas: una decisión de formato lleva a un estilo concreto, que a su vez afecta a ciertos tipos de documento. Esto permite al asistente navegar relaciones complejas entre la información que ha aprendido.</p>
-</section>
-<section id="comparativa-rápida" class="level2">
-<h2 class="anchored" data-anchor-id="comparativa-rápida">Comparativa rápida</h2>
+<section id="características-1" class="level3">
+<h3 class="anchored" data-anchor-id="características-1">Características</h3>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 21%">
-<col style="width: 34%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Sistema</th>
-<th>Lo bueno</th>
-<th>Lo menos bueno</th>
-<th>Ideal para</th>
+<th>Aspecto</th>
+<th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Instrucciones (AGENTS.md)</td>
-<td>Sencillo, sin instalación</td>
-<td>No aprende solo</td>
-<td>Proyectos pequeños, equipos de 1-2 personas</td>
+<td>Estructura</td>
+<td>Secciones autónomas que se ensamblan</td>
 </tr>
 <tr class="even">
-<td>Skills</td>
-<td>Ligero, bajo demanda</td>
-<td>Hay que crearlos manualmente</td>
-<td>Tareas repetitivas con formato fijo</td>
+<td>Autores</td>
+<td>Uno o varios (cada uno se encarga de una sección)</td>
 </tr>
 <tr class="odd">
-<td>Bloques de memoria</td>
-<td>El asistente se actualiza solo</td>
-<td>Requiere instalar un plugin</td>
-<td>Equipos pequeños que quieren persistencia básica</td>
+<td>Revisión</td>
+<td>Por sección, en paralelo</td>
 </tr>
 <tr class="even">
-<td>Búsqueda semántica</td>
-<td>Encuentra memorias relacionadas</td>
-<td>Más complejo de configurar</td>
-<td>Proyectos grandes con mucha documentación</td>
+<td>Curva de aprendizaje</td>
+<td>Media</td>
 </tr>
 <tr class="odd">
-<td>Captura automática</td>
-<td>No requiere acción manual</td>
-<td>Consume más recursos</td>
-<td>Equipos que quieren “configurar y olvidar”</td>
+<td>Ideal para</td>
+<td>Documentos largos o con actualizaciones frecuentes</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Consejo</span>Consejo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En Quarto, puedes usar la función <code>include:</code> o archivos parciales (<code>_intro.qmd</code>, <code>_metodos.qmd</code>, etc.) para crear secciones reutilizables. Así, un mismo método puede incluirse en varios informes sin copiar y pegar.</p>
+</div>
+</div>
+</section>
+<section id="ejemplo-de-estructura-modular" class="level3">
+<h3 class="anchored" data-anchor-id="ejemplo-de-estructura-modular">Ejemplo de estructura modular</h3>
+<pre><code>proyecto/
+  _portada.qmd
+  _introduccion.qmd
+  _metodos.qmd
+  _resultados.qmd
+  _discusion.qmd
+  _conclusiones.qmd
+  documento_final.qmd   (ensambla todas las secciones)</code></pre>
+</section>
+<section id="ventajas-de-la-modularidad" class="level3">
+<h3 class="anchored" data-anchor-id="ventajas-de-la-modularidad">Ventajas de la modularidad</h3>
+<ul>
+<li><strong>Reutilización:</strong> Una sección bien escrita puede usarse en múltiples documentos.</li>
+<li><strong>Actualización fácil:</strong> Cambiar solo la sección que necesita actualización, no todo el documento.</li>
+<li><strong>Trabajo en paralelo:</strong> Diferentes personas pueden escribir diferentes secciones al mismo tiempo.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="modelo-iterativo" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-iterativo">Modelo iterativo</h2>
+<p>El modelo iterativo se basa en <strong>borradores sucesivos</strong>. Escribes una primera versión, la revisas, la mejoras y repites el proceso hasta llegar a la versión final.</p>
+<section id="cuándo-usarlo-2" class="level3">
+<h3 class="anchored" data-anchor-id="cuándo-usarlo-2">¿Cuándo usarlo?</h3>
+<ul>
+<li>Artículos académicos para revistas</li>
+<li>Propuestas de financiamiento</li>
+<li>Documentos que requieren múltiples revisiones de pares</li>
+<li>Cualquier texto donde la calidad es prioritaria sobre la velocidad</li>
+</ul>
+</section>
+<section id="características-2" class="level3">
+<h3 class="anchored" data-anchor-id="características-2">Características</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estructura</td>
+<td>Borrador → Revisión → Mejora → Borrador final</td>
 </tr>
 <tr class="even">
-<td>Grafo de conocimiento</td>
-<td>Relaciona conceptos complejos</td>
-<td>El más complejo</td>
-<td>Grandes equipos con documentación interconectada</td>
+<td>Autores</td>
+<td>Uno o varios</td>
+</tr>
+<tr class="odd">
+<td>Revisión</td>
+<td>Continua, en cada ciclo</td>
+</tr>
+<tr class="even">
+<td>Curva de aprendizaje</td>
+<td>Media</td>
+</tr>
+<tr class="odd">
+<td>Ideal para</td>
+<td>Documentos que requieren pulir el contenido</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No confundas “iterativo” con “procrastinar”. Cada iteración debe tener un objetivo claro: mejorar la claridad, corregir datos, ajustar el tono, etc. Define cuántas iteraciones necesitas antes de empezar.</p>
+</div>
+</div>
+</section>
+<section id="ciclo-de-iteración-típico" class="level3">
+<h3 class="anchored" data-anchor-id="ciclo-de-iteración-típico">Ciclo de iteración típico</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Iteración</th>
+<th>Enfoque</th>
+<th>Duración estimada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1ª</td>
+<td>Estructura y contenido básico</td>
+<td>2-3 días</td>
+</tr>
+<tr class="even">
+<td>2ª</td>
+<td>Claridad y coherencia</td>
+<td>1-2 días</td>
+</tr>
+<tr class="odd">
+<td>3ª</td>
+<td>Estilo y formato</td>
+<td>1 día</td>
+</tr>
+<tr class="even">
+<td>4ª</td>
+<td>Revisión final y correcciones</td>
+<td>1 día</td>
 </tr>
 </tbody>
 </table>
 </section>
+<section id="consejos-para-la-iteración" class="level3">
+<h3 class="anchored" data-anchor-id="consejos-para-la-iteración">Consejos para la iteración</h3>
+<ol type="1">
+<li><strong>Separa la escritura de la edición.</strong> En la primera iteración, escribe sin detenerte a corregir.</li>
+<li><strong>Usa diferentes colores o marcadores</strong> para cada tipo de cambio (contenido, estilo, formato).</li>
+<li><strong>Lee en voz alta</strong> para detectar frases confusas.</li>
+<li><strong>Deja reposar</strong> el borrador al menos un día antes de revisar.</li>
+</ol>
+<hr>
 </section>
-<section id="qué-estrategia-te-conviene-según-tu-equipo" class="level1">
-<h1>¿Qué estrategia te conviene según tu equipo?</h1>
-<p>No necesitas instalar sistemas complicados desde el principio. La mayoría de los equipos de documentación pueden seguir esta progresión:</p>
-<p><strong>Nivel 1 — Un proyecto pequeño (1-3 personas)</strong></p>
-<p>Crea un <code>AGENTS.md</code> con vuestra guía de estilo y las convenciones del proyecto. Es suficiente para la mayoría de los casos. Si usáis Quarto o Markdown, añadid un skill con las reglas de formato.</p>
-<p><strong>Nivel 2 — Varios proyectos (equipo de documentación)</strong></p>
-<p>Además del <code>AGENTS.md</code> de cada proyecto, cread un archivo global con las preferencias del equipo. Así todos los miembros tienen la misma base aunque trabajen en proyectos distintos.</p>
-<p><strong>Nivel 3 — Equipo grande o documentación extensa</strong></p>
-<p>Instalad un sistema de memoria con búsqueda semántica. Especialmente si manejáis muchos términos técnicos, glosarios, o convenciones que cambian con el tiempo. El asistente encontrará la información relevante aunque uses palabras distintas para preguntar.</p>
-<p><strong>Nivel 4 — Documentación interconectada (varios manuales, productos, versiones)</strong></p>
-<p>Combinad varios sistemas: instrucciones globales para el equipo, skills para formatos específicos, y un grafo de conocimiento para relacionar conceptos entre distintos manuales y productos.</p>
 </section>
-<section id="conclusión" class="level1">
-<h1>Conclusión</h1>
-<p>OpenCode no recuerda nada entre sesiones por decisión de diseño, pero ofrece un abanico de opciones para que recuerde exactamente lo que tú necesitas:</p>
+<section id="modelo-colaborativo" class="level2">
+<h2 class="anchored" data-anchor-id="modelo-colaborativo">Modelo colaborativo</h2>
+<p>El modelo colaborativo permite que <strong>múltiples personas trabajen en el mismo documento</strong> de forma coordinada. Aquí es donde las herramientas de control de versiones (como Git) brillan.</p>
+<section id="cuándo-usarlo-3" class="level3">
+<h3 class="anchored" data-anchor-id="cuándo-usarlo-3">¿Cuándo usarlo?</h3>
 <ul>
-<li>Las <strong>instrucciones</strong> son como un manual de estilo que el asistente lee siempre</li>
-<li>Los <em>skills</em> son fichas de consulta rápida para tareas concretas</li>
-<li>Los <em>plugins</em> de memoria permiten que el asistente aprenda y recuerde por sí mismo</li>
-</ul>
-<p>La clave está en elegir lo que necesitas según tu equipo y tus proyectos. Para un equipo pequeño de documentación, las instrucciones y los skills suelen ser más que suficientes. Para equipos grandes con mucha documentación interconectada, los sistemas de memoria avanzada marcan la diferencia entre repetir explicaciones cada sesión y retomar el trabajo exactamente donde lo dejaste.</p>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
-<ul>
-<li><a href="https://OpenCode.ai">OpenCode</a> — Asistente de IA que trabaja sobre archivos locales. Guías de configuración y uso.</li>
-<li><a href="https://OpenCode.ai/docs/rules/">Rules (AGENTS.md)</a> — Cómo crear instrucciones personalizadas para OpenCode mediante archivos AGENTS.md.</li>
-<li><a href="https://OpenCode.ai/docs/skills/">Agent Skills</a> — Sistema de habilidades reutilizables que se cargan bajo demanda.</li>
-<li><a href="https://OpenCode.ai/docs/plugins/">Plugins</a> — Cómo extender OpenCode con plugins para añadir funcionalidades como memoria persistente.</li>
-<li><a href="https://github.com/anomalyco/OpenCode">OpenCode en GitHub</a> — Repositorio oficial del código fuente.</li>
+<li>Proyectos de investigación con múltiples autores</li>
+<li>Documentos institucionales con contribuciones de varios departamentos</li>
+<li>Manuales creados por equipos</li>
+<li>Libros o compilaciones editados por un equipo</li>
 </ul>
 </section>
+<section id="características-3" class="level3">
+<h3 class="anchored" data-anchor-id="características-3">Características</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspecto</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Estructura</td>
+<td>Compartida, con divisiones claras de responsabilidad</td>
+</tr>
+<tr class="even">
+<td>Autores</td>
+<td>Múltiples</td>
+</tr>
+<tr class="odd">
+<td>Revisión</td>
+<td>Continua, con revisiones entre pares</td>
+</tr>
+<tr class="even">
+<td>Curva de aprendizaje</td>
+<td>Alta (requiere conocer Git y flujo de trabajo colaborativo)</td>
+</tr>
+<tr class="odd">
+<td>Ideal para</td>
+<td>Equipos que necesitan coordinar contribuciones</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No necesitas ser programador para usar Git. Hoy en día existen interfaces visuales (como GitHub Desktop o VS Code) que hacen que el control de versiones sea accesible para cualquier persona.</p>
+</div>
+</div>
+</section>
+<section id="flujo-de-trabajo-colaborativo-básico" class="level3">
+<h3 class="anchored" data-anchor-id="flujo-de-trabajo-colaborativo-básico">Flujo de trabajo colaborativo básico</h3>
+<ol type="1">
+<li><strong>Crear el repositorio:</strong> Un espacio compartido donde vive el documento.</li>
+<li><strong>Asignar secciones:</strong> Cada autor se encarga de una o más secciones.</li>
+<li><strong>Escribir en ramas separadas:</strong> Cada autor trabaja en su propia “rama” para no interferir con los demás.</li>
+<li><strong>Solicitar revisión:</strong> Cuando una sección está lista, se solicita que otros la revisen.</li>
+<li><strong>Integrar los cambios:</strong> El coordinador reúne todas las contribuciones en el documento final.</li>
+<li><strong>Generar el documento:</strong> Se renderiza el resultado en el formato deseado.</li>
+</ol>
+</section>
+<section id="buenas-prácticas-para-la-colaboración" class="level3">
+<h3 class="anchored" data-anchor-id="buenas-prácticas-para-la-colaboración">Buenas prácticas para la colaboración</h3>
+<ul>
+<li><strong>Define un estilo común</strong> antes de empezar (tipografía, formato de citas, tono).</li>
+<li><strong>Usa comentarios</strong> en lugar de editar directamente el texto de otros autores.</li>
+<li><strong>Establece plazos claros</strong> para cada sección.</li>
+<li><strong>Haz reuniones breves</strong> de coordinación semanalmente.</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="modelos-de-formato" class="level1">
+<h1>Modelos de formato</h1>
+<p>Una vez que has decidido cómo escribir tu documento, es momento de decidir <strong>cómo se verá</strong>. El formato determina la experiencia del lector.</p>
+<section id="html-web" class="level2">
+<h2 class="anchored" data-anchor-id="html-web">HTML (web)</h2>
+<p>El formato HTML es ideal para documentos que se leerán en navegadores web. Es flexible, interactivo y fácil de compartir mediante un enlace.</p>
+<section id="ventajas-y-desventajas" class="level3">
+<h3 class="anchored" data-anchor-id="ventajas-y-desventajas">Ventajas y desventajas</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ventajas</th>
+<th>Desventajas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fácil de compartir (un enlace)</td>
+<td>Depende de conexión a internet</td>
+</tr>
+<tr class="even">
+<td>Interactivo (gráficos, enlaces, pestañas)</td>
+<td>No es ideal para imprimir</td>
+</tr>
+<tr class="odd">
+<td>Se adapta a cualquier pantalla</td>
+<td>El estilo puede variar según el navegador</td>
+</tr>
+<tr class="even">
+<td>Soporta multimedia (video, audio)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Consejo</span>Consejo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si tu audiencia accede al documento desde dispositivos móviles, HTML es la mejor opción. El formato se adapta automáticamente al tamaño de la pantalla.</p>
+</div>
+</div>
+</section>
+<section id="casos-de-uso-recomendados" class="level3">
+<h3 class="anchored" data-anchor-id="casos-de-uso-recomendados">Casos de uso recomendados</h3>
+<ul>
+<li>Páginas web de resultados de investigación</li>
+<li>Documentación técnica en línea</li>
+<li>Informes interactivos con gráficos dinámicos</li>
+<li>Blogs académicos o profesionales</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="pdf-impresión" class="level2">
+<h2 class="anchored" data-anchor-id="pdf-impresión">PDF (impresión)</h2>
+<p>El formato PDF garantiza que el documento se vea <strong>exactamente igual</strong> en cualquier dispositivo. Es el estándar para documentos formales que se imprimen o archivan.</p>
+<section id="ventajas-y-desventajas-1" class="level3">
+<h3 class="anchored" data-anchor-id="ventajas-y-desventajas-1">Ventajas y desventajas</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ventajas</th>
+<th>Desventajas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Aspecto consistente en cualquier dispositivo</td>
+<td>No es interactivo (enlaces limitados)</td>
+</tr>
+<tr class="even">
+<td>Ideal para imprimir</td>
+<td>Archivo más pesado</td>
+</tr>
+<tr class="odd">
+<td>Estándar para documentos formales</td>
+<td>Difícil de modificar después de generar</td>
+</tr>
+<tr class="even">
+<td>No requiere conexión a internet</td>
+<td>No se adapta a pantallas pequeñas</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si envías tu documento a una revista académica o a un cliente formal, es muy probable que requieran el formato PDF.</p>
+</div>
+</div>
+</section>
+<section id="casos-de-uso-recomendados-1" class="level3">
+<h3 class="anchored" data-anchor-id="casos-de-uso-recomendados-1">Casos de uso recomendados</h3>
+<ul>
+<li>Artículos para revistas científicas</li>
+<li>Informes formales para clientes o instituciones</li>
+<li>Documentos legales o administrativos</li>
+<li>Tesis y disertaciones</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="presentaciones-revealjs" class="level2">
+<h2 class="anchored" data-anchor-id="presentaciones-revealjs">Presentaciones (revealjs)</h2>
+<p>Las presentaciones son documentos diseñados para <strong>proyectarse ante una audiencia</strong>. El formato revealjs permite crear presentaciones web interactivas con animaciones y transiciones fluidas.</p>
+<section id="ventajas-y-desventajas-2" class="level3">
+<h3 class="anchored" data-anchor-id="ventajas-y-desventajas-2">Ventajas y desventajas</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 43%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ventajas</th>
+<th>Desventajas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Interactivas y atractivas visualmente</td>
+<td>Requieren práctica para diseñar bien</td>
+</tr>
+<tr class="even">
+<td>Se pueden compartir como enlace</td>
+<td>No son adecuadas para lectura detallada</td>
+</tr>
+<tr class="odd">
+<td>Soportan código, gráficos y notas del ponente</td>
+<td>La curva de aprendizaje es mayor que con PowerPoint</td>
+</tr>
+<tr class="even">
+<td>Funcionan en cualquier navegador</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Aviso</span>Advertencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No llenes las diapositivas de texto. Una presentación es un apoyo visual, no un documento para leer. Usa frases cortas, imágenes y gráficos.</p>
+</div>
+</div>
+</section>
+<section id="casos-de-uso-recomendados-2" class="level3">
+<h3 class="anchored" data-anchor-id="casos-de-uso-recomendados-2">Casos de uso recomendados</h3>
+<ul>
+<li>Presentaciones de congresos y seminarios</li>
+<li>Charlas educativas o talleres</li>
+<li>Reuniones de equipo con componente visual</li>
+<li>Pitchs de proyectos o negocios</li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="tabla-comparativa-de-formatos" class="level1">
+<h1>Tabla comparativa de formatos</h1>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Característica</th>
+<th>HTML</th>
+<th>PDF</th>
+<th>Presentación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Interactividad</strong></td>
+<td>Alta</td>
+<td>Baja</td>
+<td>Media</td>
+</tr>
+<tr class="even">
+<td><strong>Impresión</strong></td>
+<td>Regular</td>
+<td>Excelente</td>
+<td>No aplicable</td>
+</tr>
+<tr class="odd">
+<td><strong>Compartir</strong></td>
+<td>Enlace</td>
+<td>Archivo</td>
+<td>Enlace o archivo</td>
+</tr>
+<tr class="even">
+<td><strong>Móvil</strong></td>
+<td>Excelente</td>
+<td>Regular</td>
+<td>Regular</td>
+</tr>
+<tr class="odd">
+<td><strong>Formalidad</strong></td>
+<td>Media</td>
+<td>Alta</td>
+<td>Baja/Media</td>
+</tr>
+<tr class="even">
+<td><strong>Tamaño del archivo</strong></td>
+<td>Pequeño</td>
+<td>Medio</td>
+<td>Variable</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="cómo-elegir-el-modelo-adecuado" class="level1">
+<h1>¿Cómo elegir el modelo adecuado?</h1>
+<p>Elegir el modelo correcto depende de <strong>cuatro factores clave</strong>. Responde estas preguntas antes de empezar:</p>
+<section id="cuál-es-el-objetivo-del-documento" class="level2">
+<h2 class="anchored" data-anchor-id="cuál-es-el-objetivo-del-documento">1. ¿Cuál es el objetivo del documento?</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Objetivo</th>
+<th>Modelo recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Comunicar información de forma rápida</td>
+<td>Lineal + HTML</td>
+</tr>
+<tr class="even">
+<td>Crear un documento de referencia</td>
+<td>Modular + PDF</td>
+</tr>
+<tr class="odd">
+<td>Producir un texto de alta calidad</td>
+<td>Iterativo + PDF</td>
+</tr>
+<tr class="even">
+<td>Trabajar en equipo</td>
+<td>Colaborativo + HTML/PDF</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="quién-es-la-audiencia" class="level2">
+<h2 class="anchored" data-anchor-id="quién-es-la-audiencia">2. ¿Quién es la audiencia?</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Audiencia</th>
+<th>Formato recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Colegas o equipo interno</td>
+<td>HTML (fácil acceso)</td>
+</tr>
+<tr class="even">
+<td>Clientes o instituciones</td>
+<td>PDF (formalidad)</td>
+</tr>
+<tr class="odd">
+<td>Público general en línea</td>
+<td>HTML (accesibilidad)</td>
+</tr>
+<tr class="even">
+<td>Audiencia presencial</td>
+<td>Presentación</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cuántos-autores-participan" class="level2">
+<h2 class="anchored" data-anchor-id="cuántos-autores-participan">3. ¿Cuántos autores participan?</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Número de autores</th>
+<th>Modelo recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Lineal o Iterativo</td>
+</tr>
+<tr class="even">
+<td>2-3</td>
+<td>Modular o Colaborativo</td>
+</tr>
+<tr class="odd">
+<td>4 o más</td>
+<td>Colaborativo con Git</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="con-qué-frecuencia-se-actualizará" class="level2">
+<h2 class="anchored" data-anchor-id="con-qué-frecuencia-se-actualizará">4. ¿Con qué frecuencia se actualizará?</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Frecuencia</th>
+<th>Modelo recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nunca o rara vez</td>
+<td>Lineal</td>
+</tr>
+<tr class="even">
+<td>Periódicamente</td>
+<td>Modular</td>
+</tr>
+<tr class="odd">
+<td>Constantemente</td>
+<td>Colaborativo + Iterativo</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Consejo</span>Consejo final
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>No tienes que elegir un solo modelo. Puedes combinarlos. Por ejemplo: escribe de forma modular, revisa de forma iterativa y genera el resultado en HTML y PDF. La flexibilidad es tu mayor aliado.</p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="resumen-y-recomendaciones" class="level1">
+<h1>Resumen y recomendaciones</h1>
+<p>Elige tu modelo de documentación según esta guía rápida:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Situación</th>
+<th>Modelo de documentación</th>
+<th>Formato de salida</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Comunicado breve</td>
+<td>Lineal</td>
+<td>HTML</td>
+</tr>
+<tr class="even">
+<td>Informe académico</td>
+<td>Iterativo + Modular</td>
+<td>PDF</td>
+</tr>
+<tr class="odd">
+<td>Manual técnico</td>
+<td>Modular</td>
+<td>HTML + PDF</td>
+</tr>
+<tr class="even">
+<td>Proyecto en equipo</td>
+<td>Colaborativo</td>
+<td>HTML + PDF</td>
+</tr>
+<tr class="odd">
+<td>Charla o seminario</td>
+<td>Iterativo</td>
+<td>Presentación</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Recuerda
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El mejor modelo es el que se adapta a tu necesidad, no al revés. Experimenta con diferentes combinaciones hasta encontrar la que te resulte más cómoda.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="referencias" class="level1">
+<h1>Referencias</h1>
+<ul>
+<li><a href="https://quarto.org/docs/">Quarto Documentation</a> — Documentación oficial de Quarto</li>
+<li><a href="https://git-scm.com/book/es">Pro Git</a> — Guía completa de Git (disponible en español)</li>
+<li><a href="https://opencode.ai/docs/">OpenCode</a> — Documentación oficial de OpenCode</li>
+</ul>
+<hr>
+<p><em>Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026</em></p>
 </section>
 
 </main>

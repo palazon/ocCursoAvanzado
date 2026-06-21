@@ -27,6 +27,26 @@ puerta de entrada a decenas de modelos.
 
 ---
 
+## Tres formas de acceder a un modelo
+
+No confundir *modelo de IA* (el cerebro que responde) con
+*modelo de acceso* (la ruta por la que llega tu pregunta).
+
+| Acceso | Analogía | Ejemplos |
+|--------|----------|----------|
+| **Cloud** | Biblioteca pública: vas, consultas, vuelves | Zen (gratuito), DeepSeek, GPT-4o-mini |
+| **Local** | Estantería propia: la tienes en casa | Ollama, LM Studio (Qwen, Llama) |
+| **Desactivado** | Biblioteca cerrada por reformas | Proveedor que apagaste |
+
+::: {.callout-tip}
+## ¿Cuál te conviene?
+- **Empiezas** → Cloud (sin configuración, gratis)
+- **Privacidad** → Local (todo se queda en tu red)
+- **No usas** → Desactivado (evita confusiones)
+:::
+
+---
+
 ## `/models` — Ver y cambiar de modelo
 
 Escribe `/models` en el chat para ver los modelos disponibles y
@@ -164,6 +184,7 @@ En el próximo paso veremos cómo usar Git para versionar documentos.
 
 - [Ampliando: Modelos de IA](ampliando/ampliando-modelos.qmd)
 - [Ampliando: Conexiones y proveedores](ampliando/ampliando-conexiones.qmd)
+- [Ampliando: Elegir modelo IA](ampliando/guia-elegir-modelo-ia-opencode.qmd) — comparativa y guía por tarea
 - [Ollama](https://ollama.ai) — modelos locales
 
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

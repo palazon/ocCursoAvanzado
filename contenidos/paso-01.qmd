@@ -214,4 +214,11 @@ no hace cambios. Luego cambia a Build y vuelve a invocarlo.
 En el próximo paso veremos cómo crear skills reutilizables para
 tareas de documentación.
 
+::: {.callout-tip}
+## ¿Quieres saber más?
+
+Para más detalles sobre agentes, consulta:
+[Ampliando: Agentes](ampliando/ampliando-agentes.qmd)
+:::
+
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

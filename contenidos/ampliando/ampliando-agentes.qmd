@@ -1,0 +1,427 @@
+---
+title: "Ampliando: Agentes de OpenCode"
+subtitle: "Cómo crear asistentes especializados sin saber programar"
+author: "JA Palazón Ferrando"
+date: today
+lang: es
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-depth: 3
+    toc-title: "Contenidos"
+    code-fold: true
+    highlight-style: github
+    link-color: "#1a3a5c"
+    embed-resources: true
+  pdf:
+    papersize: a4
+    geometry:
+      - top=2cm
+      - bottom=2cm
+      - left=2cm
+      - right=2cm
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenidos"
+    fontsize: 11pt
+    number-sections: true
+    linestretch: 1.0
+    page-numbers: true
+    tbl-cap-location: top
+    highlight-style: github
+    linkcolor: azuloscuro
+    code-block-bg: "#F0F0F0"
+    header-includes:
+      - \definecolor{azuloscuro}{HTML}{1a3a5c}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{section}
+      - \RedeclareSectionCommand[beforeskip=-0.5ex,afterskip=0.5ex]{subsection}
+      - \setkomafont{section}{\normalfont\bfseries\large}
+      - \setkomafont{subsection}{\normalfont\bfseries\normalsize}
+      - \AfterStartingTOC[toc]{\vspace{1.5\baselineskip}}
+      - \renewcommand{\arraystretch}{1.4}
+---
+
+::: {.callout-tip}
+## ¿Para quién es esta guía?
+
+Esta guía amplía la información sobre *agents* de OpenCode para creadores de contenido que ya tienen algo de experiencia. **No necesitas saber programar** para entenderla.
+:::
+
+## ¿Qué es un agente?
+
+Un **agente** es una versión especializada de OpenCode con un rol y una personalidad concretos. Es como tener un equipo de asistentes, cada uno con una función específica.
+
+**Analogía**: imagina que tienes un equipo de trabajo:
+
+- Una persona que redacta artículos
+- Otra que revisa ortografía
+- Otra que traduce textos
+
+Cada agente es eso: una versión de OpenCode entrenada —mediante instrucciones escritas— para comportarse de una manera concreta.
+
+::: {.callout-note}
+## ¿Es complicado crear un agente?
+
+No. Los agentes son **archivos de texto** con instrucciones claras. Cualquier persona, incluso sin saber programar, puede crear uno en menos de cinco minutos.
+:::
+
+## Partes esenciales de un agente
+
+Un agente se escribe en un archivo de texto con formato Markdown. Estas son sus partes principales:
+
+### `description`
+
+Un texto breve que explica para qué sirve el agente. Es lo primero que ves cuando OpenCode lista los agentes disponibles.
+
+> **Ejemplo:** *"Agente redactor de artículos de blog en español"*
+
+### `mode`
+
+Define **cuándo** puede actuar el agente:
+
+| Modo | Significado |
+|------|-------------|
+| `primary` | Agente principal. Se usa cuando no especificas otro. Solo puede haber uno. |
+| `subagent` | Solo actúa cuando otro agente lo llama. Es como un especialista. |
+| `all` | Disponible tanto como principal como para ser llamado por otros. |
+
+### `permission`
+
+Define **qué puede hacer** el agente:
+
+| Permiso | Significado |
+|---------|-------------|
+| `read` | Leer y consultar archivos |
+| `write` | Crear y modificar archivos |
+| `execute` | Ejecutar comandos en la terminal |
+
+Puedes combinar permisos: `read|write`, `write|execute`, etc.
+
+::: {.callout-warning}
+## Seguridad
+Si un agente solo necesita revisar contenido (como un corrector), no le des permiso de escritura. Así evitas cambios accidentales.
+:::
+
+### `temperature`
+
+Controla el equilibrio entre **creatividad** y **precisión**:
+
+| Valor | Efecto | Ideal para ... |
+|-------|--------|---------------|
+| `0.0` — `0.3` | Muy preciso, predecible | Revisión técnica, traducción |
+| `0.4` — `0.7` | Equilibrio | Redacción, documentación |
+| `0.8` — `1.0` | Muy creativo | Lluvia de ideas, textos literarios |
+
+::: {.callout-tip}
+## Regla práctica
+Para documentación técnica usa `0.3` o `0.4`. Quieres claridad, no ocurrencias.
+:::
+
+### El cuerpo del agente
+
+Después de los metadatos, escribes las **instrucciones** que definen cómo debe comportarse:
+
+- Su **rol** (qué es y qué hace)
+- Su **tono** (formal, casual, didáctico)
+- Sus **reglas** (lo que debe y no debe hacer)
+- El **formato** de sus respuestas
+
+## Ejemplos prácticos
+
+### Ejemplo 1: Agente bloguero
+
+```yaml
+---
+description: "Agente redactor de artículos de blog en español"
+mode: all
+permission: read|write
+temperature: 0.7
+---
+```
+
+**Instrucciones del cuerpo:**
+
+> Eres un redactor de blogs especializado en contenido para creadores.
+>
+> - Escribes en español con tono cercano y profesional.
+> - Usas párrafos cortos (máximo 3 oraciones).
+> - Incluyes ejemplos prácticos siempre que puedas.
+> - Usas títulos claros y listas para organizar el contenido.
+> - No usas jerga técnica sin explicarla.
+
+### Ejemplo 2: Agente revisor
+
+```yaml
+---
+description: "Agente revisor de ortografía y estilo"
+mode: subagent
+permission: read
+temperature: 0.3
+---
+```
+
+**Instrucciones del cuerpo:**
+
+> Eres un revisor de textos preciso y meticuloso.
+>
+> - Revisas ortografía, gramática y puntuación.
+> - Detectas repeticiones y frases confusas.
+> - Sugieres mejoras sin cambiar el sentido original.
+> - Reportas errores claros, no opiniones subjetivas.
+
+### Ejemplo 3: Agente traductor
+
+```yaml
+---
+description: "Agente traductor español-inglés"
+mode: all
+permission: read|write
+temperature: 0.4
+---
+```
+
+**Instrucciones del cuerpo:**
+
+> Eres un traductor profesional español-inglés.
+>
+> - Traduces con precisión, sin añadir ni quitar información.
+> - Mantienes el tono del texto original.
+> - Usas la variante de inglés especificada (americano o británico).
+> - Si una expresión no tiene traducción directa, la explicas.
+
+## Cómo empezar en 3 pasos
+
+### Paso 1: Crea la carpeta
+
+Los agentes se guardan en `.opencode/agents/` dentro de tu proyecto. Si no existe, créala.
+
+### Paso 2: Crea el archivo
+
+Cada agente es un archivo `.md` con el nombre que quieras:
+
+```
+.opencode/agents/bloguero.md
+.opencode/agents/revisor.md
+.opencode/agents/traductor.md
+```
+
+### Paso 3: Escribe y guarda
+
+Escribe los metadatos (con `---`) y las instrucciones. Guarda el archivo.
+
+### Úsalo
+
+Dentro de OpenCode, escribe:
+
+```
+@bloguero
+```
+
+O pídele a OpenCode que use tu agente para una tarea concreta.
+
+::: {.callout-note}
+## Archivos ocultos
+La carpeta `.opencode` comienza con un punto. En muchos sistemas está oculta. Si no la ves, activa "mostrar archivos ocultos" en tu explorador.
+:::
+
+## Errores comunes
+
+| Error | Consecuencia | Solución |
+|-------|--------------|----------|
+| No dar permisos de escritura a un redactor | El agente no puede crear archivos | Añade `write` a `permission` |
+| `temperature` alta para tareas técnicas | Respuestas imprecisas o creativas | Usa `0.3` o `0.4` |
+| No guardar en `.opencode/agents/` | OpenCode no encuentra el agente | Verifica la ruta |
+| Instrucciones vagas | El agente hace lo que quiere | Sé específico en el cuerpo |
+| Mezclar varios temas en un agente | Resultados inconsistentes | Crea un agente por función |
+
+## Consejos rápidos
+
+- **Un agente, una función**. No le pidas al revisor que escriba, ni al bloguero que corrija.
+- **Empieza simple**. Un agente con 5 instrucciones claras es mejor que uno con 50 confusas.
+- **Prueba y ajusta**. Los agentes no salen perfectos a la primera. Úsalos, observa dónde fallan y corrige.
+- **Copia y adapta**. Si un agente te funciona bien, cópialo y cambia solo lo necesario para otra función.
+
+## Resumen rápido
+
+| Concepto | Resumen |
+|----------|---------|
+| **Agente** | Versión especializada de OpenCode con rol y personalidad |
+| **`description`** | Texto breve que explica para qué sirve |
+| **`mode`** | Cuándo actúa: `primary`, `subagent` o `all` |
+| **`permission`** | Qué puede hacer: `read`, `write`, `execute` |
+| **`temperature`** | Creatividad vs precisión (`0.0` = preciso, `1.0` = creativo) |
+| **Cuerpo** | Instrucciones en lenguaje natural |
+| **Ubicación** | `.opencode/agents/<nombre>.md` |
+
+## Referencias
+
+- [Documentación de Agentes](https://opencode.ai/docs/agents/) — Cómo crear y usar agentes
+- [Documentación oficial de OpenCode](https://opencode.ai)
+
+---
+
+## Anexo: Agentes de ejemplo para copiar
+
+### Copia y prueba estos agentes
+
+Estos son ejemplos de agentes reales que puedes copiar y adaptar.
+No vienen instalados por defecto en OpenCode.
+Créalos en usando el procedimiento llevando el fichero a `.opencode/agents/` y
+pruébalos escribiendo `@escribidor` o `@explicador` en el chat.
+ 
+Usa un editor de texto y copia y pega el contenido de cada uno de los agentes,
+guárdalos con el nombre que prefieras. 
+Después, para hacerlo más fácil, dile a OpenCode que cree los agente
+a partir de los ficheros (local para una primera prueba).
+Sal de Opencode y vuelve a entrar para que se cargen en el proyecto
+antes de poder usarlos.
+
+
+### Agente `escribidor`
+
+Agente especializado en redactar documentación técnica, informes y guías de forma clara y estructurada.
+
+```yaml
+---
+description: Agente especializado en redactar documentación técnica, informes y guías de forma clara y estructurada.
+mode: all
+hidden: true
+permission:
+  edit: allow
+  bash: deny
+temperature: 0.7
+---
+```
+
+> Eres un redactor de documentación técnica. Tu estilo es claro, estructurado y profesional.
+>
+> Al elaborar documentos:
+> - Usa un lenguaje sencillo y directo
+> - Estructura el contenido con secciones y subsecciones claras
+> - Incluye ejemplos prácticos cuando sea relevante
+> - Adapta el tono al público objetivo (técnico o no técnico)
+> - Genera índices o tablas de contenido para documentos extensos
+>
+> Siempre pregunta si hay requisitos específicos de formato o audiencia antes de empezar.
+
+**Uso recomendado:** Redacción de guías, tutoriales, manuales y documentación técnica.
+
+### Agente `explicador`
+
+Ante una pregunta técnica, genera una respuesta breve y precisa con lenguaje técnico, seguida de una versión divulgativa clara.
+
+```yaml
+---
+description: Ante una pregunta técnica, genera una respuesta breve y precisa con lenguaje técnico, seguida de una versión divulgativa clara.
+mode: all
+hidden: true
+permission:
+  edit: deny
+  bash: deny
+temperature: 0.3
+---
+```
+
+> Eres un asistente de explicación técnica. Tu objetivo es responder preguntas de forma esquemática, precisa y completa.
+>
+> Sigue SIEMPRE esta estructura:
+>
+> 1. **Prerrequisitos** (si aplica) — Conceptos previos que quien pregunta debería conocer para entender la respuesta. Usa una lista breve.
+>
+> 2. **Respuesta técnica** — Explicación concisa con lenguaje técnico preciso. Usa viñetas o esquemas. No te extiendas, pero no sacrifiques información relevante.
+>
+> 3. **Versión divulgativa** — Explica la misma idea con lenguaje sencillo, apto para alguien sin conocimientos previos del tema. Usa analogías si ayudan. Máximo 3-4 frases.
+>
+> Reglas:
+> - No añadas introducciones ni despedidas.
+> - Responde directo al grano.
+> - Si la pregunta es muy amplia, acota el alcance y explica por qué.
+> - Si no hay prerrequisitos relevantes, omite esa sección.
+> - No inventes información. Si no sabes, indícalo.
+
+**Uso recomendado:** Responder preguntas técnicas, explicar conceptos, resolver dudas de forma clara.
+
+
+
+### Comparación de cabeceras
+
+| Característica | `escribidor` | `explicador` |
+|----------------|:------------:|:------------:|
+| `description` | Describe el tipo de agente | Describe el comportamiento |
+| `mode` | `all` | `all` |
+| `hidden` | `true` | `true` |
+| `permission` | `edit: allow`, `bash: deny` | `edit: deny`, `bash: deny` |
+| `temperature` | `0.7` (creativo) | `0.3` (preciso) |
+| **Uso ideal** | Redacción, documentación | Preguntas técnicas, explicaciones |
+
+### Diferencias clave
+
+- **`description`**: el escribidor describe **qué es**; el explicador describe **qué hace**. Ambos enfoques son válidos.
+- **`permission`**: el escribidor puede editar archivos (`edit: allow`); el explicador solo lee (`edit: deny`). Ninguno puede ejecutar comandos (`bash: deny`).
+- **`temperature`**: el escribidor usa `0.7` para ser más creativo; el explicador usa `0.3` para ser más preciso.
+- **`hidden: true`**: ambos están ocultos del listado general. Si quieres que aparezcan en `/agents`, cambia a `false`.
+
+
+### Sugerencias de personalización
+
+### Cambiar la `description`
+
+Adapta la descripción a tu sector o necesidad:
+
+| Agente | Description original | Description personalizada |
+|--------|---------------------|---------------------------|
+| escribidor | "Agente especializado en redactar documentación técnica ..." | "Agente redactor de contenido educativo en español" |
+| explicador | "Ante una pregunta técnica, genera una respuesta breve ..." | "Explica conceptos técnicos con analogías sencillas" |
+
+### Ajustar la `temperature`
+
+| Valor | Efecto | Cuándo usarlo |
+|-------|--------|---------------|
+| `0.2` | Máxima precisión | Traducción, revisión gramatical |
+| `0.3` | Preciso, predecible | Explicaciones técnicas, resúmenes |
+| `0.5` | Equilibrado | Uso general, documentación |
+| `0.7` | Creativo | Redacción, contenido promocional |
+| `0.9` | Muy creativo | Lluvia de ideas, textos literarios |
+
+### Modificar los permisos
+
+| Permiso | Qué permite | Cuándo usarlo |
+|---------|-------------|---------------|
+| `edit: allow` | Crear y modificar archivos | Agentes que escriben contenido |
+| `edit: deny` | Solo lectura | Agentes que explican o revisan |
+| `bash: allow` | Ejecutar comandos | Agentes que necesitan compilar o ejecutar código |
+| `bash: deny` | Sin ejecución | La mayoría de agentes de contenido |
+
+### Mostrar en el listado
+
+Si quieres que el agente aparezca cuando escribes `/agents`, cambia `hidden` a `false`.
+No es aconsejable.
+
+### Preguntas de reflexión
+
+Antes de crear tu propio agente, considera estas preguntas:
+
+1. **¿Qué tipo de contenido creas con más frecuencia?** Artículos, tutoriales, correos, informes ... El tipo de contenido define qué agente necesitas.
+
+2. **¿Necesitas un agente que escriba, o uno que revise?** Si solo necesitas correcciones, un agente de solo lectura (`edit: deny`) es más seguro.
+
+3. **¿Qué temperatura se ajusta mejor a tu estilo?** Si prefieres precisión, usa `0.3` o `0.4`. Si buscas creatividad, sube a `0.7`.
+
+4. **¿Qué instrucciones le darías a tu primer agente?** Piensa en 5 reglas claras. No necesitas escribir un tratado.
+
+5. **¿Qué errores quieres evitar?** Revisa la tabla de errores comunes y piensa cómo los aplicarías a tu caso.
+
+::: {.callout-note}
+## Consejo
+Respóndelas antes de copiar los ejemplos del anexo.
+Te ayudarán a personalizar tu agente desde el principio.
+
+Si lo prefieres, usa esta configuración inicial y ve 
+experimentando versiones.
+Así podrás comprobar el efecto de tus cambios.
+:::
+
+---
+
+*Documento creado por el agente `scribe` — un asistente de documentación técnica para OpenCode.*

@@ -259,6 +259,19 @@ con el repositorio.
 - ✅ Tienes un flujo de trabajo colaborativo con Git
 
 ::: {.callout-tip}
+## ¿Quieres saber más?
+
+¿Cómo haces que tu equipo recuerde las preferencias y
+convenciones de un proyecto? Consulta:
+[Ampliando: Memoria](ampliando/ampliando-memoria.qmd) —
+AGENTS.md, plugins y persistencia entre sesiones
+
+¿Qué modelo de documentación usas? Consulta:
+[Ampliando: Modelos de documentación](ampliando/ampliando-documentacion.qmd) —
+lineal, modular, iterativo, colaborativo y formatos de salida
+:::
+
+::: {.callout-tip}
 ## Pide a OpenCode que documente la configuración
 
 Si no sabes cómo crear el `README` o la plantilla de

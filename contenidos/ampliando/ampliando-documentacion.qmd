@@ -61,9 +61,10 @@ Un modelo incluye tres elementos fundamentales:
 2. **Formatos:** La forma en que el documento se presenta al lector (HTML para la web, PDF para imprimir, diapositivas para presentar).
 3. **Estilos:** Las reglas visuales que mantienen la consistencia (tipografía, colores, márgenes, formato de citas).
 
-```{.callout-tip}
-**Consejo:** No intentes inventar todo desde cero. Usa una plantilla como punto de partida y adáptala a tus necesidades. Es como cocinar: puedes seguir una receta y luego agregar tus propios ingredientes.
-```
+::: {.callout-tip}
+## Consejo
+No intentes inventar todo desde cero. Usa una plantilla como punto de partida y adáptala a tus necesidades. Es como cocinar: puedes seguir una receta y luego agregar tus propios ingredientes.
+:::
 
 ---
 
@@ -92,9 +93,10 @@ El modelo lineal es el más sencillo y directo. Escribes el documento de princip
 | Curva de aprendizaje | Baja |
 | Ideal para | Documentos cortos y directos |
 
-```{.callout-note}
-**Nota:** El modelo lineal funciona bien cuando tienes una idea clara de lo que quieres comunicar y el documento no es muy extenso. Si el documento crece, considerar un modelo más flexible.
-```
+::: {.callout-note}
+## Nota
+El modelo lineal funciona bien cuando tienes una idea clara de lo que quieres comunicar y el documento no es muy extenso. Si el documento crece, considerar un modelo más flexible.
+:::
 
 ### Ejemplo de estructura lineal
 
@@ -127,21 +129,22 @@ El modelo modular divide el documento en **secciones independientes** que pueden
 | Curva de aprendizaje | Media |
 | Ideal para | Documentos largos o con actualizaciones frecuentes |
 
-```{.callout-tip}
-**Consejo:** En Quarto, puedes usar la función `include:` o archivos parciales (`_intro.qmd`, `_metodos.qmd`, etc.) para crear secciones reutilizables. Así, un mismo método puede incluirse en varios informes sin copiar y pegar.
-```
+::: {.callout-tip}
+## Consejo
+En Quarto, puedes usar la función `include:` o archivos parciales (`_intro.qmd`, `_metodos.qmd`, etc.) para crear secciones reutilizables. Así, un mismo método puede incluirse en varios informes sin copiar y pegar.
+:::
 
 ### Ejemplo de estructura modular
 
 ```
 proyecto/
-├── _portada.qmd
-├── _introduccion.qmd
-├── _metodos.qmd
-├── _resultados.qmd
-├── _discusion.qmd
-├── _conclusiones.qmd
-└── documento_final.qmd   (ensambla todas las secciones)
+  _portada.qmd
+  _introduccion.qmd
+  _metodos.qmd
+  _resultados.qmd
+  _discusion.qmd
+  _conclusiones.qmd
+  documento_final.qmd   (ensambla todas las secciones)
 ```
 
 ### Ventajas de la modularidad
@@ -173,9 +176,10 @@ El modelo iterativo se basa en **borradores sucesivos**. Escribes una primera ve
 | Curva de aprendizaje | Media |
 | Ideal para | Documentos que requieren pulir el contenido |
 
-```{.callout-warning}
-**Advertencia:** No confundas "iterativo" con "procrastinar". Cada iteración debe tener un objetivo claro: mejorar la claridad, corregir datos, ajustar el tono, etc. Define cuántas iteraciones necesitas antes de empezar.
-```
+::: {.callout-warning}
+## Advertencia
+No confundas "iterativo" con "procrastinar". Cada iteración debe tener un objetivo claro: mejorar la claridad, corregir datos, ajustar el tono, etc. Define cuántas iteraciones necesitas antes de empezar.
+:::
 
 ### Ciclo de iteración típico
 
@@ -216,9 +220,10 @@ El modelo colaborativo permite que **múltiples personas trabajen en el mismo do
 | Curva de aprendizaje | Alta (requiere conocer Git y flujo de trabajo colaborativo) |
 | Ideal para | Equipos que necesitan coordinar contribuciones |
 
-```{.callout-note}
-**Nota:** No necesitas ser programador para usar Git. Hoy en día existen interfaces visuales (como GitHub Desktop o VS Code) que hacen que el control de versiones sea accesible para cualquier persona.
-```
+::: {.callout-note}
+## Nota
+No necesitas ser programador para usar Git. Hoy en día existen interfaces visuales (como GitHub Desktop o VS Code) que hacen que el control de versiones sea accesible para cualquier persona.
+:::
 
 ### Flujo de trabajo colaborativo básico
 
@@ -255,9 +260,10 @@ El formato HTML es ideal para documentos que se leerán en navegadores web. Es f
 | Se adapta a cualquier pantalla | El estilo puede variar según el navegador |
 | Soporta multimedia (video, audio) | |
 
-```{.callout-tip}
-**Consejo:** Si tu audiencia accede al documento desde dispositivos móviles, HTML es la mejor opción. El formato se adapta automáticamente al tamaño de la pantalla.
-```
+::: {.callout-tip}
+## Consejo
+Si tu audiencia accede al documento desde dispositivos móviles, HTML es la mejor opción. El formato se adapta automáticamente al tamaño de la pantalla.
+:::
 
 ### Casos de uso recomendados
 
@@ -281,9 +287,10 @@ El formato PDF garantiza que el documento se vea **exactamente igual** en cualqu
 | Estándar para documentos formales | Difícil de modificar después de generar |
 | No requiere conexión a internet | No se adapta a pantallas pequeñas |
 
-```{.callout-note}
-**Nota:** Si envías tu documento a una revista académica o a un cliente formal, es muy probable que requieran el formato PDF.
-```
+::: {.callout-note}
+## Nota
+Si envías tu documento a una revista académica o a un cliente formal, es muy probable que requieran el formato PDF.
+:::
 
 ### Casos de uso recomendados
 
@@ -307,9 +314,10 @@ Las presentaciones son documentos diseñados para **proyectarse ante una audienc
 | Soportan código, gráficos y notas del ponente | La curva de aprendizaje es mayor que con PowerPoint |
 | Funcionan en cualquier navegador | |
 
-```{.callout-warning}
-**Advertencia:** No llenes las diapositivas de texto. Una presentación es un apoyo visual, no un documento para leer. Usa frases cortas, imágenes y gráficos.
-```
+::: {.callout-warning}
+## Advertencia
+No llenes las diapositivas de texto. Una presentación es un apoyo visual, no un documento para leer. Usa frases cortas, imágenes y gráficos.
+:::
 
 ### Casos de uso recomendados
 
@@ -371,9 +379,10 @@ Elegir el modelo correcto depende de **cuatro factores clave**. Responde estas p
 | Periódicamente | Modular |
 | Constantemente | Colaborativo + Iterativo |
 
-```{.callout-tip}
-**Consejo final:** No tienes que elegir un solo modelo. Puedes combinarlos. Por ejemplo: escribe de forma modular, revisa de forma iterativa y genera el resultado en HTML y PDF. La flexibilidad es tu mayor aliado.
-```
+::: {.callout-tip}
+## Consejo final
+No tienes que elegir un solo modelo. Puedes combinarlos. Por ejemplo: escribe de forma modular, revisa de forma iterativa y genera el resultado en HTML y PDF. La flexibilidad es tu mayor aliado.
+:::
 
 ---
 
@@ -389,14 +398,19 @@ Elige tu modelo de documentación según esta guía rápida:
 | Proyecto en equipo | Colaborativo | HTML + PDF |
 | Charla o seminario | Iterativo | Presentación |
 
-```{.callout-note}
-**Recuerda:** El mejor modelo es el que se adapta a tu necesidad, no al revés. Experimenta con diferentes combinaciones hasta encontrar la que te resulte más cómoda.
-```
+::: {.callout-note}
+## Recuerda
+El mejor modelo es el que se adapta a tu necesidad, no al revés. Experimenta con diferentes combinaciones hasta encontrar la que te resulte más cómoda.
+:::
 
 ---
 
 # Referencias
 
-- Carroll, S. (2023). *Quarto: Authoring Books, Articles, Websites, Presentations, and More*. O'Reilly Media.
-- RStudio Team. (2024). *Quarto Documentation*. Disponible en: https://quarto.org/docs/
-- Git SCM. (2024). *Pro Git*. Disponible en: https://git-scm.com/book
+- [Quarto Documentation](https://quarto.org/docs/) — Documentación oficial de Quarto
+- [Pro Git](https://git-scm.com/book/es) — Guía completa de Git (disponible en español)
+- [OpenCode](https://opencode.ai/docs/) — Documentación oficial de OpenCode
+
+---
+
+*Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*

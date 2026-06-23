@@ -96,4 +96,13 @@ Abre un [issue en GitHub](https://github.com/palazon/ocCursoAvanzado/issues).
 
 ---
 
+## Licencia
+
+Este curso se distribuye bajo la licencia
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es).
+Puedes compartirlo y adaptarlo, pero solo con fines no comerciales
+y bajo la misma licencia.
+
+---
+
 *Curso OpenCode 102 · Idea original de JA Palazón · Junio 2026*
